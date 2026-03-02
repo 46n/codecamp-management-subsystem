@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace AsTest1
+namespace APUCC_Project
 {
     public static class RippleEffect
     {
