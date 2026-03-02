@@ -46,6 +46,8 @@ namespace AsTest1
             SetupHoverEffects(iconButton2);
             SetupHoverEffects(iconButton3);
             SetupHoverEffects(iconButton4);
+            SetupHoverEffects(Profile);
+
         }
         //Structs
         private struct RGBColors
@@ -152,6 +154,11 @@ namespace AsTest1
         private void Profile_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color1);
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 
