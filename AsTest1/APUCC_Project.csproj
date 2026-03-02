@@ -37,9 +37,9 @@
 
   <ItemGroup>
     <Folder Include="Forms\Admin\" />
+    <Folder Include="Forms\Common\" />
     <Folder Include="Forms\Lecturer\" />
     <Folder Include="Forms\Trainer\" />
-    <Folder Include="Forms\Student\" />
     <Folder Include="Models\" />
     <Folder Include="Data\" />
     <Folder Include="Services\" />

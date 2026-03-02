@@ -1,6 +1,6 @@
 ﻿namespace APUCC_Project
 {
-    partial class BaseShellForm
+    partial class StudentShellForm : BaseShellForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BaseShellForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StudentShellForm));
             panelMenu = new Panel();
             Profile = new FontAwesome.Sharp.IconButton();
             iconButton4 = new FontAwesome.Sharp.IconButton();
@@ -39,8 +39,6 @@
             pictureBox1 = new PictureBox();
             iconMenuItem1 = new FontAwesome.Sharp.IconMenuItem();
             panelSidebarContainer = new FlowLayoutPanel();
-            panelMenu.SuspendLayout();
-            panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panelSidebarContainer.SuspendLayout();
             SuspendLayout();
@@ -48,12 +46,6 @@
             // panelMenu
             // 
             panelMenu.BackColor = Color.FromArgb(25, 25, 25);
-            panelMenu.Controls.Add(Profile);
-            panelMenu.Controls.Add(iconButton4);
-            panelMenu.Controls.Add(iconButton3);
-            panelMenu.Controls.Add(iconButton2);
-            panelMenu.Controls.Add(homebtn);
-            panelMenu.Controls.Add(panelLogo);
             panelMenu.Location = new Point(25, 25);
             panelMenu.Margin = new Padding(15);
             panelMenu.Name = "panelMenu";
@@ -177,7 +169,6 @@
             // 
             // panelLogo
             // 
-            panelLogo.Controls.Add(pictureBox1);
             panelLogo.Dock = DockStyle.Top;
             panelLogo.Location = new Point(0, 0);
             panelLogo.Name = "panelLogo";
@@ -222,11 +213,11 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1894, 1009);
             Controls.Add(panelSidebarContainer);
+            Location = new Point(0, 0);
             Name = "StudentShellForm";
             Text = "Form1";
             Load += Form1_Load;
-            panelMenu.ResumeLayout(false);
-            panelLogo.ResumeLayout(false);
+            Controls.SetChildIndex(panelSidebarContainer, 0);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panelSidebarContainer.ResumeLayout(false);
             ResumeLayout(false);

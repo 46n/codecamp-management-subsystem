@@ -1,7 +1,5 @@
-﻿    using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using FontAwesome.Sharp;
 
@@ -9,78 +7,81 @@ namespace APUCC_Project
 {
     public partial class BaseShellForm : Form
     {
-        //shortcuts
-        private readonly Color colorDefault = Color.White;
-        private readonly Color colorTeal = ColorTranslator.FromHtml("#669299");
-        private readonly Color colorActiveBack = Color.FromArgb(25, 25, 25);
-        // highlight bar background
+        // 🎨 Shared colors (children can access)
+        protected readonly Color colorDefault = Color.White;
+        protected readonly Color colorTeal = ColorTranslator.FromHtml("#669299");
+        protected readonly Color colorActiveBack = Color.FromArgb(25, 25, 25);
 
+        // ✅ shared fields
+        protected IconButton? currentBtn;
+        protected Panel leftBorderBtn;
+        protected Form? currentChildForm;
 
-        //Fields
-        private IconButton currentBtn;
-        private Panel leftBorderBtn;
-        private Form currentChildForm;
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            // Attach ripple effect to buttons
-            RippleEffect.Attach(homebtn, Color.FromArgb(120, 170, 190));
-            RippleEffect.Attach(iconButton2, Color.FromArgb(120, 170, 190));
-            RippleEffect.Attach(iconButton3, Color.FromArgb(120, 170, 190));
-            RippleEffect.Attach(iconButton4, Color.FromArgb(120, 170, 190));
-        }
-        //constructors
-        public BaseShellForm()
+        protected BaseShellForm()
         {
             InitializeComponent();
+
+            // highlight bar
             leftBorderBtn = new Panel();
             leftBorderBtn.Size = new Size(7, 50);
             panelMenu.Controls.Add(leftBorderBtn);
-            //Form
+            leftBorderBtn.Visible = false;
+
+            // form settings
             this.Text = string.Empty;
             this.ControlBox = false;
             this.DoubleBuffered = true;
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
-            //hover
+
+            // hover + ripple once
             SetupHoverEffects(homebtn);
             SetupHoverEffects(iconButton2);
             SetupHoverEffects(iconButton3);
             SetupHoverEffects(iconButton4);
+            SetupHoverEffects(Profile);
+
+            AttachRipples();
         }
-        //Structs
-        private struct RGBColors
+
+        // ✅ Ripple once (virtual so child can override if needed)
+        protected virtual void AttachRipples()
         {
-            public static Color color1 = Color.FromArgb(37, 36, 81);
-
+            RippleEffect.Attach(homebtn, Color.FromArgb(120, 170, 190));
+            RippleEffect.Attach(iconButton2, Color.FromArgb(120, 170, 190));
+            RippleEffect.Attach(iconButton3, Color.FromArgb(120, 170, 190));
+            RippleEffect.Attach(iconButton4, Color.FromArgb(120, 170, 190));
+            RippleEffect.Attach(Profile, Color.FromArgb(120, 170, 190));
         }
-        //Methods
-        private void ActivateButton(object senderBtn, Color color)
+
+        // ✅ children can call this
+        protected void ActivateButton(object senderBtn)
         {
-            if (senderBtn != null)
-            {
-                DisableButton();
-                //Button
-                currentBtn = (IconButton)senderBtn;
+            if (senderBtn is not IconButton btn) return;
 
-                // active button look
-                currentBtn.BackColor = colorActiveBack;
-                currentBtn.ForeColor = colorTeal;
-                currentBtn.IconColor = colorTeal;
+            DisableButton();
+            currentBtn = btn;
 
-                // ⭐ MOVE highlight bar (THIS is what you wanted)
-                leftBorderBtn.BackColor = colorTeal;
-                leftBorderBtn.Location = new Point(0, currentBtn.Location.Y);
-                leftBorderBtn.Height = currentBtn.Height;
-                leftBorderBtn.Visible = true;
-                leftBorderBtn.BringToFront();
-                //Left border button
+            btn.BackColor = colorActiveBack;
+            btn.ForeColor = colorTeal;
+            btn.IconColor = colorTeal;
 
-                //Current Child Form Icon
-                //iconCurrentChildForm.IconChar = currentBtn.IconChar;
-                //iconCurrentChildForm.IconColor = color;
-            }
+            leftBorderBtn.BackColor = colorTeal;
+            leftBorderBtn.Location = new Point(0, btn.Location.Y);
+            leftBorderBtn.Height = btn.Height;
+            leftBorderBtn.Visible = true;
+            leftBorderBtn.BringToFront();
         }
-        private void SetupHoverEffects(IconButton btn)
+
+        protected void DisableButton()
+        {
+            if (currentBtn == null) return;
+
+            currentBtn.ForeColor = colorDefault;
+            currentBtn.IconColor = colorDefault;
+            currentBtn.BackColor = Color.Transparent;
+        }
+
+        protected void SetupHoverEffects(IconButton btn)
         {
             btn.MouseEnter += (s, e) =>
             {
@@ -100,65 +101,23 @@ namespace APUCC_Project
                 }
             };
         }
-        private void DisableButton()
+
+        // ✅ Base can handle shared button clicks too (optional)
+        protected virtual void homebtn_Click(object sender, EventArgs e) => ActivateButton(sender);
+
+        protected virtual void iconButton2_Click(object sender, EventArgs e) => ActivateButton(sender);
+
+        protected virtual void iconButton3_Click(object sender, EventArgs e) => ActivateButton(sender);
+
+        protected virtual void iconButton4_Click(object sender, EventArgs e) => ActivateButton(sender);
+
+        protected virtual void Profile_Click(object sender, EventArgs e) => ActivateButton(sender);
+
+        protected virtual void pictureBox1_Click(object sender, EventArgs e) { }
+
+        protected virtual void Form1_Load(object sender, EventArgs e)
         {
-            if (currentBtn != null)
-            {
-                currentBtn.ForeColor = Color.White;
-                currentBtn.IconColor = Color.White;
-            }
-        }
-
-        //Menu Button_Clicks
-        private void homebtn_Click(object sender, EventArgs e)
-        {
-            ActivateButton(sender, RGBColors.color1);
-            RippleEffect.Attach(homebtn, Color.FromArgb(120, 170, 190));
-            RippleEffect.Attach(iconButton2, Color.FromArgb(120, 170, 190));
-            RippleEffect.Attach(iconButton3, Color.FromArgb(120, 170, 190));
-            RippleEffect.Attach(iconButton4, Color.FromArgb(120, 170, 190));
-            RippleEffect.Attach(Profile, Color.FromArgb(120, 170, 190));
-            //OpenChildForm(new FormDashboard());
-        }
-
-        private void iconButton2_Click(object sender, EventArgs e)
-        {
-            ActivateButton(sender, RGBColors.color1);
-            //OpenChildForm(new FormOrders());
-        }
-
-        private void iconButton3_Click(object sender, EventArgs e)
-        {
-            ActivateButton(sender, RGBColors.color1);
-            //OpenChildForm(new FormProducts());
-        }
-
-        private void iconButton4_Click(object sender, EventArgs e)
-        {
-            ActivateButton(sender, RGBColors.color1);
-            //OpenChildForm(new FormCustomers());
-        }
-
-        private void iconPictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Profile_Click(object sender, EventArgs e)
-        {
-            ActivateButton(sender, RGBColors.color1);
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
+            AttachRipples(); // or leave empty if you don't use it
         }
     }
-
-
 }
