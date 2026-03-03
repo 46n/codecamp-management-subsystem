@@ -1,6 +1,6 @@
 ﻿namespace APUCC_Project
 {
-    partial class StudentShellForm : BaseShellForm
+    partial class AdminShellForm : BaseShellForm
     {
         /// <summary>
         ///  Required designer variable.

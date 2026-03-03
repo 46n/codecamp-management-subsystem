@@ -1,6 +1,6 @@
 ﻿namespace APUCC_Project
 {
-    partial class StudentShellForm : BaseShellForm
+    partial class TrainerShellForm : BaseShellForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StudentShellForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TrainerShellForm));
             Profile = new FontAwesome.Sharp.IconButton();
             iconButton4 = new FontAwesome.Sharp.IconButton();
             iconButton3 = new FontAwesome.Sharp.IconButton();
@@ -195,14 +195,14 @@
             panelSidebarContainer.Size = new Size(10, 1009);
             panelSidebarContainer.TabIndex = 2;
             // 
-            // StudentShellForm
+            // TrainerShellForm
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1894, 1009);
             Controls.Add(panelSidebarContainer);
             Location = new Point(0, 0);
-            Name = "StudentShellForm";
+            Name = "TrainerShellForm";
             Text = "Form1";
             Load += Form1_Load;
             Controls.SetChildIndex(panelSidebarContainer, 0);
