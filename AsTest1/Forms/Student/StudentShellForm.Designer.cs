@@ -36,8 +36,8 @@
             homebtn = new FontAwesome.Sharp.IconButton();
             panelLogo = new Panel();
             pictureBox1 = new PictureBox();
-            iconMenuItem1 = new FontAwesome.Sharp.IconMenuItem();
             panelSidebarContainer = new FlowLayoutPanel();
+            MainPanel = new Panel();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -175,15 +175,6 @@
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click;
             // 
-            // iconMenuItem1
-            // 
-            iconMenuItem1.IconChar = FontAwesome.Sharp.IconChar.None;
-            iconMenuItem1.IconColor = Color.Black;
-            iconMenuItem1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconMenuItem1.Name = "iconMenuItem1";
-            iconMenuItem1.Size = new Size(32, 19);
-            iconMenuItem1.Text = "iconMenuItem1";
-            // 
             // panelSidebarContainer
             // 
             panelSidebarContainer.BackColor = Color.FromArgb(25, 25, 25);
@@ -195,17 +186,27 @@
             panelSidebarContainer.Size = new Size(10, 1009);
             panelSidebarContainer.TabIndex = 2;
             // 
+            // MainPanel
+            // 
+            MainPanel.BackColor = Color.FromArgb(37, 37, 41);
+            MainPanel.Dock = DockStyle.Fill;
+            MainPanel.Location = new Point(289, 0);
+            MainPanel.Name = "MainPanel";
+            MainPanel.Size = new Size(1105, 753);
+            MainPanel.TabIndex = 4;
+            MainPanel.Paint += MainPanel_Paint;
+            // 
             // StudentShellForm
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1894, 1009);
-            Controls.Add(panelSidebarContainer);
+            ClientSize = new Size(1394, 753);
+            Controls.Add(MainPanel);
             Location = new Point(0, 0);
             Name = "StudentShellForm";
             Text = "Form1";
             Load += Form1_Load;
-            Controls.SetChildIndex(panelSidebarContainer, 0);
+            Controls.SetChildIndex(MainPanel, 0);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
@@ -217,8 +218,8 @@
         private FontAwesome.Sharp.IconButton iconButton3;
         private FontAwesome.Sharp.IconButton iconButton2;
         private PictureBox pictureBox1;
-        private FontAwesome.Sharp.IconMenuItem iconMenuItem1;
         private FlowLayoutPanel panelSidebarContainer;
         private FontAwesome.Sharp.IconButton Profile;
+        private Panel MainPanel;
     }
 }
