@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StudentShellForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminShellForm));
             Profile = new FontAwesome.Sharp.IconButton();
             iconButton4 = new FontAwesome.Sharp.IconButton();
             iconButton3 = new FontAwesome.Sharp.IconButton();
@@ -40,6 +40,11 @@
             panelSidebarContainer = new FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
+            // 
+            // leftBorderBtn
+            // 
+            leftBorderBtn.Margin = new Padding(2);
+            leftBorderBtn.Size = new Size(5, 39);
             // 
             // Profile
             // 
@@ -188,21 +193,21 @@
             // 
             panelSidebarContainer.BackColor = Color.FromArgb(25, 25, 25);
             panelSidebarContainer.Dock = DockStyle.Left;
-            panelSidebarContainer.Location = new Point(379, 0);
+            panelSidebarContainer.Location = new Point(222, 0);
             panelSidebarContainer.Margin = new Padding(0);
             panelSidebarContainer.Name = "panelSidebarContainer";
-            panelSidebarContainer.Padding = new Padding(10);
-            panelSidebarContainer.Size = new Size(10, 1009);
+            panelSidebarContainer.Padding = new Padding(8);
+            panelSidebarContainer.Size = new Size(1100, 788);
             panelSidebarContainer.TabIndex = 2;
             // 
-            // StudentShellForm
+            // AdminShellForm
             // 
-            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1894, 1009);
+            ClientSize = new Size(1457, 788);
             Controls.Add(panelSidebarContainer);
             Location = new Point(0, 0);
-            Name = "StudentShellForm";
+            Name = "AdminShellForm";
             Text = "Form1";
             Load += Form1_Load;
             Controls.SetChildIndex(panelSidebarContainer, 0);

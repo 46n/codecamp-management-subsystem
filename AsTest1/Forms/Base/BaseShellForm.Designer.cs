@@ -1,6 +1,6 @@
 ﻿namespace APUCC_Project
 {
-    partial class BaseShellForm
+    partial class BaseShellForm : Form
     {
         /// <summary>
         ///  Required designer variable.
@@ -54,10 +54,10 @@
             panelMenu.Controls.Add(iconButton2);
             panelMenu.Controls.Add(homebtn);
             panelMenu.Controls.Add(panelLogo);
-            panelMenu.Location = new Point(25, 25);
-            panelMenu.Margin = new Padding(15);
+            panelMenu.Location = new Point(20, 20);
+            panelMenu.Margin = new Padding(12, 12, 12, 12);
             panelMenu.Name = "panelMenu";
-            panelMenu.Size = new Size(272, 644);
+            panelMenu.Size = new Size(209, 503);
             panelMenu.TabIndex = 0;
             // 
             // iconButton4
@@ -72,10 +72,11 @@
             iconButton4.IconFont = FontAwesome.Sharp.IconFont.Solid;
             iconButton4.IconSize = 38;
             iconButton4.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton4.Location = new Point(0, 409);
+            iconButton4.Location = new Point(0, 321);
+            iconButton4.Margin = new Padding(2, 2, 2, 2);
             iconButton4.Name = "iconButton4";
-            iconButton4.Padding = new Padding(15, 0, 0, 0);
-            iconButton4.Size = new Size(272, 70);
+            iconButton4.Padding = new Padding(12, 0, 0, 0);
+            iconButton4.Size = new Size(209, 55);
             iconButton4.TabIndex = 4;
             iconButton4.Text = "Settings";
             iconButton4.TextAlign = ContentAlignment.MiddleLeft;
@@ -95,10 +96,11 @@
             Profile.IconFont = FontAwesome.Sharp.IconFont.Solid;
             Profile.IconSize = 38;
             Profile.ImageAlign = ContentAlignment.MiddleLeft;
-            Profile.Location = new Point(0, 339);
+            Profile.Location = new Point(0, 266);
+            Profile.Margin = new Padding(2, 2, 2, 2);
             Profile.Name = "Profile";
-            Profile.Padding = new Padding(15, 0, 0, 0);
-            Profile.Size = new Size(272, 70);
+            Profile.Padding = new Padding(12, 0, 0, 0);
+            Profile.Size = new Size(209, 55);
             Profile.TabIndex = 5;
             Profile.Text = "Profile";
             Profile.TextAlign = ContentAlignment.MiddleLeft;
@@ -118,10 +120,11 @@
             iconButton3.IconFont = FontAwesome.Sharp.IconFont.Solid;
             iconButton3.IconSize = 38;
             iconButton3.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton3.Location = new Point(0, 269);
+            iconButton3.Location = new Point(0, 211);
+            iconButton3.Margin = new Padding(2, 2, 2, 2);
             iconButton3.Name = "iconButton3";
-            iconButton3.Padding = new Padding(15, 0, 0, 0);
-            iconButton3.Size = new Size(272, 70);
+            iconButton3.Padding = new Padding(12, 0, 0, 0);
+            iconButton3.Size = new Size(209, 55);
             iconButton3.TabIndex = 3;
             iconButton3.Text = "Fees";
             iconButton3.TextAlign = ContentAlignment.MiddleLeft;
@@ -141,10 +144,11 @@
             iconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconButton2.IconSize = 38;
             iconButton2.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton2.Location = new Point(0, 199);
+            iconButton2.Location = new Point(0, 156);
+            iconButton2.Margin = new Padding(2, 2, 2, 2);
             iconButton2.Name = "iconButton2";
-            iconButton2.Padding = new Padding(15, 0, 0, 0);
-            iconButton2.Size = new Size(272, 70);
+            iconButton2.Padding = new Padding(12, 0, 0, 0);
+            iconButton2.Size = new Size(209, 55);
             iconButton2.TabIndex = 2;
             iconButton2.Text = "My courses";
             iconButton2.TextAlign = ContentAlignment.MiddleLeft;
@@ -164,10 +168,11 @@
             homebtn.IconFont = FontAwesome.Sharp.IconFont.Solid;
             homebtn.IconSize = 38;
             homebtn.ImageAlign = ContentAlignment.MiddleLeft;
-            homebtn.Location = new Point(0, 129);
+            homebtn.Location = new Point(0, 101);
+            homebtn.Margin = new Padding(2, 2, 2, 2);
             homebtn.Name = "homebtn";
-            homebtn.Padding = new Padding(15, 0, 0, 0);
-            homebtn.Size = new Size(272, 70);
+            homebtn.Padding = new Padding(12, 0, 0, 0);
+            homebtn.Size = new Size(209, 55);
             homebtn.TabIndex = 1;
             homebtn.Text = "Home";
             homebtn.TextAlign = ContentAlignment.MiddleLeft;
@@ -180,16 +185,18 @@
             panelLogo.Controls.Add(pictureBox1);
             panelLogo.Dock = DockStyle.Top;
             panelLogo.Location = new Point(0, 0);
+            panelLogo.Margin = new Padding(2, 2, 2, 2);
             panelLogo.Name = "panelLogo";
-            panelLogo.Size = new Size(272, 129);
+            panelLogo.Size = new Size(209, 101);
             panelLogo.TabIndex = 0;
             // 
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(-13, -13);
+            pictureBox1.Location = new Point(-10, -10);
+            pictureBox1.Margin = new Padding(2, 2, 2, 2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(266, 154);
+            pictureBox1.Size = new Size(205, 120);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
@@ -212,16 +219,17 @@
             panelSidebarContainer.Location = new Point(0, 0);
             panelSidebarContainer.Margin = new Padding(0);
             panelSidebarContainer.Name = "panelSidebarContainer";
-            panelSidebarContainer.Padding = new Padding(10);
-            panelSidebarContainer.Size = new Size(289, 629);
+            panelSidebarContainer.Padding = new Padding(8, 8, 8, 8);
+            panelSidebarContainer.Size = new Size(222, 644);
             panelSidebarContainer.TabIndex = 2;
             // 
             // BaseShellForm
             // 
-            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1074, 629);
+            ClientSize = new Size(1078, 644);
             Controls.Add(panelSidebarContainer);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "BaseShellForm";
             Text = "Form1";
             Load += Form1_Load;
