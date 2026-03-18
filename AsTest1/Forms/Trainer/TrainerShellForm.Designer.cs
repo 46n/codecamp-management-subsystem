@@ -38,6 +38,7 @@
             pictureBox1 = new PictureBox();
             iconMenuItem1 = new FontAwesome.Sharp.IconMenuItem();
             panelSidebarContainer = new FlowLayoutPanel();
+            MainPanel = new Panel();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -195,17 +196,27 @@
             panelSidebarContainer.Size = new Size(10, 1009);
             panelSidebarContainer.TabIndex = 2;
             // 
+            // MainPanel
+            // 
+            MainPanel.Dock = DockStyle.Fill;
+            MainPanel.Location = new Point(389, 0);
+            MainPanel.Name = "MainPanel";
+            MainPanel.Size = new Size(1505, 1009);
+            MainPanel.TabIndex = 3;
+            // 
             // TrainerShellForm
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1894, 1009);
+            Controls.Add(MainPanel);
             Controls.Add(panelSidebarContainer);
             Location = new Point(0, 0);
             Name = "TrainerShellForm";
             Text = "Form1";
             Load += Form1_Load;
             Controls.SetChildIndex(panelSidebarContainer, 0);
+            Controls.SetChildIndex(MainPanel, 0);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
@@ -220,5 +231,6 @@
         private FontAwesome.Sharp.IconMenuItem iconMenuItem1;
         private FlowLayoutPanel panelSidebarContainer;
         private FontAwesome.Sharp.IconButton Profile;
+        private Panel MainPanel;
     }
 }

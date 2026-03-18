@@ -123,7 +123,7 @@
             iconButton3.Padding = new Padding(15, 0, 0, 0);
             iconButton3.Size = new Size(380, 100);
             iconButton3.TabIndex = 3;
-            iconButton3.Text = "Fees";
+            iconButton3.Text = "Send Feedback";
             iconButton3.TextAlign = ContentAlignment.MiddleLeft;
             iconButton3.TextImageRelation = TextImageRelation.ImageBeforeText;
             iconButton3.UseVisualStyleBackColor = true;
@@ -146,7 +146,7 @@
             iconButton2.Padding = new Padding(15, 0, 0, 0);
             iconButton2.Size = new Size(380, 100);
             iconButton2.TabIndex = 2;
-            iconButton2.Text = "My courses";
+            iconButton2.Text = "Enrolled students";
             iconButton2.TextAlign = ContentAlignment.MiddleLeft;
             iconButton2.TextImageRelation = TextImageRelation.ImageBeforeText;
             iconButton2.UseVisualStyleBackColor = true;
@@ -169,7 +169,7 @@
             homebtn.Padding = new Padding(15, 0, 0, 0);
             homebtn.Size = new Size(380, 100);
             homebtn.TabIndex = 1;
-            homebtn.Text = "Home";
+            homebtn.Text = "Manage Classes ";
             homebtn.TextAlign = ContentAlignment.MiddleLeft;
             homebtn.TextImageRelation = TextImageRelation.ImageBeforeText;
             homebtn.UseVisualStyleBackColor = true;
@@ -216,13 +216,13 @@
             panelSidebarContainer.Size = new Size(379, 1009);
             panelSidebarContainer.TabIndex = 2;
             // 
-            // StudentShellForm
+            // BaseShellForm
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1894, 1009);
             Controls.Add(panelSidebarContainer);
-            Name = "StudentShellForm";
+            Name = "BaseShellForm";
             Text = "Form1";
             Load += Form1_Load;
             panelMenu.ResumeLayout(false);
