@@ -6,7 +6,7 @@ namespace APUCC_Project
 {
     public partial class StudentShellForm : BaseShellForm
     {
-        private Form activeForm = null;
+        private Form? activeForm = null;
         public StudentShellForm()
         {
             InitializeComponent();
@@ -16,7 +16,7 @@ namespace APUCC_Project
             homebtn.Text = "Home";
             iconButton2.Text = "My courses";
             iconButton3.Text = "Fees";
-            iconButton4.Text = "Swttings";
+            iconButton4.Text = "Settings";
             Profile.Text = "Profile";
         }
         private void OpenChildForm(Form childForm)

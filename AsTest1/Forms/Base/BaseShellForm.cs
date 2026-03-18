@@ -119,5 +119,15 @@ namespace APUCC_Project
         {
             AttachRipples(); // or leave empty if you don't use it
         }
+
+        private void panelMenu_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void MainPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

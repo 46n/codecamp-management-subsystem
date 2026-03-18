@@ -1,6 +1,6 @@
 ﻿namespace APUCC_Project
 {
-    partial class TrainerShellForm : BaseShellForm
+    partial class TrainerShellForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -211,14 +211,6 @@
         }
 
         #endregion
-        private FontAwesome.Sharp.IconButton homebtn;
-        private Panel panelLogo;
-        private FontAwesome.Sharp.IconButton iconButton4;
-        private FontAwesome.Sharp.IconButton iconButton3;
-        private FontAwesome.Sharp.IconButton iconButton2;
-        private PictureBox pictureBox1;
-        private FontAwesome.Sharp.IconMenuItem iconMenuItem1;
-        private FlowLayoutPanel panelSidebarContainer;
-        private FontAwesome.Sharp.IconButton Profile;
+
     }
 }

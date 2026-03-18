@@ -39,6 +39,7 @@
             pictureBox1 = new PictureBox();
             iconMenuItem1 = new FontAwesome.Sharp.IconMenuItem();
             panelSidebarContainer = new FlowLayoutPanel();
+            MainPanel = new Panel();
             panelMenu.SuspendLayout();
             panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -54,11 +55,12 @@
             panelMenu.Controls.Add(iconButton2);
             panelMenu.Controls.Add(homebtn);
             panelMenu.Controls.Add(panelLogo);
-            panelMenu.Location = new Point(20, 20);
-            panelMenu.Margin = new Padding(12, 12, 12, 12);
+            panelMenu.Location = new Point(26, 25);
+            panelMenu.Margin = new Padding(16, 15, 16, 15);
             panelMenu.Name = "panelMenu";
-            panelMenu.Size = new Size(209, 503);
+            panelMenu.Size = new Size(272, 644);
             panelMenu.TabIndex = 0;
+            panelMenu.Paint += panelMenu_Paint;
             // 
             // iconButton4
             // 
@@ -72,11 +74,10 @@
             iconButton4.IconFont = FontAwesome.Sharp.IconFont.Solid;
             iconButton4.IconSize = 38;
             iconButton4.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton4.Location = new Point(0, 321);
-            iconButton4.Margin = new Padding(2, 2, 2, 2);
+            iconButton4.Location = new Point(0, 409);
             iconButton4.Name = "iconButton4";
-            iconButton4.Padding = new Padding(12, 0, 0, 0);
-            iconButton4.Size = new Size(209, 55);
+            iconButton4.Padding = new Padding(16, 0, 0, 0);
+            iconButton4.Size = new Size(272, 70);
             iconButton4.TabIndex = 4;
             iconButton4.Text = "Settings";
             iconButton4.TextAlign = ContentAlignment.MiddleLeft;
@@ -96,11 +97,10 @@
             Profile.IconFont = FontAwesome.Sharp.IconFont.Solid;
             Profile.IconSize = 38;
             Profile.ImageAlign = ContentAlignment.MiddleLeft;
-            Profile.Location = new Point(0, 266);
-            Profile.Margin = new Padding(2, 2, 2, 2);
+            Profile.Location = new Point(0, 339);
             Profile.Name = "Profile";
-            Profile.Padding = new Padding(12, 0, 0, 0);
-            Profile.Size = new Size(209, 55);
+            Profile.Padding = new Padding(16, 0, 0, 0);
+            Profile.Size = new Size(272, 70);
             Profile.TabIndex = 5;
             Profile.Text = "Profile";
             Profile.TextAlign = ContentAlignment.MiddleLeft;
@@ -120,13 +120,12 @@
             iconButton3.IconFont = FontAwesome.Sharp.IconFont.Solid;
             iconButton3.IconSize = 38;
             iconButton3.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton3.Location = new Point(0, 211);
-            iconButton3.Margin = new Padding(2, 2, 2, 2);
+            iconButton3.Location = new Point(0, 269);
             iconButton3.Name = "iconButton3";
-            iconButton3.Padding = new Padding(12, 0, 0, 0);
-            iconButton3.Size = new Size(209, 55);
+            iconButton3.Padding = new Padding(16, 0, 0, 0);
+            iconButton3.Size = new Size(272, 70);
             iconButton3.TabIndex = 3;
-            iconButton3.Text = "Fees";
+            iconButton3.Text = "Button3";
             iconButton3.TextAlign = ContentAlignment.MiddleLeft;
             iconButton3.TextImageRelation = TextImageRelation.ImageBeforeText;
             iconButton3.UseVisualStyleBackColor = true;
@@ -144,13 +143,12 @@
             iconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconButton2.IconSize = 38;
             iconButton2.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton2.Location = new Point(0, 156);
-            iconButton2.Margin = new Padding(2, 2, 2, 2);
+            iconButton2.Location = new Point(0, 199);
             iconButton2.Name = "iconButton2";
-            iconButton2.Padding = new Padding(12, 0, 0, 0);
-            iconButton2.Size = new Size(209, 55);
+            iconButton2.Padding = new Padding(16, 0, 0, 0);
+            iconButton2.Size = new Size(272, 70);
             iconButton2.TabIndex = 2;
-            iconButton2.Text = "My courses";
+            iconButton2.Text = "Button2";
             iconButton2.TextAlign = ContentAlignment.MiddleLeft;
             iconButton2.TextImageRelation = TextImageRelation.ImageBeforeText;
             iconButton2.UseVisualStyleBackColor = true;
@@ -168,13 +166,12 @@
             homebtn.IconFont = FontAwesome.Sharp.IconFont.Solid;
             homebtn.IconSize = 38;
             homebtn.ImageAlign = ContentAlignment.MiddleLeft;
-            homebtn.Location = new Point(0, 101);
-            homebtn.Margin = new Padding(2, 2, 2, 2);
+            homebtn.Location = new Point(0, 129);
             homebtn.Name = "homebtn";
-            homebtn.Padding = new Padding(12, 0, 0, 0);
-            homebtn.Size = new Size(209, 55);
+            homebtn.Padding = new Padding(16, 0, 0, 0);
+            homebtn.Size = new Size(272, 70);
             homebtn.TabIndex = 1;
-            homebtn.Text = "Home";
+            homebtn.Text = "Button1";
             homebtn.TextAlign = ContentAlignment.MiddleLeft;
             homebtn.TextImageRelation = TextImageRelation.ImageBeforeText;
             homebtn.UseVisualStyleBackColor = true;
@@ -185,18 +182,16 @@
             panelLogo.Controls.Add(pictureBox1);
             panelLogo.Dock = DockStyle.Top;
             panelLogo.Location = new Point(0, 0);
-            panelLogo.Margin = new Padding(2, 2, 2, 2);
             panelLogo.Name = "panelLogo";
-            panelLogo.Size = new Size(209, 101);
+            panelLogo.Size = new Size(272, 129);
             panelLogo.TabIndex = 0;
             // 
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(-10, -10);
-            pictureBox1.Margin = new Padding(2, 2, 2, 2);
+            pictureBox1.Location = new Point(-13, -13);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(205, 120);
+            pictureBox1.Size = new Size(266, 154);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
@@ -219,17 +214,26 @@
             panelSidebarContainer.Location = new Point(0, 0);
             panelSidebarContainer.Margin = new Padding(0);
             panelSidebarContainer.Name = "panelSidebarContainer";
-            panelSidebarContainer.Padding = new Padding(8, 8, 8, 8);
-            panelSidebarContainer.Size = new Size(222, 644);
+            panelSidebarContainer.Padding = new Padding(10);
+            panelSidebarContainer.Size = new Size(289, 824);
             panelSidebarContainer.TabIndex = 2;
+            // 
+            // MainPanel
+            // 
+            MainPanel.Dock = DockStyle.Fill;
+            MainPanel.Location = new Point(289, 0);
+            MainPanel.Name = "MainPanel";
+            MainPanel.Size = new Size(1112, 824);
+            MainPanel.TabIndex = 3;
+            MainPanel.Paint += this.MainPanel_Paint;
             // 
             // BaseShellForm
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1078, 644);
+            ClientSize = new Size(1401, 824);
+            Controls.Add(MainPanel);
             Controls.Add(panelSidebarContainer);
-            Margin = new Padding(2, 2, 2, 2);
             Name = "BaseShellForm";
             Text = "Form1";
             Load += Form1_Load;
@@ -241,15 +245,16 @@
         }
 
         #endregion
-        private Panel panelMenu;
-        private FontAwesome.Sharp.IconButton homebtn;
-        private Panel panelLogo;
-        private FontAwesome.Sharp.IconButton iconButton4;
-        private FontAwesome.Sharp.IconButton iconButton3;
-        private FontAwesome.Sharp.IconButton iconButton2;
-        private PictureBox pictureBox1;
-        private FontAwesome.Sharp.IconMenuItem iconMenuItem1;
-        private FlowLayoutPanel panelSidebarContainer;
-        private FontAwesome.Sharp.IconButton Profile;
-    }
+        protected Panel panelMenu;
+        protected FontAwesome.Sharp.IconButton homebtn;
+        protected Panel panelLogo;
+        protected FontAwesome.Sharp.IconButton iconButton4;
+        protected FontAwesome.Sharp.IconButton iconButton3;
+        protected FontAwesome.Sharp.IconButton iconButton2;
+        protected PictureBox pictureBox1;
+        protected FontAwesome.Sharp.IconMenuItem iconMenuItem1;
+        protected FlowLayoutPanel panelSidebarContainer;
+        protected FontAwesome.Sharp.IconButton Profile;
+        protected Panel MainPanel;
+    }   
 }
