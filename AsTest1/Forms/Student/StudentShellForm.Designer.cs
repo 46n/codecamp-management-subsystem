@@ -48,6 +48,7 @@
             ClientSize = new Size(1401, 824);
             Location = new Point(0, 0);
             Name = "StudentShellForm";
+            Load += StudentShellForm_Load;
             panelMenu.ResumeLayout(false);
             panelLogo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

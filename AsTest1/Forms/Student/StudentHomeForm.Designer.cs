@@ -28,20 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             lblGreeting = new Label();
             lblWelcome = new Label();
             panelScheduleCard = new Panel();
             dataGridView1 = new DataGridView();
-            button2 = new Button();
-            button1 = new Button();
             ModuleColumnHome = new DataGridViewTextBoxColumn();
             TrainerColumn = new DataGridViewTextBoxColumn();
             DayColumnHome = new DataGridViewTextBoxColumn();
             TimeColumnHome = new DataGridViewTextBoxColumn();
             RoomColumnHome = new DataGridViewTextBoxColumn();
             StatusColumnHome = new DataGridViewTextBoxColumn();
+            button2 = new Button();
+            button1 = new Button();
             panelScheduleCard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -81,32 +81,32 @@
             panelScheduleCard.Location = new Point(40, 172);
             panelScheduleCard.Name = "panelScheduleCard";
             panelScheduleCard.Padding = new Padding(20);
-            panelScheduleCard.Size = new Size(900, 320);
+            panelScheduleCard.Size = new Size(1051, 320);
             panelScheduleCard.TabIndex = 3;
             // 
             // dataGridView1
             // 
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.BackgroundColor = Color.FromArgb(35, 35, 39);
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = Color.FromArgb(25, 25, 25);
-            dataGridViewCellStyle7.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle7.ForeColor = Color.White;
-            dataGridViewCellStyle7.SelectionBackColor = SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(25, 25, 25);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { ModuleColumnHome, TrainerColumn, DayColumnHome, TimeColumnHome, RoomColumnHome, StatusColumnHome });
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = Color.FromArgb(25, 25, 25);
-            dataGridViewCellStyle8.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle8.ForeColor = Color.White;
-            dataGridViewCellStyle8.Padding = new Padding(1, 0, 0, 0);
-            dataGridViewCellStyle8.SelectionBackColor = SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle8.SelectionForeColor = Color.Transparent;
-            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
-            dataGridView1.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(25, 25, 25);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.Padding = new Padding(1, 0, 0, 0);
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle2.SelectionForeColor = Color.Transparent;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.Dock = DockStyle.Bottom;
             dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.Location = new Point(20, 83);
@@ -114,37 +114,8 @@
             dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 82;
-            dataGridView1.Size = new Size(858, 215);
+            dataGridView1.Size = new Size(1009, 215);
             dataGridView1.TabIndex = 2;
-            // 
-            // button2
-            // 
-            button2.BackColor = Color.FromArgb(42, 42, 42);
-            button2.FlatAppearance.BorderColor = Color.FromArgb(25, 25, 25);
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button2.ForeColor = Color.White;
-            button2.Location = new Point(286, 40);
-            button2.Name = "button2";
-            button2.Size = new Size(250, 46);
-            button2.TabIndex = 1;
-            button2.Text = "Upcoming Schedule";
-            button2.UseVisualStyleBackColor = false;
-            // 
-            // button1
-            // 
-            button1.BackColor = Color.FromArgb(42, 42, 42);
-            button1.FlatAppearance.BorderColor = Color.FromArgb(25, 25, 25);
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.ForeColor = Color.White;
-            button1.Location = new Point(42, 40);
-            button1.Name = "button1";
-            button1.Size = new Size(250, 46);
-            button1.TabIndex = 0;
-            button1.Text = "Current Schedule";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
             // 
             // ModuleColumnHome
             // 
@@ -176,6 +147,7 @@
             TimeColumnHome.MinimumWidth = 10;
             TimeColumnHome.Name = "TimeColumnHome";
             TimeColumnHome.ReadOnly = true;
+            TimeColumnHome.Width = 200;
             // 
             // RoomColumnHome
             // 
@@ -192,6 +164,35 @@
             StatusColumnHome.MinimumWidth = 10;
             StatusColumnHome.Name = "StatusColumnHome";
             StatusColumnHome.ReadOnly = true;
+            // 
+            // button2
+            // 
+            button2.BackColor = Color.FromArgb(42, 42, 42);
+            button2.FlatAppearance.BorderColor = Color.FromArgb(25, 25, 25);
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button2.ForeColor = Color.White;
+            button2.Location = new Point(286, 40);
+            button2.Name = "button2";
+            button2.Size = new Size(250, 46);
+            button2.TabIndex = 1;
+            button2.Text = "Upcoming Schedule";
+            button2.UseVisualStyleBackColor = false;
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.FromArgb(42, 42, 42);
+            button1.FlatAppearance.BorderColor = Color.FromArgb(25, 25, 25);
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(42, 40);
+            button1.Name = "button1";
+            button1.Size = new Size(250, 46);
+            button1.TabIndex = 0;
+            button1.Text = "Current Schedule";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // StudentHomeForm
             // 

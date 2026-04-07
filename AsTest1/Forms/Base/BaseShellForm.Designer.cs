@@ -225,7 +225,7 @@
             MainPanel.Name = "MainPanel";
             MainPanel.Size = new Size(1112, 824);
             MainPanel.TabIndex = 3;
-            MainPanel.Paint += this.MainPanel_Paint;
+            MainPanel.Paint += MainPanel_Paint;
             // 
             // BaseShellForm
             // 
@@ -234,6 +234,7 @@
             ClientSize = new Size(1401, 824);
             Controls.Add(MainPanel);
             Controls.Add(panelSidebarContainer);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "BaseShellForm";
             Text = "Form1";
             Load += Form1_Load;

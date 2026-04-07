@@ -13,6 +13,11 @@ namespace APUCC_Project
             //loading home form as the main form
             OpenChildForm(new StudentHomeForm());
             // Optional: change labels/icons for student
+
+            this.Text = "Student Dashboard";
+            this.ControlBox = true;
+            this.FormBorderStyle = FormBorderStyle.Sizable;
+
             homebtn.Text = "Home";
             iconButton2.Text = "My courses";
             iconButton3.Text = "Fees";
@@ -68,6 +73,11 @@ namespace APUCC_Project
         }
 
         private void MainPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void StudentShellForm_Load(object sender, EventArgs e)
         {
 
         }
