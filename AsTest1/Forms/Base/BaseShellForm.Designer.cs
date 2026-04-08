@@ -1,6 +1,6 @@
 ﻿namespace APUCC_Project
 {
-    partial class BaseShellForm
+    partial class BaseShellForm : Form
     {
         /// <summary>
         ///  Required designer variable.
@@ -30,8 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BaseShellForm));
             panelMenu = new Panel();
-            Profile = new FontAwesome.Sharp.IconButton();
             iconButton4 = new FontAwesome.Sharp.IconButton();
+            Profile = new FontAwesome.Sharp.IconButton();
             iconButton3 = new FontAwesome.Sharp.IconButton();
             iconButton2 = new FontAwesome.Sharp.IconButton();
             homebtn = new FontAwesome.Sharp.IconButton();
@@ -49,17 +49,41 @@
             // panelMenu
             // 
             panelMenu.BackColor = Color.FromArgb(25, 25, 25);
-            panelMenu.Controls.Add(Profile);
             panelMenu.Controls.Add(iconButton4);
+            panelMenu.Controls.Add(Profile);
             panelMenu.Controls.Add(iconButton3);
             panelMenu.Controls.Add(iconButton2);
             panelMenu.Controls.Add(homebtn);
             panelMenu.Controls.Add(panelLogo);
-            panelMenu.Location = new Point(25, 25);
-            panelMenu.Margin = new Padding(15);
+            panelMenu.Location = new Point(26, 25);
+            panelMenu.Margin = new Padding(16, 15, 16, 15);
             panelMenu.Name = "panelMenu";
-            panelMenu.Size = new Size(380, 960);
+            panelMenu.Size = new Size(272, 644);
             panelMenu.TabIndex = 0;
+            panelMenu.Paint += panelMenu_Paint;
+            // 
+            // iconButton4
+            // 
+            iconButton4.Dock = DockStyle.Top;
+            iconButton4.FlatAppearance.BorderSize = 0;
+            iconButton4.FlatStyle = FlatStyle.Flat;
+            iconButton4.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            iconButton4.ForeColor = Color.White;
+            iconButton4.IconChar = FontAwesome.Sharp.IconChar.Cog;
+            iconButton4.IconColor = Color.White;
+            iconButton4.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            iconButton4.IconSize = 38;
+            iconButton4.ImageAlign = ContentAlignment.MiddleLeft;
+            iconButton4.Location = new Point(0, 409);
+            iconButton4.Name = "iconButton4";
+            iconButton4.Padding = new Padding(16, 0, 0, 0);
+            iconButton4.Size = new Size(272, 70);
+            iconButton4.TabIndex = 4;
+            iconButton4.Text = "Settings";
+            iconButton4.TextAlign = ContentAlignment.MiddleLeft;
+            iconButton4.TextImageRelation = TextImageRelation.ImageBeforeText;
+            iconButton4.UseVisualStyleBackColor = true;
+            iconButton4.Click += iconButton4_Click;
             // 
             // Profile
             // 
@@ -73,39 +97,16 @@
             Profile.IconFont = FontAwesome.Sharp.IconFont.Solid;
             Profile.IconSize = 38;
             Profile.ImageAlign = ContentAlignment.MiddleLeft;
-            Profile.Location = new Point(0, 429);
+            Profile.Location = new Point(0, 339);
             Profile.Name = "Profile";
-            Profile.Padding = new Padding(15, 0, 0, 0);
-            Profile.Size = new Size(380, 100);
+            Profile.Padding = new Padding(16, 0, 0, 0);
+            Profile.Size = new Size(272, 70);
             Profile.TabIndex = 5;
             Profile.Text = "Profile";
             Profile.TextAlign = ContentAlignment.MiddleLeft;
             Profile.TextImageRelation = TextImageRelation.ImageBeforeText;
             Profile.UseVisualStyleBackColor = true;
             Profile.Click += Profile_Click;
-            // 
-            // iconButton4
-            // 
-            iconButton4.Dock = DockStyle.Bottom;
-            iconButton4.FlatAppearance.BorderSize = 0;
-            iconButton4.FlatStyle = FlatStyle.Flat;
-            iconButton4.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            iconButton4.ForeColor = Color.White;
-            iconButton4.IconChar = FontAwesome.Sharp.IconChar.Cog;
-            iconButton4.IconColor = Color.White;
-            iconButton4.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            iconButton4.IconSize = 38;
-            iconButton4.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton4.Location = new Point(0, 860);
-            iconButton4.Name = "iconButton4";
-            iconButton4.Padding = new Padding(15, 0, 0, 0);
-            iconButton4.Size = new Size(380, 100);
-            iconButton4.TabIndex = 4;
-            iconButton4.Text = "Settings";
-            iconButton4.TextAlign = ContentAlignment.MiddleLeft;
-            iconButton4.TextImageRelation = TextImageRelation.ImageBeforeText;
-            iconButton4.UseVisualStyleBackColor = true;
-            iconButton4.Click += iconButton4_Click;
             // 
             // iconButton3
             // 
@@ -119,12 +120,12 @@
             iconButton3.IconFont = FontAwesome.Sharp.IconFont.Solid;
             iconButton3.IconSize = 38;
             iconButton3.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton3.Location = new Point(0, 329);
+            iconButton3.Location = new Point(0, 269);
             iconButton3.Name = "iconButton3";
-            iconButton3.Padding = new Padding(15, 0, 0, 0);
-            iconButton3.Size = new Size(380, 100);
+            iconButton3.Padding = new Padding(16, 0, 0, 0);
+            iconButton3.Size = new Size(272, 70);
             iconButton3.TabIndex = 3;
-            iconButton3.Text = "Send Feedback";
+            iconButton3.Text = "Button3";
             iconButton3.TextAlign = ContentAlignment.MiddleLeft;
             iconButton3.TextImageRelation = TextImageRelation.ImageBeforeText;
             iconButton3.UseVisualStyleBackColor = true;
@@ -142,12 +143,12 @@
             iconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconButton2.IconSize = 38;
             iconButton2.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton2.Location = new Point(0, 229);
+            iconButton2.Location = new Point(0, 199);
             iconButton2.Name = "iconButton2";
-            iconButton2.Padding = new Padding(15, 0, 0, 0);
-            iconButton2.Size = new Size(380, 100);
+            iconButton2.Padding = new Padding(16, 0, 0, 0);
+            iconButton2.Size = new Size(272, 70);
             iconButton2.TabIndex = 2;
-            iconButton2.Text = "Enrolled students";
+            iconButton2.Text = "Button2";
             iconButton2.TextAlign = ContentAlignment.MiddleLeft;
             iconButton2.TextImageRelation = TextImageRelation.ImageBeforeText;
             iconButton2.UseVisualStyleBackColor = true;
@@ -167,10 +168,10 @@
             homebtn.ImageAlign = ContentAlignment.MiddleLeft;
             homebtn.Location = new Point(0, 129);
             homebtn.Name = "homebtn";
-            homebtn.Padding = new Padding(15, 0, 0, 0);
-            homebtn.Size = new Size(380, 100);
+            homebtn.Padding = new Padding(16, 0, 0, 0);
+            homebtn.Size = new Size(272, 70);
             homebtn.TabIndex = 1;
-            homebtn.Text = "Manage Classes ";
+            homebtn.Text = "Button1";
             homebtn.TextAlign = ContentAlignment.MiddleLeft;
             homebtn.TextImageRelation = TextImageRelation.ImageBeforeText;
             homebtn.UseVisualStyleBackColor = true;
@@ -182,15 +183,15 @@
             panelLogo.Dock = DockStyle.Top;
             panelLogo.Location = new Point(0, 0);
             panelLogo.Name = "panelLogo";
-            panelLogo.Size = new Size(380, 129);
+            panelLogo.Size = new Size(272, 129);
             panelLogo.TabIndex = 0;
             // 
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(-25, -40);
+            pictureBox1.Location = new Point(-13, -13);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(379, 269);
+            pictureBox1.Size = new Size(266, 154);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
@@ -214,10 +215,19 @@
             panelSidebarContainer.Margin = new Padding(0);
             panelSidebarContainer.Name = "panelSidebarContainer";
             panelSidebarContainer.Padding = new Padding(10);
-            panelSidebarContainer.Size = new Size(379, 1009);
+            panelSidebarContainer.Size = new Size(289, 824);
             panelSidebarContainer.TabIndex = 2;
             // 
             // MainPanel
+            // 
+            MainPanel.Dock = DockStyle.Fill;
+            MainPanel.Location = new Point(289, 0);
+            MainPanel.Name = "MainPanel";
+            MainPanel.Size = new Size(1112, 824);
+            MainPanel.TabIndex = 3;
+            MainPanel.Paint += MainPanel_Paint;
+            // 
+            // BaseShellForm
             // 
             MainPanel.Dock = DockStyle.Fill;
             MainPanel.Location = new Point(379, 0);
@@ -229,9 +239,10 @@
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1894, 1009);
+            ClientSize = new Size(1401, 824);
             Controls.Add(MainPanel);
             Controls.Add(panelSidebarContainer);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "BaseShellForm";
             Text = "Form1";
             Load += Form1_Load;
@@ -254,5 +265,5 @@
         protected FlowLayoutPanel panelSidebarContainer;
         protected FontAwesome.Sharp.IconButton Profile;
         protected Panel MainPanel;
-    }
+    }   
 }
