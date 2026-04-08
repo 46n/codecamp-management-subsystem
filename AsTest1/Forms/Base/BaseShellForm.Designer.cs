@@ -229,6 +229,14 @@
             // 
             // BaseShellForm
             // 
+            MainPanel.Dock = DockStyle.Fill;
+            MainPanel.Location = new Point(379, 0);
+            MainPanel.Name = "MainPanel";
+            MainPanel.Size = new Size(1515, 1009);
+            MainPanel.TabIndex = 3;
+            // 
+            // BaseShellForm
+            // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1401, 824);
