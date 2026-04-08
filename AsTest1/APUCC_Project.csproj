@@ -15,6 +15,8 @@
 
   <ItemGroup>
     <PackageReference Include="FontAwesome.Sharp" Version="6.6.0" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="7.0.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.5" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,9 +26,7 @@
     <Compile Update="Forms\Base\BaseShellForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\Trainer\TrainerShellForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Update="Forms\Trainer\TrainerShellForm.cs" />
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

@@ -39,6 +39,7 @@
             pictureBox1 = new PictureBox();
             iconMenuItem1 = new FontAwesome.Sharp.IconMenuItem();
             panelSidebarContainer = new FlowLayoutPanel();
+            MainPanel = new Panel();
             panelMenu.SuspendLayout();
             panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -216,11 +217,20 @@
             panelSidebarContainer.Size = new Size(379, 1009);
             panelSidebarContainer.TabIndex = 2;
             // 
+            // MainPanel
+            // 
+            MainPanel.Dock = DockStyle.Fill;
+            MainPanel.Location = new Point(379, 0);
+            MainPanel.Name = "MainPanel";
+            MainPanel.Size = new Size(1515, 1009);
+            MainPanel.TabIndex = 3;
+            // 
             // BaseShellForm
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1894, 1009);
+            Controls.Add(MainPanel);
             Controls.Add(panelSidebarContainer);
             Name = "BaseShellForm";
             Text = "Form1";
@@ -233,15 +243,16 @@
         }
 
         #endregion
-        private Panel panelMenu;
-        private FontAwesome.Sharp.IconButton homebtn;
-        private Panel panelLogo;
-        private FontAwesome.Sharp.IconButton iconButton4;
-        private FontAwesome.Sharp.IconButton iconButton3;
-        private FontAwesome.Sharp.IconButton iconButton2;
-        private PictureBox pictureBox1;
-        private FontAwesome.Sharp.IconMenuItem iconMenuItem1;
-        private FlowLayoutPanel panelSidebarContainer;
-        private FontAwesome.Sharp.IconButton Profile;
+        protected Panel panelMenu;
+        protected FontAwesome.Sharp.IconButton homebtn;
+        protected Panel panelLogo;
+        protected FontAwesome.Sharp.IconButton iconButton4;
+        protected FontAwesome.Sharp.IconButton iconButton3;
+        protected FontAwesome.Sharp.IconButton iconButton2;
+        protected PictureBox pictureBox1;
+        protected FontAwesome.Sharp.IconMenuItem iconMenuItem1;
+        protected FlowLayoutPanel panelSidebarContainer;
+        protected FontAwesome.Sharp.IconButton Profile;
+        protected Panel MainPanel;
     }
 }

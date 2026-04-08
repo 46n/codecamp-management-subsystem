@@ -6,10 +6,12 @@ namespace APUCC_Project
 {
     public partial class TrainerShellForm : BaseShellForm
     {
-        private Form activeForm = null;
+        private Form? activeForm = null;
         public TrainerShellForm()
         {
             InitializeComponent();
+            this.ControlBox = true;
+
 
             // Optional: change labels/icons for student
             homebtn.Text = "Manage Classes";
@@ -45,18 +47,21 @@ namespace APUCC_Project
         protected override void iconButton2_Click(object sender, EventArgs e)
         {
             base.iconButton2_Click(sender, e);
+            OpenChildForm(new TrainerEnrolledStudents());
             // OpenChildForm(new StudentCoursesForm());
         }
 
         protected override void iconButton3_Click(object sender, EventArgs e)
         {
             base.iconButton3_Click(sender, e);
+            OpenChildForm(new FeedBackForm());
             // OpenChildForm(new StudentFeesForm());
         }
 
         protected override void iconButton4_Click(object sender, EventArgs e)
         {
             base.iconButton4_Click(sender, e);
+
             // OpenChildForm(new StudentProfileForm());
         }
 
@@ -64,6 +69,26 @@ namespace APUCC_Project
         {
             base.Profile_Click(sender, e);
             // OpenChildForm(new StudentProfileForm());
+        }
+
+        private void MainPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void homebtn_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void iconButton2_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TrainerShellForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

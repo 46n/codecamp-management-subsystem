@@ -28,156 +28,152 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dataGridView1 = new DataGridView();
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
+            dgvClassSchedule = new DataGridView();
+            btnAddClass = new Button();
+            btnUpdateClass = new Button();
+            btnDeleteClass = new Button();
             label1 = new Label();
-            label2 = new Label();
-            txtModuleId = new TextBox();
-            label3 = new Label();
+            ModuleIdLabel = new Label();
+            txtModuleID = new TextBox();
+            ModuleNameLabel = new Label();
             txtModuleName = new TextBox();
-            label4 = new Label();
-            label5 = new Label();
+            ClassDateLabel = new Label();
+            ChargesLabel = new Label();
             txtCharges = new TextBox();
             panel1 = new Panel();
-            dateTimePicker1 = new DateTimePicker();
-            label6 = new Label();
-            textBox1 = new TextBox();
-            ModuleID = new DataGridViewTextBoxColumn();
-            ModuleName = new DataGridViewTextBoxColumn();
-            ClassDate = new DataGridViewTextBoxColumn();
-            ClassTime = new DataGridViewTextBoxColumn();
-            Charges = new DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            dtpClassDate = new DateTimePicker();
+            ClaasTimeLabel = new Label();
+            txtClassTime = new TextBox();
+            ((System.ComponentModel.ISupportInitialize)dgvClassSchedule).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
-            // dataGridView1
+            // dgvClassSchedule
             // 
-            dataGridView1.BorderStyle = BorderStyle.Fixed3D;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { ModuleID, ModuleName, ClassDate, ClassTime, Charges });
-            dataGridView1.Location = new Point(12, 84);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 82;
-            dataGridView1.Size = new Size(1083, 638);
-            dataGridView1.TabIndex = 0;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            dgvClassSchedule.BorderStyle = BorderStyle.Fixed3D;
+            dgvClassSchedule.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvClassSchedule.Location = new Point(64, 182);
+            dgvClassSchedule.Name = "dgvClassSchedule";
+            dgvClassSchedule.RowHeadersWidth = 82;
+            dgvClassSchedule.Size = new Size(1071, 344);
+            dgvClassSchedule.TabIndex = 0;
+            dgvClassSchedule.CellContentClick += dataGridView1_CellContentClick;
             // 
-            // button1
+            // btnAddClass
             // 
-            button1.BackColor = Color.DarkGreen;
-            button1.ForeColor = SystemColors.ButtonHighlight;
-            button1.Location = new Point(1114, 409);
-            button1.Name = "button1";
-            button1.Size = new Size(230, 75);
-            button1.TabIndex = 1;
-            button1.Text = "ADD CLASS";
-            button1.UseVisualStyleBackColor = false;
+            btnAddClass.BackColor = Color.DarkGreen;
+            btnAddClass.ForeColor = SystemColors.ButtonHighlight;
+            btnAddClass.Location = new Point(59, 771);
+            btnAddClass.Name = "btnAddClass";
+            btnAddClass.Size = new Size(230, 75);
+            btnAddClass.TabIndex = 1;
+            btnAddClass.Text = "ADD CLASS";
+            btnAddClass.UseVisualStyleBackColor = false;
             // 
-            // button2
+            // btnUpdateClass
             // 
-            button2.BackColor = SystemColors.MenuHighlight;
-            button2.ForeColor = SystemColors.ButtonHighlight;
-            button2.Location = new Point(1373, 409);
-            button2.Name = "button2";
-            button2.Size = new Size(230, 75);
-            button2.TabIndex = 2;
-            button2.Text = "UPDATE CLASS";
-            button2.UseVisualStyleBackColor = false;
+            btnUpdateClass.BackColor = SystemColors.MenuHighlight;
+            btnUpdateClass.ForeColor = SystemColors.ButtonHighlight;
+            btnUpdateClass.Location = new Point(317, 771);
+            btnUpdateClass.Name = "btnUpdateClass";
+            btnUpdateClass.Size = new Size(230, 75);
+            btnUpdateClass.TabIndex = 2;
+            btnUpdateClass.Text = "UPDATE CLASS";
+            btnUpdateClass.UseVisualStyleBackColor = false;
             // 
-            // button3
+            // btnDeleteClass
             // 
-            button3.BackColor = Color.FromArgb(192, 0, 0);
-            button3.ForeColor = SystemColors.ButtonHighlight;
-            button3.Location = new Point(1114, 508);
-            button3.Name = "button3";
-            button3.Size = new Size(230, 75);
-            button3.TabIndex = 3;
-            button3.Text = "DELETE CLASS";
-            button3.UseVisualStyleBackColor = false;
+            btnDeleteClass.BackColor = Color.FromArgb(192, 0, 0);
+            btnDeleteClass.ForeColor = SystemColors.ButtonHighlight;
+            btnDeleteClass.Location = new Point(578, 771);
+            btnDeleteClass.Name = "btnDeleteClass";
+            btnDeleteClass.Size = new Size(230, 75);
+            btnDeleteClass.TabIndex = 3;
+            btnDeleteClass.Text = "DELETE CLASS";
+            btnDeleteClass.UseVisualStyleBackColor = false;
+            btnDeleteClass.Click += deleteClass_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 16.125F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = SystemColors.ControlText;
-            label1.Location = new Point(3, 8);
+            label1.Location = new Point(52, 48);
             label1.Name = "label1";
-            label1.Size = new Size(314, 59);
+            label1.Size = new Size(352, 65);
             label1.TabIndex = 4;
             label1.Text = "Class Schedule ";
             label1.Click += label1_Click;
             // 
-            // label2
+            // ModuleIdLabel
             // 
-            label2.AutoSize = true;
-            label2.BackColor = SystemColors.GradientActiveCaption;
-            label2.BorderStyle = BorderStyle.Fixed3D;
-            label2.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(1114, 89);
-            label2.Name = "label2";
-            label2.Size = new Size(153, 42);
-            label2.TabIndex = 5;
-            label2.Text = "Module ID";
+            ModuleIdLabel.AutoSize = true;
+            ModuleIdLabel.BackColor = SystemColors.GradientActiveCaption;
+            ModuleIdLabel.BorderStyle = BorderStyle.Fixed3D;
+            ModuleIdLabel.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ModuleIdLabel.Location = new Point(64, 563);
+            ModuleIdLabel.Name = "ModuleIdLabel";
+            ModuleIdLabel.Size = new Size(153, 42);
+            ModuleIdLabel.TabIndex = 5;
+            ModuleIdLabel.Text = "Module ID";
             // 
-            // txtModuleId
+            // txtModuleID
             // 
-            txtModuleId.BackColor = SystemColors.ButtonHighlight;
-            txtModuleId.Location = new Point(1303, 92);
-            txtModuleId.Name = "txtModuleId";
-            txtModuleId.Size = new Size(388, 39);
-            txtModuleId.TabIndex = 6;
+            txtModuleID.BackColor = SystemColors.ButtonHighlight;
+            txtModuleID.Location = new Point(239, 566);
+            txtModuleID.Name = "txtModuleID";
+            txtModuleID.Size = new Size(200, 39);
+            txtModuleID.TabIndex = 6;
+            txtModuleID.TextChanged += txtModuleID_TextChanged;
             // 
-            // label3
+            // ModuleNameLabel
             // 
-            label3.AutoSize = true;
-            label3.BackColor = SystemColors.GradientActiveCaption;
-            label3.BorderStyle = BorderStyle.FixedSingle;
-            label3.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(1114, 150);
-            label3.Name = "label3";
-            label3.Size = new Size(202, 42);
-            label3.TabIndex = 7;
-            label3.Text = "Module Name";
+            ModuleNameLabel.AutoSize = true;
+            ModuleNameLabel.BackColor = SystemColors.GradientActiveCaption;
+            ModuleNameLabel.BorderStyle = BorderStyle.FixedSingle;
+            ModuleNameLabel.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ModuleNameLabel.Location = new Point(494, 566);
+            ModuleNameLabel.Name = "ModuleNameLabel";
+            ModuleNameLabel.Size = new Size(202, 42);
+            ModuleNameLabel.TabIndex = 7;
+            ModuleNameLabel.Text = "Module Name";
             // 
             // txtModuleName
             // 
-            txtModuleName.Location = new Point(1335, 153);
+            txtModuleName.Location = new Point(731, 569);
             txtModuleName.Name = "txtModuleName";
-            txtModuleName.Size = new Size(356, 39);
+            txtModuleName.Size = new Size(200, 39);
             txtModuleName.TabIndex = 8;
             // 
-            // label4
+            // ClassDateLabel
             // 
-            label4.AutoSize = true;
-            label4.BackColor = SystemColors.GradientActiveCaption;
-            label4.BorderStyle = BorderStyle.Fixed3D;
-            label4.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(1114, 215);
-            label4.Name = "label4";
-            label4.Size = new Size(159, 42);
-            label4.TabIndex = 9;
-            label4.Text = "Class Date ";
+            ClassDateLabel.AutoSize = true;
+            ClassDateLabel.BackColor = SystemColors.GradientActiveCaption;
+            ClassDateLabel.BorderStyle = BorderStyle.Fixed3D;
+            ClassDateLabel.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ClassDateLabel.Location = new Point(64, 701);
+            ClassDateLabel.Name = "ClassDateLabel";
+            ClassDateLabel.Size = new Size(159, 42);
+            ClassDateLabel.TabIndex = 9;
+            ClassDateLabel.Text = "Class Date ";
             // 
-            // label5
+            // ChargesLabel
             // 
-            label5.AutoSize = true;
-            label5.BackColor = SystemColors.GradientActiveCaption;
-            label5.BorderStyle = BorderStyle.Fixed3D;
-            label5.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(1114, 340);
-            label5.Name = "label5";
-            label5.Size = new Size(122, 42);
-            label5.TabIndex = 11;
-            label5.Text = "Charges";
+            ChargesLabel.AutoSize = true;
+            ChargesLabel.BackColor = SystemColors.GradientActiveCaption;
+            ChargesLabel.BorderStyle = BorderStyle.Fixed3D;
+            ChargesLabel.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ChargesLabel.Location = new Point(494, 632);
+            ChargesLabel.Name = "ChargesLabel";
+            ChargesLabel.Size = new Size(122, 42);
+            ChargesLabel.TabIndex = 11;
+            ChargesLabel.Text = "Charges";
             // 
             // txtCharges
             // 
-            txtCharges.Location = new Point(1259, 343);
+            txtCharges.Location = new Point(655, 632);
             txtCharges.Name = "txtCharges";
-            txtCharges.Size = new Size(432, 39);
+            txtCharges.Size = new Size(200, 39);
             txtCharges.TabIndex = 12;
             // 
             // panel1
@@ -185,98 +181,68 @@
             panel1.BackColor = SystemColors.MenuHighlight;
             panel1.BorderStyle = BorderStyle.Fixed3D;
             panel1.Controls.Add(label1);
-            panel1.Location = new Point(9, 12);
+            panel1.Location = new Point(-27, -2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1764, 72);
+            panel1.Size = new Size(1800, 168);
             panel1.TabIndex = 13;
             // 
-            // dateTimePicker1
+            // dtpClassDate
             // 
-            dateTimePicker1.Location = new Point(1291, 216);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(400, 39);
-            dateTimePicker1.TabIndex = 14;
+            dtpClassDate.Location = new Point(239, 704);
+            dtpClassDate.Name = "dtpClassDate";
+            dtpClassDate.Size = new Size(400, 39);
+            dtpClassDate.TabIndex = 14;
             // 
-            // label6
+            // ClaasTimeLabel
             // 
-            label6.AutoSize = true;
-            label6.BackColor = SystemColors.GradientActiveCaption;
-            label6.BorderStyle = BorderStyle.Fixed3D;
-            label6.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label6.Location = new Point(1114, 285);
-            label6.Name = "label6";
-            label6.Size = new Size(153, 42);
-            label6.TabIndex = 15;
-            label6.Text = "Class Time";
+            ClaasTimeLabel.AutoSize = true;
+            ClaasTimeLabel.BackColor = SystemColors.GradientActiveCaption;
+            ClaasTimeLabel.BorderStyle = BorderStyle.Fixed3D;
+            ClaasTimeLabel.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ClaasTimeLabel.Location = new Point(64, 635);
+            ClaasTimeLabel.Name = "ClaasTimeLabel";
+            ClaasTimeLabel.Size = new Size(153, 42);
+            ClaasTimeLabel.TabIndex = 15;
+            ClaasTimeLabel.Text = "Class Time";
             // 
-            // textBox1
+            // txtClassTime
             // 
-            textBox1.Location = new Point(1291, 285);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(400, 39);
-            textBox1.TabIndex = 16;
-            // 
-            // ModuleID
-            // 
-            ModuleID.HeaderText = "Module ID";
-            ModuleID.MinimumWidth = 10;
-            ModuleID.Name = "ModuleID";
-            ModuleID.Width = 200;
-            // 
-            // ModuleName
-            // 
-            ModuleName.HeaderText = "Module Name";
-            ModuleName.MinimumWidth = 10;
-            ModuleName.Name = "ModuleName";
-            ModuleName.Width = 200;
-            // 
-            // ClassDate
-            // 
-            ClassDate.HeaderText = "Class Date";
-            ClassDate.MinimumWidth = 10;
-            ClassDate.Name = "ClassDate";
-            ClassDate.Width = 200;
-            // 
-            // ClassTime
-            // 
-            ClassTime.HeaderText = "Class Time";
-            ClassTime.MinimumWidth = 10;
-            ClassTime.Name = "ClassTime";
-            ClassTime.Width = 200;
-            // 
-            // Charges
-            // 
-            Charges.HeaderText = "Charges";
-            Charges.MinimumWidth = 10;
-            Charges.Name = "Charges";
-            Charges.Width = 200;
+            txtClassTime.Location = new Point(239, 635);
+            txtClassTime.Name = "txtClassTime";
+            txtClassTime.Size = new Size(200, 39);
+            txtClassTime.TabIndex = 16;
             // 
             // TrainerHomeForm
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ButtonHighlight;
-            ClientSize = new Size(1766, 829);
-            Controls.Add(textBox1);
-            Controls.Add(label6);
-            Controls.Add(dateTimePicker1);
+            ClientSize = new Size(1740, 900);
+            Controls.Add(txtClassTime);
+            Controls.Add(ClaasTimeLabel);
+            Controls.Add(dtpClassDate);
             Controls.Add(panel1);
             Controls.Add(txtCharges);
-            Controls.Add(label5);
-            Controls.Add(label4);
+            Controls.Add(ChargesLabel);
+            Controls.Add(ClassDateLabel);
             Controls.Add(txtModuleName);
-            Controls.Add(label3);
-            Controls.Add(txtModuleId);
-            Controls.Add(label2);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button1);
-            Controls.Add(dataGridView1);
+            Controls.Add(ModuleNameLabel);
+            Controls.Add(txtModuleID);
+            Controls.Add(ModuleIdLabel);
+            Controls.Add(btnDeleteClass);
+            Controls.Add(btnUpdateClass);
+            Controls.Add(btnAddClass);
+            Controls.Add(dgvClassSchedule);
+            FormBorderStyle = FormBorderStyle.None;
+            MaximizeBox = false;
             MaximumSize = new Size(2200, 900);
+            MinimizeBox = false;
             Name = "TrainerHomeForm";
-            Text = "s";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "ClassText";
+            WindowState = FormWindowState.Maximized;
             Load += TrainerHomeForm_Load;
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvClassSchedule).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
@@ -285,26 +251,21 @@
 
         #endregion
 
-        private DataGridView dataGridView1;
-        private Button button1;
-        private Button button2;
-        private Button button3;
+        private DataGridView dgvClassSchedule;
+        private Button btnAddClass;
+        private Button btnUpdateClass;
+        private Button btnDeleteClass;
         private Label label1;
-        private Label label2;
-        private TextBox txtModuleId;
-        private Label label3;
+        private Label ModuleIdLabel;
+        private TextBox txtModuleID;
+        private Label ModuleNameLabel;
         private TextBox txtModuleName;
-        private Label label4;
-        private Label label5;
+        private Label ClassDateLabel;
+        private Label ChargesLabel;
         private TextBox txtCharges;
         private Panel panel1;
-        private DateTimePicker dateTimePicker1;
-        private Label label6;
-        private TextBox textBox1;
-        private DataGridViewTextBoxColumn ModuleID;
-        private DataGridViewTextBoxColumn ModuleName;
-        private DataGridViewTextBoxColumn ClassDate;
-        private DataGridViewTextBoxColumn ClassTime;
-        private DataGridViewTextBoxColumn Charges;
+        private DateTimePicker dtpClassDate;
+        private Label ClaasTimeLabel;
+        private TextBox txtClassTime;
     }
 }
