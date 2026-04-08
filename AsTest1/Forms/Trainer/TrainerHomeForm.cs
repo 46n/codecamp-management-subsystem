@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Configuration;
 
 namespace APUCC_Project.Forms.Trainer
 {
     public partial class TrainerHomeForm : Form
     {
+        string connStr = ConfigurationManager.ConnectionStrings["MyConn"].ConnectionString;
 
         public TrainerHomeForm()
         {
@@ -25,7 +22,7 @@ namespace APUCC_Project.Forms.Trainer
 
         private void TrainerHomeForm_Load(object sender, EventArgs e)
         {
-
+            LoadClassSchedule();
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
@@ -38,7 +35,7 @@ namespace APUCC_Project.Forms.Trainer
 
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvClassSchedule_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
 
@@ -46,13 +43,14 @@ namespace APUCC_Project.Forms.Trainer
 
             txtModuleID.Text = row.Cells[0].Value?.ToString() ?? "";
             txtModuleName.Text = row.Cells[1].Value?.ToString() ?? "";
-            txtClassTime.Text = row.Cells[3].Value?.ToString() ?? "";
-            txtCharges.Text = row.Cells[4].Value?.ToString() ?? "";
 
             if (row.Cells[2].Value != null && row.Cells[2].Value != DBNull.Value)
                 dtpClassDate.Value = Convert.ToDateTime(row.Cells[2].Value);
             else
                 dtpClassDate.Value = DateTime.Today;
+
+            txtClassTime.Text = row.Cells[3].Value?.ToString() ?? "";
+            txtCharges.Text = row.Cells[4].Value?.ToString() ?? "";
         }
 
         private void btnAddClass_Click(object sender, EventArgs e)
@@ -63,11 +61,36 @@ namespace APUCC_Project.Forms.Trainer
                 return;
             }
 
-            // Add to database here
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connStr))
+                {
+                    string query = @"INSERT INTO ClassSchedule
+                                    (ModuleId, ModuleName, ClassDate, ClassTime, Charges)
+                                    VALUES
+                                    (@ModuleId, @ModuleName, @ClassDate, @ClassTime, @Charges)";
 
-            MessageBox.Show("Class added successfully.");
-            LoadClassSchedule();
-            ClearFields();
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@ModuleId", txtModuleID.Text);
+                        cmd.Parameters.AddWithValue("@ModuleName", txtModuleName.Text);
+                        cmd.Parameters.AddWithValue("@ClassDate", dtpClassDate.Value.Date);
+                        cmd.Parameters.AddWithValue("@ClassTime", txtClassTime.Text);
+                        cmd.Parameters.AddWithValue("@Charges", decimal.Parse(txtCharges.Text));
+
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                MessageBox.Show("Class added successfully.");
+                LoadClassSchedule();
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Add Error: " + ex.Message);
+            }
         }
 
         private void updateClass_Click(object sender, EventArgs e)
@@ -78,9 +101,42 @@ namespace APUCC_Project.Forms.Trainer
                 return;
             }
 
-            MessageBox.Show("Class updated successfully.");
-            LoadClassSchedule();
-            ClearFields();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connStr))
+                {
+                    string query = @"UPDATE ClassSchedule
+                                     SET ModuleName = @ModuleName,
+                                         ClassDate = @ClassDate,
+                                         ClassTime = @ClassTime,
+                                         Charges = @Charges
+                                     WHERE ModuleId = @ModuleId";
+
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@ModuleId", txtModuleID.Text);
+                        cmd.Parameters.AddWithValue("@ModuleName", txtModuleName.Text);
+                        cmd.Parameters.AddWithValue("@ClassDate", dtpClassDate.Value.Date);
+                        cmd.Parameters.AddWithValue("@ClassTime", txtClassTime.Text);
+                        cmd.Parameters.AddWithValue("@Charges", decimal.Parse(txtCharges.Text));
+
+                        con.Open();
+                        int rows = cmd.ExecuteNonQuery();
+
+                        if (rows > 0)
+                            MessageBox.Show("Class updated successfully.");
+                        else
+                            MessageBox.Show("No record found to update.");
+                    }
+                }
+
+                LoadClassSchedule();
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Update Error: " + ex.Message);
+            }
         }
 
         private void deleteClass_Click(object sender, EventArgs e)
@@ -100,9 +156,33 @@ namespace APUCC_Project.Forms.Trainer
 
             if (result == DialogResult.Yes)
             {
-                MessageBox.Show("Class deleted successfully.");
-                LoadClassSchedule();
-                ClearFields();
+                try
+                {
+                    using (SqlConnection con = new SqlConnection(connStr))
+                    {
+                        string query = "DELETE FROM ClassSchedule WHERE ModuleId = @ModuleId";
+
+                        using (SqlCommand cmd = new SqlCommand(query, con))
+                        {
+                            cmd.Parameters.AddWithValue("@ModuleId", txtModuleID.Text);
+
+                            con.Open();
+                            int rows = cmd.ExecuteNonQuery();
+
+                            if (rows > 0)
+                                MessageBox.Show("Class deleted successfully.");
+                            else
+                                MessageBox.Show("No record found to delete.");
+                        }
+                    }
+
+                    LoadClassSchedule();
+                    ClearFields();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Delete Error: " + ex.Message);
+                }
             }
         }
 
@@ -110,11 +190,29 @@ namespace APUCC_Project.Forms.Trainer
         {
 
         }
+
         private void LoadClassSchedule()
         {
-            // For now (no database yet), just leave it empty
-            // Later we will load data into dgvClassSchedule
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connStr))
+                {
+                    string query = "SELECT ModuleId, ModuleName, ClassDate, ClassTime, Charges FROM ClassSchedule";
+
+                    using (SqlDataAdapter da = new SqlDataAdapter(query, con))
+                    {
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+                        dgvClassSchedule.DataSource = dt;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Load Error: " + ex.Message);
+            }
         }
+
         private void ClearFields()
         {
             txtModuleID.Clear();
@@ -122,6 +220,11 @@ namespace APUCC_Project.Forms.Trainer
             txtClassTime.Clear();
             txtCharges.Clear();
             dtpClassDate.Value = DateTime.Today;
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

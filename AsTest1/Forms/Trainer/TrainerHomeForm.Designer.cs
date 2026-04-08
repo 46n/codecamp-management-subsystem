@@ -57,7 +57,7 @@
             dgvClassSchedule.RowHeadersWidth = 82;
             dgvClassSchedule.Size = new Size(1071, 344);
             dgvClassSchedule.TabIndex = 0;
-            dgvClassSchedule.CellContentClick += dataGridView1_CellContentClick;
+            dgvClassSchedule.CellContentClick += dgvClassSchedule_CellContentClick;
             // 
             // btnAddClass
             // 
@@ -185,6 +185,7 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1800, 168);
             panel1.TabIndex = 13;
+            panel1.Paint += panel1_Paint;
             // 
             // dtpClassDate
             // 
