@@ -56,9 +56,11 @@
             grpFilter.Controls.Add(btnGenerate);
             grpFilter.Controls.Add(cboTrainer);
             grpFilter.Controls.Add(cboMonth);
-            grpFilter.Location = new Point(31, 52);
+            grpFilter.Location = new Point(40, 67);
+            grpFilter.Margin = new Padding(4, 4, 4, 4);
             grpFilter.Name = "grpFilter";
-            grpFilter.Size = new Size(757, 91);
+            grpFilter.Padding = new Padding(4, 4, 4, 4);
+            grpFilter.Size = new Size(984, 116);
             grpFilter.TabIndex = 0;
             grpFilter.TabStop = false;
             grpFilter.Text = "Filter";
@@ -66,26 +68,29 @@
             // lblTrainer
             // 
             lblTrainer.AutoSize = true;
-            lblTrainer.Location = new Point(364, 38);
+            lblTrainer.Location = new Point(473, 49);
+            lblTrainer.Margin = new Padding(4, 0, 4, 0);
             lblTrainer.Name = "lblTrainer";
-            lblTrainer.Size = new Size(63, 25);
+            lblTrainer.Size = new Size(86, 32);
             lblTrainer.TabIndex = 4;
             lblTrainer.Text = "Trainer";
             // 
             // lblMonth
             // 
             lblMonth.AutoSize = true;
-            lblMonth.Location = new Point(41, 37);
+            lblMonth.Location = new Point(53, 47);
+            lblMonth.Margin = new Padding(4, 0, 4, 0);
             lblMonth.Name = "lblMonth";
-            lblMonth.Size = new Size(65, 25);
+            lblMonth.Size = new Size(86, 32);
             lblMonth.TabIndex = 3;
             lblMonth.Text = "Month";
             // 
             // btnGenerate
             // 
-            btnGenerate.Location = new Point(650, 34);
+            btnGenerate.Location = new Point(845, 44);
+            btnGenerate.Margin = new Padding(4, 4, 4, 4);
             btnGenerate.Name = "btnGenerate";
-            btnGenerate.Size = new Size(101, 34);
+            btnGenerate.Size = new Size(131, 44);
             btnGenerate.TabIndex = 2;
             btnGenerate.Text = "Generate";
             btnGenerate.UseVisualStyleBackColor = true;
@@ -93,51 +98,57 @@
             // cboTrainer
             // 
             cboTrainer.FormattingEnabled = true;
-            cboTrainer.Location = new Point(458, 34);
+            cboTrainer.Location = new Point(595, 44);
+            cboTrainer.Margin = new Padding(4, 4, 4, 4);
             cboTrainer.Name = "cboTrainer";
-            cboTrainer.Size = new Size(182, 33);
+            cboTrainer.Size = new Size(235, 40);
             cboTrainer.TabIndex = 1;
             // 
             // cboMonth
             // 
             cboMonth.FormattingEnabled = true;
-            cboMonth.Location = new Point(124, 34);
+            cboMonth.Location = new Point(161, 44);
+            cboMonth.Margin = new Padding(4, 4, 4, 4);
             cboMonth.Name = "cboMonth";
-            cboMonth.Size = new Size(182, 33);
+            cboMonth.Size = new Size(235, 40);
             cboMonth.TabIndex = 0;
             // 
             // lblPaidCountTitle
             // 
             lblPaidCountTitle.AutoSize = true;
-            lblPaidCountTitle.Location = new Point(31, 177);
+            lblPaidCountTitle.Location = new Point(40, 227);
+            lblPaidCountTitle.Margin = new Padding(4, 0, 4, 0);
             lblPaidCountTitle.Name = "lblPaidCountTitle";
-            lblPaidCountTitle.Size = new Size(111, 25);
+            lblPaidCountTitle.Size = new Size(148, 32);
             lblPaidCountTitle.TabIndex = 1;
             lblPaidCountTitle.Text = "Paid Student";
             // 
             // lblTotalIncomeTitle
             // 
             lblTotalIncomeTitle.AutoSize = true;
-            lblTotalIncomeTitle.Location = new Point(235, 177);
+            lblTotalIncomeTitle.Location = new Point(306, 227);
+            lblTotalIncomeTitle.Margin = new Padding(4, 0, 4, 0);
             lblTotalIncomeTitle.Name = "lblTotalIncomeTitle";
-            lblTotalIncomeTitle.Size = new Size(113, 25);
+            lblTotalIncomeTitle.Size = new Size(151, 32);
             lblTotalIncomeTitle.TabIndex = 2;
             lblTotalIncomeTitle.Text = "Total Income";
             // 
             // btnPrint
             // 
-            btnPrint.Location = new Point(56, 534);
+            btnPrint.Location = new Point(73, 684);
+            btnPrint.Margin = new Padding(4, 4, 4, 4);
             btnPrint.Name = "btnPrint";
-            btnPrint.Size = new Size(101, 34);
+            btnPrint.Size = new Size(131, 44);
             btnPrint.TabIndex = 5;
             btnPrint.Text = "Print";
             btnPrint.UseVisualStyleBackColor = true;
             // 
             // btnClose
             // 
-            btnClose.Location = new Point(226, 534);
+            btnClose.Location = new Point(294, 684);
+            btnClose.Margin = new Padding(4, 4, 4, 4);
             btnClose.Name = "btnClose";
-            btnClose.Size = new Size(101, 34);
+            btnClose.Size = new Size(131, 44);
             btnClose.TabIndex = 6;
             btnClose.Text = "Close";
             btnClose.UseVisualStyleBackColor = true;
@@ -146,10 +157,11 @@
             // 
             gdvReport.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             gdvReport.Columns.AddRange(new DataGridViewColumn[] { colTrainerName, colModule, colLevel, colStudentPaid, colFeePerStudent, colTotal });
-            gdvReport.Location = new Point(-16, 264);
+            gdvReport.Location = new Point(-21, 338);
+            gdvReport.Margin = new Padding(4, 4, 4, 4);
             gdvReport.Name = "gdvReport";
             gdvReport.RowHeadersWidth = 62;
-            gdvReport.Size = new Size(879, 166);
+            gdvReport.Size = new Size(1143, 212);
             gdvReport.TabIndex = 7;
             // 
             // colTrainerName
@@ -208,17 +220,19 @@
             // 
             // AdminMonthlyIncome
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(875, 596);
+            ClientSize = new Size(1138, 763);
             Controls.Add(gdvReport);
             Controls.Add(btnClose);
             Controls.Add(btnPrint);
             Controls.Add(lblTotalIncomeTitle);
             Controls.Add(lblPaidCountTitle);
             Controls.Add(grpFilter);
+            Margin = new Padding(4, 4, 4, 4);
             Name = "AdminMonthlyIncome";
             Text = "Admin Monthly Income";
+            Load += AdminMonthlyIncome_Load;
             grpFilter.ResumeLayout(false);
             grpFilter.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)gdvReport).EndInit();

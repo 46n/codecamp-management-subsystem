@@ -30,9 +30,9 @@
         {
             panel1 = new Panel();
             TrainerFeedbackLabel = new Label();
-            textFeedback = new TextBox();
+            txtFeedback = new TextBox();
             btnSendFeedback = new Button();
-            FeedbackTypecheckedListBox = new CheckedListBox();
+            chkFeedbackType = new CheckedListBox();
             TypeFeedbacklabel = new Label();
             label1 = new Label();
             txtTrainerName = new TextBox();
@@ -59,14 +59,14 @@
             TrainerFeedbackLabel.TabIndex = 0;
             TrainerFeedbackLabel.Text = "Feedback To Administration ";
             // 
-            // textFeedback
+            // txtFeedback
             // 
-            textFeedback.BackColor = SystemColors.InactiveBorder;
-            textFeedback.Location = new Point(49, 284);
-            textFeedback.Multiline = true;
-            textFeedback.Name = "textFeedback";
-            textFeedback.Size = new Size(1026, 459);
-            textFeedback.TabIndex = 1;
+            txtFeedback.BackColor = SystemColors.InactiveBorder;
+            txtFeedback.Location = new Point(49, 284);
+            txtFeedback.Multiline = true;
+            txtFeedback.Name = "txtFeedback";
+            txtFeedback.Size = new Size(1026, 459);
+            txtFeedback.TabIndex = 1;
             // 
             // btnSendFeedback
             // 
@@ -77,15 +77,17 @@
             btnSendFeedback.TabIndex = 2;
             btnSendFeedback.Text = "Send Feedback";
             btnSendFeedback.UseVisualStyleBackColor = false;
+            btnSendFeedback.Click += btnSendFeedback_Click;
             // 
-            // FeedbackTypecheckedListBox
+            // chkFeedbackType
             // 
-            FeedbackTypecheckedListBox.FormattingEnabled = true;
-            FeedbackTypecheckedListBox.Items.AddRange(new object[] { "Genaeral", "Suggestion", "complaint" });
-            FeedbackTypecheckedListBox.Location = new Point(1101, 494);
-            FeedbackTypecheckedListBox.Name = "FeedbackTypecheckedListBox";
-            FeedbackTypecheckedListBox.Size = new Size(206, 112);
-            FeedbackTypecheckedListBox.TabIndex = 3;
+            chkFeedbackType.FormattingEnabled = true;
+            chkFeedbackType.Items.AddRange(new object[] { "Genaeral", "Suggestion", "complaint" });
+            chkFeedbackType.Location = new Point(1101, 494);
+            chkFeedbackType.Name = "chkFeedbackType";
+            chkFeedbackType.Size = new Size(206, 112);
+            chkFeedbackType.TabIndex = 3;
+            chkFeedbackType.SelectedIndexChanged += chkGeneral_SelectedIndexChanged;
             // 
             // TypeFeedbacklabel
             // 
@@ -134,9 +136,9 @@
             Controls.Add(txtTrainerName);
             Controls.Add(label1);
             Controls.Add(TypeFeedbacklabel);
-            Controls.Add(FeedbackTypecheckedListBox);
+            Controls.Add(chkFeedbackType);
             Controls.Add(btnSendFeedback);
-            Controls.Add(textFeedback);
+            Controls.Add(txtFeedback);
             Controls.Add(panel1);
             Name = "FeedBackForm1";
             Text = "FeedbackToAdminForm";
@@ -151,9 +153,9 @@
 
         private Panel panel1;
         private Label TrainerFeedbackLabel;
-        private TextBox textFeedback;
+        private TextBox txtFeedback;
         private Button btnSendFeedback;
-        private CheckedListBox FeedbackTypecheckedListBox;
+        private CheckedListBox chkFeedbackType;
         private Label TypeFeedbacklabel;
         private Label label1;
         private TextBox txtTrainerName;
