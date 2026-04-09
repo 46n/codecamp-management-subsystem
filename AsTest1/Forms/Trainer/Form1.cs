@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace APUCC_Project.Forms.Trainer
 {
-    public partial class FeedBackForm : Form
+    public partial class FeedBackForm1 : Form
     {
-        public FeedBackForm()
+        public FeedBackForm1()
         {
             InitializeComponent();
                 this.StartPosition = FormStartPosition.CenterScreen;

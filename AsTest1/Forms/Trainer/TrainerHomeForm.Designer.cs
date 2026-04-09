@@ -57,7 +57,7 @@
             dgvClassSchedule.RowHeadersWidth = 82;
             dgvClassSchedule.Size = new Size(1071, 344);
             dgvClassSchedule.TabIndex = 0;
-            dgvClassSchedule.CellContentClick += dgvClassSchedule_CellContentClick;
+            dgvClassSchedule.CellClick += dgvClassSchedule_CellClick;
             // 
             // btnAddClass
             // 
@@ -69,6 +69,7 @@
             btnAddClass.TabIndex = 1;
             btnAddClass.Text = "ADD CLASS";
             btnAddClass.UseVisualStyleBackColor = false;
+            btnAddClass.Click += btnAddClass_Click;
             // 
             // btnUpdateClass
             // 
@@ -80,6 +81,7 @@
             btnUpdateClass.TabIndex = 2;
             btnUpdateClass.Text = "UPDATE CLASS";
             btnUpdateClass.UseVisualStyleBackColor = false;
+            btnUpdateClass.Click += updateClass_Click;
             // 
             // btnDeleteClass
             // 
@@ -103,7 +105,6 @@
             label1.Size = new Size(352, 65);
             label1.TabIndex = 4;
             label1.Text = "Class Schedule ";
-            label1.Click += label1_Click;
             // 
             // ModuleIdLabel
             // 
@@ -124,7 +125,6 @@
             txtModuleID.Name = "txtModuleID";
             txtModuleID.Size = new Size(200, 39);
             txtModuleID.TabIndex = 6;
-            txtModuleID.TextChanged += txtModuleID_TextChanged;
             // 
             // ModuleNameLabel
             // 
@@ -185,7 +185,6 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1800, 168);
             panel1.TabIndex = 13;
-            panel1.Paint += panel1_Paint;
             // 
             // dtpClassDate
             // 

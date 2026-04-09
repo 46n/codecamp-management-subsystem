@@ -1,14 +1,15 @@
 ﻿using System;
+using System.Configuration;
 using System.Data;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
-using System.Configuration;
 
 namespace APUCC_Project.Forms.Trainer
 {
     public partial class TrainerHomeForm : Form
     {
-        string connStr = ConfigurationManager.ConnectionStrings["MyConn"].ConnectionString;
+        private readonly string connStr =
+            ConfigurationManager.ConnectionStrings["MyConn"].ConnectionString;
 
         public TrainerHomeForm()
         {
@@ -25,60 +26,51 @@ namespace APUCC_Project.Forms.Trainer
             LoadClassSchedule();
         }
 
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dgvClassSchedule_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0) return;
-
-            DataGridViewRow row = dgvClassSchedule.Rows[e.RowIndex];
-
-            txtModuleID.Text = row.Cells[0].Value?.ToString() ?? "";
-            txtModuleName.Text = row.Cells[1].Value?.ToString() ?? "";
-
-            if (row.Cells[2].Value != null && row.Cells[2].Value != DBNull.Value)
-                dtpClassDate.Value = Convert.ToDateTime(row.Cells[2].Value);
-            else
-                dtpClassDate.Value = DateTime.Today;
-
-            txtClassTime.Text = row.Cells[3].Value?.ToString() ?? "";
-            txtCharges.Text = row.Cells[4].Value?.ToString() ?? "";
-        }
-
         private void btnAddClass_Click(object sender, EventArgs e)
         {
-            if (txtModuleID.Text == "" || txtModuleName.Text == "" || txtClassTime.Text == "" || txtCharges.Text == "")
-            {
-                MessageBox.Show("Please fill in all fields.");
+            if (!ValidateInputs(out decimal charges, out TimeSpan classTime))
                 return;
-            }
 
             try
             {
                 using (SqlConnection con = new SqlConnection(connStr))
                 {
-                    string query = @"INSERT INTO ClassSchedule
-                                    (ModuleId, ModuleName, ClassDate, ClassTime, Charges)
-                                    VALUES
-                                    (@ModuleId, @ModuleName, @ClassDate, @ClassTime, @Charges)";
+                    con.Open();
 
-                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    string checkQuery = @"
+                        SELECT COUNT(*)
+                        FROM ClassSchedule
+                        WHERE ModuleId = @ModuleId
+                          AND ClassDate = @ClassDate
+                          AND ClassTime = @ClassTime";
+
+                    using (SqlCommand checkCmd = new SqlCommand(checkQuery, con))
                     {
-                        cmd.Parameters.AddWithValue("@ModuleId", txtModuleID.Text);
-                        cmd.Parameters.AddWithValue("@ModuleName", txtModuleName.Text);
-                        cmd.Parameters.AddWithValue("@ClassDate", dtpClassDate.Value.Date);
-                        cmd.Parameters.AddWithValue("@ClassTime", txtClassTime.Text);
-                        cmd.Parameters.AddWithValue("@Charges", decimal.Parse(txtCharges.Text));
+                        checkCmd.Parameters.AddWithValue("@ModuleId", txtModuleID.Text.Trim());
+                        checkCmd.Parameters.AddWithValue("@ClassDate", dtpClassDate.Value.Date);
+                        checkCmd.Parameters.AddWithValue("@ClassTime", classTime);
 
-                        con.Open();
+                        int count = (int)checkCmd.ExecuteScalar();
+
+                        if (count > 0)
+                        {
+                            MessageBox.Show("This class schedule already exists.");
+                            return;
+                        }
+                    }
+
+                    string insertQuery = @"
+                        INSERT INTO ClassSchedule (ModuleId, ModuleName, ClassDate, ClassTime, Charges)
+                        VALUES (@ModuleId, @ModuleName, @ClassDate, @ClassTime, @Charges)";
+
+                    using (SqlCommand cmd = new SqlCommand(insertQuery, con))
+                    {
+                        cmd.Parameters.AddWithValue("@ModuleId", txtModuleID.Text.Trim());
+                        cmd.Parameters.AddWithValue("@ModuleName", txtModuleName.Text.Trim());
+                        cmd.Parameters.AddWithValue("@ClassDate", dtpClassDate.Value.Date);
+                        cmd.Parameters.AddWithValue("@ClassTime", classTime);
+                        cmd.Parameters.AddWithValue("@Charges", charges);
+
                         cmd.ExecuteNonQuery();
                     }
                 }
@@ -95,7 +87,10 @@ namespace APUCC_Project.Forms.Trainer
 
         private void updateClass_Click(object sender, EventArgs e)
         {
-            if (txtModuleID.Text == "")
+            if (!ValidateInputs(out decimal charges, out TimeSpan classTime))
+                return;
+
+            if (dgvClassSchedule.CurrentRow == null || dgvClassSchedule.CurrentRow.Index < 0)
             {
                 MessageBox.Show("Please select a class to update.");
                 return;
@@ -103,24 +98,54 @@ namespace APUCC_Project.Forms.Trainer
 
             try
             {
+                int selectedId = Convert.ToInt32(dgvClassSchedule.CurrentRow.Cells["Id"].Value);
+
                 using (SqlConnection con = new SqlConnection(connStr))
                 {
-                    string query = @"UPDATE ClassSchedule
-                                     SET ModuleName = @ModuleName,
-                                         ClassDate = @ClassDate,
-                                         ClassTime = @ClassTime,
-                                         Charges = @Charges
-                                     WHERE ModuleId = @ModuleId";
+                    con.Open();
 
-                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    string duplicateCheck = @"
+                        SELECT COUNT(*)
+                        FROM ClassSchedule
+                        WHERE ModuleId = @ModuleId
+                          AND ClassDate = @ClassDate
+                          AND ClassTime = @ClassTime
+                          AND Id <> @Id";
+
+                    using (SqlCommand checkCmd = new SqlCommand(duplicateCheck, con))
                     {
-                        cmd.Parameters.AddWithValue("@ModuleId", txtModuleID.Text);
-                        cmd.Parameters.AddWithValue("@ModuleName", txtModuleName.Text);
-                        cmd.Parameters.AddWithValue("@ClassDate", dtpClassDate.Value.Date);
-                        cmd.Parameters.AddWithValue("@ClassTime", txtClassTime.Text);
-                        cmd.Parameters.AddWithValue("@Charges", decimal.Parse(txtCharges.Text));
+                        checkCmd.Parameters.AddWithValue("@ModuleId", txtModuleID.Text.Trim());
+                        checkCmd.Parameters.AddWithValue("@ClassDate", dtpClassDate.Value.Date);
+                        checkCmd.Parameters.AddWithValue("@ClassTime", classTime);
+                        checkCmd.Parameters.AddWithValue("@Id", selectedId);
 
-                        con.Open();
+                        int count = (int)checkCmd.ExecuteScalar();
+
+                        if (count > 0)
+                        {
+                            MessageBox.Show("Another class with the same Module ID, date, and time already exists.");
+                            return;
+                        }
+                    }
+
+                    string updateQuery = @"
+                        UPDATE ClassSchedule
+                        SET ModuleId = @ModuleId,
+                            ModuleName = @ModuleName,
+                            ClassDate = @ClassDate,
+                            ClassTime = @ClassTime,
+                            Charges = @Charges
+                        WHERE Id = @Id";
+
+                    using (SqlCommand cmd = new SqlCommand(updateQuery, con))
+                    {
+                        cmd.Parameters.AddWithValue("@ModuleId", txtModuleID.Text.Trim());
+                        cmd.Parameters.AddWithValue("@ModuleName", txtModuleName.Text.Trim());
+                        cmd.Parameters.AddWithValue("@ClassDate", dtpClassDate.Value.Date);
+                        cmd.Parameters.AddWithValue("@ClassTime", classTime);
+                        cmd.Parameters.AddWithValue("@Charges", charges);
+                        cmd.Parameters.AddWithValue("@Id", selectedId);
+
                         int rows = cmd.ExecuteNonQuery();
 
                         if (rows > 0)
@@ -141,7 +166,7 @@ namespace APUCC_Project.Forms.Trainer
 
         private void deleteClass_Click(object sender, EventArgs e)
         {
-            if (txtModuleID.Text == "")
+            if (dgvClassSchedule.CurrentRow == null || dgvClassSchedule.CurrentRow.Index < 0)
             {
                 MessageBox.Show("Please select a class to delete.");
                 return;
@@ -151,44 +176,67 @@ namespace APUCC_Project.Forms.Trainer
                 "Are you sure you want to delete this class?",
                 "Confirm Delete",
                 MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning
-            );
+                MessageBoxIcon.Warning);
 
-            if (result == DialogResult.Yes)
+            if (result != DialogResult.Yes)
+                return;
+
+            try
             {
-                try
+                int selectedId = Convert.ToInt32(dgvClassSchedule.CurrentRow.Cells["Id"].Value);
+
+                using (SqlConnection con = new SqlConnection(connStr))
                 {
-                    using (SqlConnection con = new SqlConnection(connStr))
+                    con.Open();
+
+                    string deleteQuery = "DELETE FROM ClassSchedule WHERE Id = @Id";
+
+                    using (SqlCommand cmd = new SqlCommand(deleteQuery, con))
                     {
-                        string query = "DELETE FROM ClassSchedule WHERE ModuleId = @ModuleId";
+                        cmd.Parameters.AddWithValue("@Id", selectedId);
 
-                        using (SqlCommand cmd = new SqlCommand(query, con))
-                        {
-                            cmd.Parameters.AddWithValue("@ModuleId", txtModuleID.Text);
+                        int rows = cmd.ExecuteNonQuery();
 
-                            con.Open();
-                            int rows = cmd.ExecuteNonQuery();
-
-                            if (rows > 0)
-                                MessageBox.Show("Class deleted successfully.");
-                            else
-                                MessageBox.Show("No record found to delete.");
-                        }
+                        if (rows > 0)
+                            MessageBox.Show("Class deleted successfully.");
+                        else
+                            MessageBox.Show("No record found to delete.");
                     }
+                }
 
-                    LoadClassSchedule();
-                    ClearFields();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Delete Error: " + ex.Message);
-                }
+                LoadClassSchedule();
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Delete Error: " + ex.Message);
             }
         }
 
-        private void txtModuleID_TextChanged(object sender, EventArgs e)
+        private void dgvClassSchedule_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0) return;
 
+            DataGridViewRow row = dgvClassSchedule.Rows[e.RowIndex];
+
+            txtModuleID.Text = row.Cells["ModuleId"].Value?.ToString() ?? "";
+            txtModuleName.Text = row.Cells["ModuleName"].Value?.ToString() ?? "";
+            txtCharges.Text = row.Cells["Charges"].Value?.ToString() ?? "";
+
+            if (row.Cells["ClassDate"].Value != null && row.Cells["ClassDate"].Value != DBNull.Value)
+                dtpClassDate.Value = Convert.ToDateTime(row.Cells["ClassDate"].Value);
+            else
+                dtpClassDate.Value = DateTime.Today;
+
+            if (row.Cells["ClassTime"].Value != null && row.Cells["ClassTime"].Value != DBNull.Value)
+            {
+                TimeSpan time = (TimeSpan)row.Cells["ClassTime"].Value;
+                txtClassTime.Text = time.ToString(@"hh\:mm");
+            }
+            else
+            {
+                txtClassTime.Clear();
+            }
         }
 
         private void LoadClassSchedule()
@@ -197,13 +245,25 @@ namespace APUCC_Project.Forms.Trainer
             {
                 using (SqlConnection con = new SqlConnection(connStr))
                 {
-                    string query = "SELECT ModuleId, ModuleName, ClassDate, ClassTime, Charges FROM ClassSchedule";
+                    con.Open();
+
+                    string query = @"
+                        SELECT Id, ModuleId, ModuleName, ClassDate, ClassTime, Charges
+                        FROM ClassSchedule
+                        ORDER BY ClassDate, ClassTime";
 
                     using (SqlDataAdapter da = new SqlDataAdapter(query, con))
                     {
                         DataTable dt = new DataTable();
                         da.Fill(dt);
+
+                        dgvClassSchedule.AutoGenerateColumns = true;
+                        dgvClassSchedule.DataSource = null;
+                        dgvClassSchedule.Columns.Clear();
                         dgvClassSchedule.DataSource = dt;
+
+                        if (dgvClassSchedule.Columns["Id"] != null)
+                            dgvClassSchedule.Columns["Id"].Visible = false;
                     }
                 }
             }
@@ -211,6 +271,35 @@ namespace APUCC_Project.Forms.Trainer
             {
                 MessageBox.Show("Load Error: " + ex.Message);
             }
+        }
+
+        private bool ValidateInputs(out decimal charges, out TimeSpan classTime)
+        {
+            charges = 0;
+            classTime = TimeSpan.Zero;
+
+            if (string.IsNullOrWhiteSpace(txtModuleID.Text) ||
+                string.IsNullOrWhiteSpace(txtModuleName.Text) ||
+                string.IsNullOrWhiteSpace(txtClassTime.Text) ||
+                string.IsNullOrWhiteSpace(txtCharges.Text))
+            {
+                MessageBox.Show("Please fill in all fields.");
+                return false;
+            }
+
+            if (!decimal.TryParse(txtCharges.Text.Trim(), out charges))
+            {
+                MessageBox.Show("Charges must be a valid number.");
+                return false;
+            }
+
+            if (!TimeSpan.TryParse(txtClassTime.Text.Trim(), out classTime))
+            {
+                MessageBox.Show("Enter valid time in HH:mm format. Example: 04:30 or 16:30");
+                return false;
+            }
+
+            return true;
         }
 
         private void ClearFields()
@@ -222,9 +311,20 @@ namespace APUCC_Project.Forms.Trainer
             dtpClassDate.Value = DateTime.Today;
         }
 
+        private void txtModuleID_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+        }
+
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-
         }
     }
 }
