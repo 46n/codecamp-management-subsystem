@@ -54,7 +54,7 @@ namespace APUCC_Project
         protected override void iconButton3_Click(object sender, EventArgs e)
         {
             base.iconButton3_Click(sender, e);
-            OpenChildForm(new FeedBackForm());
+            OpenChildForm(new FeedBackForm1());
             // OpenChildForm(new StudentFeesForm());
         }
 
