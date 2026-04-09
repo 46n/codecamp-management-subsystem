@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace APUCC_Project.Forms.Admin
 {
-    public partial class AdminTrainer : Form
+    public partial class AdminTrainerFeedback : Form
     {
-        public AdminTrainer()
+        public AdminTrainerFeedback()
         {
             InitializeComponent();
         }

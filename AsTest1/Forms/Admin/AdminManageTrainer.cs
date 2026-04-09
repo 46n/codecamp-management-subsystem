@@ -14,5 +14,15 @@ namespace APUCC_Project.Forms.Admin
         {
             InitializeComponent();
         }
+
+        private void dgvTrainer_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void AdminManageTrainer_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

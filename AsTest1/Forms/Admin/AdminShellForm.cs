@@ -1,41 +1,67 @@
-﻿using System;
+﻿using APUCC_Project.Forms.Admin;
+using System;
 using System.Windows.Forms;
 
 namespace APUCC_Project
 {
     public partial class AdminShellForm : BaseShellForm
     {
+        private Form? activeForm = null;
+
         public AdminShellForm()
         {
             InitializeComponent();
-            this.Text = "Student Dashboard";
+
+            this.Text = "Admin Dashboard";
             this.ControlBox = true;
             this.FormBorderStyle = FormBorderStyle.Sizable;
 
-            // Optional: change labels/icons for student
-            homebtn.Text = "Home";
-            iconButton2.Text = "My courses";
-            iconButton3.Text = "Fees";
-            iconButton4.Text = "Settings";
-            Profile.Text = "Profile";
+            homebtn.Text = "Manage Trainer";
+            iconButton2.Text = "Trainer Feedback";
+            iconButton3.Text = "Monthly Income Report";
+
+            iconButton4.Visible = false;
+            Profile.Visible = false;
+
+            OpenChildForm(new AdminManageTrainer());
+        }
+
+        private void OpenChildForm(Form childForm)
+        {
+            if (activeForm != null)
+                activeForm.Close();
+
+            activeForm = childForm;
+
+            childForm.TopLevel = false;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.Dock = DockStyle.Fill;
+
+            MainPanel.Controls.Clear();
+            MainPanel.Controls.Add(childForm);
+            MainPanel.Tag = childForm;
+
+            childForm.BringToFront();
+            childForm.Show();
         }
 
         // Student actions when clicking the SHARED base buttons
         protected override void homebtn_Click(object sender, EventArgs e)
         {
             base.homebtn_Click(sender, e); // keeps highlight + style
-            // OpenChildForm(new StudentHomeForm());
+            OpenChildForm(new AdminManageTrainer());
         }
 
         protected override void iconButton2_Click(object sender, EventArgs e)
         {
             base.iconButton2_Click(sender, e);
-            // OpenChildForm(new StudentCoursesForm());
+            OpenChildForm(new AdminTrainerFeedback());
         }
 
         protected override void iconButton3_Click(object sender, EventArgs e)
         {
             base.iconButton3_Click(sender, e);
+            OpenChildForm(new AdminMonthlyIncome());
             // OpenChildForm(new StudentFeesForm());
         }
 

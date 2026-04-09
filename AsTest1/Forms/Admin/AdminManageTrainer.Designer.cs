@@ -49,6 +49,15 @@
             txtPhone = new TextBox();
             txtEmail = new TextBox();
             txtFullName = new TextBox();
+            btnSearch = new Button();
+            btnShowAll = new Button();
+            btnRemove = new Button();
+            btnClose = new Button();
+            btnAssign = new Button();
+            btnSave = new Button();
+            btnClear = new Button();
+            lblSearch = new Label();
+            txtSearch = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvTrainer).BeginInit();
             grpAssignment.SuspendLayout();
             grpTrainerDetails.SuspendLayout();
@@ -60,13 +69,14 @@
             dgvTrainer.AllowUserToDeleteRows = false;
             dgvTrainer.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvTrainer.Columns.AddRange(new DataGridViewColumn[] { colTrainerID, colTrainerName, colModule, colLevel });
-            dgvTrainer.Location = new Point(-45, 88);
+            dgvTrainer.Location = new Point(-45, 86);
             dgvTrainer.Name = "dgvTrainer";
             dgvTrainer.ReadOnly = true;
             dgvTrainer.RightToLeft = RightToLeft.No;
             dgvTrainer.RowHeadersWidth = 62;
-            dgvTrainer.Size = new Size(605, 220);
+            dgvTrainer.Size = new Size(632, 206);
             dgvTrainer.TabIndex = 5;
+            dgvTrainer.CellContentClick += dgvTrainer_CellContentClick;
             // 
             // colTrainerID
             // 
@@ -110,7 +120,7 @@
             grpAssignment.Controls.Add(lblModule);
             grpAssignment.Controls.Add(cboLevel);
             grpAssignment.Controls.Add(cboModule);
-            grpAssignment.Location = new Point(566, 309);
+            grpAssignment.Location = new Point(566, 287);
             grpAssignment.Name = "grpAssignment";
             grpAssignment.Size = new Size(300, 150);
             grpAssignment.TabIndex = 4;
@@ -250,22 +260,112 @@
             txtFullName.Size = new Size(150, 31);
             txtFullName.TabIndex = 0;
             // 
+            // btnSearch
+            // 
+            btnSearch.Location = new Point(296, 22);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new Size(112, 34);
+            btnSearch.TabIndex = 6;
+            btnSearch.Text = "Search";
+            btnSearch.UseVisualStyleBackColor = true;
+            // 
+            // btnShowAll
+            // 
+            btnShowAll.Location = new Point(430, 22);
+            btnShowAll.Name = "btnShowAll";
+            btnShowAll.Size = new Size(112, 34);
+            btnShowAll.TabIndex = 7;
+            btnShowAll.Text = "Show All";
+            btnShowAll.UseVisualStyleBackColor = true;
+            // 
+            // btnRemove
+            // 
+            btnRemove.Location = new Point(84, 307);
+            btnRemove.Name = "btnRemove";
+            btnRemove.Size = new Size(112, 34);
+            btnRemove.TabIndex = 8;
+            btnRemove.Text = "Remove";
+            btnRemove.UseVisualStyleBackColor = true;
+            // 
+            // btnClose
+            // 
+            btnClose.Location = new Point(232, 307);
+            btnClose.Name = "btnClose";
+            btnClose.Size = new Size(112, 34);
+            btnClose.TabIndex = 9;
+            btnClose.Text = "Close";
+            btnClose.UseVisualStyleBackColor = true;
+            // 
+            // btnAssign
+            // 
+            btnAssign.Location = new Point(593, 450);
+            btnAssign.Name = "btnAssign";
+            btnAssign.Size = new Size(112, 34);
+            btnAssign.TabIndex = 10;
+            btnAssign.Text = "Assign";
+            btnAssign.UseVisualStyleBackColor = true;
+            // 
+            // btnSave
+            // 
+            btnSave.Location = new Point(430, 450);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(112, 34);
+            btnSave.TabIndex = 11;
+            btnSave.Text = "Save";
+            btnSave.UseVisualStyleBackColor = true;
+            // 
+            // btnClear
+            // 
+            btnClear.Location = new Point(733, 450);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(112, 34);
+            btnClear.TabIndex = 12;
+            btnClear.Text = "Clear";
+            btnClear.UseVisualStyleBackColor = true;
+            // 
+            // lblSearch
+            // 
+            lblSearch.AutoSize = true;
+            lblSearch.Location = new Point(43, 26);
+            lblSearch.Name = "lblSearch";
+            lblSearch.Size = new Size(64, 25);
+            lblSearch.TabIndex = 13;
+            lblSearch.Text = "Search";
+            // 
+            // txtSearch
+            // 
+            txtSearch.Location = new Point(127, 22);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(150, 31);
+            txtSearch.TabIndex = 14;
+            // 
             // AdminManageTrainer
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(897, 471);
+            ClientSize = new Size(897, 496);
+            Controls.Add(txtSearch);
+            Controls.Add(lblSearch);
+            Controls.Add(btnClear);
+            Controls.Add(btnSave);
+            Controls.Add(btnAssign);
+            Controls.Add(btnClose);
+            Controls.Add(btnRemove);
+            Controls.Add(btnShowAll);
+            Controls.Add(btnSearch);
             Controls.Add(dgvTrainer);
             Controls.Add(grpAssignment);
             Controls.Add(grpTrainerDetails);
             Name = "AdminManageTrainer";
             Text = "AdminManageTrainer";
+            Load += AdminManageTrainer_Load;
             ((System.ComponentModel.ISupportInitialize)dgvTrainer).EndInit();
             grpAssignment.ResumeLayout(false);
             grpAssignment.PerformLayout();
             grpTrainerDetails.ResumeLayout(false);
             grpTrainerDetails.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -291,5 +391,14 @@
         private TextBox txtPhone;
         private TextBox txtEmail;
         private TextBox txtFullName;
+        private Button btnSearch;
+        private Button btnShowAll;
+        private Button btnRemove;
+        private Button btnClose;
+        private Button btnAssign;
+        private Button btnSave;
+        private Button btnClear;
+        private Label lblSearch;
+        private TextBox txtSearch;
     }
 }
