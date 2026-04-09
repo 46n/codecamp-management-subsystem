@@ -58,6 +58,8 @@
             btnClear = new Button();
             lblSearch = new Label();
             txtSearch = new TextBox();
+            lblError = new Label();
+            lblStatus = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvTrainer).BeginInit();
             grpAssignment.SuspendLayout();
             grpTrainerDetails.SuspendLayout();
@@ -339,11 +341,29 @@
             txtSearch.Size = new Size(150, 31);
             txtSearch.TabIndex = 14;
             // 
+            // lblError
+            // 
+            lblError.AutoSize = true;
+            lblError.Location = new Point(543, 506);
+            lblError.Name = "lblError";
+            lblError.Size = new Size(0, 25);
+            lblError.TabIndex = 15;
+            // 
+            // lblStatus
+            // 
+            lblStatus.AutoSize = true;
+            lblStatus.Location = new Point(107, 372);
+            lblStatus.Name = "lblStatus";
+            lblStatus.Size = new Size(0, 25);
+            lblStatus.TabIndex = 16;
+            // 
             // AdminManageTrainer
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(897, 496);
+            ClientSize = new Size(897, 551);
+            Controls.Add(lblStatus);
+            Controls.Add(lblError);
             Controls.Add(txtSearch);
             Controls.Add(lblSearch);
             Controls.Add(btnClear);
@@ -400,5 +420,7 @@
         private Button btnClear;
         private Label lblSearch;
         private TextBox txtSearch;
+        private Label lblError;
+        private Label lblStatus;
     }
 }
