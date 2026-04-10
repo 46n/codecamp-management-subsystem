@@ -10,13 +10,17 @@ namespace APUCC_Project
         public StudentShellForm()
         {
             InitializeComponent();
-            //loading home form as the main form
+
             OpenChildForm(new StudentHomeForm());
-            // Optional: change labels/icons for student
 
             this.Text = "Student Dashboard";
             this.ControlBox = true;
-            this.FormBorderStyle = FormBorderStyle.Sizable;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = true; // optional
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.MinimumSize = this.Size;
+            this.MaximumSize = this.Size;
 
             homebtn.Text = "Home";
             iconButton2.Text = "My courses";

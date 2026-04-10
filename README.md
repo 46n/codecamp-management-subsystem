@@ -171,7 +171,11 @@ user interface and database integration.
 </li>
 
 <li>
-<a href="https://github.com/3bdosh70">Abdalla Abdelrahman</a> — TP089555
+<a href="https://github.com/3bdosh70">Abdalla Hassan</a> — TP089555
+</li>
+
+<li>
+<a href="https://github.com/Ghostcline">Abdelrahman Hussein</a> — TP086182
 </li>
 </ul>
 

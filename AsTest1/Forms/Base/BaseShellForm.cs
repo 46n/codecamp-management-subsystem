@@ -41,7 +41,13 @@ namespace APUCC_Project
             SetupHoverEffects(Profile);
 
             AttachRipples();
+
+            this.ClientSize = new Size(770, 425);
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
+
 
         // ✅ Ripple once (virtual so child can override if needed)
         protected virtual void AttachRipples()
