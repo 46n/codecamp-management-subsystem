@@ -11,7 +11,7 @@ namespace APUCC_Project
         {
             InitializeComponent();
             this.ControlBox = true;
-
+            OpenChildForm(new TrainerHomeForm());
 
             // Optional: change labels/icons for student
             homebtn.Text = "Manage Classes";
@@ -73,7 +73,7 @@ namespace APUCC_Project
 
         private void MainPanel_Paint(object sender, PaintEventArgs e)
         {
-
+            
         }
 
         private void homebtn_Click_1(object sender, EventArgs e)
@@ -81,12 +81,12 @@ namespace APUCC_Project
 
         }
 
-        private void iconButton2_Click_1(object sender, EventArgs e)
+        private void TrainerShellForm_Load(object sender, EventArgs e)
         {
-
+            OpenChildForm(new TrainerHomeForm());
         }
 
-        private void TrainerShellForm_Load(object sender, EventArgs e)
+        private void iconButton2_Click_1(object sender, EventArgs e)
         {
 
         }
