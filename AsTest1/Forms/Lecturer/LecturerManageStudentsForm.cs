@@ -15,6 +15,9 @@ namespace APUCC_Project.Forms.Lecturer
             InitializeComponent();
         }
 
-       
+        private void LecturerManageStudentsForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
