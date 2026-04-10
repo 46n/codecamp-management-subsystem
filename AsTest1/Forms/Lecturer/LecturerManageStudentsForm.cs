@@ -14,5 +14,7 @@ namespace APUCC_Project.Forms.Lecturer
         {
             InitializeComponent();
         }
+
+       
     }
 }
