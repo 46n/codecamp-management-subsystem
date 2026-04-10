@@ -37,10 +37,18 @@ namespace APUCC_Project
 
             childForm.TopLevel = false;
             childForm.FormBorderStyle = FormBorderStyle.None;
+
+            MainPanel.Controls.Clear();
+
+            Panel contentPanel = new Panel();
+            contentPanel.Dock = DockStyle.Fill;
+            contentPanel.Padding = new Padding(0, 30, 0, 0); // left, top, right, bottom
+            contentPanel.BackColor = MainPanel.BackColor;
+
             childForm.Dock = DockStyle.Fill;
 
-            MainPanel.Controls.Clear();   // the big panel on the right
-            MainPanel.Controls.Add(childForm);
+            contentPanel.Controls.Add(childForm);
+            MainPanel.Controls.Add(contentPanel);
 
             childForm.BringToFront();
             childForm.Show();
