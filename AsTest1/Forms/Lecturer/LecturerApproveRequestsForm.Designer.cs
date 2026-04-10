@@ -33,14 +33,14 @@
             btnFilter = new Button();
             dgvRequests = new DataGridView();
             grpSelectedRequestDetails = new GroupBox();
-            txtStudent = new TextBox();
-            txtModule = new TextBox();
-            txtTPNumber = new TextBox();
-            txtLevel = new TextBox();
-            lblStudent = new Label();
-            lblModule = new Label();
-            lblTPNumber = new Label();
             lblLevel = new Label();
+            lblTPNumber = new Label();
+            lblModule = new Label();
+            lblStudent = new Label();
+            txtLevel = new TextBox();
+            txtTPNumber = new TextBox();
+            txtModule = new TextBox();
+            txtStudent = new TextBox();
             btnApprove = new Button();
             btnReject = new Button();
             btnRerfesh = new Button();
@@ -54,7 +54,7 @@
             // cboShowRequests
             // 
             cboShowRequests.FormattingEnabled = true;
-            cboShowRequests.Location = new Point(159, 12);
+            cboShowRequests.Location = new Point(159, 74);
             cboShowRequests.Name = "cboShowRequests";
             cboShowRequests.Size = new Size(182, 33);
             cboShowRequests.TabIndex = 0;
@@ -62,7 +62,7 @@
             // lblShow
             // 
             lblShow.AutoSize = true;
-            lblShow.Location = new Point(55, 15);
+            lblShow.Location = new Point(55, 77);
             lblShow.Name = "lblShow";
             lblShow.Size = new Size(56, 25);
             lblShow.TabIndex = 1;
@@ -70,7 +70,7 @@
             // 
             // btnFilter
             // 
-            btnFilter.Location = new Point(377, 11);
+            btnFilter.Location = new Point(377, 73);
             btnFilter.Name = "btnFilter";
             btnFilter.Size = new Size(112, 34);
             btnFilter.TabIndex = 2;
@@ -80,7 +80,7 @@
             // dgvRequests
             // 
             dgvRequests.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvRequests.Location = new Point(38, 90);
+            dgvRequests.Location = new Point(37, 125);
             dgvRequests.Name = "dgvRequests";
             dgvRequests.RowHeadersWidth = 62;
             dgvRequests.Size = new Size(703, 151);
@@ -96,58 +96,21 @@
             grpSelectedRequestDetails.Controls.Add(txtTPNumber);
             grpSelectedRequestDetails.Controls.Add(txtModule);
             grpSelectedRequestDetails.Controls.Add(txtStudent);
-            grpSelectedRequestDetails.Location = new Point(28, 262);
+            grpSelectedRequestDetails.Location = new Point(27, 297);
             grpSelectedRequestDetails.Name = "grpSelectedRequestDetails";
             grpSelectedRequestDetails.Size = new Size(806, 153);
             grpSelectedRequestDetails.TabIndex = 4;
             grpSelectedRequestDetails.TabStop = false;
             grpSelectedRequestDetails.Text = "Selected Request Details";
             // 
-            // txtStudent
+            // lblLevel
             // 
-            txtStudent.Location = new Point(132, 30);
-            txtStudent.Name = "txtStudent";
-            txtStudent.Size = new Size(211, 31);
-            txtStudent.TabIndex = 0;
-            // 
-            // txtModule
-            // 
-            txtModule.Location = new Point(132, 97);
-            txtModule.Name = "txtModule";
-            txtModule.Size = new Size(211, 31);
-            txtModule.TabIndex = 1;
-            // 
-            // txtTPNumber
-            // 
-            txtTPNumber.Location = new Point(567, 30);
-            txtTPNumber.Name = "txtTPNumber";
-            txtTPNumber.Size = new Size(211, 31);
-            txtTPNumber.TabIndex = 2;
-            // 
-            // txtLevel
-            // 
-            txtLevel.Location = new Point(567, 97);
-            txtLevel.Name = "txtLevel";
-            txtLevel.Size = new Size(211, 31);
-            txtLevel.TabIndex = 3;
-            // 
-            // lblStudent
-            // 
-            lblStudent.AutoSize = true;
-            lblStudent.Location = new Point(27, 36);
-            lblStudent.Name = "lblStudent";
-            lblStudent.Size = new Size(73, 25);
-            lblStudent.TabIndex = 4;
-            lblStudent.Text = "Student";
-            // 
-            // lblModule
-            // 
-            lblModule.AutoSize = true;
-            lblModule.Location = new Point(27, 103);
-            lblModule.Name = "lblModule";
-            lblModule.Size = new Size(73, 25);
-            lblModule.TabIndex = 5;
-            lblModule.Text = "Module";
+            lblLevel.AutoSize = true;
+            lblLevel.Location = new Point(458, 103);
+            lblLevel.Name = "lblLevel";
+            lblLevel.Size = new Size(51, 25);
+            lblLevel.TabIndex = 7;
+            lblLevel.Text = "Level";
             // 
             // lblTPNumber
             // 
@@ -158,14 +121,51 @@
             lblTPNumber.TabIndex = 6;
             lblTPNumber.Text = "TP Number";
             // 
-            // lblLevel
+            // lblModule
             // 
-            lblLevel.AutoSize = true;
-            lblLevel.Location = new Point(458, 103);
-            lblLevel.Name = "lblLevel";
-            lblLevel.Size = new Size(51, 25);
-            lblLevel.TabIndex = 7;
-            lblLevel.Text = "Level";
+            lblModule.AutoSize = true;
+            lblModule.Location = new Point(27, 103);
+            lblModule.Name = "lblModule";
+            lblModule.Size = new Size(73, 25);
+            lblModule.TabIndex = 5;
+            lblModule.Text = "Module";
+            // 
+            // lblStudent
+            // 
+            lblStudent.AutoSize = true;
+            lblStudent.Location = new Point(27, 36);
+            lblStudent.Name = "lblStudent";
+            lblStudent.Size = new Size(73, 25);
+            lblStudent.TabIndex = 4;
+            lblStudent.Text = "Student";
+            // 
+            // txtLevel
+            // 
+            txtLevel.Location = new Point(567, 97);
+            txtLevel.Name = "txtLevel";
+            txtLevel.Size = new Size(211, 31);
+            txtLevel.TabIndex = 3;
+            // 
+            // txtTPNumber
+            // 
+            txtTPNumber.Location = new Point(567, 30);
+            txtTPNumber.Name = "txtTPNumber";
+            txtTPNumber.Size = new Size(211, 31);
+            txtTPNumber.TabIndex = 2;
+            // 
+            // txtModule
+            // 
+            txtModule.Location = new Point(132, 97);
+            txtModule.Name = "txtModule";
+            txtModule.Size = new Size(211, 31);
+            txtModule.TabIndex = 1;
+            // 
+            // txtStudent
+            // 
+            txtStudent.Location = new Point(132, 30);
+            txtStudent.Name = "txtStudent";
+            txtStudent.Size = new Size(211, 31);
+            txtStudent.TabIndex = 0;
             // 
             // btnApprove
             // 
@@ -206,7 +206,7 @@
             // lblStatus
             // 
             lblStatus.AutoSize = true;
-            lblStatus.Location = new Point(696, 433);
+            lblStatus.Location = new Point(695, 468);
             lblStatus.Name = "lblStatus";
             lblStatus.Size = new Size(0, 25);
             lblStatus.TabIndex = 9;
@@ -214,7 +214,7 @@
             // lblFormStatus
             // 
             lblFormStatus.AutoSize = true;
-            lblFormStatus.Location = new Point(53, 427);
+            lblFormStatus.Location = new Point(52, 462);
             lblFormStatus.Name = "lblFormStatus";
             lblFormStatus.Size = new Size(0, 25);
             lblFormStatus.TabIndex = 10;

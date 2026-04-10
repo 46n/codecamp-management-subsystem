@@ -267,6 +267,7 @@
             btnRegister.TabIndex = 1;
             btnRegister.Text = "Register";
             btnRegister.UseVisualStyleBackColor = true;
+            btnRegister.Click += btnRegister_Click;
             // 
             // btnClear
             // 
@@ -276,6 +277,7 @@
             btnClear.TabIndex = 2;
             btnClear.Text = "Clear";
             btnClear.UseVisualStyleBackColor = true;
+            btnClear.Click += btnClear_Click;
             // 
             // btnShowAll
             // 
@@ -285,6 +287,7 @@
             btnShowAll.TabIndex = 4;
             btnShowAll.Text = "Show All";
             btnShowAll.UseVisualStyleBackColor = true;
+            btnShowAll.Click += btnShowAll_Click;
             // 
             // btnDeleteStudent
             // 
@@ -294,6 +297,7 @@
             btnDeleteStudent.TabIndex = 5;
             btnDeleteStudent.Text = "Delete Student";
             btnDeleteStudent.UseVisualStyleBackColor = true;
+            btnDeleteStudent.Click += btnDeleteStudent_Click;
             // 
             // btnClose
             // 
@@ -303,6 +307,7 @@
             btnClose.TabIndex = 6;
             btnClose.Text = "Close";
             btnClose.UseVisualStyleBackColor = true;
+            btnClose.Click += btnClose_Click;
             // 
             // button7
             // 
@@ -312,6 +317,7 @@
             button7.TabIndex = 7;
             button7.Text = "Filter";
             button7.UseVisualStyleBackColor = true;
+            button7.Click += btnFilter_Click;
             // 
             // lblFilterModule
             // 
