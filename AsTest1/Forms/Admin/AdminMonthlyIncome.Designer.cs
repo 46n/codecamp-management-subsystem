@@ -45,8 +45,10 @@
             colStudentPaid = new DataGridViewTextBoxColumn();
             colFeePerStudent = new DataGridViewTextBoxColumn();
             colTotal = new DataGridViewTextBoxColumn();
+            dgvReport = new DataGridView();
             grpFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gdvReport).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvReport).BeginInit();
             SuspendLayout();
             // 
             // grpFilter
@@ -57,9 +59,9 @@
             grpFilter.Controls.Add(cboTrainer);
             grpFilter.Controls.Add(cboMonth);
             grpFilter.Location = new Point(40, 67);
-            grpFilter.Margin = new Padding(4, 4, 4, 4);
+            grpFilter.Margin = new Padding(4);
             grpFilter.Name = "grpFilter";
-            grpFilter.Padding = new Padding(4, 4, 4, 4);
+            grpFilter.Padding = new Padding(4);
             grpFilter.Size = new Size(984, 116);
             grpFilter.TabIndex = 0;
             grpFilter.TabStop = false;
@@ -88,7 +90,7 @@
             // btnGenerate
             // 
             btnGenerate.Location = new Point(845, 44);
-            btnGenerate.Margin = new Padding(4, 4, 4, 4);
+            btnGenerate.Margin = new Padding(4);
             btnGenerate.Name = "btnGenerate";
             btnGenerate.Size = new Size(131, 44);
             btnGenerate.TabIndex = 2;
@@ -99,7 +101,7 @@
             // 
             cboTrainer.FormattingEnabled = true;
             cboTrainer.Location = new Point(595, 44);
-            cboTrainer.Margin = new Padding(4, 4, 4, 4);
+            cboTrainer.Margin = new Padding(4);
             cboTrainer.Name = "cboTrainer";
             cboTrainer.Size = new Size(235, 40);
             cboTrainer.TabIndex = 1;
@@ -108,7 +110,7 @@
             // 
             cboMonth.FormattingEnabled = true;
             cboMonth.Location = new Point(161, 44);
-            cboMonth.Margin = new Padding(4, 4, 4, 4);
+            cboMonth.Margin = new Padding(4);
             cboMonth.Name = "cboMonth";
             cboMonth.Size = new Size(235, 40);
             cboMonth.TabIndex = 0;
@@ -136,7 +138,7 @@
             // btnPrint
             // 
             btnPrint.Location = new Point(73, 684);
-            btnPrint.Margin = new Padding(4, 4, 4, 4);
+            btnPrint.Margin = new Padding(4);
             btnPrint.Name = "btnPrint";
             btnPrint.Size = new Size(131, 44);
             btnPrint.TabIndex = 5;
@@ -146,7 +148,7 @@
             // btnClose
             // 
             btnClose.Location = new Point(294, 684);
-            btnClose.Margin = new Padding(4, 4, 4, 4);
+            btnClose.Margin = new Padding(4);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(131, 44);
             btnClose.TabIndex = 6;
@@ -158,7 +160,7 @@
             gdvReport.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             gdvReport.Columns.AddRange(new DataGridViewColumn[] { colTrainerName, colModule, colLevel, colStudentPaid, colFeePerStudent, colTotal });
             gdvReport.Location = new Point(-21, 338);
-            gdvReport.Margin = new Padding(4, 4, 4, 4);
+            gdvReport.Margin = new Padding(4);
             gdvReport.Name = "gdvReport";
             gdvReport.RowHeadersWidth = 62;
             gdvReport.Size = new Size(1143, 212);
@@ -218,24 +220,34 @@
             colTotal.ReadOnly = true;
             colTotal.Width = 150;
             // 
+            // dgvReport
+            // 
+            dgvReport.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvReport.Location = new Point(40, 292);
+            dgvReport.Name = "dgvReport";
+            dgvReport.RowHeadersWidth = 82;
+            dgvReport.Size = new Size(984, 346);
+            dgvReport.TabIndex = 7;
+            // 
             // AdminMonthlyIncome
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1138, 763);
-            Controls.Add(gdvReport);
+            Controls.Add(dgvReport);
             Controls.Add(btnClose);
             Controls.Add(btnPrint);
             Controls.Add(lblTotalIncomeTitle);
             Controls.Add(lblPaidCountTitle);
             Controls.Add(grpFilter);
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "AdminMonthlyIncome";
             Text = "Admin Monthly Income";
             Load += AdminMonthlyIncome_Load;
             grpFilter.ResumeLayout(false);
             grpFilter.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)gdvReport).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvReport).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -259,5 +271,6 @@
         private DataGridViewTextBoxColumn colStudentPaid;
         private DataGridViewTextBoxColumn colFeePerStudent;
         private DataGridViewTextBoxColumn colTotal;
+        private DataGridView dgvReport;
     }
 }
