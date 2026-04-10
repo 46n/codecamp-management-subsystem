@@ -98,11 +98,11 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.ForeColor = SystemColors.ControlText;
+            label1.Font = new Font("Segoe UI Black", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.White;
             label1.Location = new Point(52, 48);
             label1.Name = "label1";
-            label1.Size = new Size(352, 65);
+            label1.Size = new Size(383, 65);
             label1.TabIndex = 4;
             label1.Text = "Class Schedule ";
             // 
@@ -178,12 +178,12 @@
             // 
             // panel1
             // 
-            panel1.BackColor = SystemColors.MenuHighlight;
+            panel1.BackColor = Color.FromArgb(25, 25, 25);
             panel1.BorderStyle = BorderStyle.Fixed3D;
             panel1.Controls.Add(label1);
             panel1.Location = new Point(-27, -2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1800, 168);
+            panel1.Size = new Size(1738, 168);
             panel1.TabIndex = 13;
             // 
             // dtpClassDate
@@ -217,7 +217,7 @@
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ButtonHighlight;
-            ClientSize = new Size(1740, 900);
+            ClientSize = new Size(1454, 900);
             Controls.Add(txtClassTime);
             Controls.Add(ClaasTimeLabel);
             Controls.Add(dtpClassDate);

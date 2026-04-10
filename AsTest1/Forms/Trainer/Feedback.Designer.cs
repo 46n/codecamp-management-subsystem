@@ -42,7 +42,7 @@
             // 
             // panel1
             // 
-            panel1.BackColor = SystemColors.MenuHighlight;
+            panel1.BackColor = Color.FromArgb(25, 25, 25);
             panel1.Controls.Add(TrainerFeedbackLabel);
             panel1.Location = new Point(-7, 4);
             panel1.Name = "panel1";
@@ -52,16 +52,17 @@
             // TrainerFeedbackLabel
             // 
             TrainerFeedbackLabel.AutoSize = true;
-            TrainerFeedbackLabel.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            TrainerFeedbackLabel.Font = new Font("Segoe UI Black", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            TrainerFeedbackLabel.ForeColor = Color.White;
             TrainerFeedbackLabel.Location = new Point(38, 48);
             TrainerFeedbackLabel.Name = "TrainerFeedbackLabel";
-            TrainerFeedbackLabel.Size = new Size(625, 65);
+            TrainerFeedbackLabel.Size = new Size(708, 65);
             TrainerFeedbackLabel.TabIndex = 0;
             TrainerFeedbackLabel.Text = "Feedback To Administration ";
             // 
             // txtFeedback
             // 
-            txtFeedback.BackColor = SystemColors.InactiveBorder;
+            txtFeedback.BackColor = SystemColors.ControlLight;
             txtFeedback.Location = new Point(49, 284);
             txtFeedback.Multiline = true;
             txtFeedback.Name = "txtFeedback";
@@ -131,7 +132,7 @@
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLightLight;
-            ClientSize = new Size(1660, 814);
+            ClientSize = new Size(1590, 814);
             Controls.Add(TrainerNameLabel);
             Controls.Add(txtTrainerName);
             Controls.Add(label1);

@@ -1,3 +1,5 @@
+using APUCC_Project.Forms.Trainer;
+
 namespace APUCC_Project
 {
     internal static class Program

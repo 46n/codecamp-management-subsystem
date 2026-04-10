@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            EnrolledStudentsLebal = new Label();
+            EnrolledStudentslbl = new Label();
             EnrolledStuedntsPanel = new Panel();
             dataGridView1 = new DataGridView();
             btnGoBackHome = new Button();
@@ -36,21 +36,22 @@
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
-            // EnrolledStudentsLebal
+            // EnrolledStudentslbl
             // 
-            EnrolledStudentsLebal.AutoSize = true;
-            EnrolledStudentsLebal.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            EnrolledStudentsLebal.Location = new Point(42, 55);
-            EnrolledStudentsLebal.Name = "EnrolledStudentsLebal";
-            EnrolledStudentsLebal.Size = new Size(410, 65);
-            EnrolledStudentsLebal.TabIndex = 0;
-            EnrolledStudentsLebal.Text = "Enrolled Students ";
+            EnrolledStudentslbl.AutoSize = true;
+            EnrolledStudentslbl.Font = new Font("Segoe UI Black", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            EnrolledStudentslbl.ForeColor = Color.White;
+            EnrolledStudentslbl.Location = new Point(42, 55);
+            EnrolledStudentslbl.Name = "EnrolledStudentslbl";
+            EnrolledStudentslbl.Size = new Size(457, 65);
+            EnrolledStudentslbl.TabIndex = 0;
+            EnrolledStudentslbl.Text = "Enrolled Students ";
             // 
             // EnrolledStuedntsPanel
             // 
-            EnrolledStuedntsPanel.BackColor = SystemColors.Highlight;
+            EnrolledStuedntsPanel.BackColor = Color.FromArgb(25, 25, 25);
             EnrolledStuedntsPanel.BorderStyle = BorderStyle.Fixed3D;
-            EnrolledStuedntsPanel.Controls.Add(EnrolledStudentsLebal);
+            EnrolledStuedntsPanel.Controls.Add(EnrolledStudentslbl);
             EnrolledStuedntsPanel.Location = new Point(-20, -16);
             EnrolledStuedntsPanel.Name = "EnrolledStuedntsPanel";
             EnrolledStuedntsPanel.Size = new Size(1845, 176);
@@ -99,7 +100,7 @@
 
         #endregion
 
-        private Label EnrolledStudentsLebal;
+        private Label EnrolledStudentslbl;
         private Panel EnrolledStuedntsPanel;
         private DataGridView dataGridView1;
         private Button btnGoBackHome;
