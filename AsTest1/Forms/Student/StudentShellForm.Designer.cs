@@ -43,10 +43,7 @@
             // 
             // StudentShellForm
             // 
-            AutoScaleMode = AutoScaleMode.None;
-            ClientSize = new Size(770, 425);
-            MaximumSize = new Size(770, 425);
-            MinimumSize = new Size(770, 425);
+            AutoScaleMode = AutoScaleMode.Font;
             StartPosition = FormStartPosition.CenterScreen;
             Name = "StudentShellForm";
             Load += StudentShellForm_Load;
