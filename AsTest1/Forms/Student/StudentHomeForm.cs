@@ -13,6 +13,7 @@ namespace APUCC_Project.Forms.Student
         public StudentHomeForm()
         {
             InitializeComponent();
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -23,9 +24,15 @@ namespace APUCC_Project.Forms.Student
         private void label2_Click(object sender, EventArgs e)
         {
 
+
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
         {
 
         }
