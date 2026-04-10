@@ -14,8 +14,8 @@ namespace APUCC_Project
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             //Application.Run(new StudentShellForm());
-            //Application.Run(new AdminShellForm());
-            Application.Run(new TrainerShellForm());
+            Application.Run(new StudentShellForm());
+            //Application.Run(new TrainerShellForm());
         }
     }
 }

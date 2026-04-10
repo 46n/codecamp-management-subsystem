@@ -52,9 +52,10 @@
             lblGreeting.BackColor = Color.Transparent;
             lblGreeting.Font = new Font("Segoe UI Semibold", 16.125F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblGreeting.ForeColor = Color.White;
-            lblGreeting.Location = new Point(40, 35);
+            lblGreeting.Location = new Point(22, 16);
+            lblGreeting.Margin = new Padding(2, 0, 2, 0);
             lblGreeting.Name = "lblGreeting";
-            lblGreeting.Size = new Size(508, 59);
+            lblGreeting.Size = new Size(259, 30);
             lblGreeting.TabIndex = 1;
             lblGreeting.Text = "Good Evening, Abdullah ";
             lblGreeting.Click += label2_Click;
@@ -65,23 +66,26 @@
             lblWelcome.BackColor = Color.Transparent;
             lblWelcome.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblWelcome.ForeColor = Color.White;
-            lblWelcome.Location = new Point(40, 103);
+            lblWelcome.Location = new Point(22, 48);
+            lblWelcome.Margin = new Padding(2, 0, 2, 0);
             lblWelcome.Name = "lblWelcome";
-            lblWelcome.Size = new Size(497, 32);
+            lblWelcome.Size = new Size(248, 15);
             lblWelcome.TabIndex = 2;
             lblWelcome.Text = "Welcome back to your CodeCamp dashboard";
             // 
             // panelScheduleCard
             // 
-            panelScheduleCard.BackColor = Color.FromArgb(35, 35, 39);
+            panelScheduleCard.BackColor = Color.FromArgb(243, 243, 243);
+            panelScheduleCard.BackgroundImageLayout = ImageLayout.None;
             panelScheduleCard.BorderStyle = BorderStyle.FixedSingle;
             panelScheduleCard.Controls.Add(dataGridView1);
             panelScheduleCard.Controls.Add(button2);
             panelScheduleCard.Controls.Add(button1);
-            panelScheduleCard.Location = new Point(40, 172);
+            panelScheduleCard.Location = new Point(22, 81);
+            panelScheduleCard.Margin = new Padding(2, 1, 2, 1);
             panelScheduleCard.Name = "panelScheduleCard";
-            panelScheduleCard.Padding = new Padding(20);
-            panelScheduleCard.Size = new Size(1051, 320);
+            panelScheduleCard.Padding = new Padding(11, 9, 11, 9);
+            panelScheduleCard.Size = new Size(567, 151);
             panelScheduleCard.TabIndex = 3;
             // 
             // dataGridView1
@@ -109,12 +113,13 @@
             dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
             dataGridView1.Dock = DockStyle.Bottom;
             dataGridView1.EnableHeadersVisualStyles = false;
-            dataGridView1.Location = new Point(20, 83);
+            dataGridView1.Location = new Point(11, 39);
+            dataGridView1.Margin = new Padding(2, 1, 2, 1);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 82;
-            dataGridView1.Size = new Size(1009, 215);
+            dataGridView1.Size = new Size(543, 101);
             dataGridView1.TabIndex = 2;
             // 
             // ModuleColumnHome
@@ -172,9 +177,10 @@
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             button2.ForeColor = Color.White;
-            button2.Location = new Point(286, 40);
+            button2.Location = new Point(154, 19);
+            button2.Margin = new Padding(2, 1, 2, 1);
             button2.Name = "button2";
-            button2.Size = new Size(250, 46);
+            button2.Size = new Size(135, 22);
             button2.TabIndex = 1;
             button2.Text = "Upcoming Schedule";
             button2.UseVisualStyleBackColor = false;
@@ -186,9 +192,10 @@
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(42, 40);
+            button1.Location = new Point(23, 19);
+            button1.Margin = new Padding(2, 1, 2, 1);
             button1.Name = "button1";
-            button1.Size = new Size(250, 46);
+            button1.Size = new Size(135, 22);
             button1.TabIndex = 0;
             button1.Text = "Current Schedule";
             button1.UseVisualStyleBackColor = false;
@@ -196,14 +203,15 @@
             // 
             // StudentHomeForm
             // 
-            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(42, 42, 42);
-            ClientSize = new Size(1162, 688);
+            BackColor = Color.White;
+            ClientSize = new Size(626, 322);
             Controls.Add(panelScheduleCard);
             Controls.Add(lblWelcome);
             Controls.Add(lblGreeting);
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(2, 1, 2, 1);
             Name = "StudentHomeForm";
             Text = "StudentHomeForm";
             panelScheduleCard.ResumeLayout(false);
