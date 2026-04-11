@@ -28,57 +28,56 @@
         /// </summary>
         private void InitializeComponent()
         {
-            EnrolledStudentslbl = new Label();
+            lblTitle = new Label();
             EnrolledStuedntsPanel = new Panel();
-            dataGridView1 = new DataGridView();
-            btnGoBackHome = new Button();
+            dgvEnrolledStudents = new DataGridView();
+            btnBack = new Button();
             EnrolledStuedntsPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvEnrolledStudents).BeginInit();
             SuspendLayout();
             // 
-            // EnrolledStudentslbl
+            // lblTitle
             // 
-            EnrolledStudentslbl.AutoSize = true;
-            EnrolledStudentslbl.Font = new Font("Segoe UI Black", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            EnrolledStudentslbl.ForeColor = Color.White;
-            EnrolledStudentslbl.Location = new Point(42, 55);
-            EnrolledStudentslbl.Name = "EnrolledStudentslbl";
-            EnrolledStudentslbl.Size = new Size(457, 65);
-            EnrolledStudentslbl.TabIndex = 0;
-            EnrolledStudentslbl.Text = "Enrolled Students ";
+            lblTitle.AutoSize = true;
+            lblTitle.Font = new Font("Segoe UI Black", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTitle.ForeColor = Color.White;
+            lblTitle.Location = new Point(42, 55);
+            lblTitle.Name = "lblTitle";
+            lblTitle.Size = new Size(457, 65);
+            lblTitle.TabIndex = 0;
+            lblTitle.Text = "Enrolled Students ";
             // 
             // EnrolledStuedntsPanel
             // 
             EnrolledStuedntsPanel.BackColor = Color.FromArgb(25, 25, 25);
             EnrolledStuedntsPanel.BorderStyle = BorderStyle.Fixed3D;
-            EnrolledStuedntsPanel.Controls.Add(EnrolledStudentslbl);
+            EnrolledStuedntsPanel.Controls.Add(lblTitle);
             EnrolledStuedntsPanel.Location = new Point(-20, -16);
             EnrolledStuedntsPanel.Name = "EnrolledStuedntsPanel";
             EnrolledStuedntsPanel.Size = new Size(1845, 176);
             EnrolledStuedntsPanel.TabIndex = 1;
             // 
-            // dataGridView1
+            // dgvEnrolledStudents
             // 
-            dataGridView1.BorderStyle = BorderStyle.Fixed3D;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(40, 180);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 82;
-            dataGridView1.Size = new Size(1088, 506);
-            dataGridView1.TabIndex = 2;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            dgvEnrolledStudents.BorderStyle = BorderStyle.Fixed3D;
+            dgvEnrolledStudents.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvEnrolledStudents.Location = new Point(40, 180);
+            dgvEnrolledStudents.Name = "dgvEnrolledStudents";
+            dgvEnrolledStudents.RowHeadersWidth = 82;
+            dgvEnrolledStudents.Size = new Size(1088, 506);
+            dgvEnrolledStudents.TabIndex = 2;
             // 
-            // btnGoBackHome
+            // btnBack
             // 
-            btnGoBackHome.BackColor = SystemColors.HotTrack;
-            btnGoBackHome.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnGoBackHome.Location = new Point(40, 712);
-            btnGoBackHome.Name = "btnGoBackHome";
-            btnGoBackHome.Size = new Size(358, 86);
-            btnGoBackHome.TabIndex = 3;
-            btnGoBackHome.Text = "Go Back ";
-            btnGoBackHome.UseVisualStyleBackColor = false;
-            btnGoBackHome.Click += button1_Click;
+            btnBack.BackColor = SystemColors.HotTrack;
+            btnBack.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnBack.Location = new Point(40, 712);
+            btnBack.Name = "btnBack";
+            btnBack.Size = new Size(358, 86);
+            btnBack.TabIndex = 3;
+            btnBack.Text = "Go Back ";
+            btnBack.UseVisualStyleBackColor = false;
+            btnBack.Click += btnBack_Click;
             // 
             // TrainerEnrolledStudents
             // 
@@ -86,23 +85,23 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ButtonHighlight;
             ClientSize = new Size(1830, 896);
-            Controls.Add(btnGoBackHome);
-            Controls.Add(dataGridView1);
+            Controls.Add(btnBack);
+            Controls.Add(dgvEnrolledStudents);
             Controls.Add(EnrolledStuedntsPanel);
             Name = "TrainerEnrolledStudents";
             Text = "TrainerEnrolledStudents";
             Load += TrainerEnrolledStudents_Load;
             EnrolledStuedntsPanel.ResumeLayout(false);
             EnrolledStuedntsPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvEnrolledStudents).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Label EnrolledStudentslbl;
+        private Label lblTitle;
         private Panel EnrolledStuedntsPanel;
-        private DataGridView dataGridView1;
-        private Button btnGoBackHome;
+        private DataGridView dgvEnrolledStudents;
+        private Button btnBack;
     }
 }

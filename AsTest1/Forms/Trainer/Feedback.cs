@@ -10,8 +10,7 @@ namespace APUCC_Project.Forms.Trainer
         private readonly string connStr =
             ConfigurationManager.ConnectionStrings["MyConn"].ConnectionString;
 
-        // Temporary trainer id until you connect it to login
-        private int trainerId = 1;
+        private int trainerId = 1; // temporary default until full login is connected
 
         public FeedBackForm1()
         {
@@ -26,98 +25,143 @@ namespace APUCC_Project.Forms.Trainer
 
         private void FeedBackForm_Load(object sender, EventArgs e)
         {
+            txtTrainerName.ReadOnly = true;
+            LoadTrainerName();
+        }
+
+        private void LoadTrainerName()
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(connStr))
+                {
+                    con.Open();
+
+                    string query = @"
+                        SELECT U.Name
+                        FROM Trainers T
+                        INNER JOIN Users U ON T.UserID = U.UserID
+                        WHERE T.TrainerID = @TrainerID";
+
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@TrainerID", trainerId);
+
+                        object result = cmd.ExecuteScalar();
+
+                        if (result != null)
+                            txtTrainerName.Text = result.ToString();
+                        else
+                            txtTrainerName.Text = "";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading trainer name: " + ex.Message);
+            }
         }
 
         private void btnSendFeedback_Click(object sender, EventArgs e)
         {
             try
             {
-                string connStr = ConfigurationManager.ConnectionStrings["MyConn"].ConnectionString;
+                if (!ValidateFeedbackInput())
+                    return;
+
+                string feedbackType = chkFeedbackType.CheckedItems[0].ToString();
+                string message = txtMessage.Text.Trim();
 
                 using (SqlConnection con = new SqlConnection(connStr))
                 {
                     con.Open();
 
-                    // 1. Get feedback type
-                    string feedbackType = "";
+                    string insertQuery = @"
+                        INSERT INTO Feedback (TrainerID, FeedbackType, Message)
+                        VALUES (@TrainerID, @FeedbackType, @Message)";
 
-                    if (chkFeedbackType.CheckedItems.Count > 0)
-                    {
-                        feedbackType = chkFeedbackType.CheckedItems[0].ToString();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Please select a feedback type.");
-                        return;
-                    }
-
-                    // 2. Validate inputs
-                    string trainerName = txtTrainerName.Text.Trim();
-
-                    if (trainerName == "")
-                    {
-                        MessageBox.Show("Enter trainer name.");
-                        return;
-                    }
-
-                    if (txtFeedback.Text.Trim() == "")
-                    {
-                        MessageBox.Show("Enter feedback.");
-                        return;
-                    }
-
-                    // 3. Get TrainerID from DB
-                    int trainerId = -1;
-
-                    string query = @"
-                SELECT T.TrainerID
-                FROM Trainers T
-                INNER JOIN Users U ON T.UserID = U.UserID
-                WHERE U.Name = @Name";
-
-                    using (SqlCommand cmd = new SqlCommand(query, con))
-                    {
-                        cmd.Parameters.AddWithValue("@Name", trainerName);
-
-                        object result = cmd.ExecuteScalar();
-
-                        if (result == null)
-                        {
-                            MessageBox.Show("Trainer not found.");
-                            return;
-                        }
-
-                        trainerId = Convert.ToInt32(result);
-                    }
-
-                    // 🔍 DEBUG (IMPORTANT)
-                    MessageBox.Show("TrainerID = " + trainerId);
-
-                    // 4. Insert feedback
-                    string insert = @"
-                INSERT INTO Feedback (TrainerID, FeedbackType, Message)
-                VALUES (@TrainerID, @Type, @Message)";
-
-                    using (SqlCommand cmd = new SqlCommand(insert, con))
+                    using (SqlCommand cmd = new SqlCommand(insertQuery, con))
                     {
                         cmd.Parameters.AddWithValue("@TrainerID", trainerId);
-                        cmd.Parameters.AddWithValue("@Type", feedbackType);
-                        cmd.Parameters.AddWithValue("@Message", txtFeedback.Text.Trim());
+                        cmd.Parameters.AddWithValue("@FeedbackType", feedbackType);
+                        cmd.Parameters.AddWithValue("@Message", message);
 
                         cmd.ExecuteNonQuery();
                     }
                 }
 
-                MessageBox.Show("Feedback sent successfully!");
+                MessageBox.Show("Feedback sent successfully.");
+
+                ClearFields();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Database error: " + ex.Message);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error: " + ex.Message);
             }
         }
 
-        private void chkGeneral_SelectedIndexChanged(object sender, EventArgs e)
+        private bool ValidateFeedbackInput()
         {
+            if (trainerId <= 0)
+            {
+                MessageBox.Show("Invalid trainer account.");
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtTrainerName.Text))
+            {
+                MessageBox.Show("Trainer name could not be loaded.");
+                return false;
+            }
+
+            if (chkFeedbackType.CheckedItems.Count == 0)
+            {
+                MessageBox.Show("Please select a feedback type.");
+                return false;
+            }
+
+            if (chkFeedbackType.CheckedItems.Count > 1)
+            {
+                MessageBox.Show("Please select only one feedback type.");
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtMessage.Text))
+            {
+                MessageBox.Show("Please enter feedback.");
+                txtMessage.Focus();
+                return false;
+            }
+
+            if (txtMessage.Text.Trim().Length < 5)
+            {
+                MessageBox.Show("Feedback is too short.");
+                txtMessage.Focus();
+                return false;
+            }
+
+            if (txtMessage.Text.Trim().Length > 500)
+            {
+                MessageBox.Show("Feedback must not exceed 500 characters.");
+                txtMessage.Focus();
+                return false;
+            }
+
+            return true;
+        }
+
+        private void ClearFields()
+        {
+            txtMessage.Clear();
+
+            for (int i = 0; i < chkFeedbackType.Items.Count; i++)
+            {
+                chkFeedbackType.SetItemChecked(i, false);
+            }
         }
     }
 }
