@@ -54,6 +54,7 @@
             // cboShowRequests
             // 
             cboShowRequests.FormattingEnabled = true;
+            cboShowRequests.Location = new Point(159, 74);
             cboShowRequests.Location = new Point(177, 109);
             cboShowRequests.Name = "cboShowRequests";
             cboShowRequests.Size = new Size(182, 33);
@@ -62,6 +63,7 @@
             // lblShow
             // 
             lblShow.AutoSize = true;
+            lblShow.Location = new Point(55, 77);
             lblShow.Location = new Point(73, 112);
             lblShow.Name = "lblShow";
             lblShow.Size = new Size(56, 25);
@@ -70,6 +72,7 @@
             // 
             // btnFilter
             // 
+            btnFilter.Location = new Point(377, 73);
             btnFilter.Location = new Point(395, 108);
             btnFilter.Name = "btnFilter";
             btnFilter.Size = new Size(112, 34);
@@ -81,6 +84,7 @@
             // dgvRequests
             // 
             dgvRequests.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvRequests.Location = new Point(37, 125);
             dgvRequests.Location = new Point(56, 187);
             dgvRequests.Name = "dgvRequests";
             dgvRequests.RowHeadersWidth = 62;
@@ -97,6 +101,7 @@
             grpSelectedRequestDetails.Controls.Add(txtTPNumber);
             grpSelectedRequestDetails.Controls.Add(txtModule);
             grpSelectedRequestDetails.Controls.Add(txtStudent);
+            grpSelectedRequestDetails.Location = new Point(27, 297);
             grpSelectedRequestDetails.Location = new Point(46, 359);
             grpSelectedRequestDetails.Name = "grpSelectedRequestDetails";
             grpSelectedRequestDetails.Size = new Size(806, 153);
@@ -114,6 +119,12 @@
             lblLevel.Text = "Level";
             // 
             // lblTPNumber
+            lblLevel.AutoSize = true;
+            lblLevel.Location = new Point(458, 103);
+            lblLevel.Name = "lblLevel";
+            lblLevel.Size = new Size(51, 25);
+            lblLevel.TabIndex = 7;
+            lblLevel.Text = "Level";
             // 
             lblTPNumber.AutoSize = true;
             lblTPNumber.Location = new Point(458, 36);
@@ -121,6 +132,22 @@
             lblTPNumber.Size = new Size(101, 25);
             lblTPNumber.TabIndex = 6;
             lblTPNumber.Text = "TP Number";
+            // lblTPNumber
+            // 
+            // lblModule
+            lblTPNumber.AutoSize = true;
+            lblTPNumber.Location = new Point(458, 36);
+            lblTPNumber.Name = "lblTPNumber";
+            lblTPNumber.Size = new Size(101, 25);
+            lblTPNumber.TabIndex = 6;
+            lblTPNumber.Text = "TP Number";
+            // 
+            lblModule.AutoSize = true;
+            lblModule.Location = new Point(27, 103);
+            lblModule.Name = "lblModule";
+            lblModule.Size = new Size(73, 25);
+            lblModule.TabIndex = 5;
+            lblModule.Text = "Module";
             // 
             // lblModule
             // 
@@ -148,7 +175,24 @@
             txtLevel.TabIndex = 3;
             // 
             // txtTPNumber
+            // txtLevel
             // 
+            txtTPNumber.Location = new Point(567, 30);
+            txtTPNumber.Name = "txtTPNumber";
+            txtTPNumber.Size = new Size(211, 31);
+            txtTPNumber.TabIndex = 2;
+            txtLevel.Location = new Point(567, 97);
+            txtLevel.Name = "txtLevel";
+            txtLevel.Size = new Size(211, 31);
+            txtLevel.TabIndex = 3;
+            // 
+            // txtModule
+            // txtTPNumber
+            // 
+            txtModule.Location = new Point(132, 97);
+            txtModule.Name = "txtModule";
+            txtModule.Size = new Size(211, 31);
+            txtModule.TabIndex = 1;
             txtTPNumber.Location = new Point(567, 30);
             txtTPNumber.Name = "txtTPNumber";
             txtTPNumber.Size = new Size(211, 31);
@@ -211,6 +255,7 @@
             // lblStatus
             // 
             lblStatus.AutoSize = true;
+            lblStatus.Location = new Point(695, 468);
             lblStatus.Location = new Point(714, 530);
             lblStatus.Name = "lblStatus";
             lblStatus.Size = new Size(0, 25);
@@ -219,6 +264,7 @@
             // lblFormStatus
             // 
             lblFormStatus.AutoSize = true;
+            lblFormStatus.Location = new Point(52, 462);
             lblFormStatus.Location = new Point(71, 524);
             lblFormStatus.Name = "lblFormStatus";
             lblFormStatus.Size = new Size(0, 25);
