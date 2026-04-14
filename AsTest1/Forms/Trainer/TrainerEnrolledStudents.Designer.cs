@@ -84,7 +84,7 @@
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ButtonHighlight;
-            ClientSize = new Size(1830, 896);
+            ClientSize = new Size(1566, 896);
             Controls.Add(btnBack);
             Controls.Add(dgvEnrolledStudents);
             Controls.Add(EnrolledStuedntsPanel);

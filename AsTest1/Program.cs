@@ -15,7 +15,8 @@ namespace APUCC_Project
             ApplicationConfiguration.Initialize();
             //Application.Run(new StudentShellForm());
             //Application.Run(new LecturerShellForm());
-            Application.Run(new TrainerShellForm());
+            //Application.Run(new TrainerShellForm());
+            Application.Run(new AdminShellForm());
         }
     }
 }
