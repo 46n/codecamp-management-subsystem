@@ -1,3 +1,4 @@
+using APUCC_Project.Forms.Common;
 using APUCC_Project.Forms.Trainer;
 
 namespace APUCC_Project
@@ -16,7 +17,8 @@ namespace APUCC_Project
             //Application.Run(new StudentShellForm());
             //Application.Run(new LecturerShellForm());
             //Application.Run(new TrainerShellForm());
-            Application.Run(new AdminShellForm());
+            //Application.Run(new AdminShellForm());
+            Application.Run(new LoginForm());
         }
     }
 }
