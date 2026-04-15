@@ -93,10 +93,10 @@ namespace APUCC_Project.Forms.Common
                                 {
                                      nextForm = new StudentShellForm();
                                 }
-                                // else if (role == "Lecturer")
-                                // {
-                                //     nextForm = new LecturerShellForm();
-                                // }
+                                else if (role == "Lecturer")
+                                {
+                                     nextForm = new LecturerShellForm();
+                                }
                                 else
                                 {
                                     lblWrong.Text = "Soory, An Invalid User .";
