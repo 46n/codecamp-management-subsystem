@@ -23,6 +23,8 @@ namespace APUCC_Project.Forms.Lecturer
 
         private void LecturerManageStudentsForm_Load(object sender, EventArgs e)
         {
+
+
             SetupComboBoxes();
             SetupStudentsGrid();
             LoadLevelOptions();
@@ -500,6 +502,8 @@ namespace APUCC_Project.Forms.Lecturer
                 }
             }
         }
+
+
 
         private void DeleteSelectedStudent()
         {

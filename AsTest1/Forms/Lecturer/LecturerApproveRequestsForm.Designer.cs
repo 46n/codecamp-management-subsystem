@@ -55,6 +55,7 @@
             // 
             cboShowRequests.FormattingEnabled = true;
             cboShowRequests.Location = new Point(159, 74);
+            cboShowRequests.Location = new Point(177, 109);
             cboShowRequests.Name = "cboShowRequests";
             cboShowRequests.Size = new Size(182, 33);
             cboShowRequests.TabIndex = 0;
@@ -63,6 +64,7 @@
             // 
             lblShow.AutoSize = true;
             lblShow.Location = new Point(55, 77);
+            lblShow.Location = new Point(73, 112);
             lblShow.Name = "lblShow";
             lblShow.Size = new Size(56, 25);
             lblShow.TabIndex = 1;
@@ -71,16 +73,19 @@
             // btnFilter
             // 
             btnFilter.Location = new Point(377, 73);
+            btnFilter.Location = new Point(395, 108);
             btnFilter.Name = "btnFilter";
             btnFilter.Size = new Size(112, 34);
             btnFilter.TabIndex = 2;
             btnFilter.Text = "Filter";
             btnFilter.UseVisualStyleBackColor = true;
+            btnFilter.Click += btnFilter_Click;
             // 
             // dgvRequests
             // 
             dgvRequests.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvRequests.Location = new Point(37, 125);
+            dgvRequests.Location = new Point(56, 187);
             dgvRequests.Name = "dgvRequests";
             dgvRequests.RowHeadersWidth = 62;
             dgvRequests.Size = new Size(703, 151);
@@ -97,6 +102,7 @@
             grpSelectedRequestDetails.Controls.Add(txtModule);
             grpSelectedRequestDetails.Controls.Add(txtStudent);
             grpSelectedRequestDetails.Location = new Point(27, 297);
+            grpSelectedRequestDetails.Location = new Point(46, 359);
             grpSelectedRequestDetails.Name = "grpSelectedRequestDetails";
             grpSelectedRequestDetails.Size = new Size(806, 153);
             grpSelectedRequestDetails.TabIndex = 4;
@@ -113,6 +119,12 @@
             lblLevel.Text = "Level";
             // 
             // lblTPNumber
+            lblLevel.AutoSize = true;
+            lblLevel.Location = new Point(458, 103);
+            lblLevel.Name = "lblLevel";
+            lblLevel.Size = new Size(51, 25);
+            lblLevel.TabIndex = 7;
+            lblLevel.Text = "Level";
             // 
             lblTPNumber.AutoSize = true;
             lblTPNumber.Location = new Point(458, 36);
@@ -120,6 +132,22 @@
             lblTPNumber.Size = new Size(101, 25);
             lblTPNumber.TabIndex = 6;
             lblTPNumber.Text = "TP Number";
+            // lblTPNumber
+            // 
+            // lblModule
+            lblTPNumber.AutoSize = true;
+            lblTPNumber.Location = new Point(458, 36);
+            lblTPNumber.Name = "lblTPNumber";
+            lblTPNumber.Size = new Size(101, 25);
+            lblTPNumber.TabIndex = 6;
+            lblTPNumber.Text = "TP Number";
+            // 
+            lblModule.AutoSize = true;
+            lblModule.Location = new Point(27, 103);
+            lblModule.Name = "lblModule";
+            lblModule.Size = new Size(73, 25);
+            lblModule.TabIndex = 5;
+            lblModule.Text = "Module";
             // 
             // lblModule
             // 
@@ -147,7 +175,24 @@
             txtLevel.TabIndex = 3;
             // 
             // txtTPNumber
+            // txtLevel
             // 
+            txtTPNumber.Location = new Point(567, 30);
+            txtTPNumber.Name = "txtTPNumber";
+            txtTPNumber.Size = new Size(211, 31);
+            txtTPNumber.TabIndex = 2;
+            txtLevel.Location = new Point(567, 97);
+            txtLevel.Name = "txtLevel";
+            txtLevel.Size = new Size(211, 31);
+            txtLevel.TabIndex = 3;
+            // 
+            // txtModule
+            // txtTPNumber
+            // 
+            txtModule.Location = new Point(132, 97);
+            txtModule.Name = "txtModule";
+            txtModule.Size = new Size(211, 31);
+            txtModule.TabIndex = 1;
             txtTPNumber.Location = new Point(567, 30);
             txtTPNumber.Name = "txtTPNumber";
             txtTPNumber.Size = new Size(211, 31);
@@ -169,44 +214,49 @@
             // 
             // btnApprove
             // 
-            btnApprove.Location = new Point(38, 455);
+            btnApprove.Location = new Point(56, 552);
             btnApprove.Name = "btnApprove";
             btnApprove.Size = new Size(112, 34);
             btnApprove.TabIndex = 5;
             btnApprove.Text = "Approve";
             btnApprove.UseVisualStyleBackColor = true;
+            btnApprove.Click += btnApprove_Click;
             // 
             // btnReject
             // 
-            btnReject.Location = new Point(195, 455);
+            btnReject.Location = new Point(213, 552);
             btnReject.Name = "btnReject";
             btnReject.Size = new Size(112, 34);
             btnReject.TabIndex = 6;
             btnReject.Text = "Reject";
             btnReject.UseVisualStyleBackColor = true;
+            btnReject.Click += btnReject_Click;
             // 
             // btnRerfesh
             // 
-            btnRerfesh.Location = new Point(345, 455);
+            btnRerfesh.Location = new Point(363, 552);
             btnRerfesh.Name = "btnRerfesh";
             btnRerfesh.Size = new Size(112, 34);
             btnRerfesh.TabIndex = 7;
             btnRerfesh.Text = "Rerfresh";
             btnRerfesh.UseVisualStyleBackColor = true;
+            btnRerfesh.Click += btnRefresh_Click;
             // 
             // btnClose
             // 
-            btnClose.Location = new Point(497, 455);
+            btnClose.Location = new Point(515, 552);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(112, 34);
             btnClose.TabIndex = 8;
             btnClose.Text = "Close";
             btnClose.UseVisualStyleBackColor = true;
+            btnClose.Click += btnClose_Click;
             // 
             // lblStatus
             // 
             lblStatus.AutoSize = true;
             lblStatus.Location = new Point(695, 468);
+            lblStatus.Location = new Point(714, 530);
             lblStatus.Name = "lblStatus";
             lblStatus.Size = new Size(0, 25);
             lblStatus.TabIndex = 9;
@@ -215,6 +265,7 @@
             // 
             lblFormStatus.AutoSize = true;
             lblFormStatus.Location = new Point(52, 462);
+            lblFormStatus.Location = new Point(71, 524);
             lblFormStatus.Name = "lblFormStatus";
             lblFormStatus.Size = new Size(0, 25);
             lblFormStatus.TabIndex = 10;
@@ -223,7 +274,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(905, 521);
+            ClientSize = new Size(905, 598);
             Controls.Add(lblFormStatus);
             Controls.Add(lblStatus);
             Controls.Add(btnClose);
