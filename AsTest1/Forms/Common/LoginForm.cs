@@ -91,7 +91,7 @@ namespace APUCC_Project.Forms.Common
                                 }
                                 else if (role == "Student")
                                 {
-                                     nextForm = new StudentShellForm();
+                                     nextForm = new StudentShellForm(1);
                                 }
                                 else if (role == "Lecturer")
                                 {
