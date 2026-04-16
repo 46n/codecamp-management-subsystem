@@ -7,17 +7,20 @@ namespace APUCC_Project
     public partial class StudentShellForm : BaseShellForm
     {
         private Form? activeForm = null;
-        public StudentShellForm()
+        private readonly int _studentId;
+
+        public StudentShellForm(int studentId)
         {
             InitializeComponent();
+            _studentId = studentId;
 
-            OpenChildForm(new StudentHomeForm());
+            OpenChildForm(new StudentHomeForm(_studentId));
 
             this.Text = "Student Dashboard";
             this.ControlBox = true;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.MinimizeBox = true; // optional
+            this.MinimizeBox = true;
             this.StartPosition = FormStartPosition.CenterScreen;
             this.MinimumSize = this.Size;
             this.MaximumSize = this.Size;
@@ -28,6 +31,7 @@ namespace APUCC_Project
             iconButton4.Text = "Settings";
             Profile.Text = "Profile";
         }
+
         private void OpenChildForm(Form childForm)
         {
             if (activeForm != null)
@@ -42,7 +46,7 @@ namespace APUCC_Project
 
             Panel contentPanel = new Panel();
             contentPanel.Dock = DockStyle.Fill;
-            contentPanel.Padding = new Padding(0, 30, 0, 0); // left, top, right, bottom
+            contentPanel.Padding = new Padding(0, 30, 0, 0);
             contentPanel.BackColor = MainPanel.BackColor;
 
             childForm.Dock = DockStyle.Fill;
@@ -53,11 +57,11 @@ namespace APUCC_Project
             childForm.BringToFront();
             childForm.Show();
         }
-        // Student actions when clicking the SHARED base buttons
+
         protected override void homebtn_Click(object sender, EventArgs e)
         {
-            base.homebtn_Click(sender, e); // keeps highlight + style
-            OpenChildForm(new StudentHomeForm());
+            base.homebtn_Click(sender, e);
+            OpenChildForm(new StudentHomeForm(_studentId));
         }
 
         protected override void iconButton2_Click(object sender, EventArgs e)
@@ -75,25 +79,15 @@ namespace APUCC_Project
         protected override void iconButton4_Click(object sender, EventArgs e)
         {
             base.iconButton4_Click(sender, e);
-            //OpenChildForm(new StudentProfileForm());
         }
 
         protected override void Profile_Click(object sender, EventArgs e)
         {
             base.Profile_Click(sender, e);
-            // OpenChildForm(new StudentProfileForm());
-        }
-
-        private void MainPanel_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void StudentShellForm_Load(object sender, EventArgs e)
         {
-
         }
     }
-
-
 }

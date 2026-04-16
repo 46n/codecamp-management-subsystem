@@ -54,7 +54,7 @@
             btnShowAll = new Button();
             btnDeleteStudent = new Button();
             btnClose = new Button();
-            button7 = new Button();
+            btnFilter = new Button();
             lblFilterModule = new Label();
             lblFilterLevel = new Label();
             cboFilterModule = new ComboBox();
@@ -336,16 +336,15 @@
             btnClose.UseVisualStyleBackColor = true;
             btnClose.Click += btnClose_Click;
             // 
-            // button7
+            // btnFilter
             // 
-            button7.Location = new Point(420, 37);
-            button7.Margin = new Padding(4, 4, 4, 4);
-            button7.Name = "button7";
-            button7.Size = new Size(108, 46);
-            button7.TabIndex = 7;
-            button7.Text = "Filter";
-            button7.UseVisualStyleBackColor = true;
-            button7.Click += btnFilter_Click;
+            btnFilter.Location = new Point(323, 29);
+            btnFilter.Name = "btnFilter";
+            btnFilter.Size = new Size(83, 36);
+            btnFilter.TabIndex = 7;
+            btnFilter.Text = "Filter";
+            btnFilter.UseVisualStyleBackColor = true;
+            btnFilter.Click += btnFilter_Click;
             // 
             // lblFilterModule
             // 
@@ -435,7 +434,7 @@
             Controls.Add(cboFilterModule);
             Controls.Add(lblFilterLevel);
             Controls.Add(lblFilterModule);
-            Controls.Add(button7);
+            Controls.Add(btnFilter);
             Controls.Add(btnClose);
             Controls.Add(btnDeleteStudent);
             Controls.Add(btnShowAll);
@@ -481,7 +480,7 @@
         private Button btnShowAll;
         private Button btnDeleteStudent;
         private Button btnClose;
-        private Button button7;
+        private Button btnFilter;
         private Label lblFilterModule;
         private Label lblFilterLevel;
         private ComboBox cboFilterModule;
