@@ -225,15 +225,17 @@ namespace APUCC_Project.Forms.Student
 
                 transaction.Commit();
 
-                LoadOutstandingFees();
-                LoadPaymentHistory();
-
                 MessageBox.Show(
                     "Payment recorded successfully.",
                     "Fees",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information
                 );
+
+                LoadOutstandingFees();
+                LoadPaymentHistory();
+                dataGridView1.Refresh();
+                dataGridView2.Refresh();
             }
             catch (Exception ex)
             {

@@ -131,6 +131,17 @@ namespace APUCC_Project.Forms.Common
                 return;
             }
 
+            if (newPassword.Length < 8)
+            {
+                MessageBox.Show(
+                    "Password must be at least 8 characters.",
+                    "Profile",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                txtPassword.Focus();
+                return;
+            }
+
             try
             {
                 using SqlConnection con = new SqlConnection(_connStr);

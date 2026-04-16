@@ -102,6 +102,11 @@ CREATE TABLE Students
 );
 GO
 
+ALTER TABLE Users
+ADD CONSTRAINT CHK_Users_Password_Length
+CHECK (LEN([Password]) >= 8);
+GO
+
 /* =========================================
    4A. USER PROFILE DETAILS TABLE
    Shared profile extension for all roles
@@ -857,14 +862,14 @@ GO
 ========================================================= */
 INSERT INTO Users (Username, [Password], [Role], [Name], Email, Phone, [Address])
 VALUES
-('admin1',    '123', 'Admin',    'Admin User', 'admin1@apu.edu.my',               '0111000001', 'APU Main Campus'),
-('trainer1',  '123', 'Trainer',  'Abdalla',    'abdalla@apu.edu.my',              '0111000002', 'Bukit Jalil'),
-('trainer2',  '123', 'Trainer',  'Waleed',     'waleed@apu.edu.my',               '0111000003', 'Sri Petaling'),
-('lecturer1', '123', 'Lecturer', 'Dr Ahmad',   'ahmad@apu.edu.my',                '0111000004', 'School of Computing'),
-('lecturer2', '123', 'Lecturer', 'Ms Farah',   'farah@apu.edu.my',                '0111000005', 'School of Computing'),
-('student1',  '123', 'Student',  'Ali Ahmad',  'TP001@mail.apu.edu.my',           '0111000006', 'Kuala Lumpur'),
-('student2',  '123', 'Student',  'Nur Aina',   'TP002@mail.apu.edu.my',           '0111000007', 'Selangor'),
-('student3',  '123', 'Student',  'John Lee',   'TP003@mail.apu.edu.my',           '0111000008', 'Penang');
+('admin1',    '123456789', 'Admin',    'Admin User', 'admin1@apu.edu.my',               '0111000001', 'APU Main Campus'),
+('trainer1',  '123456789', 'Trainer',  'Abdalla',    'abdalla@apu.edu.my',              '0111000002', 'Bukit Jalil'),
+('trainer2',  '123456789', 'Trainer',  'Waleed',     'waleed@apu.edu.my',               '0111000003', 'Sri Petaling'),
+('lecturer1', '123456789', 'Lecturer', 'Dr Ahmad',   'ahmad@apu.edu.my',                '0111000004', 'School of Computing'),
+('lecturer2', '123456789', 'Lecturer', 'Ms Farah',   'farah@apu.edu.my',                '0111000005', 'School of Computing'),
+('student1',  '123456789', 'Student',  'Ali Ahmad',  'TP001@mail.apu.edu.my',           '0111000006', 'Kuala Lumpur'),
+('student2',  '123456789', 'Student',  'Nur Aina',   'TP002@mail.apu.edu.my',           '0111000007', 'Selangor'),
+('student3',  '123456789', 'Student',  'John Lee',   'TP003@mail.apu.edu.my',           '0111000008', 'Penang');
 GO
 
 INSERT INTO Trainers (UserID, Qualifications, Specialisation, AssignedModuleId, AssignedModuleName, AssignedLevel)
@@ -933,34 +938,34 @@ GO
 ========================================================= */
 INSERT INTO Users (Username, [Password], [Role], [Name], Email, Phone, [Address])
 VALUES
-('trainer3',  '123', 'Trainer',  'Sarah Lim',        'sarah.lim@apu.edu.my',        '0161000001', 'Bukit Jalil'),
-('trainer4',  '123', 'Trainer',  'Jason Tan',        'jason.tan@apu.edu.my',        '0161000002', 'Cheras'),
-('trainer5',  '123', 'Trainer',  'Priya Nair',       'priya.nair@apu.edu.my',       '0161000003', 'Puchong'),
-('trainer6',  '123', 'Trainer',  'Daniel Wong',      'daniel.wong@apu.edu.my',      '0161000004', 'Subang'),
-('lecturer3', '123', 'Lecturer', 'Dr Lim Mei Yan',   'meiyan@apu.edu.my',           '0172000001', 'APU Campus'),
-('lecturer4', '123', 'Lecturer', 'Mr Hafiz Rahman',  'hafiz.rahman@apu.edu.my',     '0172000002', 'APU Campus'),
-('lecturer5', '123', 'Lecturer', 'Ms Tan Li Wen',    'liwen.tan@apu.edu.my',        '0172000003', 'APU Campus'),
+('trainer3',  '123456789', 'Trainer',  'Sarah Lim',        'sarah.lim@apu.edu.my',        '0161000001', 'Bukit Jalil'),
+('trainer4',  '123456789', 'Trainer',  'Jason Tan',        'jason.tan@apu.edu.my',        '0161000002', 'Cheras'),
+('trainer5',  '123456789', 'Trainer',  'Priya Nair',       'priya.nair@apu.edu.my',       '0161000003', 'Puchong'),
+('trainer6',  '123456789', 'Trainer',  'Daniel Wong',      'daniel.wong@apu.edu.my',      '0161000004', 'Subang'),
+('lecturer3', '123456789', 'Lecturer', 'Dr Lim Mei Yan',   'meiyan@apu.edu.my',           '0172000001', 'APU Campus'),
+('lecturer4', '123456789', 'Lecturer', 'Mr Hafiz Rahman',  'hafiz.rahman@apu.edu.my',     '0172000002', 'APU Campus'),
+('lecturer5', '123456789', 'Lecturer', 'Ms Tan Li Wen',    'liwen.tan@apu.edu.my',        '0172000003', 'APU Campus'),
 
-('student4',  '123', 'Student',  'Muhammad Amir',    'TP100001@mail.apu.edu.my',    '0183000001', 'Kuala Lumpur'),
-('student5',  '123', 'Student',  'Siti Hajar',       'TP100002@mail.apu.edu.my',    '0183000002', 'Selangor'),
-('student6',  '123', 'Student',  'Ethan Koh',        'TP100003@mail.apu.edu.my',    '0183000003', 'Penang'),
-('student7',  '123', 'Student',  'Nurul Syafiqah',   'TP100004@mail.apu.edu.my',    '0183000004', 'Johor'),
-('student8',  '123', 'Student',  'Adam Faris',       'TP100005@mail.apu.edu.my',    '0183000005', 'Perak'),
-('student9',  '123', 'Student',  'Alicia Chan',      'TP100006@mail.apu.edu.my',    '0183000006', 'Malacca'),
-('student10', '123', 'Student',  'Ryan Goh',         'TP100007@mail.apu.edu.my',    '0183000007', 'Negeri Sembilan'),
-('student11', '123', 'Student',  'Izzah Sofea',      'TP100008@mail.apu.edu.my',    '0183000008', 'Sabah'),
-('student12', '123', 'Student',  'Marcus Teo',       'TP100009@mail.apu.edu.my',    '0183000009', 'Sarawak'),
-('student13', '123', 'Student',  'Farhan Iskandar',  'TP100010@mail.apu.edu.my',    '0183000010', 'Kedah'),
-('student14', '123', 'Student',  'Grace Yap',        'TP100011@mail.apu.edu.my',    '0183000011', 'Selangor'),
-('student15', '123', 'Student',  'Haziq Roslan',     'TP100012@mail.apu.edu.my',    '0183000012', 'Kuala Lumpur'),
-('student16', '123', 'Student',  'Chloe Lee',        'TP100013@mail.apu.edu.my',    '0183000013', 'Penang'),
-('student17', '123', 'Student',  'Aiman Hakim',      'TP100014@mail.apu.edu.my',    '0183000014', 'Johor'),
-('student18', '123', 'Student',  'Natalie Wong',     'TP100015@mail.apu.edu.my',    '0183000015', 'Sabah'),
-('student19', '123', 'Student',  'Syed Danish',      'TP100016@mail.apu.edu.my',    '0183000016', 'Perlis'),
-('student20', '123', 'Student',  'Mei Xin',          'TP100017@mail.apu.edu.my',    '0183000017', 'Sarawak'),
-('student21', '123', 'Student',  'Hakim Zulkifli',   'TP100018@mail.apu.edu.my',    '0183000018', 'Selangor'),
-('student22', '123', 'Student',  'Vanessa Low',      'TP100019@mail.apu.edu.my',    '0183000019', 'Kuala Lumpur'),
-('student23', '123', 'Student',  'Farisya Jamal',    'TP100020@mail.apu.edu.my',    '0183000020', 'Johor');
+('student4',  '123456789', 'Student',  'Muhammad Amir',    'TP100001@mail.apu.edu.my',    '0183000001', 'Kuala Lumpur'),
+('student5',  '123456789', 'Student',  'Siti Hajar',       'TP100002@mail.apu.edu.my',    '0183000002', 'Selangor'),
+('student6',  '123456789', 'Student',  'Ethan Koh',        'TP100003@mail.apu.edu.my',    '0183000003', 'Penang'),
+('student7',  '123456789', 'Student',  'Nurul Syafiqah',   'TP100004@mail.apu.edu.my',    '0183000004', 'Johor'),
+('student8',  '123456789', 'Student',  'Adam Faris',       'TP100005@mail.apu.edu.my',    '0183000005', 'Perak'),
+('student9',  '123456789', 'Student',  'Alicia Chan',      'TP100006@mail.apu.edu.my',    '0183000006', 'Malacca'),
+('student10', '123456789', 'Student',  'Ryan Goh',         'TP100007@mail.apu.edu.my',    '0183000007', 'Negeri Sembilan'),
+('student11', '123456789', 'Student',  'Izzah Sofea',      'TP100008@mail.apu.edu.my',    '0183000008', 'Sabah'),
+('student12', '123456789', 'Student',  'Marcus Teo',       'TP100009@mail.apu.edu.my',    '0183000009', 'Sarawak'),
+('student13', '123456789', 'Student',  'Farhan Iskandar',  'TP100010@mail.apu.edu.my',    '0183000010', 'Kedah'),
+('student14', '123456789', 'Student',  'Grace Yap',        'TP100011@mail.apu.edu.my',    '0183000011', 'Selangor'),
+('student15', '123456789', 'Student',  'Haziq Roslan',     'TP100012@mail.apu.edu.my',    '0183000012', 'Kuala Lumpur'),
+('student16', '123456789', 'Student',  'Chloe Lee',        'TP100013@mail.apu.edu.my',    '0183000013', 'Penang'),
+('student17', '123456789', 'Student',  'Aiman Hakim',      'TP100014@mail.apu.edu.my',    '0183000014', 'Johor'),
+('student18', '123456789', 'Student',  'Natalie Wong',     'TP100015@mail.apu.edu.my',    '0183000015', 'Sabah'),
+('student19', '123456789', 'Student',  'Syed Danish',      'TP100016@mail.apu.edu.my',    '0183000016', 'Perlis'),
+('student20', '123456789', 'Student',  'Mei Xin',          'TP100017@mail.apu.edu.my',    '0183000017', 'Sarawak'),
+('student21', '123456789', 'Student',  'Hakim Zulkifli',   'TP100018@mail.apu.edu.my',    '0183000018', 'Selangor'),
+('student22', '123456789', 'Student',  'Vanessa Low',      'TP100019@mail.apu.edu.my',    '0183000019', 'Kuala Lumpur'),
+('student23', '123456789', 'Student',  'Farisya Jamal',    'TP100020@mail.apu.edu.my',    '0183000020', 'Johor');
 GO
 
 /* =========================================================
