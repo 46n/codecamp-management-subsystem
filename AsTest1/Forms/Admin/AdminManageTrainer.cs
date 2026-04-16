@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Data;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 
@@ -17,19 +18,43 @@ namespace APUCC_Project.Forms.Admin
         public AdminManageTrainer()
         {
             InitializeComponent();
+
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.Sizable;
             this.MaximizeBox = true;
             this.MinimizeBox = true;
             this.WindowState = FormWindowState.Maximized;
+
+            dgvTrainer.CellClick += dgvTrainer_CellClick;
+            txtPassword.TextChanged += txtPassword_TextChanged;
         }
 
         private void AdminManageTrainer_Load(object sender, EventArgs e)
         {
+            SetupControls();
             ConfigureGrid();
             LoadModules();
+            LoadLevels();
             LoadTrainers();
             ClearFields();
+        }
+
+        private void SetupControls()
+        {
+            txtFullName.ReadOnly = false;
+            txtEmail.ReadOnly = false;
+            txtPhone.ReadOnly = false;
+            txtUserName.ReadOnly = false;
+            txtPassword.ReadOnly = false;
+
+            txtFullName.Enabled = true;
+            txtEmail.Enabled = true;
+            txtPhone.Enabled = true;
+            txtUserName.Enabled = true;
+            txtPassword.Enabled = true;
+
+            cboModule.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboLevel.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void ConfigureGrid()
@@ -42,6 +67,15 @@ namespace APUCC_Project.Forms.Admin
             dgvTrainer.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvTrainer.RowHeadersVisible = false;
             dgvTrainer.AutoGenerateColumns = false;
+        }
+
+        private void LoadLevels()
+        {
+            cboLevel.Items.Clear();
+            cboLevel.Items.Add("Beginner");
+            cboLevel.Items.Add("Intermediate");
+            cboLevel.Items.Add("Advance");
+            cboLevel.SelectedIndex = -1;
         }
 
         private void LoadModules()
@@ -130,11 +164,11 @@ namespace APUCC_Project.Forms.Admin
                     selectedTrainerId = Convert.ToInt32(dr["TrainerID"]);
                     selectedUserId = Convert.ToInt32(dr["UserID"]);
 
-                    txtFullName.Text = dr["Name"].ToString();
-                    txtEmail.Text = dr["Email"].ToString();
-                    txtPhone.Text = dr["Phone"].ToString();
-                    txtUserName.Text = dr["Username"].ToString();
-                    txtPassword.Text = dr["Password"].ToString();
+                    txtFullName.Text = dr["Name"]?.ToString() ?? "";
+                    txtEmail.Text = dr["Email"]?.ToString() ?? "";
+                    txtPhone.Text = dr["Phone"]?.ToString() ?? "";
+                    txtUserName.Text = dr["Username"]?.ToString() ?? "";
+                    txtPassword.Text = dr["Password"]?.ToString() ?? "";
 
                     if (dr["AssignedModuleId"] != DBNull.Value)
                         cboModule.SelectedValue = dr["AssignedModuleId"].ToString();
@@ -156,23 +190,35 @@ namespace APUCC_Project.Forms.Admin
             lblError.Text = "";
             lblStatus.Text = "";
 
-            if (txtFullName.Text.Trim() == "" ||
-                txtEmail.Text.Trim() == "" ||
-                txtPhone.Text.Trim() == "" ||
-                txtUserName.Text.Trim() == "" ||
-                txtPassword.Text.Trim() == "")
+            txtFullName.Text = txtFullName.Text.Trim();
+            txtEmail.Text = txtEmail.Text.Trim();
+            txtPhone.Text = txtPhone.Text.Trim();
+            txtUserName.Text = txtUserName.Text.Trim();
+            txtPassword.Text = txtPassword.Text.Trim();
+
+            if (txtFullName.Text == "" ||
+                txtEmail.Text == "" ||
+                txtPhone.Text == "" ||
+                txtUserName.Text == "" ||
+                txtPassword.Text == "")
             {
                 lblError.Text = "Please fill in all trainer details.";
                 return false;
             }
 
-            if (!txtEmail.Text.Contains("@") || !txtEmail.Text.Contains("."))
+            if (!Regex.IsMatch(txtEmail.Text, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
             {
                 lblError.Text = "Please enter a valid email address.";
                 return false;
             }
 
-            if (UsernameExists(txtUserName.Text.Trim(), selectedUserId))
+            if (!Regex.IsMatch(txtPassword.Text, @"^\d{8}$"))
+            {
+                lblError.Text = "Password must be exactly 8 digits.";
+                return false;
+            }
+
+            if (UsernameExists(txtUserName.Text, selectedUserId))
             {
                 lblError.Text = "Username already exists.";
                 return false;
@@ -197,7 +243,6 @@ namespace APUCC_Project.Forms.Admin
 
                 con.Open();
                 int count = Convert.ToInt32(cmd.ExecuteScalar());
-
                 return count > 0;
             }
         }
@@ -226,7 +271,10 @@ namespace APUCC_Project.Forms.Admin
         {
             if (e.RowIndex >= 0)
             {
-                int trainerId = Convert.ToInt32(dgvTrainer.Rows[e.RowIndex].Cells["colTrainerID"].Value);
+                int trainerId = Convert.ToInt32(
+                    dgvTrainer.Rows[e.RowIndex].Cells["colTrainerID"].Value
+                );
+
                 LoadTrainerDetails(trainerId);
             }
         }
@@ -243,36 +291,64 @@ namespace APUCC_Project.Forms.Admin
 
                 try
                 {
-                    string userQuery = @"
-                        INSERT INTO Users (Username, Password, Role, Name, Email, Phone, Address)
-                        VALUES (@Username, @Password, 'Trainer', @Name, @Email, @Phone, @Address);
-                        SELECT SCOPE_IDENTITY();";
+                    if (selectedUserId == -1)
+                    {
+                        // INSERT new trainer
+                        string userQuery = @"
+                            INSERT INTO Users (Username, Password, Role, Name, Email, Phone, Address)
+                            VALUES (@Username, @Password, 'Trainer', @Name, @Email, @Phone, @Address);
+                            SELECT SCOPE_IDENTITY();";
 
-                    SqlCommand userCmd = new SqlCommand(userQuery, con, trans);
-                    userCmd.Parameters.AddWithValue("@Username", txtUserName.Text.Trim());
-                    userCmd.Parameters.AddWithValue("@Password", txtPassword.Text.Trim());
-                    userCmd.Parameters.AddWithValue("@Name", txtFullName.Text.Trim());
-                    userCmd.Parameters.AddWithValue("@Email", txtEmail.Text.Trim());
-                    userCmd.Parameters.AddWithValue("@Phone", txtPhone.Text.Trim());
-                    userCmd.Parameters.AddWithValue("@Address", DBNull.Value);
+                        SqlCommand userCmd = new SqlCommand(userQuery, con, trans);
+                        userCmd.Parameters.AddWithValue("@Username", txtUserName.Text);
+                        userCmd.Parameters.AddWithValue("@Password", txtPassword.Text);
+                        userCmd.Parameters.AddWithValue("@Name", txtFullName.Text);
+                        userCmd.Parameters.AddWithValue("@Email", txtEmail.Text);
+                        userCmd.Parameters.AddWithValue("@Phone", txtPhone.Text);
+                        userCmd.Parameters.AddWithValue("@Address", DBNull.Value);
 
-                    int newUserId = Convert.ToInt32(userCmd.ExecuteScalar());
+                        int newUserId = Convert.ToInt32(userCmd.ExecuteScalar());
 
-                    string trainerQuery = @"
-                        INSERT INTO Trainers (UserID, Qualifications, Specialisation, AssignedModuleId, AssignedModuleName, AssignedLevel)
-                        VALUES (@UserID, @Qualifications, @Specialisation, NULL, NULL, NULL)";
+                        string trainerQuery = @"
+                            INSERT INTO Trainers (UserID, Qualifications, Specialisation, AssignedModuleId, AssignedModuleName, AssignedLevel)
+                            VALUES (@UserID, @Qualifications, @Specialisation, NULL, NULL, NULL)";
 
-                    SqlCommand trainerCmd = new SqlCommand(trainerQuery, con, trans);
-                    trainerCmd.Parameters.AddWithValue("@UserID", newUserId);
-                    trainerCmd.Parameters.AddWithValue("@Qualifications", DBNull.Value);
-                    trainerCmd.Parameters.AddWithValue("@Specialisation", DBNull.Value);
-                    trainerCmd.ExecuteNonQuery();
+                        SqlCommand trainerCmd = new SqlCommand(trainerQuery, con, trans);
+                        trainerCmd.Parameters.AddWithValue("@UserID", newUserId);
+                        trainerCmd.Parameters.AddWithValue("@Qualifications", DBNull.Value);
+                        trainerCmd.Parameters.AddWithValue("@Specialisation", DBNull.Value);
+                        trainerCmd.ExecuteNonQuery();
+
+                        lblStatus.Text = "Trainer saved successfully.";
+                    }
+                    else
+                    {
+                        // UPDATE existing trainer
+                        string updateUserQuery = @"
+                            UPDATE Users
+                            SET Name = @Name,
+                                Email = @Email,
+                                Phone = @Phone,
+                                Username = @Username,
+                                Password = @Password
+                            WHERE UserID = @UserID";
+
+                        SqlCommand updateCmd = new SqlCommand(updateUserQuery, con, trans);
+                        updateCmd.Parameters.AddWithValue("@Name", txtFullName.Text);
+                        updateCmd.Parameters.AddWithValue("@Email", txtEmail.Text);
+                        updateCmd.Parameters.AddWithValue("@Phone", txtPhone.Text);
+                        updateCmd.Parameters.AddWithValue("@Username", txtUserName.Text);
+                        updateCmd.Parameters.AddWithValue("@Password", txtPassword.Text);
+                        updateCmd.Parameters.AddWithValue("@UserID", selectedUserId);
+                        updateCmd.ExecuteNonQuery();
+
+                        lblStatus.Text = "Trainer updated successfully.";
+                    }
 
                     trans.Commit();
 
                     LoadTrainers();
                     ClearFields();
-                    lblStatus.Text = "Trainer saved successfully.";
                 }
                 catch (Exception ex)
                 {
@@ -466,6 +542,22 @@ namespace APUCC_Project.Forms.Admin
         private void dgvTrainer_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             // optional
+        }
+
+        private void txtPassword_TextChanged(object sender, EventArgs e)
+        {
+            string digitsOnly = Regex.Replace(txtPassword.Text, @"\D", "");
+
+            if (txtPassword.Text != digitsOnly)
+            {
+                int cursor = txtPassword.SelectionStart - 1;
+                if (cursor < 0) cursor = 0;
+
+                txtPassword.Text = digitsOnly;
+                txtPassword.SelectionStart = cursor > txtPassword.Text.Length
+                    ? txtPassword.Text.Length
+                    : cursor;
+            }
         }
     }
 }

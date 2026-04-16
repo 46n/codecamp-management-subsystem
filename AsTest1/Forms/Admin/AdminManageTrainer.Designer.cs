@@ -60,9 +60,12 @@
             txtSearch = new TextBox();
             lblError = new Label();
             lblStatus = new Label();
+            pnlMain = new Panel();
+            lblManageTrainer = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvTrainer).BeginInit();
             grpAssignment.SuspendLayout();
             grpTrainerDetails.SuspendLayout();
+            pnlMain.SuspendLayout();
             SuspendLayout();
             // 
             // dgvTrainer
@@ -71,13 +74,13 @@
             dgvTrainer.AllowUserToDeleteRows = false;
             dgvTrainer.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvTrainer.Columns.AddRange(new DataGridViewColumn[] { colTrainerID, colTrainerName, colModule, colLevel });
-            dgvTrainer.Location = new Point(-58, 110);
+            dgvTrainer.Location = new Point(136, 302);
             dgvTrainer.Margin = new Padding(4);
             dgvTrainer.Name = "dgvTrainer";
             dgvTrainer.ReadOnly = true;
             dgvTrainer.RightToLeft = RightToLeft.No;
             dgvTrainer.RowHeadersWidth = 62;
-            dgvTrainer.Size = new Size(822, 264);
+            dgvTrainer.Size = new Size(786, 264);
             dgvTrainer.TabIndex = 5;
             dgvTrainer.CellContentClick += dgvTrainer_CellContentClick;
             // 
@@ -123,7 +126,7 @@
             grpAssignment.Controls.Add(lblModule);
             grpAssignment.Controls.Add(cboLevel);
             grpAssignment.Controls.Add(cboModule);
-            grpAssignment.Location = new Point(736, 367);
+            grpAssignment.Location = new Point(930, 559);
             grpAssignment.Margin = new Padding(4);
             grpAssignment.Name = "grpAssignment";
             grpAssignment.Padding = new Padding(4);
@@ -182,7 +185,7 @@
             grpTrainerDetails.Controls.Add(txtPhone);
             grpTrainerDetails.Controls.Add(txtEmail);
             grpTrainerDetails.Controls.Add(txtFullName);
-            grpTrainerDetails.Location = new Point(736, 15);
+            grpTrainerDetails.Location = new Point(930, 207);
             grpTrainerDetails.Margin = new Padding(4);
             grpTrainerDetails.Name = "grpTrainerDetails";
             grpTrainerDetails.Padding = new Padding(4);
@@ -283,7 +286,7 @@
             // 
             // btnSearch
             // 
-            btnSearch.Location = new Point(385, 28);
+            btnSearch.Location = new Point(579, 220);
             btnSearch.Margin = new Padding(4);
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new Size(146, 44);
@@ -294,7 +297,7 @@
             // 
             // btnShowAll
             // 
-            btnShowAll.Location = new Point(559, 28);
+            btnShowAll.Location = new Point(753, 220);
             btnShowAll.Margin = new Padding(4);
             btnShowAll.Name = "btnShowAll";
             btnShowAll.Size = new Size(146, 44);
@@ -305,7 +308,7 @@
             // 
             // btnRemove
             // 
-            btnRemove.Location = new Point(109, 393);
+            btnRemove.Location = new Point(303, 585);
             btnRemove.Margin = new Padding(4);
             btnRemove.Name = "btnRemove";
             btnRemove.Size = new Size(146, 44);
@@ -316,7 +319,7 @@
             // 
             // btnClose
             // 
-            btnClose.Location = new Point(302, 393);
+            btnClose.Location = new Point(496, 585);
             btnClose.Margin = new Padding(4);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(146, 44);
@@ -327,7 +330,7 @@
             // 
             // btnAssign
             // 
-            btnAssign.Location = new Point(771, 576);
+            btnAssign.Location = new Point(965, 768);
             btnAssign.Margin = new Padding(4);
             btnAssign.Name = "btnAssign";
             btnAssign.Size = new Size(146, 44);
@@ -338,7 +341,7 @@
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(559, 576);
+            btnSave.Location = new Point(789, 768);
             btnSave.Margin = new Padding(4);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(146, 44);
@@ -349,7 +352,7 @@
             // 
             // btnClear
             // 
-            btnClear.Location = new Point(953, 576);
+            btnClear.Location = new Point(1147, 768);
             btnClear.Margin = new Padding(4);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(146, 44);
@@ -361,7 +364,7 @@
             // lblSearch
             // 
             lblSearch.AutoSize = true;
-            lblSearch.Location = new Point(56, 33);
+            lblSearch.Location = new Point(250, 225);
             lblSearch.Margin = new Padding(4, 0, 4, 0);
             lblSearch.Name = "lblSearch";
             lblSearch.Size = new Size(85, 32);
@@ -370,7 +373,7 @@
             // 
             // txtSearch
             // 
-            txtSearch.Location = new Point(165, 28);
+            txtSearch.Location = new Point(359, 220);
             txtSearch.Margin = new Padding(4);
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new Size(194, 39);
@@ -379,7 +382,7 @@
             // lblError
             // 
             lblError.AutoSize = true;
-            lblError.Location = new Point(706, 648);
+            lblError.Location = new Point(789, 830);
             lblError.Margin = new Padding(4, 0, 4, 0);
             lblError.Name = "lblError";
             lblError.Size = new Size(0, 32);
@@ -388,17 +391,39 @@
             // lblStatus
             // 
             lblStatus.AutoSize = true;
-            lblStatus.Location = new Point(139, 476);
+            lblStatus.Location = new Point(333, 668);
             lblStatus.Margin = new Padding(4, 0, 4, 0);
             lblStatus.Name = "lblStatus";
             lblStatus.Size = new Size(0, 32);
             lblStatus.TabIndex = 16;
             // 
+            // pnlMain
+            // 
+            pnlMain.BackColor = Color.FromArgb(25, 25, 25);
+            pnlMain.Controls.Add(lblManageTrainer);
+            pnlMain.Location = new Point(-1, -20);
+            pnlMain.Name = "pnlMain";
+            pnlMain.Size = new Size(1448, 208);
+            pnlMain.TabIndex = 17;
+            // 
+            // lblManageTrainer
+            // 
+            lblManageTrainer.AutoSize = true;
+            lblManageTrainer.Font = new Font("Segoe UI Black", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblManageTrainer.ForeColor = Color.White;
+            lblManageTrainer.Location = new Point(64, 74);
+            lblManageTrainer.Name = "lblManageTrainer";
+            lblManageTrainer.Size = new Size(402, 65);
+            lblManageTrainer.TabIndex = 0;
+            lblManageTrainer.Text = "Manage Trainer";
+            // 
             // AdminManageTrainer
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1166, 705);
+            BackColor = Color.White;
+            ClientSize = new Size(1436, 871);
+            Controls.Add(pnlMain);
             Controls.Add(lblStatus);
             Controls.Add(lblError);
             Controls.Add(txtSearch);
@@ -422,6 +447,8 @@
             grpAssignment.PerformLayout();
             grpTrainerDetails.ResumeLayout(false);
             grpTrainerDetails.PerformLayout();
+            pnlMain.ResumeLayout(false);
+            pnlMain.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -460,5 +487,7 @@
         private TextBox txtSearch;
         private Label lblError;
         private Label lblStatus;
+        private Panel pnlMain;
+        private Label lblManageTrainer;
     }
 }

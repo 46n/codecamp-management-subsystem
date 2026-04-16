@@ -54,7 +54,7 @@
             btnShowAll = new Button();
             btnDeleteStudent = new Button();
             btnClose = new Button();
-            button7 = new Button();
+            btnFilter = new Button();
             lblFilterModule = new Label();
             lblFilterLevel = new Label();
             cboFilterModule = new ComboBox();
@@ -89,10 +89,10 @@
             grpRegisterStudent.Controls.Add(txtPhone);
             grpRegisterStudent.Controls.Add(txtAddress);
             grpRegisterStudent.Controls.Add(txtTPNumber);
-            grpRegisterStudent.Location = new Point(651, 15);
-            grpRegisterStudent.Margin = new Padding(4, 4, 4, 4);
+            grpRegisterStudent.Location = new Point(817, 35);
+            grpRegisterStudent.Margin = new Padding(4);
             grpRegisterStudent.Name = "grpRegisterStudent";
-            grpRegisterStudent.Padding = new Padding(4, 4, 4, 4);
+            grpRegisterStudent.Padding = new Padding(4);
             grpRegisterStudent.Size = new Size(421, 600);
             grpRegisterStudent.TabIndex = 0;
             grpRegisterStudent.TabStop = false;
@@ -201,7 +201,7 @@
             // txtPassword
             // 
             txtPassword.Location = new Point(179, 553);
-            txtPassword.Margin = new Padding(4, 4, 4, 4);
+            txtPassword.Margin = new Padding(4);
             txtPassword.Name = "txtPassword";
             txtPassword.Size = new Size(221, 39);
             txtPassword.TabIndex = 9;
@@ -209,7 +209,7 @@
             // txtUsername
             // 
             txtUsername.Location = new Point(179, 504);
-            txtUsername.Margin = new Padding(4, 4, 4, 4);
+            txtUsername.Margin = new Padding(4);
             txtUsername.Name = "txtUsername";
             txtUsername.Size = new Size(221, 39);
             txtUsername.TabIndex = 8;
@@ -218,7 +218,7 @@
             // 
             cboModule.FormattingEnabled = true;
             cboModule.Location = new Point(179, 387);
-            cboModule.Margin = new Padding(4, 4, 4, 4);
+            cboModule.Margin = new Padding(4);
             cboModule.Name = "cboModule";
             cboModule.Size = new Size(221, 40);
             cboModule.TabIndex = 7;
@@ -227,7 +227,7 @@
             // 
             cboMonth.FormattingEnabled = true;
             cboMonth.Location = new Point(179, 454);
-            cboMonth.Margin = new Padding(4, 4, 4, 4);
+            cboMonth.Margin = new Padding(4);
             cboMonth.Name = "cboMonth";
             cboMonth.Size = new Size(221, 40);
             cboMonth.TabIndex = 6;
@@ -236,7 +236,7 @@
             // 
             cboLevel.FormattingEnabled = true;
             cboLevel.Location = new Point(179, 325);
-            cboLevel.Margin = new Padding(4, 4, 4, 4);
+            cboLevel.Margin = new Padding(4);
             cboLevel.Name = "cboLevel";
             cboLevel.Size = new Size(221, 40);
             cboLevel.TabIndex = 5;
@@ -244,7 +244,7 @@
             // txtFullName
             // 
             txtFullName.Location = new Point(179, 86);
-            txtFullName.Margin = new Padding(4, 4, 4, 4);
+            txtFullName.Margin = new Padding(4);
             txtFullName.Name = "txtFullName";
             txtFullName.Size = new Size(221, 39);
             txtFullName.TabIndex = 4;
@@ -252,7 +252,7 @@
             // txtEmail
             // 
             txtEmail.Location = new Point(179, 146);
-            txtEmail.Margin = new Padding(4, 4, 4, 4);
+            txtEmail.Margin = new Padding(4);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(221, 39);
             txtEmail.TabIndex = 3;
@@ -260,7 +260,7 @@
             // txtPhone
             // 
             txtPhone.Location = new Point(179, 207);
-            txtPhone.Margin = new Padding(4, 4, 4, 4);
+            txtPhone.Margin = new Padding(4);
             txtPhone.Name = "txtPhone";
             txtPhone.Size = new Size(221, 39);
             txtPhone.TabIndex = 2;
@@ -268,7 +268,7 @@
             // txtAddress
             // 
             txtAddress.Location = new Point(179, 266);
-            txtAddress.Margin = new Padding(4, 4, 4, 4);
+            txtAddress.Margin = new Padding(4);
             txtAddress.Name = "txtAddress";
             txtAddress.Size = new Size(221, 39);
             txtAddress.TabIndex = 1;
@@ -276,15 +276,15 @@
             // txtTPNumber
             // 
             txtTPNumber.Location = new Point(179, 26);
-            txtTPNumber.Margin = new Padding(4, 4, 4, 4);
+            txtTPNumber.Margin = new Padding(4);
             txtTPNumber.Name = "txtTPNumber";
             txtTPNumber.Size = new Size(221, 39);
             txtTPNumber.TabIndex = 0;
             // 
             // btnRegister
             // 
-            btnRegister.Location = new Point(651, 655);
-            btnRegister.Margin = new Padding(4, 4, 4, 4);
+            btnRegister.Location = new Point(817, 675);
+            btnRegister.Margin = new Padding(4);
             btnRegister.Name = "btnRegister";
             btnRegister.Size = new Size(146, 44);
             btnRegister.TabIndex = 1;
@@ -294,8 +294,8 @@
             // 
             // btnClear
             // 
-            btnClear.Location = new Point(853, 655);
-            btnClear.Margin = new Padding(4, 4, 4, 4);
+            btnClear.Location = new Point(1019, 675);
+            btnClear.Margin = new Padding(4);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(146, 44);
             btnClear.TabIndex = 2;
@@ -305,8 +305,8 @@
             // 
             // btnShowAll
             // 
-            btnShowAll.Location = new Point(536, 37);
-            btnShowAll.Margin = new Padding(4, 4, 4, 4);
+            btnShowAll.Location = new Point(702, 57);
+            btnShowAll.Margin = new Padding(4);
             btnShowAll.Name = "btnShowAll";
             btnShowAll.Size = new Size(108, 46);
             btnShowAll.TabIndex = 4;
@@ -316,8 +316,8 @@
             // 
             // btnDeleteStudent
             // 
-            btnDeleteStudent.Location = new Point(112, 396);
-            btnDeleteStudent.Margin = new Padding(4, 4, 4, 4);
+            btnDeleteStudent.Location = new Point(278, 416);
+            btnDeleteStudent.Margin = new Padding(4);
             btnDeleteStudent.Name = "btnDeleteStudent";
             btnDeleteStudent.Size = new Size(146, 44);
             btnDeleteStudent.TabIndex = 5;
@@ -327,8 +327,8 @@
             // 
             // btnClose
             // 
-            btnClose.Location = new Point(346, 399);
-            btnClose.Margin = new Padding(4, 4, 4, 4);
+            btnClose.Location = new Point(512, 419);
+            btnClose.Margin = new Padding(4);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(146, 44);
             btnClose.TabIndex = 6;
@@ -336,21 +336,20 @@
             btnClose.UseVisualStyleBackColor = true;
             btnClose.Click += btnClose_Click;
             // 
-            // button7
+            // btnFilter
             // 
-            button7.Location = new Point(420, 37);
-            button7.Margin = new Padding(4, 4, 4, 4);
-            button7.Name = "button7";
-            button7.Size = new Size(108, 46);
-            button7.TabIndex = 7;
-            button7.Text = "Filter";
-            button7.UseVisualStyleBackColor = true;
-            button7.Click += btnFilter_Click;
+            btnFilter.Location = new Point(599, 61);
+            btnFilter.Name = "btnFilter";
+            btnFilter.Size = new Size(83, 36);
+            btnFilter.TabIndex = 7;
+            btnFilter.Text = "Filter";
+            btnFilter.UseVisualStyleBackColor = true;
+            btnFilter.Click += btnFilter_Click;
             // 
             // lblFilterModule
             // 
             lblFilterModule.AutoSize = true;
-            lblFilterModule.Location = new Point(217, 45);
+            lblFilterModule.Location = new Point(383, 65);
             lblFilterModule.Margin = new Padding(4, 0, 4, 0);
             lblFilterModule.Name = "lblFilterModule";
             lblFilterModule.Size = new Size(97, 32);
@@ -360,7 +359,7 @@
             // lblFilterLevel
             // 
             lblFilterLevel.AutoSize = true;
-            lblFilterLevel.Location = new Point(14, 50);
+            lblFilterLevel.Location = new Point(180, 70);
             lblFilterLevel.Margin = new Padding(4, 0, 4, 0);
             lblFilterLevel.Name = "lblFilterLevel";
             lblFilterLevel.Size = new Size(67, 32);
@@ -370,8 +369,8 @@
             // cboFilterModule
             // 
             cboFilterModule.FormattingEnabled = true;
-            cboFilterModule.Location = new Point(315, 41);
-            cboFilterModule.Margin = new Padding(4, 4, 4, 4);
+            cboFilterModule.Location = new Point(481, 61);
+            cboFilterModule.Margin = new Padding(4);
             cboFilterModule.Name = "cboFilterModule";
             cboFilterModule.Size = new Size(96, 40);
             cboFilterModule.TabIndex = 20;
@@ -379,8 +378,8 @@
             // cboFilterLevel
             // 
             cboFilterLevel.FormattingEnabled = true;
-            cboFilterLevel.Location = new Point(112, 45);
-            cboFilterLevel.Margin = new Padding(4, 4, 4, 4);
+            cboFilterLevel.Location = new Point(278, 65);
+            cboFilterLevel.Margin = new Padding(4);
             cboFilterLevel.Name = "cboFilterLevel";
             cboFilterLevel.Size = new Size(96, 40);
             cboFilterLevel.TabIndex = 22;
@@ -388,8 +387,8 @@
             // dgvStudents
             // 
             dgvStudents.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvStudents.Location = new Point(36, 109);
-            dgvStudents.Margin = new Padding(4, 4, 4, 4);
+            dgvStudents.Location = new Point(202, 129);
+            dgvStudents.Margin = new Padding(4);
             dgvStudents.Name = "dgvStudents";
             dgvStudents.RowHeadersWidth = 62;
             dgvStudents.Size = new Size(581, 252);
@@ -398,7 +397,7 @@
             // lblFormStatus
             // 
             lblFormStatus.AutoSize = true;
-            lblFormStatus.Location = new Point(109, 471);
+            lblFormStatus.Location = new Point(275, 491);
             lblFormStatus.Margin = new Padding(4, 0, 4, 0);
             lblFormStatus.Name = "lblFormStatus";
             lblFormStatus.Size = new Size(0, 32);
@@ -407,7 +406,7 @@
             // lblStatus
             // 
             lblStatus.AutoSize = true;
-            lblStatus.Location = new Point(644, 620);
+            lblStatus.Location = new Point(810, 640);
             lblStatus.Margin = new Padding(4, 0, 4, 0);
             lblStatus.Name = "lblStatus";
             lblStatus.Size = new Size(0, 32);
@@ -416,7 +415,7 @@
             // lblError
             // 
             lblError.AutoSize = true;
-            lblError.Location = new Point(853, 620);
+            lblError.Location = new Point(1019, 640);
             lblError.Margin = new Padding(4, 0, 4, 0);
             lblError.Name = "lblError";
             lblError.Size = new Size(0, 32);
@@ -426,7 +425,7 @@
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1119, 709);
+            ClientSize = new Size(1367, 829);
             Controls.Add(lblError);
             Controls.Add(lblStatus);
             Controls.Add(lblFormStatus);
@@ -435,14 +434,14 @@
             Controls.Add(cboFilterModule);
             Controls.Add(lblFilterLevel);
             Controls.Add(lblFilterModule);
-            Controls.Add(button7);
+            Controls.Add(btnFilter);
             Controls.Add(btnClose);
             Controls.Add(btnDeleteStudent);
             Controls.Add(btnShowAll);
             Controls.Add(btnClear);
             Controls.Add(btnRegister);
             Controls.Add(grpRegisterStudent);
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "LecturerManageStudentsForm";
             Text = "LecturerManageStudentsForm";
             Load += LecturerManageStudentsForm_Load;
@@ -481,7 +480,7 @@
         private Button btnShowAll;
         private Button btnDeleteStudent;
         private Button btnClose;
-        private Button button7;
+        private Button btnFilter;
         private Label lblFilterModule;
         private Label lblFilterLevel;
         private ComboBox cboFilterModule;
