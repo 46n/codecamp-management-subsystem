@@ -131,6 +131,7 @@
             btnFilter.TabIndex = 5;
             btnFilter.Text = "Filter";
             btnFilter.UseVisualStyleBackColor = true;
+            btnFilter.Click += btnFilter_Click;
             // 
             // btnShowAll
             // 
@@ -140,6 +141,7 @@
             btnShowAll.TabIndex = 6;
             btnShowAll.Text = "Show All";
             btnShowAll.UseVisualStyleBackColor = true;
+            btnShowAll.Click += btnShowAll_Click;
             // 
             // dgvStudentList
             // 
@@ -149,6 +151,7 @@
             dgvStudentList.RowHeadersWidth = 82;
             dgvStudentList.Size = new Size(1246, 274);
             dgvStudentList.TabIndex = 2;
+            dgvStudentList.CellClick += dgvStudentList_CellClick;
             // 
             // btnDeleteSelected
             // 
@@ -158,6 +161,7 @@
             btnDeleteSelected.TabIndex = 3;
             btnDeleteSelected.Text = "Delete Selected";
             btnDeleteSelected.UseVisualStyleBackColor = true;
+            btnDeleteSelected.Click += btnDeleteSelected_Click;
             // 
             // btnClose
             // 
@@ -167,6 +171,7 @@
             btnClose.TabIndex = 4;
             btnClose.Text = "Close";
             btnClose.UseVisualStyleBackColor = true;
+            btnClose.Click += btnClose_Click;
             // 
             // cboModule
             // 
@@ -217,6 +222,7 @@
             Controls.Add(VeiwStudentpnl);
             Name = "LecturerViewStudentsForm";
             Text = "LecturerViewStudentsForm";
+            Load += LecturerViewStudentsForm_Load;
             VeiwStudentpnl.ResumeLayout(false);
             VeiwStudentpnl.PerformLayout();
             grpFilter.ResumeLayout(false);

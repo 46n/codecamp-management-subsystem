@@ -54,8 +54,8 @@
             // cboShowRequests
             // 
             cboShowRequests.FormattingEnabled = true;
-            cboShowRequests.Location = new Point(230, 140);
-            cboShowRequests.Margin = new Padding(4, 4, 4, 4);
+            cboShowRequests.Location = new Point(216, 32);
+            cboShowRequests.Margin = new Padding(4);
             cboShowRequests.Name = "cboShowRequests";
             cboShowRequests.Size = new Size(235, 40);
             cboShowRequests.TabIndex = 0;
@@ -63,7 +63,7 @@
             // lblShow
             // 
             lblShow.AutoSize = true;
-            lblShow.Location = new Point(95, 143);
+            lblShow.Location = new Point(81, 35);
             lblShow.Margin = new Padding(4, 0, 4, 0);
             lblShow.Name = "lblShow";
             lblShow.Size = new Size(72, 32);
@@ -72,8 +72,8 @@
             // 
             // btnFilter
             // 
-            btnFilter.Location = new Point(514, 138);
-            btnFilter.Margin = new Padding(4, 4, 4, 4);
+            btnFilter.Location = new Point(500, 30);
+            btnFilter.Margin = new Padding(4);
             btnFilter.Name = "btnFilter";
             btnFilter.Size = new Size(146, 44);
             btnFilter.TabIndex = 2;
@@ -84,12 +84,13 @@
             // dgvRequests
             // 
             dgvRequests.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvRequests.Location = new Point(73, 239);
-            dgvRequests.Margin = new Padding(4, 4, 4, 4);
+            dgvRequests.Location = new Point(59, 131);
+            dgvRequests.Margin = new Padding(4);
             dgvRequests.Name = "dgvRequests";
             dgvRequests.RowHeadersWidth = 62;
             dgvRequests.Size = new Size(914, 193);
             dgvRequests.TabIndex = 3;
+            dgvRequests.CellClick += dgvRequests_CellClick;
             // 
             // grpSelectedRequestDetails
             // 
@@ -101,10 +102,10 @@
             grpSelectedRequestDetails.Controls.Add(txtTPNumber);
             grpSelectedRequestDetails.Controls.Add(txtModule);
             grpSelectedRequestDetails.Controls.Add(txtStudent);
-            grpSelectedRequestDetails.Location = new Point(60, 460);
-            grpSelectedRequestDetails.Margin = new Padding(4, 4, 4, 4);
+            grpSelectedRequestDetails.Location = new Point(46, 352);
+            grpSelectedRequestDetails.Margin = new Padding(4);
             grpSelectedRequestDetails.Name = "grpSelectedRequestDetails";
-            grpSelectedRequestDetails.Padding = new Padding(4, 4, 4, 4);
+            grpSelectedRequestDetails.Padding = new Padding(4);
             grpSelectedRequestDetails.Size = new Size(1048, 196);
             grpSelectedRequestDetails.TabIndex = 4;
             grpSelectedRequestDetails.TabStop = false;
@@ -153,7 +154,7 @@
             // txtLevel
             // 
             txtLevel.Location = new Point(737, 124);
-            txtLevel.Margin = new Padding(4, 4, 4, 4);
+            txtLevel.Margin = new Padding(4);
             txtLevel.Name = "txtLevel";
             txtLevel.Size = new Size(273, 39);
             txtLevel.TabIndex = 3;
@@ -161,7 +162,7 @@
             // txtTPNumber
             // 
             txtTPNumber.Location = new Point(737, 38);
-            txtTPNumber.Margin = new Padding(4, 4, 4, 4);
+            txtTPNumber.Margin = new Padding(4);
             txtTPNumber.Name = "txtTPNumber";
             txtTPNumber.Size = new Size(273, 39);
             txtTPNumber.TabIndex = 2;
@@ -169,7 +170,7 @@
             // txtModule
             // 
             txtModule.Location = new Point(172, 124);
-            txtModule.Margin = new Padding(4, 4, 4, 4);
+            txtModule.Margin = new Padding(4);
             txtModule.Name = "txtModule";
             txtModule.Size = new Size(273, 39);
             txtModule.TabIndex = 1;
@@ -177,15 +178,15 @@
             // txtStudent
             // 
             txtStudent.Location = new Point(172, 38);
-            txtStudent.Margin = new Padding(4, 4, 4, 4);
+            txtStudent.Margin = new Padding(4);
             txtStudent.Name = "txtStudent";
             txtStudent.Size = new Size(273, 39);
             txtStudent.TabIndex = 0;
             // 
             // btnApprove
             // 
-            btnApprove.Location = new Point(73, 707);
-            btnApprove.Margin = new Padding(4, 4, 4, 4);
+            btnApprove.Location = new Point(59, 599);
+            btnApprove.Margin = new Padding(4);
             btnApprove.Name = "btnApprove";
             btnApprove.Size = new Size(146, 44);
             btnApprove.TabIndex = 5;
@@ -195,8 +196,8 @@
             // 
             // btnReject
             // 
-            btnReject.Location = new Point(277, 707);
-            btnReject.Margin = new Padding(4, 4, 4, 4);
+            btnReject.Location = new Point(263, 599);
+            btnReject.Margin = new Padding(4);
             btnReject.Name = "btnReject";
             btnReject.Size = new Size(146, 44);
             btnReject.TabIndex = 6;
@@ -206,8 +207,8 @@
             // 
             // btnRerfesh
             // 
-            btnRerfesh.Location = new Point(472, 707);
-            btnRerfesh.Margin = new Padding(4, 4, 4, 4);
+            btnRerfesh.Location = new Point(458, 599);
+            btnRerfesh.Margin = new Padding(4);
             btnRerfesh.Name = "btnRerfesh";
             btnRerfesh.Size = new Size(146, 44);
             btnRerfesh.TabIndex = 7;
@@ -217,8 +218,8 @@
             // 
             // btnClose
             // 
-            btnClose.Location = new Point(670, 707);
-            btnClose.Margin = new Padding(4, 4, 4, 4);
+            btnClose.Location = new Point(656, 599);
+            btnClose.Margin = new Padding(4);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(146, 44);
             btnClose.TabIndex = 8;
@@ -229,7 +230,7 @@
             // lblStatus
             // 
             lblStatus.AutoSize = true;
-            lblStatus.Location = new Point(928, 678);
+            lblStatus.Location = new Point(914, 570);
             lblStatus.Margin = new Padding(4, 0, 4, 0);
             lblStatus.Name = "lblStatus";
             lblStatus.Size = new Size(0, 32);
@@ -238,7 +239,7 @@
             // lblFormStatus
             // 
             lblFormStatus.AutoSize = true;
-            lblFormStatus.Location = new Point(92, 671);
+            lblFormStatus.Location = new Point(78, 563);
             lblFormStatus.Margin = new Padding(4, 0, 4, 0);
             lblFormStatus.Name = "lblFormStatus";
             lblFormStatus.Size = new Size(0, 32);
@@ -260,9 +261,10 @@
             Controls.Add(btnFilter);
             Controls.Add(lblShow);
             Controls.Add(cboShowRequests);
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "LecturerApproveRequestsForm";
             Text = "LecturerApproveRequestsForm";
+            Load += LecturerApproveRequestsForm_Load;
             ((System.ComponentModel.ISupportInitialize)dgvRequests).EndInit();
             grpSelectedRequestDetails.ResumeLayout(false);
             grpSelectedRequestDetails.PerformLayout();
