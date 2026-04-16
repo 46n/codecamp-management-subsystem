@@ -1,7 +1,8 @@
 /* =========================================
    APU CodeCamp Management System
    Full Database Script
-   Includes Admin, Trainer, Lecturer, Student
+   Updated from older version
+   Keeps existing tables and adds university-style structure
 ========================================= */
 
 USE master;
@@ -33,6 +34,21 @@ CREATE TABLE Users
     Email NVARCHAR(100) NOT NULL,
     Phone NVARCHAR(20) NOT NULL,
     [Address] NVARCHAR(200) NULL
+);
+GO
+
+ALTER TABLE Users
+ADD CONSTRAINT CHK_Users_Role
+CHECK ([Role] IN ('Admin', 'Trainer', 'Lecturer', 'Student'));
+GO
+
+ALTER TABLE Users
+ADD CONSTRAINT CHK_Users_Email_Format
+CHECK
+(
+    ([Role] = 'Student' AND Email LIKE 'TP%@mail.apu.edu.my')
+    OR
+    ([Role] IN ('Admin', 'Trainer', 'Lecturer') AND Email LIKE '%@apu.edu.my' AND Email NOT LIKE '%@mail.apu.edu.my')
 );
 GO
 
@@ -88,6 +104,7 @@ GO
 
 /* =========================================
    5. CLASS SCHEDULE TABLE
+   Original table kept for compatibility
 ========================================= */
 CREATE TABLE ClassSchedule
 (
@@ -128,7 +145,6 @@ GO
 
 /* =========================================
    7. ENROLLMENT REQUESTS TABLE
-   Student requests extra coaching
 ========================================= */
 CREATE TABLE EnrollmentRequests
 (
@@ -155,7 +171,6 @@ GO
 
 /* =========================================
    8. STUDENT ENROLLMENTS TABLE
-   Approved or lecturer-enrolled classes
 ========================================= */
 CREATE TABLE StudentEnrollments
 (
@@ -214,7 +229,6 @@ GO
 
 /* =========================================
    11. LEGACY STUDENT PAYMENTS TABLE
-   Kept for compatibility with existing code
 ========================================= */
 CREATE TABLE StudentPayments
 (
@@ -230,122 +244,140 @@ CREATE TABLE StudentPayments
 GO
 
 /* =========================================
-   12. SAMPLE USERS
+   12. NEW TABLE: INTAKES
 ========================================= */
-INSERT INTO Users (Username, [Password], [Role], [Name], Email, Phone, [Address])
-VALUES
-('admin1',    '123', 'Admin',    'Admin User',   'admin@test.com',    '0000000000', 'Admin Address'),
-('trainer1',  '123', 'Trainer',  'Abdalla',      'abdalla@test.com',  '1234567890', 'Trainer Address'),
-('trainer2',  '123', 'Trainer',  'Waleed',       'waleed@test.com',   '0987654321', 'Trainer Address 2'),
-('lecturer1', '123', 'Lecturer', 'Dr Ahmad',     'ahmad@test.com',    '0133333333', 'APU'),
-('lecturer2', '123', 'Lecturer', 'Ms Farah',     'farah@test.com',    '0144444444', 'APU'),
-('student1',  '123', 'Student',  'Ali Ahmad',    'ali@test.com',      '0111111111', 'KL'),
-('student2',  '123', 'Student',  'Nur Aina',     'aina@test.com',     '0122222222', 'Selangor'),
-('student3',  '123', 'Student',  'John Lee',     'john@test.com',     '0155555555', 'Penang');
+CREATE TABLE Intakes
+(
+    IntakeID INT PRIMARY KEY IDENTITY(1,1),
+    IntakeCode NVARCHAR(20) NOT NULL UNIQUE,
+    IntakeName NVARCHAR(100) NOT NULL,
+    StartDate DATE NOT NULL,
+    EndDate DATE NULL,
+    Status NVARCHAR(20) NOT NULL DEFAULT 'Active'
+);
 GO
 
 /* =========================================
-   13. SAMPLE TRAINERS
+   13. NEW TABLE: MODULES
 ========================================= */
-INSERT INTO Trainers (UserID, Qualifications, Specialisation, AssignedModuleId, AssignedModuleName, AssignedLevel)
-VALUES
-(2, 'BSc Computer Science', 'Programming', '120', 'Programming Fundamentals', 'Beginner'),
-(3, 'MSc Software Engineering', 'Database', '220', 'Object Oriented Programming', 'Intermediate');
+CREATE TABLE Modules
+(
+    ModuleID INT PRIMARY KEY IDENTITY(1,1),
+    ModuleCode NVARCHAR(20) NOT NULL UNIQUE,
+    ModuleName NVARCHAR(100) NOT NULL,
+    AcademicLevel NVARCHAR(20) NOT NULL,
+    CreditHours INT NULL,
+    Status NVARCHAR(20) NOT NULL DEFAULT 'Active'
+);
 GO
 
 /* =========================================
-   14. SAMPLE LECTURERS
+   14. NEW TABLE: STUDENT INTAKES
 ========================================= */
-INSERT INTO Lecturers (UserID, Department, Specialisation)
-VALUES
-(4, 'School of Computing', 'Programming'),
-(5, 'School of Computing', 'Database');
+CREATE TABLE StudentIntakes
+(
+    StudentIntakeID INT PRIMARY KEY IDENTITY(1,1),
+    StudentID INT NOT NULL,
+    IntakeID INT NOT NULL,
+    AssignedDate DATE NOT NULL DEFAULT GETDATE(),
+    Status NVARCHAR(20) NOT NULL DEFAULT 'Active',
+    CONSTRAINT FK_StudentIntakes_Students
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID),
+    CONSTRAINT FK_StudentIntakes_Intakes
+        FOREIGN KEY (IntakeID) REFERENCES Intakes(IntakeID)
+);
 GO
 
 /* =========================================
-   15. SAMPLE STUDENTS
+   15. NEW TABLE: LECTURER MODULES
 ========================================= */
-INSERT INTO Students (UserID, TPNumber, StudyLevel, ContactNumber, StudentAddress, MonthOfEnrollment, StudentStatus)
-VALUES
-(6, 'TP001', 'Level 1', '0111111111', 'KL',       'April 2026', 'Active'),
-(7, 'TP002', 'Level 1', '0122222222', 'Selangor', 'April 2026', 'Active'),
-(8, 'TP003', 'Level 2', '0155555555', 'Penang',   'April 2026', 'Active');
+CREATE TABLE LecturerModules
+(
+    LecturerModuleID INT PRIMARY KEY IDENTITY(1,1),
+    LecturerID INT NOT NULL,
+    ModuleID INT NOT NULL,
+    IntakeID INT NOT NULL,
+    AssignedDate DATE NOT NULL DEFAULT GETDATE(),
+    Status NVARCHAR(20) NOT NULL DEFAULT 'Active',
+    CONSTRAINT FK_LecturerModules_Lecturers
+        FOREIGN KEY (LecturerID) REFERENCES Lecturers(LecturerID),
+    CONSTRAINT FK_LecturerModules_Modules
+        FOREIGN KEY (ModuleID) REFERENCES Modules(ModuleID),
+    CONSTRAINT FK_LecturerModules_Intakes
+        FOREIGN KEY (IntakeID) REFERENCES Intakes(IntakeID)
+);
 GO
 
 /* =========================================
-   16. SAMPLE CLASS SCHEDULE
+   16. NEW TABLE: TRAINER ASSIGNMENTS
 ========================================= */
-INSERT INTO ClassSchedule (ModuleId, ModuleName, ClassDate, ClassTime, Charges, TrainerID, [Level], Room)
-VALUES
-('120', 'Programming Fundamentals', '2026-04-22', '09:00', 150.00, 1, 'Beginner',    'B-01'),
-('220', 'Object Oriented Programming', '2026-04-23', '10:00', 200.00, 2, 'Intermediate', 'B-02'),
-('320', 'Database Systems', '2026-04-24', '14:00', 260.00, 2, 'Advance', 'B-03');
+CREATE TABLE TrainerAssignments
+(
+    TrainerAssignmentID INT PRIMARY KEY IDENTITY(1,1),
+    TrainerID INT NOT NULL,
+    ModuleID INT NOT NULL,
+    IntakeID INT NULL,
+    CoachingLevel NVARCHAR(20) NOT NULL,
+    AssignedDate DATE NOT NULL DEFAULT GETDATE(),
+    Status NVARCHAR(20) NOT NULL DEFAULT 'Active',
+    CONSTRAINT FK_TrainerAssignments_Trainers
+        FOREIGN KEY (TrainerID) REFERENCES Trainers(TrainerID),
+    CONSTRAINT FK_TrainerAssignments_Modules
+        FOREIGN KEY (ModuleID) REFERENCES Modules(ModuleID),
+    CONSTRAINT FK_TrainerAssignments_Intakes
+        FOREIGN KEY (IntakeID) REFERENCES Intakes(IntakeID)
+);
 GO
 
 /* =========================================
-   17. SAMPLE FEEDBACK
+   17. NEW TABLE: WEEKLY SCHEDULES
 ========================================= */
-INSERT INTO Feedback (TrainerID, FeedbackType, [Message], DateSent, [Status])
-VALUES
-(1, 'General',    'Course completed successfully.', GETDATE(), 'Unread'),
-(1, 'Suggestion', 'Need more practice sessions.',   GETDATE(), 'Unread'),
-(2, 'Complaint',  'Project deadline is too short.', GETDATE(), 'Read');
+CREATE TABLE WeeklySchedules
+(
+    WeeklyScheduleID INT PRIMARY KEY IDENTITY(1,1),
+    ModuleID INT NOT NULL,
+    IntakeID INT NOT NULL,
+    TrainerID INT NULL,
+    LecturerID INT NULL,
+    CoachingLevel NVARCHAR(20) NOT NULL,
+    DayOfWeek NVARCHAR(20) NOT NULL,
+    StartTime TIME NOT NULL,
+    EndTime TIME NULL,
+    Room NVARCHAR(50) NULL,
+    StartDate DATE NOT NULL,
+    EndDate DATE NULL,
+    Status NVARCHAR(20) NOT NULL DEFAULT 'Active',
+    CONSTRAINT FK_WeeklySchedules_Modules
+        FOREIGN KEY (ModuleID) REFERENCES Modules(ModuleID),
+    CONSTRAINT FK_WeeklySchedules_Intakes
+        FOREIGN KEY (IntakeID) REFERENCES Intakes(IntakeID),
+    CONSTRAINT FK_WeeklySchedules_Trainers
+        FOREIGN KEY (TrainerID) REFERENCES Trainers(TrainerID),
+    CONSTRAINT FK_WeeklySchedules_Lecturers
+        FOREIGN KEY (LecturerID) REFERENCES Lecturers(LecturerID)
+);
 GO
 
 /* =========================================
-   18. SAMPLE ENROLLMENT REQUESTS
+   18. NEW TABLE: STUDENT WEEKLY ENROLLMENTS
 ========================================= */
-INSERT INTO EnrollmentRequests (StudentID, ClassScheduleID, RequestDate, RequestStatus, Remarks, HandledByLecturerID, HandledDate)
-VALUES
-(1, 2, GETDATE(), 'Pending',   'Interested in extra OOP coaching', NULL, NULL),
-(2, 1, GETDATE(), 'Approved',  'Requested by student', 1, GETDATE()),
-(3, 3, GETDATE(), 'Rejected',  'Class already full',   2, GETDATE());
+CREATE TABLE StudentWeeklyEnrollments
+(
+    StudentWeeklyEnrollmentID INT PRIMARY KEY IDENTITY(1,1),
+    StudentID INT NOT NULL,
+    WeeklyScheduleID INT NOT NULL,
+    EnrollmentDate DATE NOT NULL DEFAULT GETDATE(),
+    EnrollmentStatus NVARCHAR(20) NOT NULL DEFAULT 'Active',
+    CONSTRAINT FK_StudentWeeklyEnrollments_Students
+        FOREIGN KEY (StudentID) REFERENCES Students(StudentID),
+    CONSTRAINT FK_StudentWeeklyEnrollments_WeeklySchedules
+        FOREIGN KEY (WeeklyScheduleID) REFERENCES WeeklySchedules(WeeklyScheduleID)
+);
 GO
 
 /* =========================================
-   19. SAMPLE STUDENT ENROLLMENTS
+   37. TEST QUERIES
 ========================================= */
-INSERT INTO StudentEnrollments (StudentID, ClassScheduleID, EnrolledDate, EnrollmentStatus, EnrolledByLecturerID, CompletedDate)
-VALUES
-(1, 1, GETDATE(), 'Active',    1, NULL),
-(2, 2, GETDATE(), 'Active',    1, NULL),
-(3, 3, GETDATE(), 'Completed', 2, GETDATE());
-GO
-
-/* =========================================
-   20. SAMPLE INVOICES
-========================================= */
-INSERT INTO Invoices (EnrollmentID, InvoiceDate, Amount, InvoiceStatus, DueDate)
-VALUES
-(1, GETDATE(), 150.00, 'Unpaid', DATEADD(DAY, 7, GETDATE())),
-(2, GETDATE(), 200.00, 'Paid',   DATEADD(DAY, 7, GETDATE())),
-(3, GETDATE(), 260.00, 'Paid',   DATEADD(DAY, 7, GETDATE()));
-GO
-
-/* =========================================
-   21. SAMPLE PAYMENT HISTORY
-========================================= */
-INSERT INTO PaymentHistory (InvoiceID, AmountPaid, PaymentDate, PaymentMethod, ReceiptNo, PaymentStatus)
-VALUES
-(2, 200.00, GETDATE(), 'Cash', 'RCPT-1001', 'Paid'),
-(3, 260.00, GETDATE(), 'Card', 'RCPT-1002', 'Paid');
-GO
-
-/* =========================================
-   22. SAMPLE LEGACY STUDENT PAYMENTS
-========================================= */
-INSERT INTO StudentPayments (ClassScheduleID, StudentName, Amount, PaymentDate, [Status])
-VALUES
-(1, 'Ali Ahmad', 150.00, GETDATE(), 'Paid'),
-(2, 'Nur Aina',  200.00, GETDATE(), 'Paid'),
-(3, 'John Lee',  260.00, GETDATE(), 'Paid');
-GO
-
-/* =========================================
-   23. TEST QUERIES
-========================================= */
-
--- All base tables
 SELECT * FROM Users;
 SELECT * FROM Trainers;
 SELECT * FROM Lecturers;
@@ -357,11 +389,18 @@ SELECT * FROM StudentEnrollments;
 SELECT * FROM Invoices;
 SELECT * FROM PaymentHistory;
 SELECT * FROM StudentPayments;
+SELECT * FROM Intakes;
+SELECT * FROM Modules;
+SELECT * FROM StudentIntakes;
+SELECT * FROM LecturerModules;
+SELECT * FROM TrainerAssignments;
+SELECT * FROM WeeklySchedules;
+SELECT * FROM StudentWeeklyEnrollments;
 GO
 
 /* =========================================
-   24. STUDENT HOME FORM QUERY
-   View enrolled schedule
+   38. STUDENT HOME FORM QUERY
+   Legacy schedule view
 ========================================= */
 SELECT 
     se.EnrollmentID,
@@ -385,8 +424,35 @@ ORDER BY cs.ClassDate, cs.ClassTime;
 GO
 
 /* =========================================
-   25. STUDENT COURSES FORM QUERY
-   Current enrolled courses
+   39. NEW WEEKLY STUDENT HOME QUERY
+   University-style weekly schedule
+========================================= */
+SELECT
+    swe.StudentWeeklyEnrollmentID,
+    s.StudentID,
+    u.[Name] AS StudentName,
+    i.IntakeCode,
+    m.ModuleCode,
+    m.ModuleName,
+    ws.DayOfWeek,
+    ws.StartTime,
+    ws.EndTime,
+    ws.Room,
+    tu.[Name] AS TrainerName,
+    swe.EnrollmentStatus
+FROM StudentWeeklyEnrollments swe
+INNER JOIN Students s ON swe.StudentID = s.StudentID
+INNER JOIN Users u ON s.UserID = u.UserID
+INNER JOIN WeeklySchedules ws ON swe.WeeklyScheduleID = ws.WeeklyScheduleID
+INNER JOIN Modules m ON ws.ModuleID = m.ModuleID
+INNER JOIN Intakes i ON ws.IntakeID = i.IntakeID
+LEFT JOIN Trainers t ON ws.TrainerID = t.TrainerID
+LEFT JOIN Users tu ON t.UserID = tu.UserID
+ORDER BY i.IntakeCode, ws.DayOfWeek, ws.StartTime;
+GO
+
+/* =========================================
+   40. STUDENT COURSES FORM QUERY
 ========================================= */
 SELECT
     s.StudentID,
@@ -404,7 +470,7 @@ ORDER BY u.[Name];
 GO
 
 /* =========================================
-   26. STUDENT REQUESTS QUERY
+   41. STUDENT REQUESTS QUERY
 ========================================= */
 SELECT
     er.RequestID,
@@ -425,8 +491,7 @@ ORDER BY er.RequestID DESC;
 GO
 
 /* =========================================
-   27. STUDENT FEES FORM QUERY
-   Outstanding invoices + payment history
+   42. STUDENT FEES FORM QUERY
 ========================================= */
 SELECT
     i.InvoiceID,
@@ -465,7 +530,7 @@ ORDER BY ph.PaymentHistoryID DESC;
 GO
 
 /* =========================================
-   28. LECTURER VIEW STUDENT LIST
+   43. LECTURER VIEW STUDENT LIST
 ========================================= */
 SELECT
     s.StudentID,
@@ -484,36 +549,438 @@ ORDER BY u.[Name];
 GO
 
 /* =========================================
-   29. LECTURER APPROVE REQUEST EXAMPLE
+   44. LECTURER VIEW STUDENTS BY INTAKE
 ========================================= */
--- Example only:
--- UPDATE EnrollmentRequests
--- SET RequestStatus = 'Approved',
---     HandledByLecturerID = 1,
---     HandledDate = GETDATE()
--- WHERE RequestID = 1;
-
--- INSERT INTO StudentEnrollments (StudentID, ClassScheduleID, EnrolledDate, EnrollmentStatus, EnrolledByLecturerID)
--- SELECT StudentID, ClassScheduleID, GETDATE(), 'Active', 1
--- FROM EnrollmentRequests
--- WHERE RequestID = 1;
+SELECT
+    s.StudentID,
+    u.[Name] AS StudentName,
+    s.TPNumber,
+    i.IntakeCode,
+    i.IntakeName,
+    s.StudyLevel,
+    s.StudentStatus
+FROM Students s
+INNER JOIN Users u ON s.UserID = u.UserID
+INNER JOIN StudentIntakes si ON s.StudentID = si.StudentID
+INNER JOIN Intakes i ON si.IntakeID = i.IntakeID
+ORDER BY i.IntakeCode, u.[Name];
 GO
 
 /* =========================================
-   30. STUDENT PAYMENT EXAMPLE
+   45. TRAINER WEEKLY TEACHING VIEW
 ========================================= */
--- Example only:
--- INSERT INTO PaymentHistory (InvoiceID, AmountPaid, PaymentDate, PaymentMethod, ReceiptNo, PaymentStatus)
--- VALUES (1, 150.00, GETDATE(), 'Online Transfer', 'RCPT-2001', 'Paid');
-
--- UPDATE Invoices
--- SET InvoiceStatus = 'Paid'
--- WHERE InvoiceID = 1;
+SELECT
+    t.TrainerID,
+    u.[Name] AS TrainerName,
+    i.IntakeCode,
+    m.ModuleCode,
+    m.ModuleName,
+    ws.DayOfWeek,
+    ws.StartTime,
+    ws.EndTime,
+    ws.Room,
+    ws.CoachingLevel
+FROM WeeklySchedules ws
+INNER JOIN Trainers t ON ws.TrainerID = t.TrainerID
+INNER JOIN Users u ON t.UserID = u.UserID
+INNER JOIN Modules m ON ws.ModuleID = m.ModuleID
+INNER JOIN Intakes i ON ws.IntakeID = i.IntakeID
+ORDER BY u.[Name], ws.DayOfWeek, ws.StartTime;
 GO
 
-SELECT * FROM Lecturers;
-SELECT * FROM Students;
-SELECT * FROM EnrollmentRequests;
+/* =========================================
+   46. QUICK CHECKS
+========================================= */
 SELECT * FROM StudentEnrollments;
-SELECT * FROM Invoices;
-SELECT * FROM PaymentHistory;
+GO
+
+SELECT 
+    se.StudentID,
+    cs.ModuleName,
+    cs.ClassDate,
+    cs.ClassTime,
+    cs.Room,
+    se.EnrollmentStatus
+FROM StudentEnrollments se
+INNER JOIN ClassSchedule cs ON se.ClassScheduleID = cs.Id
+WHERE se.StudentID = 1;
+GO
+
+
+USE MyDatabase;
+GO
+
+/* =========================================================
+   EXTRA DEMO DATA FOR STUDENT FORMS
+   This script adds realistic fake university data
+   without changing your table structure.
+========================================================= */
+
+/* =========================================================
+   A. ADD MORE USERS
+========================================================= */
+INSERT INTO Users (Username, [Password], [Role], [Name], Email, Phone, [Address])
+VALUES
+('trainer3',  '123', 'Trainer',  'Sarah Lim',        'sarah.lim@apu.edu.my',        '0161000001', 'Bukit Jalil'),
+('trainer4',  '123', 'Trainer',  'Jason Tan',        'jason.tan@apu.edu.my',        '0161000002', 'Cheras'),
+('trainer5',  '123', 'Trainer',  'Priya Nair',       'priya.nair@apu.edu.my',       '0161000003', 'Puchong'),
+('trainer6',  '123', 'Trainer',  'Daniel Wong',      'daniel.wong@apu.edu.my',      '0161000004', 'Subang'),
+('lecturer3', '123', 'Lecturer', 'Dr Lim Mei Yan',   'meiyan@apu.edu.my',           '0172000001', 'APU Campus'),
+('lecturer4', '123', 'Lecturer', 'Mr Hafiz Rahman',  'hafiz.rahman@apu.edu.my',     '0172000002', 'APU Campus'),
+('lecturer5', '123', 'Lecturer', 'Ms Tan Li Wen',    'liwen.tan@apu.edu.my',        '0172000003', 'APU Campus'),
+
+('student4',  '123', 'Student',  'Muhammad Amir',    'TP100001@mail.apu.edu.my',    '0183000001', 'Kuala Lumpur'),
+('student5',  '123', 'Student',  'Siti Hajar',       'TP100002@mail.apu.edu.my',    '0183000002', 'Selangor'),
+('student6',  '123', 'Student',  'Ethan Koh',        'TP100003@mail.apu.edu.my',    '0183000003', 'Penang'),
+('student7',  '123', 'Student',  'Nurul Syafiqah',   'TP100004@mail.apu.edu.my',    '0183000004', 'Johor'),
+('student8',  '123', 'Student',  'Adam Faris',       'TP100005@mail.apu.edu.my',    '0183000005', 'Perak'),
+('student9',  '123', 'Student',  'Alicia Chan',      'TP100006@mail.apu.edu.my',    '0183000006', 'Malacca'),
+('student10', '123', 'Student',  'Ryan Goh',         'TP100007@mail.apu.edu.my',    '0183000007', 'Negeri Sembilan'),
+('student11', '123', 'Student',  'Izzah Sofea',      'TP100008@mail.apu.edu.my',    '0183000008', 'Sabah'),
+('student12', '123', 'Student',  'Marcus Teo',       'TP100009@mail.apu.edu.my',    '0183000009', 'Sarawak'),
+('student13', '123', 'Student',  'Farhan Iskandar',  'TP100010@mail.apu.edu.my',    '0183000010', 'Kedah'),
+('student14', '123', 'Student',  'Grace Yap',        'TP100011@mail.apu.edu.my',    '0183000011', 'Selangor'),
+('student15', '123', 'Student',  'Haziq Roslan',     'TP100012@mail.apu.edu.my',    '0183000012', 'Kuala Lumpur'),
+('student16', '123', 'Student',  'Chloe Lee',        'TP100013@mail.apu.edu.my',    '0183000013', 'Penang'),
+('student17', '123', 'Student',  'Aiman Hakim',      'TP100014@mail.apu.edu.my',    '0183000014', 'Johor'),
+('student18', '123', 'Student',  'Natalie Wong',     'TP100015@mail.apu.edu.my',    '0183000015', 'Sabah'),
+('student19', '123', 'Student',  'Syed Danish',      'TP100016@mail.apu.edu.my',    '0183000016', 'Perlis'),
+('student20', '123', 'Student',  'Mei Xin',          'TP100017@mail.apu.edu.my',    '0183000017', 'Sarawak'),
+('student21', '123', 'Student',  'Hakim Zulkifli',   'TP100018@mail.apu.edu.my',    '0183000018', 'Selangor'),
+('student22', '123', 'Student',  'Vanessa Low',      'TP100019@mail.apu.edu.my',    '0183000019', 'Kuala Lumpur'),
+('student23', '123', 'Student',  'Farisya Jamal',    'TP100020@mail.apu.edu.my',    '0183000020', 'Johor');
+GO
+
+/* =========================================================
+   B. ADD TRAINERS
+========================================================= */
+INSERT INTO Trainers (UserID, Qualifications, Specialisation, AssignedModuleId, AssignedModuleName, AssignedLevel)
+VALUES
+(9,  'MSc Data Science',            'Python Programming',     '130', 'Python Programming',         'Beginner'),
+(10, 'BSc Software Engineering',    'Web Development',        '240', 'Web Development',            'Intermediate'),
+(11, 'MSc Computer Science',        'Data Structures',        '340', 'Data Structures',            'Intermediate'),
+(12, 'BSc Information Technology',  'Database Systems',       '350', 'Database Systems',           'Advance');
+GO
+
+/* =========================================================
+   C. ADD LECTURERS
+========================================================= */
+INSERT INTO Lecturers (UserID, Department, Specialisation)
+VALUES
+(13, 'School of Computing', 'Software Engineering'),
+(14, 'School of Computing', 'Programming'),
+(15, 'School of Computing', 'Data Science');
+GO
+
+/* =========================================================
+   D. ADD STUDENTS
+   Existing students are 1,2,3 from your script.
+   These new students continue from new UserIDs.
+========================================================= */
+INSERT INTO Students (UserID, TPNumber, StudyLevel, ContactNumber, StudentAddress, MonthOfEnrollment, StudentStatus)
+VALUES
+(16, 'TP100001', 'Level 1', '0183000001', 'Kuala Lumpur', 'April 2026', 'Active'),
+(17, 'TP100002', 'Level 1', '0183000002', 'Selangor',     'April 2026', 'Active'),
+(18, 'TP100003', 'Level 1', '0183000003', 'Penang',       'April 2026', 'Active'),
+(19, 'TP100004', 'Level 1', '0183000004', 'Johor',        'April 2026', 'Active'),
+(20, 'TP100005', 'Level 1', '0183000005', 'Perak',        'April 2026', 'Active'),
+(21, 'TP100006', 'Level 1', '0183000006', 'Malacca',      'April 2026', 'Active'),
+(22, 'TP100007', 'Level 1', '0183000007', 'Negeri Sembilan','April 2026','Active'),
+(23, 'TP100008', 'Level 1', '0183000008', 'Sabah',        'April 2026', 'Active'),
+(24, 'TP100009', 'Level 2', '0183000009', 'Sarawak',      'April 2026', 'Active'),
+(25, 'TP100010', 'Level 2', '0183000010', 'Kedah',        'April 2026', 'Active'),
+(26, 'TP100011', 'Level 2', '0183000011', 'Selangor',     'April 2026', 'Active'),
+(27, 'TP100012', 'Level 2', '0183000012', 'Kuala Lumpur', 'April 2026', 'Active'),
+(28, 'TP100013', 'Level 2', '0183000013', 'Penang',       'April 2026', 'Active'),
+(29, 'TP100014', 'Level 2', '0183000014', 'Johor',        'April 2026', 'Active'),
+(30, 'TP100015', 'Level 2', '0183000015', 'Sabah',        'April 2026', 'Active'),
+(31, 'TP100016', 'Level 3', '0183000016', 'Perlis',       'April 2026', 'Active'),
+(32, 'TP100017', 'Level 3', '0183000017', 'Sarawak',      'April 2026', 'Active'),
+(33, 'TP100018', 'Level 3', '0183000018', 'Selangor',     'April 2026', 'Active'),
+(34, 'TP100019', 'Level 3', '0183000019', 'Kuala Lumpur', 'April 2026', 'Active'),
+(35, 'TP100020', 'Level 3', '0183000020', 'Johor',        'April 2026', 'Active');
+GO
+
+/* =========================================================
+   E. ADD MORE INTAKES
+========================================================= */
+INSERT INTO Intakes (IntakeCode, IntakeName, StartDate, EndDate, Status)
+VALUES
+('UCDF2607CS', 'Computer Science July 2026',       '2026-07-01', '2028-06-30', 'Active'),
+('UCDF2607SE', 'Software Engineering July 2026',   '2026-07-01', '2028-06-30', 'Active'),
+('UCDF2607DS', 'Data Science July 2026',           '2026-07-01', '2028-06-30', 'Active'),
+('UCDF2511CS', 'Computer Science November 2025',   '2025-11-01', '2027-10-31', 'Active');
+GO
+
+/* =========================================================
+   F. ADD MORE MODULES
+========================================================= */
+INSERT INTO Modules (ModuleCode, ModuleName, AcademicLevel, CreditHours, Status)
+VALUES
+('PY102',   'Python Programming',            'Level 1', 3, 'Active'),
+('WD105',   'Web Design Fundamentals',       'Level 1', 3, 'Active'),
+('SE201',   'Software Engineering Basics',   'Level 2', 3, 'Active'),
+('CN202',   'Computer Networks',             'Level 2', 4, 'Active'),
+('OS203',   'Operating Systems',             'Level 2', 4, 'Active'),
+('MAD301',  'Mobile App Development',        'Level 3', 4, 'Active'),
+('AI302',   'Introduction to AI',            'Level 3', 4, 'Active'),
+('ML303',   'Machine Learning Fundamentals', 'Level 3', 4, 'Active'),
+('UI304',   'UI UX Design',                  'Level 2', 3, 'Active'),
+('CSP305',  'Cloud Solutions Practice',      'Level 3', 4, 'Active');
+GO
+
+/* =========================================================
+   G. ASSIGN STUDENTS TO INTAKES
+========================================================= */
+INSERT INTO StudentIntakes (StudentID, IntakeID, AssignedDate, Status)
+VALUES
+(4,1,GETDATE(),'Active'),
+(5,1,GETDATE(),'Active'),
+(6,1,GETDATE(),'Active'),
+(7,1,GETDATE(),'Active'),
+(8,1,GETDATE(),'Active'),
+(9,1,GETDATE(),'Active'),
+(10,1,GETDATE(),'Active'),
+(11,1,GETDATE(),'Active'),
+
+(12,2,GETDATE(),'Active'),
+(13,2,GETDATE(),'Active'),
+(14,2,GETDATE(),'Active'),
+(15,2,GETDATE(),'Active'),
+(16,2,GETDATE(),'Active'),
+
+(17,3,GETDATE(),'Active'),
+(18,3,GETDATE(),'Active'),
+(19,3,GETDATE(),'Active'),
+
+(20,4,GETDATE(),'Active'),
+(21,4,GETDATE(),'Active'),
+(22,5,GETDATE(),'Active'),
+(23,6,GETDATE(),'Active');
+GO
+
+/* =========================================================
+   H. ADD LECTURER MODULES
+========================================================= */
+INSERT INTO LecturerModules (LecturerID, ModuleID, IntakeID, AssignedDate, Status)
+VALUES
+(1, 1, 1, GETDATE(), 'Active'),
+(1, 2, 1, GETDATE(), 'Active'),
+(1, 4, 1, GETDATE(), 'Active'),
+(2, 3, 2, GETDATE(), 'Active'),
+(2, 5, 3, GETDATE(), 'Active'),
+(3, 6, 1, GETDATE(), 'Active'),
+(3, 7, 1, GETDATE(), 'Active'),
+(4, 8, 2, GETDATE(), 'Active'),
+(4, 9, 2, GETDATE(), 'Active'),
+(5,10, 3, GETDATE(), 'Active'),
+(5,11, 3, GETDATE(), 'Active'),
+(5,12, 4, GETDATE(), 'Active');
+GO
+
+/* =========================================================
+   I. ADD TRAINER ASSIGNMENTS
+========================================================= */
+INSERT INTO TrainerAssignments (TrainerID, ModuleID, IntakeID, CoachingLevel, AssignedDate, Status)
+VALUES
+(1, 1, 1, 'Beginner',     GETDATE(), 'Active'),
+(2, 2, 1, 'Intermediate', GETDATE(), 'Active'),
+(1, 4, 1, 'Beginner',     GETDATE(), 'Active'),
+(2, 3, 2, 'Advance',      GETDATE(), 'Active'),
+(3, 6, 1, 'Beginner',     GETDATE(), 'Active'),
+(4, 7, 1, 'Intermediate', GETDATE(), 'Active'),
+(5, 8, 2, 'Intermediate', GETDATE(), 'Active'),
+(6, 9, 2, 'Advance',      GETDATE(), 'Active'),
+(3,10, 3, 'Advance',      GETDATE(), 'Active'),
+(4,11, 3, 'Advance',      GETDATE(), 'Active'),
+(5,12, 4, 'Intermediate', GETDATE(), 'Active');
+GO
+
+/* =========================================================
+   J. ADD MORE CLASS SCHEDULE
+   IMPORTANT:
+   - some rows use CAST(GETDATE() AS DATE) for Current Schedule
+   - many rows use future dates for Upcoming Schedule
+========================================================= */
+INSERT INTO ClassSchedule (ModuleId, ModuleName, ClassDate, ClassTime, Charges, TrainerID, [Level], Room)
+VALUES
+('120', 'Programming Fundamentals', CAST(GETDATE() AS DATE),                '09:00', 150.00, 1, 'Beginner',     'B-01'),
+('220', 'Object Oriented Programming', CAST(GETDATE() AS DATE),             '11:00', 200.00, 2, 'Intermediate', 'B-02'),
+('130', 'Python Programming', DATEADD(DAY, 1, CAST(GETDATE() AS DATE)),     '10:00', 160.00, 3, 'Beginner',     'C-01'),
+('240', 'Web Development', DATEADD(DAY, 1, CAST(GETDATE() AS DATE)),        '14:00', 180.00, 4, 'Intermediate', 'C-02'),
+('340', 'Data Structures', DATEADD(DAY, 2, CAST(GETDATE() AS DATE)),        '09:00', 220.00, 5, 'Intermediate', 'C-03'),
+('350', 'Database Systems', DATEADD(DAY, 2, CAST(GETDATE() AS DATE)),       '13:00', 240.00, 6, 'Advance',      'C-04'),
+('360', 'Computer Networks', DATEADD(DAY, 3, CAST(GETDATE() AS DATE)),      '08:30', 210.00, 4, 'Intermediate', 'D-01'),
+('370', 'Operating Systems', DATEADD(DAY, 3, CAST(GETDATE() AS DATE)),      '10:30', 230.00, 5, 'Advance',      'D-02'),
+('380', 'Software Engineering Basics', DATEADD(DAY, 4, CAST(GETDATE() AS DATE)), '12:00', 200.00, 3, 'Intermediate', 'D-03'),
+('390', 'UI UX Design', DATEADD(DAY, 4, CAST(GETDATE() AS DATE)),           '15:00', 170.00, 4, 'Beginner',     'D-04'),
+
+('401', 'Introduction to AI', DATEADD(DAY, 5, CAST(GETDATE() AS DATE)),     '09:00', 260.00, 5, 'Advance',      'E-01'),
+('402', 'Machine Learning Fundamentals', DATEADD(DAY, 5, CAST(GETDATE() AS DATE)), '11:00', 280.00, 6, 'Advance', 'E-02'),
+('403', 'Mobile App Development', DATEADD(DAY, 6, CAST(GETDATE() AS DATE)), '10:00', 250.00, 3, 'Advance',      'E-03'),
+('404', 'Cloud Solutions Practice', DATEADD(DAY, 6, CAST(GETDATE() AS DATE)),'14:00', 290.00, 6, 'Advance',      'E-04'),
+
+('120A', 'Programming Fundamentals Group A', DATEADD(DAY, 7, CAST(GETDATE() AS DATE)),  '09:00', 150.00, 1, 'Beginner',     'B-05'),
+('120B', 'Programming Fundamentals Group B', DATEADD(DAY, 8, CAST(GETDATE() AS DATE)),  '09:00', 150.00, 1, 'Beginner',     'B-06'),
+('220A', 'Object Oriented Programming Group A', DATEADD(DAY, 8, CAST(GETDATE() AS DATE)),'11:00', 200.00, 2, 'Intermediate', 'B-07'),
+('220B', 'Object Oriented Programming Group B', DATEADD(DAY, 9, CAST(GETDATE() AS DATE)),'13:00', 200.00, 2, 'Intermediate', 'B-08'),
+('130A', 'Python Programming Lab', DATEADD(DAY, 9, CAST(GETDATE() AS DATE)), '15:00', 160.00, 3, 'Beginner',     'C-05'),
+('240A', 'Web Development Workshop', DATEADD(DAY, 10, CAST(GETDATE() AS DATE)), '10:00', 180.00, 4, 'Intermediate','C-06'),
+
+('340A', 'Data Structures Tutorial', DATEADD(DAY, 11, CAST(GETDATE() AS DATE)), '09:00', 220.00, 5, 'Intermediate', 'C-07'),
+('350A', 'Database Systems Lab', DATEADD(DAY, 11, CAST(GETDATE() AS DATE)),   '14:00', 240.00, 6, 'Advance',      'C-08'),
+('360A', 'Computer Networks Tutorial', DATEADD(DAY, 12, CAST(GETDATE() AS DATE)), '08:30', 210.00, 4, 'Intermediate', 'D-05'),
+('370A', 'Operating Systems Tutorial', DATEADD(DAY, 12, CAST(GETDATE() AS DATE)), '10:30', 230.00, 5, 'Advance',    'D-06'),
+('380A', 'Software Engineering Clinic', DATEADD(DAY, 13, CAST(GETDATE() AS DATE)), '12:00', 200.00, 3, 'Intermediate','D-07'),
+('390A', 'UI UX Design Clinic', DATEADD(DAY, 13, CAST(GETDATE() AS DATE)),     '15:00', 170.00, 4, 'Beginner',     'D-08'),
+
+('401A', 'Introduction to AI Tutorial', DATEADD(DAY, 14, CAST(GETDATE() AS DATE)), '09:00', 260.00, 5, 'Advance',   'E-05'),
+('402A', 'Machine Learning Tutorial', DATEADD(DAY, 15, CAST(GETDATE() AS DATE)),   '11:00', 280.00, 6, 'Advance',   'E-06'),
+('403A', 'Mobile App Development Lab', DATEADD(DAY, 15, CAST(GETDATE() AS DATE)),   '10:00', 250.00, 3, 'Advance',   'E-07'),
+('404A', 'Cloud Solutions Workshop', DATEADD(DAY, 16, CAST(GETDATE() AS DATE)),    '14:00', 290.00, 6, 'Advance',   'E-08');
+GO
+
+/* =========================================================
+   K. ADD ENROLLMENT REQUESTS
+========================================================= */
+INSERT INTO EnrollmentRequests (StudentID, ClassScheduleID, RequestDate, RequestStatus, Remarks, HandledByLecturerID, HandledDate)
+VALUES
+(1, 4,  GETDATE(), 'Pending',  'Interested in web development coaching', NULL, NULL),
+(2, 5,  GETDATE(), 'Approved', 'Need help with data structures', 1, GETDATE()),
+(3, 6,  GETDATE(), 'Rejected', 'Schedule conflict with existing class', 2, GETDATE()),
+(4, 7,  GETDATE(), 'Pending',  'Want extra computer networks class', NULL, NULL),
+(5, 8,  GETDATE(), 'Approved', 'Lecturer recommended', 3, GETDATE()),
+(6, 9,  GETDATE(), 'Pending',  'Request for software engineering support', NULL, NULL),
+(7, 10, GETDATE(), 'Approved', 'Student self-request', 4, GETDATE()),
+(8, 11, GETDATE(), 'Rejected', 'Class full', 5, GETDATE()),
+(9, 12, GETDATE(), 'Pending',  'Needs help in machine learning basics', NULL, NULL),
+(10,13, GETDATE(), 'Approved', 'Recommended after test results', 2, GETDATE());
+GO
+
+/* =========================================================
+   L. ADD STUDENT ENROLLMENTS
+   These are the rows your StudentHomeForm is using.
+========================================================= */
+INSERT INTO StudentEnrollments (StudentID, ClassScheduleID, EnrolledDate, EnrollmentStatus, EnrolledByLecturerID, CompletedDate)
+VALUES
+(1, 4,  GETDATE(), 'Active',    1, NULL),
+(1, 5,  GETDATE(), 'Active',    1, NULL),
+(1, 1,  GETDATE(), 'Active',    1, NULL),
+
+(2, 2,  GETDATE(), 'Active',    1, NULL),
+(2, 6,  GETDATE(), 'Active',    1, NULL),
+(2, 7,  GETDATE(), 'Active',    1, NULL),
+
+(3, 3,  GETDATE(), 'Completed', 2, GETDATE()),
+(3, 8,  GETDATE(), 'Active',    2, NULL),
+
+(4, 9,  GETDATE(), 'Active',    3, NULL),
+(4, 10, GETDATE(), 'Active',    3, NULL),
+
+(5, 11, GETDATE(), 'Active',    3, NULL),
+(5, 12, GETDATE(), 'Active',    3, NULL),
+
+(6, 13, GETDATE(), 'Active',    4, NULL),
+(6, 14, GETDATE(), 'Active',    4, NULL),
+
+(7, 15, GETDATE(), 'Active',    4, NULL),
+(7, 17, GETDATE(), 'Active',    4, NULL),
+
+(8, 16, GETDATE(), 'Active',    5, NULL),
+(8, 18, GETDATE(), 'Active',    5, NULL),
+
+(9, 19, GETDATE(), 'Active',    1, NULL),
+(9, 20, GETDATE(), 'Active',    1, NULL),
+
+(10,21, GETDATE(), 'Active',    2, NULL),
+(10,22, GETDATE(), 'Active',    2, NULL),
+
+(11,23, GETDATE(), 'Active',    2, NULL),
+(11,24, GETDATE(), 'Active',    2, NULL),
+
+(12,25, GETDATE(), 'Active',    3, NULL),
+(12,26, GETDATE(), 'Active',    3, NULL),
+
+(13,27, GETDATE(), 'Active',    3, NULL),
+(13,28, GETDATE(), 'Active',    3, NULL),
+
+(14,29, GETDATE(), 'Active',    4, NULL),
+(14,30, GETDATE(), 'Active',    4, NULL);
+GO
+
+/* =========================================================
+   M. ADD INVOICES
+========================================================= */
+INSERT INTO Invoices (EnrollmentID, InvoiceDate, Amount, InvoiceStatus, DueDate)
+SELECT EnrollmentID, GETDATE(),
+       CASE 
+           WHEN EnrollmentID % 5 = 0 THEN 290.00
+           WHEN EnrollmentID % 4 = 0 THEN 250.00
+           WHEN EnrollmentID % 3 = 0 THEN 220.00
+           WHEN EnrollmentID % 2 = 0 THEN 200.00
+           ELSE 150.00
+       END,
+       CASE 
+           WHEN EnrollmentID IN (2,3,5,8,11,14,17,20,23,26) THEN 'Paid'
+           ELSE 'Unpaid'
+       END,
+       DATEADD(DAY, 14, GETDATE())
+FROM StudentEnrollments
+WHERE EnrollmentID >= 4 AND EnrollmentID <= 30;
+GO
+
+/* =========================================================
+   N. ADD PAYMENT HISTORY
+========================================================= */
+INSERT INTO PaymentHistory (InvoiceID, AmountPaid, PaymentDate, PaymentMethod, ReceiptNo, PaymentStatus)
+SELECT InvoiceID, Amount, GETDATE(),
+       CASE 
+           WHEN InvoiceID % 3 = 0 THEN 'Card'
+           WHEN InvoiceID % 3 = 1 THEN 'Online Banking'
+           ELSE 'Cash'
+       END,
+       CONCAT('RCPT-', 2000 + InvoiceID),
+       'Paid'
+FROM Invoices
+WHERE InvoiceStatus = 'Paid';
+GO
+
+/* =========================================================
+   O. ADD LEGACY STUDENT PAYMENTS
+========================================================= */
+INSERT INTO StudentPayments (ClassScheduleID, StudentName, Amount, PaymentDate, [Status])
+VALUES
+(4,  'Ali Ahmad',       180.00, GETDATE(), 'Paid'),
+(5,  'Nur Aina',        220.00, GETDATE(), 'Paid'),
+(6,  'John Lee',        240.00, GETDATE(), 'Paid'),
+(7,  'Muhammad Amir',   210.00, GETDATE(), 'Paid'),
+(8,  'Siti Hajar',      230.00, GETDATE(), 'Paid'),
+(9,  'Ethan Koh',       200.00, GETDATE(), 'Paid'),
+(10, 'Nurul Syafiqah',  170.00, GETDATE(), 'Paid'),
+(11, 'Adam Faris',      260.00, GETDATE(), 'Paid'),
+(12, 'Alicia Chan',     280.00, GETDATE(), 'Paid'),
+(13, 'Ryan Goh',        250.00, GETDATE(), 'Paid');
+GO
+
+/* =========================================================
+   P. ADD MORE FEEDBACK
+========================================================= */
+INSERT INTO Feedback (TrainerID, FeedbackType, [Message], DateSent, [Status])
+VALUES
+(1, 'Suggestion', 'Students need more lab-based exercises for beginner modules.', GETDATE(), 'Unread'),
+(2, 'General',    'OOP group showed strong improvement after week 2.', GETDATE(), 'Unread'),
+(3, 'Suggestion', 'Python class would benefit from smaller coaching groups.', GETDATE(), 'Read'),
+(4, 'Complaint',  'Projector in lab C-02 was not working during session.', GETDATE(), 'Unread'),
+(5, 'General',    'Data structures workshop attendance was excellent.', GETDATE(), 'Read'),
+(6, 'Suggestion', 'Need one more weekly session for advanced database learners.', GETDATE(), 'Unread');
+GO
+
+/* =========================================================
+   Q. OPTIONAL CHECKS
+========================================================= */
+SELECT COUNT(*) AS TotalUsers FROM Users;
+SELECT COUNT(*) AS TotalStudents FROM Students;
+SELECT COUNT(*) AS TotalSchedules FROM ClassSchedule;
+SELECT COUNT(*) AS TotalEnrollments FROM StudentEnrollments;
+SELECT COUNT(*) AS TotalInvoices FROM Invoices;
+GO
