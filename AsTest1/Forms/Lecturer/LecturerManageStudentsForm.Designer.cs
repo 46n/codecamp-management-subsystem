@@ -90,9 +90,9 @@
             grpRegisterStudent.Controls.Add(txtAddress);
             grpRegisterStudent.Controls.Add(txtTPNumber);
             grpRegisterStudent.Location = new Point(651, 15);
-            grpRegisterStudent.Margin = new Padding(4, 4, 4, 4);
+            grpRegisterStudent.Margin = new Padding(4);
             grpRegisterStudent.Name = "grpRegisterStudent";
-            grpRegisterStudent.Padding = new Padding(4, 4, 4, 4);
+            grpRegisterStudent.Padding = new Padding(4);
             grpRegisterStudent.Size = new Size(421, 600);
             grpRegisterStudent.TabIndex = 0;
             grpRegisterStudent.TabStop = false;
@@ -201,7 +201,7 @@
             // txtPassword
             // 
             txtPassword.Location = new Point(179, 553);
-            txtPassword.Margin = new Padding(4, 4, 4, 4);
+            txtPassword.Margin = new Padding(4);
             txtPassword.Name = "txtPassword";
             txtPassword.Size = new Size(221, 39);
             txtPassword.TabIndex = 9;
@@ -209,7 +209,7 @@
             // txtUsername
             // 
             txtUsername.Location = new Point(179, 504);
-            txtUsername.Margin = new Padding(4, 4, 4, 4);
+            txtUsername.Margin = new Padding(4);
             txtUsername.Name = "txtUsername";
             txtUsername.Size = new Size(221, 39);
             txtUsername.TabIndex = 8;
@@ -218,7 +218,7 @@
             // 
             cboModule.FormattingEnabled = true;
             cboModule.Location = new Point(179, 387);
-            cboModule.Margin = new Padding(4, 4, 4, 4);
+            cboModule.Margin = new Padding(4);
             cboModule.Name = "cboModule";
             cboModule.Size = new Size(221, 40);
             cboModule.TabIndex = 7;
@@ -227,7 +227,7 @@
             // 
             cboMonth.FormattingEnabled = true;
             cboMonth.Location = new Point(179, 454);
-            cboMonth.Margin = new Padding(4, 4, 4, 4);
+            cboMonth.Margin = new Padding(4);
             cboMonth.Name = "cboMonth";
             cboMonth.Size = new Size(221, 40);
             cboMonth.TabIndex = 6;
@@ -236,7 +236,7 @@
             // 
             cboLevel.FormattingEnabled = true;
             cboLevel.Location = new Point(179, 325);
-            cboLevel.Margin = new Padding(4, 4, 4, 4);
+            cboLevel.Margin = new Padding(4);
             cboLevel.Name = "cboLevel";
             cboLevel.Size = new Size(221, 40);
             cboLevel.TabIndex = 5;
@@ -244,7 +244,7 @@
             // txtFullName
             // 
             txtFullName.Location = new Point(179, 86);
-            txtFullName.Margin = new Padding(4, 4, 4, 4);
+            txtFullName.Margin = new Padding(4);
             txtFullName.Name = "txtFullName";
             txtFullName.Size = new Size(221, 39);
             txtFullName.TabIndex = 4;
@@ -252,7 +252,7 @@
             // txtEmail
             // 
             txtEmail.Location = new Point(179, 146);
-            txtEmail.Margin = new Padding(4, 4, 4, 4);
+            txtEmail.Margin = new Padding(4);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(221, 39);
             txtEmail.TabIndex = 3;
@@ -260,7 +260,7 @@
             // txtPhone
             // 
             txtPhone.Location = new Point(179, 207);
-            txtPhone.Margin = new Padding(4, 4, 4, 4);
+            txtPhone.Margin = new Padding(4);
             txtPhone.Name = "txtPhone";
             txtPhone.Size = new Size(221, 39);
             txtPhone.TabIndex = 2;
@@ -268,7 +268,7 @@
             // txtAddress
             // 
             txtAddress.Location = new Point(179, 266);
-            txtAddress.Margin = new Padding(4, 4, 4, 4);
+            txtAddress.Margin = new Padding(4);
             txtAddress.Name = "txtAddress";
             txtAddress.Size = new Size(221, 39);
             txtAddress.TabIndex = 1;
@@ -276,7 +276,7 @@
             // txtTPNumber
             // 
             txtTPNumber.Location = new Point(179, 26);
-            txtTPNumber.Margin = new Padding(4, 4, 4, 4);
+            txtTPNumber.Margin = new Padding(4);
             txtTPNumber.Name = "txtTPNumber";
             txtTPNumber.Size = new Size(221, 39);
             txtTPNumber.TabIndex = 0;
@@ -284,7 +284,7 @@
             // btnRegister
             // 
             btnRegister.Location = new Point(651, 655);
-            btnRegister.Margin = new Padding(4, 4, 4, 4);
+            btnRegister.Margin = new Padding(4);
             btnRegister.Name = "btnRegister";
             btnRegister.Size = new Size(146, 44);
             btnRegister.TabIndex = 1;
@@ -295,7 +295,7 @@
             // btnClear
             // 
             btnClear.Location = new Point(853, 655);
-            btnClear.Margin = new Padding(4, 4, 4, 4);
+            btnClear.Margin = new Padding(4);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(146, 44);
             btnClear.TabIndex = 2;
@@ -306,7 +306,7 @@
             // btnShowAll
             // 
             btnShowAll.Location = new Point(536, 37);
-            btnShowAll.Margin = new Padding(4, 4, 4, 4);
+            btnShowAll.Margin = new Padding(4);
             btnShowAll.Name = "btnShowAll";
             btnShowAll.Size = new Size(108, 46);
             btnShowAll.TabIndex = 4;
@@ -317,7 +317,7 @@
             // btnDeleteStudent
             // 
             btnDeleteStudent.Location = new Point(112, 396);
-            btnDeleteStudent.Margin = new Padding(4, 4, 4, 4);
+            btnDeleteStudent.Margin = new Padding(4);
             btnDeleteStudent.Name = "btnDeleteStudent";
             btnDeleteStudent.Size = new Size(146, 44);
             btnDeleteStudent.TabIndex = 5;
@@ -328,7 +328,7 @@
             // btnClose
             // 
             btnClose.Location = new Point(346, 399);
-            btnClose.Margin = new Padding(4, 4, 4, 4);
+            btnClose.Margin = new Padding(4);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(146, 44);
             btnClose.TabIndex = 6;
@@ -338,7 +338,7 @@
             // 
             // btnFilter
             // 
-            btnFilter.Location = new Point(323, 29);
+            btnFilter.Location = new Point(433, 41);
             btnFilter.Name = "btnFilter";
             btnFilter.Size = new Size(83, 36);
             btnFilter.TabIndex = 7;
@@ -370,7 +370,7 @@
             // 
             cboFilterModule.FormattingEnabled = true;
             cboFilterModule.Location = new Point(315, 41);
-            cboFilterModule.Margin = new Padding(4, 4, 4, 4);
+            cboFilterModule.Margin = new Padding(4);
             cboFilterModule.Name = "cboFilterModule";
             cboFilterModule.Size = new Size(96, 40);
             cboFilterModule.TabIndex = 20;
@@ -379,7 +379,7 @@
             // 
             cboFilterLevel.FormattingEnabled = true;
             cboFilterLevel.Location = new Point(112, 45);
-            cboFilterLevel.Margin = new Padding(4, 4, 4, 4);
+            cboFilterLevel.Margin = new Padding(4);
             cboFilterLevel.Name = "cboFilterLevel";
             cboFilterLevel.Size = new Size(96, 40);
             cboFilterLevel.TabIndex = 22;
@@ -388,7 +388,7 @@
             // 
             dgvStudents.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvStudents.Location = new Point(36, 109);
-            dgvStudents.Margin = new Padding(4, 4, 4, 4);
+            dgvStudents.Margin = new Padding(4);
             dgvStudents.Name = "dgvStudents";
             dgvStudents.RowHeadersWidth = 62;
             dgvStudents.Size = new Size(581, 252);
@@ -441,7 +441,7 @@
             Controls.Add(btnClear);
             Controls.Add(btnRegister);
             Controls.Add(grpRegisterStudent);
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "LecturerManageStudentsForm";
             Text = "LecturerManageStudentsForm";
             Load += LecturerManageStudentsForm_Load;

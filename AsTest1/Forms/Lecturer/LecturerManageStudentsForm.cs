@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Data;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 
@@ -13,18 +13,20 @@ namespace APUCC_Project.Forms.Lecturer
         private int selectedStudentId = -1;
         private int selectedUserId = -1;
 
-        // Change this later when you connect real login/session
+        // Temporary lecturer id for now
         private int currentLecturerId = 1;
 
         public LecturerManageStudentsForm()
         {
             InitializeComponent();
+
+            dgvStudents.CellClick += dgvStudents_CellClick;
+            txtTPNumber.TextChanged += txtTPNumber_TextChanged;
         }
 
         private void LecturerManageStudentsForm_Load(object sender, EventArgs e)
         {
-
-
+            SetupTextBoxes();
             SetupComboBoxes();
             SetupStudentsGrid();
             LoadLevelOptions();
@@ -32,6 +34,25 @@ namespace APUCC_Project.Forms.Lecturer
             LoadMonthOptions();
             ClearInputs();
             LoadStudents("All", "All");
+        }
+
+        private void SetupTextBoxes()
+        {
+            txtTPNumber.ReadOnly = false;
+            txtFullName.ReadOnly = false;
+            txtEmail.ReadOnly = false;
+            txtPhone.ReadOnly = false;
+            txtAddress.ReadOnly = false;
+            txtUsername.ReadOnly = false;
+            txtPassword.ReadOnly = false;
+
+            txtTPNumber.Enabled = true;
+            txtFullName.Enabled = true;
+            txtEmail.Enabled = true;
+            txtPhone.Enabled = true;
+            txtAddress.Enabled = true;
+            txtUsername.Enabled = true;
+            txtPassword.Enabled = true;
         }
 
         private void SetupComboBoxes()
@@ -48,20 +69,22 @@ namespace APUCC_Project.Forms.Lecturer
             dgvStudents.Columns.Clear();
             dgvStudents.AutoGenerateColumns = false;
 
-            // Hidden IDs
-            DataGridViewTextBoxColumn colStudentID = new DataGridViewTextBoxColumn();
-            colStudentID.Name = "colStudentID";
-            colStudentID.HeaderText = "StudentID";
-            colStudentID.Visible = false;
+            DataGridViewTextBoxColumn colStudentID = new DataGridViewTextBoxColumn
+            {
+                Name = "colStudentID",
+                HeaderText = "StudentID",
+                Visible = false
+            };
             dgvStudents.Columns.Add(colStudentID);
 
-            DataGridViewTextBoxColumn colUserID = new DataGridViewTextBoxColumn();
-            colUserID.Name = "colUserID";
-            colUserID.HeaderText = "UserID";
-            colUserID.Visible = false;
+            DataGridViewTextBoxColumn colUserID = new DataGridViewTextBoxColumn
+            {
+                Name = "colUserID",
+                HeaderText = "UserID",
+                Visible = false
+            };
             dgvStudents.Columns.Add(colUserID);
 
-            // Visible columns
             dgvStudents.Columns.Add("colTPNo", "TP No.");
             dgvStudents.Columns.Add("colStudentName", "Name");
             dgvStudents.Columns.Add("colLevel", "Level");
@@ -112,7 +135,7 @@ namespace APUCC_Project.Forms.Lecturer
 
                 while (dr.Read())
                 {
-                    string moduleName = dr["ModuleName"].ToString() ?? "";
+                    string moduleName = dr["ModuleName"]?.ToString() ?? "";
 
                     if (!string.IsNullOrWhiteSpace(moduleName))
                     {
@@ -192,13 +215,13 @@ namespace APUCC_Project.Forms.Lecturer
                 while (dr.Read())
                 {
                     dgvStudents.Rows.Add(
-                        dr["StudentID"].ToString(),
-                        dr["UserID"].ToString(),
-                        dr["TPNumber"].ToString(),
-                        dr["StudentName"].ToString(),
-                        dr["StudyLevel"].ToString(),
-                        dr["ModuleName"].ToString(),
-                        dr["StudentStatus"].ToString()
+                        dr["StudentID"]?.ToString(),
+                        dr["UserID"]?.ToString(),
+                        dr["TPNumber"]?.ToString(),
+                        dr["StudentName"]?.ToString(),
+                        dr["StudyLevel"]?.ToString(),
+                        dr["ModuleName"]?.ToString(),
+                        dr["StudentStatus"]?.ToString()
                     );
                 }
 
@@ -244,17 +267,17 @@ namespace APUCC_Project.Forms.Lecturer
                     selectedStudentId = Convert.ToInt32(dr["StudentID"]);
                     selectedUserId = Convert.ToInt32(dr["UserID"]);
 
-                    txtTPNumber.Text = dr["TPNumber"].ToString() ?? "";
-                    txtFullName.Text = dr["Name"].ToString() ?? "";
-                    txtEmail.Text = dr["Email"].ToString() ?? "";
-                    txtPhone.Text = dr["Phone"].ToString() ?? "";
-                    txtAddress.Text = dr["Address"].ToString() ?? "";
-                    txtUsername.Text = dr["Username"].ToString() ?? "";
-                    txtPassword.Text = dr["Password"].ToString() ?? "";
+                    txtTPNumber.Text = dr["TPNumber"]?.ToString() ?? "";
+                    txtFullName.Text = dr["Name"]?.ToString() ?? "";
+                    txtEmail.Text = dr["Email"]?.ToString() ?? "";
+                    txtPhone.Text = dr["Phone"]?.ToString() ?? "";
+                    txtAddress.Text = dr["Address"]?.ToString() ?? "";
+                    txtUsername.Text = dr["Username"]?.ToString() ?? "";
+                    txtPassword.Text = dr["Password"]?.ToString() ?? "";
 
-                    SetComboBoxValue(cboLevel, dr["StudyLevel"].ToString());
-                    SetComboBoxValue(cboModule, dr["ModuleName"].ToString());
-                    SetComboBoxValue(cboMonth, dr["MonthOfEnrollment"].ToString());
+                    SetComboBoxValue(cboLevel, dr["StudyLevel"]?.ToString());
+                    SetComboBoxValue(cboModule, dr["ModuleName"]?.ToString());
+                    SetComboBoxValue(cboMonth, dr["MonthOfEnrollment"]?.ToString());
                 }
 
                 dr.Close();
@@ -272,9 +295,23 @@ namespace APUCC_Project.Forms.Lecturer
             lblError.Text = "";
             lblStatus.Text = "";
 
+            txtTPNumber.Text = txtTPNumber.Text.Trim().ToUpper();
+            txtFullName.Text = txtFullName.Text.Trim();
+            txtEmail.Text = txtEmail.Text.Trim();
+            txtPhone.Text = txtPhone.Text.Trim();
+            txtAddress.Text = txtAddress.Text.Trim();
+            txtUsername.Text = txtUsername.Text.Trim();
+            txtPassword.Text = txtPassword.Text.Trim();
+
             if (string.IsNullOrWhiteSpace(txtTPNumber.Text))
             {
                 lblError.Text = "TP Number is required.";
+                return false;
+            }
+
+            if (!Regex.IsMatch(txtTPNumber.Text, @"^TP\d{6}$"))
+            {
+                lblError.Text = "TP Number must follow this format: TP000000";
                 return false;
             }
 
@@ -290,7 +327,7 @@ namespace APUCC_Project.Forms.Lecturer
                 return false;
             }
 
-            if (!txtEmail.Text.Contains("@") || !txtEmail.Text.Contains("."))
+            if (!Regex.IsMatch(txtEmail.Text, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
             {
                 lblError.Text = "Please enter a valid email address.";
                 return false;
@@ -329,6 +366,12 @@ namespace APUCC_Project.Forms.Lecturer
             if (string.IsNullOrWhiteSpace(txtPassword.Text))
             {
                 lblError.Text = "Password is required.";
+                return false;
+            }
+
+            if (!Regex.IsMatch(txtPassword.Text, @"^\d{8}$"))
+            {
+                lblError.Text = "Password must be exactly 8 digits.";
                 return false;
             }
 
@@ -408,7 +451,6 @@ namespace APUCC_Project.Forms.Lecturer
 
                 try
                 {
-                    // 1. Insert user
                     string insertUserQuery = @"
                         INSERT INTO Users
                         (Username, [Password], [Role], [Name], Email, Phone, [Address])
@@ -417,16 +459,15 @@ namespace APUCC_Project.Forms.Lecturer
                         SELECT SCOPE_IDENTITY();";
 
                     SqlCommand userCmd = new SqlCommand(insertUserQuery, con, transaction);
-                    userCmd.Parameters.AddWithValue("@Username", txtUsername.Text.Trim());
-                    userCmd.Parameters.AddWithValue("@Password", txtPassword.Text.Trim());
-                    userCmd.Parameters.AddWithValue("@Name", txtFullName.Text.Trim());
-                    userCmd.Parameters.AddWithValue("@Email", txtEmail.Text.Trim());
-                    userCmd.Parameters.AddWithValue("@Phone", txtPhone.Text.Trim());
-                    userCmd.Parameters.AddWithValue("@Address", txtAddress.Text.Trim());
+                    userCmd.Parameters.AddWithValue("@Username", txtUsername.Text);
+                    userCmd.Parameters.AddWithValue("@Password", txtPassword.Text);
+                    userCmd.Parameters.AddWithValue("@Name", txtFullName.Text);
+                    userCmd.Parameters.AddWithValue("@Email", txtEmail.Text);
+                    userCmd.Parameters.AddWithValue("@Phone", txtPhone.Text);
+                    userCmd.Parameters.AddWithValue("@Address", txtAddress.Text);
 
                     int userId = Convert.ToInt32(userCmd.ExecuteScalar());
 
-                    // 2. Insert student
                     string insertStudentQuery = @"
                         INSERT INTO Students
                         (UserID, TPNumber, StudyLevel, ContactNumber, StudentAddress, MonthOfEnrollment, StudentStatus)
@@ -436,15 +477,14 @@ namespace APUCC_Project.Forms.Lecturer
 
                     SqlCommand studentCmd = new SqlCommand(insertStudentQuery, con, transaction);
                     studentCmd.Parameters.AddWithValue("@UserID", userId);
-                    studentCmd.Parameters.AddWithValue("@TPNumber", txtTPNumber.Text.Trim());
+                    studentCmd.Parameters.AddWithValue("@TPNumber", txtTPNumber.Text);
                     studentCmd.Parameters.AddWithValue("@StudyLevel", cboLevel.Text);
-                    studentCmd.Parameters.AddWithValue("@ContactNumber", txtPhone.Text.Trim());
-                    studentCmd.Parameters.AddWithValue("@StudentAddress", txtAddress.Text.Trim());
+                    studentCmd.Parameters.AddWithValue("@ContactNumber", txtPhone.Text);
+                    studentCmd.Parameters.AddWithValue("@StudentAddress", txtAddress.Text);
                     studentCmd.Parameters.AddWithValue("@MonthOfEnrollment", cboMonth.Text);
 
                     int studentId = Convert.ToInt32(studentCmd.ExecuteScalar());
 
-                    // 3. Auto-enroll to selected module if schedule exists
                     int classScheduleId = GetClassScheduleIdByModule(cboModule.Text, con, transaction);
 
                     if (classScheduleId != -1)
@@ -463,7 +503,6 @@ namespace APUCC_Project.Forms.Lecturer
 
                         int enrollmentId = Convert.ToInt32(enrollCmd.ExecuteScalar());
 
-                        // 4. Create invoice
                         decimal amount = GetClassCharges(classScheduleId, con, transaction);
 
                         string insertInvoiceQuery = @"
@@ -502,8 +541,6 @@ namespace APUCC_Project.Forms.Lecturer
                 }
             }
         }
-
-
 
         private void DeleteSelectedStudent()
         {
@@ -652,7 +689,7 @@ namespace APUCC_Project.Forms.Lecturer
         {
             if (lblFormStatus != null)
             {
-                lblFormStatus.Text = $"{dgvStudents.Rows.Count} students loaded | frmManageStudents";
+                lblFormStatus.Text = $"{dgvStudents.Rows.Count} students loaded | fromManageStudents";
             }
         }
 
@@ -660,14 +697,8 @@ namespace APUCC_Project.Forms.Lecturer
         {
             if (e.RowIndex >= 0)
             {
-                selectedStudentId = Convert.ToInt32(
-                    dgvStudents.Rows[e.RowIndex].Cells["colStudentID"].Value
-                );
-
-                selectedUserId = Convert.ToInt32(
-                    dgvStudents.Rows[e.RowIndex].Cells["colUserID"].Value
-                );
-
+                selectedStudentId = Convert.ToInt32(dgvStudents.Rows[e.RowIndex].Cells["colStudentID"].Value);
+                selectedUserId = Convert.ToInt32(dgvStudents.Rows[e.RowIndex].Cells["colUserID"].Value);
                 LoadStudentDetails(selectedStudentId);
             }
         }
@@ -692,19 +723,19 @@ namespace APUCC_Project.Forms.Lecturer
             if (!ValidateInputs())
                 return;
 
-            if (UsernameExists(txtUsername.Text.Trim()))
+            if (UsernameExists(txtUsername.Text))
             {
                 lblError.Text = "Username already exists.";
                 return;
             }
 
-            if (TPNumberExists(txtTPNumber.Text.Trim()))
+            if (TPNumberExists(txtTPNumber.Text))
             {
                 lblError.Text = "TP Number already exists.";
                 return;
             }
 
-            if (EmailExists(txtEmail.Text.Trim()))
+            if (EmailExists(txtEmail.Text))
             {
                 lblError.Text = "Email already exists.";
                 return;
@@ -726,6 +757,13 @@ namespace APUCC_Project.Forms.Lecturer
         private void btnClose_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void txtTPNumber_TextChanged(object sender, EventArgs e)
+        {
+            int cursor = txtTPNumber.SelectionStart;
+            txtTPNumber.Text = txtTPNumber.Text.ToUpper();
+            txtTPNumber.SelectionStart = cursor;
         }
     }
 }
