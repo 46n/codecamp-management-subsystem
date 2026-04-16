@@ -6,9 +6,10 @@ namespace APUCC_Project
 {
     public partial class TrainerShellForm : BaseShellForm
     {
-        public TrainerShellForm()
+        public TrainerShellForm(int userId)
         {
             InitializeComponent();
+            InitializeUserContext(userId, "Trainer");
             this.ControlBox = true;
             OpenChildForm(new TrainerHomeForm());
 

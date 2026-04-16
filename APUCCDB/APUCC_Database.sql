@@ -103,6 +103,27 @@ CREATE TABLE Students
 GO
 
 /* =========================================
+   4A. USER PROFILE DETAILS TABLE
+   Shared profile extension for all roles
+========================================= */
+CREATE TABLE UserProfileDetails
+(
+    UserProfileDetailID INT PRIMARY KEY IDENTITY(1,1),
+    UserID INT NOT NULL UNIQUE,
+    ProfileCode NVARCHAR(30) NULL,
+    SecondaryCode NVARCHAR(60) NULL,
+    IdentityNumber NVARCHAR(50) NULL,
+    Country NVARCHAR(60) NULL,
+    ProgrammeName NVARCHAR(150) NULL,
+    MentorName NVARCHAR(100) NULL,
+    ProgrammeLeader NVARCHAR(100) NULL,
+    PassExpiryDate DATE NULL,
+    CONSTRAINT FK_UserProfileDetails_Users
+        FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
+GO
+
+/* =========================================
    5. CLASS SCHEDULE TABLE
    Original table kept for compatibility
 ========================================= */
@@ -532,6 +553,37 @@ WHERE ph.PaymentStatus = 'Paid';
 GO
 
 /* =========================================
+   22. SHARED USER PROFILE VIEW
+========================================= */
+IF OBJECT_ID('vw_UserProfiles', 'V') IS NOT NULL
+    DROP VIEW vw_UserProfiles;
+GO
+
+CREATE VIEW vw_UserProfiles
+AS
+SELECT
+    u.UserID,
+    u.Username,
+    u.[Role],
+    u.[Name] AS FullName,
+    u.Email,
+    u.[Password] AS CurrentPassword,
+    u.Phone,
+    u.[Address],
+    COALESCE(NULLIF(upd.ProfileCode, ''), NULLIF(s.TPNumber, ''), CONCAT('USER-', RIGHT(CONCAT('0000', u.UserID), 4))) AS PrimaryCode,
+    COALESCE(NULLIF(upd.SecondaryCode, ''), NULLIF(s.StudyLevel, ''), u.[Role]) AS SecondaryCode,
+    upd.IdentityNumber,
+    upd.Country,
+    upd.ProgrammeName,
+    upd.MentorName,
+    upd.ProgrammeLeader,
+    upd.PassExpiryDate
+FROM Users u
+LEFT JOIN Students s ON u.UserID = s.UserID
+LEFT JOIN UserProfileDetails upd ON u.UserID = upd.UserID;
+GO
+
+/* =========================================
    37. TEST QUERIES
 ========================================= */
 SELECT * FROM Users;
@@ -557,6 +609,7 @@ SELECT * FROM vw_StudentSubscribedCourses;
 SELECT * FROM vw_RequestableCourseOptions;
 SELECT * FROM vw_StudentOutstandingFees;
 SELECT * FROM vw_StudentPaymentHistory;
+SELECT * FROM vw_UserProfiles;
 GO
 
 /* =========================================
@@ -798,6 +851,82 @@ GO
    This script adds realistic fake university data
    without changing your table structure.
 ========================================================= */
+
+/* =========================================================
+   0. BASE USERS FOR LOGIN / PROFILE / STUDENT DEMOS
+========================================================= */
+INSERT INTO Users (Username, [Password], [Role], [Name], Email, Phone, [Address])
+VALUES
+('admin1',    '123', 'Admin',    'Admin User', 'admin1@apu.edu.my',               '0111000001', 'APU Main Campus'),
+('trainer1',  '123', 'Trainer',  'Abdalla',    'abdalla@apu.edu.my',              '0111000002', 'Bukit Jalil'),
+('trainer2',  '123', 'Trainer',  'Waleed',     'waleed@apu.edu.my',               '0111000003', 'Sri Petaling'),
+('lecturer1', '123', 'Lecturer', 'Dr Ahmad',   'ahmad@apu.edu.my',                '0111000004', 'School of Computing'),
+('lecturer2', '123', 'Lecturer', 'Ms Farah',   'farah@apu.edu.my',                '0111000005', 'School of Computing'),
+('student1',  '123', 'Student',  'Ali Ahmad',  'TP001@mail.apu.edu.my',           '0111000006', 'Kuala Lumpur'),
+('student2',  '123', 'Student',  'Nur Aina',   'TP002@mail.apu.edu.my',           '0111000007', 'Selangor'),
+('student3',  '123', 'Student',  'John Lee',   'TP003@mail.apu.edu.my',           '0111000008', 'Penang');
+GO
+
+INSERT INTO Trainers (UserID, Qualifications, Specialisation, AssignedModuleId, AssignedModuleName, AssignedLevel)
+VALUES
+(2, 'BSc Software Engineering', 'Programming Fundamentals', '120', 'Programming Fundamentals', 'Beginner'),
+(3, 'MSc Information Systems',  'Object Oriented Programming', '220', 'Object Oriented Programming', 'Intermediate');
+GO
+
+INSERT INTO Lecturers (UserID, Department, Specialisation)
+VALUES
+(4, 'School of Computing', 'Computer Science'),
+(5, 'School of Computing', 'Software Engineering');
+GO
+
+INSERT INTO Students (UserID, TPNumber, StudyLevel, ContactNumber, StudentAddress, MonthOfEnrollment, StudentStatus)
+VALUES
+(6, 'TP001', 'Level 1', '0111000006', 'Kuala Lumpur', 'February 2026', 'Active'),
+(7, 'TP002', 'Level 1', '0111000007', 'Selangor', 'February 2026', 'Active'),
+(8, 'TP003', 'Level 2', '0111000008', 'Penang', 'February 2026', 'Active');
+GO
+
+INSERT INTO Intakes (IntakeCode, IntakeName, StartDate, EndDate, Status)
+VALUES
+('APU1F2507CSAI', 'Computer Science Artificial Intelligence July 2025', '2025-07-01', '2028-06-30', 'Active'),
+('APU1F2507SE',   'Software Engineering July 2025',                     '2025-07-01', '2028-06-30', 'Active');
+GO
+
+INSERT INTO Modules (ModuleCode, ModuleName, AcademicLevel, CreditHours, Status)
+VALUES
+('PF101',  'Programming Fundamentals',      'Level 1', 3, 'Active'),
+('OOP102', 'Object Oriented Programming',   'Level 1', 3, 'Active');
+GO
+
+INSERT INTO StudentIntakes (StudentID, IntakeID, AssignedDate, Status)
+VALUES
+(1, 1, GETDATE(), 'Active'),
+(2, 1, GETDATE(), 'Active'),
+(3, 2, GETDATE(), 'Active');
+GO
+
+INSERT INTO UserProfileDetails
+(
+    UserID,
+    ProfileCode,
+    SecondaryCode,
+    IdentityNumber,
+    Country,
+    ProgrammeName,
+    MentorName,
+    ProgrammeLeader,
+    PassExpiryDate
+)
+VALUES
+(1, 'ADM001', 'OPERATIONS',         'A-1001',    'Malaysia', 'Administration and Operations',                   'Executive Office',             'Campus Director',           NULL),
+(2, 'TRN001', 'FOUNDATION',         'T-2001',    'Sudan',    'Programming Coaching Unit',                      'Lead Trainer Manager',         'Training Director',         NULL),
+(3, 'TRN002', 'INTERMEDIATE',       'T-2002',    'Jordan',   'Object Oriented Programming Unit',               'Lead Trainer Manager',         'Training Director',         NULL),
+(4, 'LEC001', 'ACADEMIC',           'L-3001',    'Malaysia', 'School of Computing',                            'Deputy Dean',                  'Dean of Computing',         NULL),
+(5, 'LEC002', 'ACADEMIC',           'L-3002',    'Malaysia', 'School of Computing',                            'Deputy Dean',                  'Dean of Computing',         NULL),
+(6, 'TP001',  'APU1F2507CS(AI)',    '13417752',  'Yemen',    'Bachelor of Computer Science (Hons) (Artificial Intelligence)', 'Assoc. Prof. Dr. Imran Medi', 'Lai Chew Ping', '2026-07-18'),
+(7, 'TP002',  'APU1F2507CS(AI)',    '24588910',  'Malaysia', 'Bachelor of Computer Science (Hons) (Artificial Intelligence)', 'Dr Ahmad',                    'Lai Chew Ping', '2026-12-31'),
+(8, 'TP003',  'APU1F2507SE',        '77881234',  'Singapore','Bachelor of Software Engineering (Hons)',        'Ms Farah',                     'Prof. Tan Mei Lin',         '2027-02-14');
+GO
 
 /* =========================================================
    A. ADD MORE USERS

@@ -15,6 +15,8 @@ namespace APUCC_Project
         protected IconButton? currentBtn;
         protected Panel leftBorderBtn;
         protected Form? currentChildForm;
+        protected int CurrentUserId { get; private set; }
+        protected string CurrentUserRole { get; private set; } = string.Empty;
 
         protected BaseShellForm()
         {
@@ -50,6 +52,12 @@ namespace APUCC_Project
             RippleEffect.Attach(iconButton2, Color.FromArgb(120, 170, 190));
             RippleEffect.Attach(iconButton3, Color.FromArgb(120, 170, 190));
             RippleEffect.Attach(Profile, Color.FromArgb(120, 170, 190));
+        }
+
+        protected void InitializeUserContext(int userId, string userRole)
+        {
+            CurrentUserId = userId;
+            CurrentUserRole = userRole;
         }
 
         private void HideSharedSettingsButton()
@@ -152,7 +160,7 @@ namespace APUCC_Project
         protected virtual void Profile_Click(object sender, EventArgs e)
         {
             ActivateButton(sender);
-            OpenSharedChildForm(new ProfileForm(Text, this));
+            OpenSharedChildForm(new ProfileForm(CurrentUserId, CurrentUserRole, Text, this));
         }
 
         protected virtual void pictureBox1_Click(object sender, EventArgs e) { }

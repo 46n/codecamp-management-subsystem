@@ -78,16 +78,17 @@ namespace APUCC_Project.Forms.Common
                 using SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read())
                 {
+                    int userId = Convert.ToInt32(dr["UserID"]);
                     string role = dr["Role"].ToString() ?? string.Empty;
                     Form? nextForm = null;
 
                     if (role == "Admin")
                     {
-                        nextForm = new AdminShellForm();
+                        nextForm = new AdminShellForm(userId);
                     }
                     else if (role == "Trainer")
                     {
-                        nextForm = new TrainerShellForm();
+                        nextForm = new TrainerShellForm(userId);
                     }
                     else if (role == "Student")
                     {
@@ -99,11 +100,11 @@ namespace APUCC_Project.Forms.Common
                         }
 
                         int studentId = Convert.ToInt32(dr["StudentID"]);
-                        nextForm = new StudentShellForm(studentId);
+                        nextForm = new StudentShellForm(userId, studentId);
                     }
                     else if (role == "Lecturer")
                     {
-                        nextForm = new LecturerShellForm();
+                        nextForm = new LecturerShellForm(userId);
                     }
                     else
                     {

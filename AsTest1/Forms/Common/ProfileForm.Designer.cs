@@ -17,116 +17,290 @@ namespace APUCC_Project.Forms.Common
 
         private void InitializeComponent()
         {
-            panelCard = new Panel();
+            panelAccount = new Panel();
+            btnSavePassword = new Button();
+            btnEditPassword = new Button();
+            txtAddress = new TextBox();
+            lblAddress = new Label();
+            txtPhone = new TextBox();
+            lblPhone = new Label();
+            txtPassword = new TextBox();
+            lblPassword = new Label();
+            txtEmail = new TextBox();
+            lblEmail = new Label();
+            txtRole = new TextBox();
+            lblRole = new Label();
+            txtUsername = new TextBox();
+            lblUsername = new Label();
+            lblAccountTitle = new Label();
             btnSignOut = new Button();
-            lblHint = new Label();
-            lblRoleValue = new Label();
-            lblRoleLabel = new Label();
-            lblTitle = new Label();
-            panelCard.SuspendLayout();
+            panelAccount.SuspendLayout();
             SuspendLayout();
             // 
-            // panelCard
+            // panelAccount
             // 
-            panelCard.BackColor = Color.White;
-            panelCard.BorderStyle = BorderStyle.FixedSingle;
-            panelCard.Controls.Add(btnSignOut);
-            panelCard.Controls.Add(lblHint);
-            panelCard.Controls.Add(lblRoleValue);
-            panelCard.Controls.Add(lblRoleLabel);
-            panelCard.Controls.Add(lblTitle);
-            panelCard.Location = new Point(48, 51);
-            panelCard.Margin = new Padding(6, 6, 6, 6);
-            panelCard.Name = "panelCard";
-            panelCard.Size = new Size(808, 518);
-            panelCard.TabIndex = 0;
+            panelAccount.BackColor = Color.White;
+            panelAccount.BorderStyle = BorderStyle.FixedSingle;
+            panelAccount.Controls.Add(btnSavePassword);
+            panelAccount.Controls.Add(btnEditPassword);
+            panelAccount.Controls.Add(txtAddress);
+            panelAccount.Controls.Add(lblAddress);
+            panelAccount.Controls.Add(txtPhone);
+            panelAccount.Controls.Add(lblPhone);
+            panelAccount.Controls.Add(txtPassword);
+            panelAccount.Controls.Add(lblPassword);
+            panelAccount.Controls.Add(txtEmail);
+            panelAccount.Controls.Add(lblEmail);
+            panelAccount.Controls.Add(txtRole);
+            panelAccount.Controls.Add(lblRole);
+            panelAccount.Controls.Add(txtUsername);
+            panelAccount.Controls.Add(lblUsername);
+            panelAccount.Controls.Add(lblAccountTitle);
+            panelAccount.Location = new Point(49, 55);
+            panelAccount.Margin = new Padding(6, 6, 6, 6);
+            panelAccount.Name = "panelAccount";
+            panelAccount.Size = new Size(705, 749);
+            panelAccount.TabIndex = 1;
+            // 
+            // btnSavePassword
+            // 
+            btnSavePassword.BackColor = Color.FromArgb(36, 112, 99);
+            btnSavePassword.FlatAppearance.BorderSize = 0;
+            btnSavePassword.FlatStyle = FlatStyle.Flat;
+            btnSavePassword.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSavePassword.ForeColor = Color.White;
+            btnSavePassword.Location = new Point(513, 670);
+            btnSavePassword.Margin = new Padding(6, 6, 6, 6);
+            btnSavePassword.Name = "btnSavePassword";
+            btnSavePassword.Size = new Size(112, 51);
+            btnSavePassword.TabIndex = 14;
+            btnSavePassword.Text = "Save";
+            btnSavePassword.UseVisualStyleBackColor = false;
+            btnSavePassword.Click += btnSavePassword_Click;
+            // 
+            // btnEditPassword
+            // 
+            btnEditPassword.BackColor = Color.FromArgb(124, 196, 214);
+            btnEditPassword.FlatAppearance.BorderSize = 0;
+            btnEditPassword.FlatStyle = FlatStyle.Flat;
+            btnEditPassword.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnEditPassword.ForeColor = Color.Black;
+            btnEditPassword.Location = new Point(375, 670);
+            btnEditPassword.Margin = new Padding(6, 6, 6, 6);
+            btnEditPassword.Name = "btnEditPassword";
+            btnEditPassword.Size = new Size(112, 51);
+            btnEditPassword.TabIndex = 13;
+            btnEditPassword.Text = "Edit";
+            btnEditPassword.UseVisualStyleBackColor = false;
+            btnEditPassword.Click += btnEditPassword_Click;
+            // 
+            // txtAddress
+            // 
+            txtAddress.BackColor = Color.WhiteSmoke;
+            txtAddress.BorderStyle = BorderStyle.FixedSingle;
+            txtAddress.ForeColor = Color.Black;
+            txtAddress.Location = new Point(312, 593);
+            txtAddress.Margin = new Padding(6, 6, 6, 6);
+            txtAddress.Name = "txtAddress";
+            txtAddress.ReadOnly = true;
+            txtAddress.Size = new Size(313, 39);
+            txtAddress.TabIndex = 12;
+            // 
+            // lblAddress
+            // 
+            lblAddress.AutoSize = true;
+            lblAddress.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblAddress.ForeColor = Color.Black;
+            lblAddress.Location = new Point(33, 593);
+            lblAddress.Margin = new Padding(6, 0, 6, 0);
+            lblAddress.Name = "lblAddress";
+            lblAddress.Size = new Size(115, 37);
+            lblAddress.TabIndex = 11;
+            lblAddress.Text = "Address";
+            // 
+            // txtPhone
+            // 
+            txtPhone.BackColor = Color.WhiteSmoke;
+            txtPhone.BorderStyle = BorderStyle.FixedSingle;
+            txtPhone.ForeColor = Color.Black;
+            txtPhone.Location = new Point(312, 501);
+            txtPhone.Margin = new Padding(6, 6, 6, 6);
+            txtPhone.Name = "txtPhone";
+            txtPhone.ReadOnly = true;
+            txtPhone.Size = new Size(313, 39);
+            txtPhone.TabIndex = 10;
+            // 
+            // lblPhone
+            // 
+            lblPhone.AutoSize = true;
+            lblPhone.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPhone.ForeColor = Color.Black;
+            lblPhone.Location = new Point(33, 503);
+            lblPhone.Margin = new Padding(6, 0, 6, 0);
+            lblPhone.Name = "lblPhone";
+            lblPhone.Size = new Size(95, 37);
+            lblPhone.TabIndex = 9;
+            lblPhone.Text = "Phone";
+            // 
+            // txtPassword
+            // 
+            txtPassword.BackColor = Color.WhiteSmoke;
+            txtPassword.BorderStyle = BorderStyle.FixedSingle;
+            txtPassword.ForeColor = Color.Black;
+            txtPassword.Location = new Point(312, 399);
+            txtPassword.Margin = new Padding(6, 6, 6, 6);
+            txtPassword.Name = "txtPassword";
+            txtPassword.Size = new Size(313, 39);
+            txtPassword.TabIndex = 8;
+            // 
+            // lblPassword
+            // 
+            lblPassword.AutoSize = true;
+            lblPassword.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPassword.ForeColor = Color.Black;
+            lblPassword.Location = new Point(33, 401);
+            lblPassword.Margin = new Padding(6, 0, 6, 0);
+            lblPassword.Name = "lblPassword";
+            lblPassword.Size = new Size(132, 37);
+            lblPassword.TabIndex = 7;
+            lblPassword.Text = "Password";
+            // 
+            // txtEmail
+            // 
+            txtEmail.BackColor = Color.WhiteSmoke;
+            txtEmail.BorderStyle = BorderStyle.FixedSingle;
+            txtEmail.ForeColor = Color.Black;
+            txtEmail.Location = new Point(312, 307);
+            txtEmail.Margin = new Padding(6, 6, 6, 6);
+            txtEmail.Name = "txtEmail";
+            txtEmail.ReadOnly = true;
+            txtEmail.Size = new Size(313, 39);
+            txtEmail.TabIndex = 6;
+            // 
+            // lblEmail
+            // 
+            lblEmail.AutoSize = true;
+            lblEmail.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblEmail.ForeColor = Color.Black;
+            lblEmail.Location = new Point(33, 309);
+            lblEmail.Margin = new Padding(6, 0, 6, 0);
+            lblEmail.Name = "lblEmail";
+            lblEmail.Size = new Size(83, 37);
+            lblEmail.TabIndex = 5;
+            lblEmail.Text = "Email";
+            // 
+            // txtRole
+            // 
+            txtRole.BackColor = Color.WhiteSmoke;
+            txtRole.BorderStyle = BorderStyle.FixedSingle;
+            txtRole.ForeColor = Color.Black;
+            txtRole.Location = new Point(312, 215);
+            txtRole.Margin = new Padding(6, 6, 6, 6);
+            txtRole.Name = "txtRole";
+            txtRole.ReadOnly = true;
+            txtRole.Size = new Size(313, 39);
+            txtRole.TabIndex = 4;
+            // 
+            // lblRole
+            // 
+            lblRole.AutoSize = true;
+            lblRole.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblRole.ForeColor = Color.Black;
+            lblRole.Location = new Point(33, 217);
+            lblRole.Margin = new Padding(6, 0, 6, 0);
+            lblRole.Name = "lblRole";
+            lblRole.Size = new Size(70, 37);
+            lblRole.TabIndex = 3;
+            lblRole.Text = "Role";
+            // 
+            // txtUsername
+            // 
+            txtUsername.BackColor = Color.WhiteSmoke;
+            txtUsername.BorderStyle = BorderStyle.FixedSingle;
+            txtUsername.ForeColor = Color.Black;
+            txtUsername.Location = new Point(312, 124);
+            txtUsername.Margin = new Padding(6, 6, 6, 6);
+            txtUsername.Name = "txtUsername";
+            txtUsername.ReadOnly = true;
+            txtUsername.Size = new Size(313, 39);
+            txtUsername.TabIndex = 2;
+            // 
+            // lblUsername
+            // 
+            lblUsername.AutoSize = true;
+            lblUsername.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblUsername.ForeColor = Color.Black;
+            lblUsername.Location = new Point(33, 126);
+            lblUsername.Margin = new Padding(6, 0, 6, 0);
+            lblUsername.Name = "lblUsername";
+            lblUsername.Size = new Size(140, 37);
+            lblUsername.TabIndex = 1;
+            lblUsername.Text = "Username";
+            // 
+            // lblAccountTitle
+            // 
+            lblAccountTitle.AutoSize = true;
+            lblAccountTitle.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblAccountTitle.ForeColor = Color.Black;
+            lblAccountTitle.Location = new Point(21, 24);
+            lblAccountTitle.Margin = new Padding(6, 0, 6, 0);
+            lblAccountTitle.Name = "lblAccountTitle";
+            lblAccountTitle.Size = new Size(331, 59);
+            lblAccountTitle.TabIndex = 0;
+            lblAccountTitle.Text = "Account Details";
             // 
             // btnSignOut
             // 
             btnSignOut.BackColor = Color.FromArgb(192, 57, 43);
             btnSignOut.FlatAppearance.BorderSize = 0;
             btnSignOut.FlatStyle = FlatStyle.Flat;
-            btnSignOut.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSignOut.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSignOut.ForeColor = Color.White;
-            btnSignOut.Location = new Point(45, 371);
+            btnSignOut.Location = new Point(49, 849);
             btnSignOut.Margin = new Padding(6, 6, 6, 6);
             btnSignOut.Name = "btnSignOut";
-            btnSignOut.Size = new Size(721, 90);
-            btnSignOut.TabIndex = 4;
+            btnSignOut.Size = new Size(705, 90);
+            btnSignOut.TabIndex = 3;
             btnSignOut.Text = "Sign Out";
             btnSignOut.UseVisualStyleBackColor = false;
             btnSignOut.Click += btnSignOut_Click;
-            // 
-            // lblHint
-            // 
-            lblHint.AutoSize = true;
-            lblHint.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblHint.ForeColor = Color.DimGray;
-            lblHint.Location = new Point(45, 224);
-            lblHint.Margin = new Padding(6, 0, 6, 0);
-            lblHint.Name = "lblHint";
-            lblHint.Size = new Size(539, 32);
-            lblHint.TabIndex = 3;
-            lblHint.Text = "Shared profile page placeholder for all user roles.";
-            // 
-            // lblRoleValue
-            // 
-            lblRoleValue.AutoSize = true;
-            lblRoleValue.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblRoleValue.ForeColor = Color.Black;
-            lblRoleValue.Location = new Point(45, 158);
-            lblRoleValue.Margin = new Padding(6, 0, 6, 0);
-            lblRoleValue.Name = "lblRoleValue";
-            lblRoleValue.Size = new Size(282, 41);
-            lblRoleValue.TabIndex = 2;
-            lblRoleValue.Text = "Student Dashboard";
-            // 
-            // lblRoleLabel
-            // 
-            lblRoleLabel.AutoSize = true;
-            lblRoleLabel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblRoleLabel.ForeColor = Color.DimGray;
-            lblRoleLabel.Location = new Point(45, 117);
-            lblRoleLabel.Margin = new Padding(6, 0, 6, 0);
-            lblRoleLabel.Name = "lblRoleLabel";
-            lblRoleLabel.Size = new Size(213, 32);
-            lblRoleLabel.TabIndex = 1;
-            lblRoleLabel.Text = "Current dashboard";
-            // 
-            // lblTitle
-            // 
-            lblTitle.AutoSize = true;
-            lblTitle.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTitle.ForeColor = Color.Black;
-            lblTitle.Location = new Point(35, 36);
-            lblTitle.Margin = new Padding(6, 0, 6, 0);
-            lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(151, 59);
-            lblTitle.TabIndex = 0;
-            lblTitle.Text = "Profile";
             // 
             // ProfileForm
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoScroll = true;
+            AutoScrollMinSize = new Size(0, 980);
             BackColor = Color.White;
-            ClientSize = new Size(1186, 621);
-            Controls.Add(panelCard);
+            ClientSize = new Size(972, 1095);
+            Controls.Add(btnSignOut);
+            Controls.Add(panelAccount);
             Margin = new Padding(6, 6, 6, 6);
             Name = "ProfileForm";
             Text = "Profile";
-            panelCard.ResumeLayout(false);
-            panelCard.PerformLayout();
+            Load += ProfileForm_Load;
+            panelAccount.ResumeLayout(false);
+            panelAccount.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
-
-        private Panel panelCard;
+        private Panel panelAccount;
+        private Label lblAccountTitle;
+        private TextBox txtUsername;
+        private Label lblUsername;
+        private TextBox txtRole;
+        private Label lblRole;
+        private TextBox txtEmail;
+        private Label lblEmail;
+        private TextBox txtPassword;
+        private Label lblPassword;
+        private TextBox txtPhone;
+        private Label lblPhone;
+        private TextBox txtAddress;
+        private Label lblAddress;
+        private Button btnSavePassword;
+        private Button btnEditPassword;
         private Button btnSignOut;
-        private Label lblHint;
-        private Label lblRoleValue;
-        private Label lblRoleLabel;
-        private Label lblTitle;
     }
 }

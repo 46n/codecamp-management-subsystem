@@ -8,9 +8,10 @@ namespace APUCC_Project
     {
         private readonly int _studentId;
 
-        public StudentShellForm(int studentId)
+        public StudentShellForm(int userId, int studentId)
         {
             InitializeComponent();
+            InitializeUserContext(userId, "Student");
             _studentId = studentId;
 
             OpenChildForm(new StudentHomeForm(_studentId));

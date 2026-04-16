@@ -6,8 +6,9 @@ namespace APUCC_Project
 {
     public class LecturerShellForm : BaseShellForm
     {
-        public LecturerShellForm()
+        public LecturerShellForm(int userId)
         {
+            InitializeUserContext(userId, "Lecturer");
             this.Text = "Lecturer Dashboard";
             this.ControlBox = true;
             this.FormBorderStyle = FormBorderStyle.Sizable;

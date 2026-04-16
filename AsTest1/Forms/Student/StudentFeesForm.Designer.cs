@@ -55,7 +55,7 @@
             // 
             OutstandingPaymentGroupBox.Controls.Add(dataGridView1);
             OutstandingPaymentGroupBox.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            OutstandingPaymentGroupBox.ForeColor = Color.White;
+            OutstandingPaymentGroupBox.ForeColor = Color.Black;
             OutstandingPaymentGroupBox.Location = new Point(28, 26);
             OutstandingPaymentGroupBox.Name = "OutstandingPaymentGroupBox";
             OutstandingPaymentGroupBox.Size = new Size(1022, 268);
@@ -65,7 +65,7 @@
             // 
             // dataGridView1
             // 
-            dataGridView1.BackgroundColor = Color.FromArgb(42, 42, 42);
+            dataGridView1.BackgroundColor = Color.White;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { InvoiceIDHiddenColumn, ModuleColumn, Column2, Column3, Column4, Column5, ActionColumn });
             dataGridView1.Location = new Point(8, 50);
@@ -82,6 +82,7 @@
             InvoiceIDHiddenColumn.MinimumWidth = 10;
             InvoiceIDHiddenColumn.Name = "InvoiceIDHiddenColumn";
             InvoiceIDHiddenColumn.Visible = false;
+            InvoiceIDHiddenColumn.Width = 200;
             // 
             // ModuleColumn
             // 
@@ -132,7 +133,7 @@
             // 
             groupBox2.Controls.Add(dataGridView2);
             groupBox2.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            groupBox2.ForeColor = Color.White;
+            groupBox2.ForeColor = Color.Black;
             groupBox2.Location = new Point(28, 316);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(1022, 258);
@@ -142,7 +143,7 @@
             // 
             // dataGridView2
             // 
-            dataGridView2.BackgroundColor = Color.FromArgb(42, 42, 42);
+            dataGridView2.BackgroundColor = Color.White;
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView2.Columns.AddRange(new DataGridViewColumn[] { InvoiceIDColumn, ModuleColumn2, AmountColumn, dataGridViewTextBoxColumn4, DatePaidColumn, ReceiptColumn });
             dataGridView2.Location = new Point(8, 50);
@@ -201,7 +202,7 @@
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(42, 42, 42);
+            BackColor = Color.White;
             ClientSize = new Size(1302, 706);
             Controls.Add(groupBox2);
             Controls.Add(OutstandingPaymentGroupBox);

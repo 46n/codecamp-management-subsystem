@@ -6,9 +6,10 @@ namespace APUCC_Project
 {
     public partial class AdminShellForm : BaseShellForm
     {
-        public AdminShellForm()
+        public AdminShellForm(int userId)
         {
             InitializeComponent();
+            InitializeUserContext(userId, "Admin");
 
             this.Text = "Admin Dashboard";
             this.ControlBox = true;
