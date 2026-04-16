@@ -89,7 +89,7 @@
             grpRegisterStudent.Controls.Add(txtPhone);
             grpRegisterStudent.Controls.Add(txtAddress);
             grpRegisterStudent.Controls.Add(txtTPNumber);
-            grpRegisterStudent.Location = new Point(651, 15);
+            grpRegisterStudent.Location = new Point(817, 35);
             grpRegisterStudent.Margin = new Padding(4);
             grpRegisterStudent.Name = "grpRegisterStudent";
             grpRegisterStudent.Padding = new Padding(4);
@@ -283,7 +283,7 @@
             // 
             // btnRegister
             // 
-            btnRegister.Location = new Point(651, 655);
+            btnRegister.Location = new Point(817, 675);
             btnRegister.Margin = new Padding(4);
             btnRegister.Name = "btnRegister";
             btnRegister.Size = new Size(146, 44);
@@ -294,7 +294,7 @@
             // 
             // btnClear
             // 
-            btnClear.Location = new Point(853, 655);
+            btnClear.Location = new Point(1019, 675);
             btnClear.Margin = new Padding(4);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(146, 44);
@@ -305,7 +305,7 @@
             // 
             // btnShowAll
             // 
-            btnShowAll.Location = new Point(536, 37);
+            btnShowAll.Location = new Point(702, 57);
             btnShowAll.Margin = new Padding(4);
             btnShowAll.Name = "btnShowAll";
             btnShowAll.Size = new Size(108, 46);
@@ -316,7 +316,7 @@
             // 
             // btnDeleteStudent
             // 
-            btnDeleteStudent.Location = new Point(112, 396);
+            btnDeleteStudent.Location = new Point(278, 416);
             btnDeleteStudent.Margin = new Padding(4);
             btnDeleteStudent.Name = "btnDeleteStudent";
             btnDeleteStudent.Size = new Size(146, 44);
@@ -327,7 +327,7 @@
             // 
             // btnClose
             // 
-            btnClose.Location = new Point(346, 399);
+            btnClose.Location = new Point(512, 419);
             btnClose.Margin = new Padding(4);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(146, 44);
@@ -338,7 +338,7 @@
             // 
             // btnFilter
             // 
-            btnFilter.Location = new Point(433, 41);
+            btnFilter.Location = new Point(599, 61);
             btnFilter.Name = "btnFilter";
             btnFilter.Size = new Size(83, 36);
             btnFilter.TabIndex = 7;
@@ -349,7 +349,7 @@
             // lblFilterModule
             // 
             lblFilterModule.AutoSize = true;
-            lblFilterModule.Location = new Point(217, 45);
+            lblFilterModule.Location = new Point(383, 65);
             lblFilterModule.Margin = new Padding(4, 0, 4, 0);
             lblFilterModule.Name = "lblFilterModule";
             lblFilterModule.Size = new Size(97, 32);
@@ -359,7 +359,7 @@
             // lblFilterLevel
             // 
             lblFilterLevel.AutoSize = true;
-            lblFilterLevel.Location = new Point(14, 50);
+            lblFilterLevel.Location = new Point(180, 70);
             lblFilterLevel.Margin = new Padding(4, 0, 4, 0);
             lblFilterLevel.Name = "lblFilterLevel";
             lblFilterLevel.Size = new Size(67, 32);
@@ -369,7 +369,7 @@
             // cboFilterModule
             // 
             cboFilterModule.FormattingEnabled = true;
-            cboFilterModule.Location = new Point(315, 41);
+            cboFilterModule.Location = new Point(481, 61);
             cboFilterModule.Margin = new Padding(4);
             cboFilterModule.Name = "cboFilterModule";
             cboFilterModule.Size = new Size(96, 40);
@@ -378,7 +378,7 @@
             // cboFilterLevel
             // 
             cboFilterLevel.FormattingEnabled = true;
-            cboFilterLevel.Location = new Point(112, 45);
+            cboFilterLevel.Location = new Point(278, 65);
             cboFilterLevel.Margin = new Padding(4);
             cboFilterLevel.Name = "cboFilterLevel";
             cboFilterLevel.Size = new Size(96, 40);
@@ -387,7 +387,7 @@
             // dgvStudents
             // 
             dgvStudents.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvStudents.Location = new Point(36, 109);
+            dgvStudents.Location = new Point(202, 129);
             dgvStudents.Margin = new Padding(4);
             dgvStudents.Name = "dgvStudents";
             dgvStudents.RowHeadersWidth = 62;
@@ -397,7 +397,7 @@
             // lblFormStatus
             // 
             lblFormStatus.AutoSize = true;
-            lblFormStatus.Location = new Point(109, 471);
+            lblFormStatus.Location = new Point(275, 491);
             lblFormStatus.Margin = new Padding(4, 0, 4, 0);
             lblFormStatus.Name = "lblFormStatus";
             lblFormStatus.Size = new Size(0, 32);
@@ -406,7 +406,7 @@
             // lblStatus
             // 
             lblStatus.AutoSize = true;
-            lblStatus.Location = new Point(644, 620);
+            lblStatus.Location = new Point(810, 640);
             lblStatus.Margin = new Padding(4, 0, 4, 0);
             lblStatus.Name = "lblStatus";
             lblStatus.Size = new Size(0, 32);
@@ -415,7 +415,7 @@
             // lblError
             // 
             lblError.AutoSize = true;
-            lblError.Location = new Point(853, 620);
+            lblError.Location = new Point(1019, 640);
             lblError.Margin = new Padding(4, 0, 4, 0);
             lblError.Name = "lblError";
             lblError.Size = new Size(0, 32);
@@ -425,7 +425,7 @@
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1119, 709);
+            ClientSize = new Size(1367, 829);
             Controls.Add(lblError);
             Controls.Add(lblStatus);
             Controls.Add(lblFormStatus);

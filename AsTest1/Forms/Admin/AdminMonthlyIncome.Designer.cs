@@ -46,9 +46,12 @@
             colFeePerStudent = new DataGridViewTextBoxColumn();
             colTotal = new DataGridViewTextBoxColumn();
             dgvReport = new DataGridView();
+            panel1 = new Panel();
+            lblAdminMonthlyIncome = new Label();
             grpFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gdvReport).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvReport).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // grpFilter
@@ -58,7 +61,7 @@
             grpFilter.Controls.Add(btnGenerate);
             grpFilter.Controls.Add(cboTrainer);
             grpFilter.Controls.Add(cboMonth);
-            grpFilter.Location = new Point(40, 67);
+            grpFilter.Location = new Point(138, 201);
             grpFilter.Margin = new Padding(4);
             grpFilter.Name = "grpFilter";
             grpFilter.Padding = new Padding(4);
@@ -118,7 +121,7 @@
             // lblPaidCountTitle
             // 
             lblPaidCountTitle.AutoSize = true;
-            lblPaidCountTitle.Location = new Point(40, 227);
+            lblPaidCountTitle.Location = new Point(138, 361);
             lblPaidCountTitle.Margin = new Padding(4, 0, 4, 0);
             lblPaidCountTitle.Name = "lblPaidCountTitle";
             lblPaidCountTitle.Size = new Size(148, 32);
@@ -128,7 +131,7 @@
             // lblTotalIncomeTitle
             // 
             lblTotalIncomeTitle.AutoSize = true;
-            lblTotalIncomeTitle.Location = new Point(306, 227);
+            lblTotalIncomeTitle.Location = new Point(404, 361);
             lblTotalIncomeTitle.Margin = new Padding(4, 0, 4, 0);
             lblTotalIncomeTitle.Name = "lblTotalIncomeTitle";
             lblTotalIncomeTitle.Size = new Size(151, 32);
@@ -137,7 +140,7 @@
             // 
             // btnPrint
             // 
-            btnPrint.Location = new Point(73, 684);
+            btnPrint.Location = new Point(171, 802);
             btnPrint.Margin = new Padding(4);
             btnPrint.Name = "btnPrint";
             btnPrint.Size = new Size(131, 44);
@@ -147,7 +150,7 @@
             // 
             // btnClose
             // 
-            btnClose.Location = new Point(294, 684);
+            btnClose.Location = new Point(392, 802);
             btnClose.Margin = new Padding(4);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(131, 44);
@@ -223,17 +226,39 @@
             // dgvReport
             // 
             dgvReport.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvReport.Location = new Point(40, 292);
+            dgvReport.Location = new Point(138, 426);
             dgvReport.Name = "dgvReport";
             dgvReport.RowHeadersWidth = 82;
             dgvReport.Size = new Size(984, 346);
             dgvReport.TabIndex = 7;
             // 
+            // panel1
+            // 
+            panel1.BackColor = Color.FromArgb(25, 25, 25);
+            panel1.Controls.Add(lblAdminMonthlyIncome);
+            panel1.Location = new Point(-15, -8);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1448, 200);
+            panel1.TabIndex = 8;
+            // 
+            // lblAdminMonthlyIncome
+            // 
+            lblAdminMonthlyIncome.AutoSize = true;
+            lblAdminMonthlyIncome.Font = new Font("Segoe UI Black", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblAdminMonthlyIncome.ForeColor = Color.White;
+            lblAdminMonthlyIncome.Location = new Point(80, 66);
+            lblAdminMonthlyIncome.Name = "lblAdminMonthlyIncome";
+            lblAdminMonthlyIncome.Size = new Size(415, 65);
+            lblAdminMonthlyIncome.TabIndex = 0;
+            lblAdminMonthlyIncome.Text = "Monthly Income";
+            // 
             // AdminMonthlyIncome
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1138, 763);
+            BackColor = Color.White;
+            ClientSize = new Size(1430, 861);
+            Controls.Add(panel1);
             Controls.Add(dgvReport);
             Controls.Add(btnClose);
             Controls.Add(btnPrint);
@@ -248,6 +273,8 @@
             grpFilter.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)gdvReport).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvReport).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -272,5 +299,7 @@
         private DataGridViewTextBoxColumn colFeePerStudent;
         private DataGridViewTextBoxColumn colTotal;
         private DataGridView dgvReport;
+        private Panel panel1;
+        private Label lblAdminMonthlyIncome;
     }
 }
