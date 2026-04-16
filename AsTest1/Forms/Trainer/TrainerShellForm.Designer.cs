@@ -68,7 +68,7 @@
             // MainPanel
             // 
             MainPanel.Controls.Add(TrainerShellpnl);
-            MainPanel.Size = new Size(1116, 824);
+            MainPanel.Size = new Size(1408, 1148);
             MainPanel.Paint += MainPanel_Paint;
             // 
             // TrainerShellpnl
@@ -77,7 +77,7 @@
             TrainerShellpnl.Controls.Add(lblTrainerStart);
             TrainerShellpnl.Location = new Point(-4, 0);
             TrainerShellpnl.Name = "TrainerShellpnl";
-            TrainerShellpnl.Size = new Size(1121, 165);
+            TrainerShellpnl.Size = new Size(1481, 165);
             TrainerShellpnl.TabIndex = 0;
             // 
             // lblTrainerStart
@@ -95,8 +95,10 @@
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1406, 824);
+            ClientSize = new Size(1698, 1148);
             Location = new Point(0, 0);
+            MaximumSize = new Size(1700, 1200);
+            MinimumSize = new Size(1700, 1150);
             Name = "TrainerShellForm";
             Load += TrainerShellForm_Load;
             panelMenu.ResumeLayout(false);

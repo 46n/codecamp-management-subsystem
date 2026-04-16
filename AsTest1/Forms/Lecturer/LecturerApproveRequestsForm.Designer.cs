@@ -54,28 +54,28 @@
             // cboShowRequests
             // 
             cboShowRequests.FormattingEnabled = true;
-            cboShowRequests.Location = new Point(159, 74);
-            cboShowRequests.Location = new Point(177, 109);
+            cboShowRequests.Location = new Point(230, 140);
+            cboShowRequests.Margin = new Padding(4, 4, 4, 4);
             cboShowRequests.Name = "cboShowRequests";
-            cboShowRequests.Size = new Size(182, 33);
+            cboShowRequests.Size = new Size(235, 40);
             cboShowRequests.TabIndex = 0;
             // 
             // lblShow
             // 
             lblShow.AutoSize = true;
-            lblShow.Location = new Point(55, 77);
-            lblShow.Location = new Point(73, 112);
+            lblShow.Location = new Point(95, 143);
+            lblShow.Margin = new Padding(4, 0, 4, 0);
             lblShow.Name = "lblShow";
-            lblShow.Size = new Size(56, 25);
+            lblShow.Size = new Size(72, 32);
             lblShow.TabIndex = 1;
             lblShow.Text = "Show";
             // 
             // btnFilter
             // 
-            btnFilter.Location = new Point(377, 73);
-            btnFilter.Location = new Point(395, 108);
+            btnFilter.Location = new Point(514, 138);
+            btnFilter.Margin = new Padding(4, 4, 4, 4);
             btnFilter.Name = "btnFilter";
-            btnFilter.Size = new Size(112, 34);
+            btnFilter.Size = new Size(146, 44);
             btnFilter.TabIndex = 2;
             btnFilter.Text = "Filter";
             btnFilter.UseVisualStyleBackColor = true;
@@ -84,11 +84,11 @@
             // dgvRequests
             // 
             dgvRequests.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvRequests.Location = new Point(37, 125);
-            dgvRequests.Location = new Point(56, 187);
+            dgvRequests.Location = new Point(73, 239);
+            dgvRequests.Margin = new Padding(4, 4, 4, 4);
             dgvRequests.Name = "dgvRequests";
             dgvRequests.RowHeadersWidth = 62;
-            dgvRequests.Size = new Size(703, 151);
+            dgvRequests.Size = new Size(914, 193);
             dgvRequests.TabIndex = 3;
             // 
             // grpSelectedRequestDetails
@@ -101,10 +101,11 @@
             grpSelectedRequestDetails.Controls.Add(txtTPNumber);
             grpSelectedRequestDetails.Controls.Add(txtModule);
             grpSelectedRequestDetails.Controls.Add(txtStudent);
-            grpSelectedRequestDetails.Location = new Point(27, 297);
-            grpSelectedRequestDetails.Location = new Point(46, 359);
+            grpSelectedRequestDetails.Location = new Point(60, 460);
+            grpSelectedRequestDetails.Margin = new Padding(4, 4, 4, 4);
             grpSelectedRequestDetails.Name = "grpSelectedRequestDetails";
-            grpSelectedRequestDetails.Size = new Size(806, 153);
+            grpSelectedRequestDetails.Padding = new Padding(4, 4, 4, 4);
+            grpSelectedRequestDetails.Size = new Size(1048, 196);
             grpSelectedRequestDetails.TabIndex = 4;
             grpSelectedRequestDetails.TabStop = false;
             grpSelectedRequestDetails.Text = "Selected Request Details";
@@ -112,111 +113,81 @@
             // lblLevel
             // 
             lblLevel.AutoSize = true;
-            lblLevel.Location = new Point(458, 103);
+            lblLevel.Location = new Point(595, 132);
+            lblLevel.Margin = new Padding(4, 0, 4, 0);
             lblLevel.Name = "lblLevel";
-            lblLevel.Size = new Size(51, 25);
+            lblLevel.Size = new Size(69, 32);
             lblLevel.TabIndex = 7;
             lblLevel.Text = "Level";
             // 
             // lblTPNumber
-            lblLevel.AutoSize = true;
-            lblLevel.Location = new Point(458, 103);
-            lblLevel.Name = "lblLevel";
-            lblLevel.Size = new Size(51, 25);
-            lblLevel.TabIndex = 7;
-            lblLevel.Text = "Level";
             // 
             lblTPNumber.AutoSize = true;
-            lblTPNumber.Location = new Point(458, 36);
+            lblTPNumber.Location = new Point(595, 46);
+            lblTPNumber.Margin = new Padding(4, 0, 4, 0);
             lblTPNumber.Name = "lblTPNumber";
-            lblTPNumber.Size = new Size(101, 25);
+            lblTPNumber.Size = new Size(135, 32);
             lblTPNumber.TabIndex = 6;
             lblTPNumber.Text = "TP Number";
-            // lblTPNumber
-            // 
-            // lblModule
-            lblTPNumber.AutoSize = true;
-            lblTPNumber.Location = new Point(458, 36);
-            lblTPNumber.Name = "lblTPNumber";
-            lblTPNumber.Size = new Size(101, 25);
-            lblTPNumber.TabIndex = 6;
-            lblTPNumber.Text = "TP Number";
-            // 
-            lblModule.AutoSize = true;
-            lblModule.Location = new Point(27, 103);
-            lblModule.Name = "lblModule";
-            lblModule.Size = new Size(73, 25);
-            lblModule.TabIndex = 5;
-            lblModule.Text = "Module";
             // 
             // lblModule
             // 
             lblModule.AutoSize = true;
-            lblModule.Location = new Point(27, 103);
+            lblModule.Location = new Point(35, 132);
+            lblModule.Margin = new Padding(4, 0, 4, 0);
             lblModule.Name = "lblModule";
-            lblModule.Size = new Size(73, 25);
+            lblModule.Size = new Size(97, 32);
             lblModule.TabIndex = 5;
             lblModule.Text = "Module";
             // 
             // lblStudent
             // 
             lblStudent.AutoSize = true;
-            lblStudent.Location = new Point(27, 36);
+            lblStudent.Location = new Point(35, 46);
+            lblStudent.Margin = new Padding(4, 0, 4, 0);
             lblStudent.Name = "lblStudent";
-            lblStudent.Size = new Size(73, 25);
+            lblStudent.Size = new Size(97, 32);
             lblStudent.TabIndex = 4;
             lblStudent.Text = "Student";
             // 
             // txtLevel
             // 
-            txtLevel.Location = new Point(567, 97);
+            txtLevel.Location = new Point(737, 124);
+            txtLevel.Margin = new Padding(4, 4, 4, 4);
             txtLevel.Name = "txtLevel";
-            txtLevel.Size = new Size(211, 31);
+            txtLevel.Size = new Size(273, 39);
             txtLevel.TabIndex = 3;
             // 
             // txtTPNumber
-            // txtLevel
             // 
-            txtTPNumber.Location = new Point(567, 30);
+            txtTPNumber.Location = new Point(737, 38);
+            txtTPNumber.Margin = new Padding(4, 4, 4, 4);
             txtTPNumber.Name = "txtTPNumber";
-            txtTPNumber.Size = new Size(211, 31);
-            txtTPNumber.TabIndex = 2;
-            txtLevel.Location = new Point(567, 97);
-            txtLevel.Name = "txtLevel";
-            txtLevel.Size = new Size(211, 31);
-            txtLevel.TabIndex = 3;
-            // 
-            // txtModule
-            // txtTPNumber
-            // 
-            txtModule.Location = new Point(132, 97);
-            txtModule.Name = "txtModule";
-            txtModule.Size = new Size(211, 31);
-            txtModule.TabIndex = 1;
-            txtTPNumber.Location = new Point(567, 30);
-            txtTPNumber.Name = "txtTPNumber";
-            txtTPNumber.Size = new Size(211, 31);
+            txtTPNumber.Size = new Size(273, 39);
             txtTPNumber.TabIndex = 2;
             // 
             // txtModule
             // 
-            txtModule.Location = new Point(132, 97);
+            txtModule.Location = new Point(172, 124);
+            txtModule.Margin = new Padding(4, 4, 4, 4);
             txtModule.Name = "txtModule";
-            txtModule.Size = new Size(211, 31);
+            txtModule.Size = new Size(273, 39);
             txtModule.TabIndex = 1;
             // 
             // txtStudent
             // 
-            txtStudent.Location = new Point(132, 30);
+            txtStudent.Location = new Point(172, 38);
+            txtStudent.Margin = new Padding(4, 4, 4, 4);
             txtStudent.Name = "txtStudent";
-            txtStudent.Size = new Size(211, 31);
+            txtStudent.Size = new Size(273, 39);
             txtStudent.TabIndex = 0;
             // 
             // btnApprove
             // 
-            btnApprove.Location = new Point(56, 552);
+            btnApprove.Location = new Point(73, 707);
+            btnApprove.Margin = new Padding(4, 4, 4, 4);
             btnApprove.Name = "btnApprove";
-            btnApprove.Size = new Size(112, 34);
+            btnApprove.Size = new Size(146, 44);
             btnApprove.TabIndex = 5;
             btnApprove.Text = "Approve";
             btnApprove.UseVisualStyleBackColor = true;
@@ -224,9 +195,10 @@
             // 
             // btnReject
             // 
-            btnReject.Location = new Point(213, 552);
+            btnReject.Location = new Point(277, 707);
+            btnReject.Margin = new Padding(4, 4, 4, 4);
             btnReject.Name = "btnReject";
-            btnReject.Size = new Size(112, 34);
+            btnReject.Size = new Size(146, 44);
             btnReject.TabIndex = 6;
             btnReject.Text = "Reject";
             btnReject.UseVisualStyleBackColor = true;
@@ -234,9 +206,10 @@
             // 
             // btnRerfesh
             // 
-            btnRerfesh.Location = new Point(363, 552);
+            btnRerfesh.Location = new Point(472, 707);
+            btnRerfesh.Margin = new Padding(4, 4, 4, 4);
             btnRerfesh.Name = "btnRerfesh";
-            btnRerfesh.Size = new Size(112, 34);
+            btnRerfesh.Size = new Size(146, 44);
             btnRerfesh.TabIndex = 7;
             btnRerfesh.Text = "Rerfresh";
             btnRerfesh.UseVisualStyleBackColor = true;
@@ -244,9 +217,10 @@
             // 
             // btnClose
             // 
-            btnClose.Location = new Point(515, 552);
+            btnClose.Location = new Point(670, 707);
+            btnClose.Margin = new Padding(4, 4, 4, 4);
             btnClose.Name = "btnClose";
-            btnClose.Size = new Size(112, 34);
+            btnClose.Size = new Size(146, 44);
             btnClose.TabIndex = 8;
             btnClose.Text = "Close";
             btnClose.UseVisualStyleBackColor = true;
@@ -255,26 +229,26 @@
             // lblStatus
             // 
             lblStatus.AutoSize = true;
-            lblStatus.Location = new Point(695, 468);
-            lblStatus.Location = new Point(714, 530);
+            lblStatus.Location = new Point(928, 678);
+            lblStatus.Margin = new Padding(4, 0, 4, 0);
             lblStatus.Name = "lblStatus";
-            lblStatus.Size = new Size(0, 25);
+            lblStatus.Size = new Size(0, 32);
             lblStatus.TabIndex = 9;
             // 
             // lblFormStatus
             // 
             lblFormStatus.AutoSize = true;
-            lblFormStatus.Location = new Point(52, 462);
-            lblFormStatus.Location = new Point(71, 524);
+            lblFormStatus.Location = new Point(92, 671);
+            lblFormStatus.Margin = new Padding(4, 0, 4, 0);
             lblFormStatus.Name = "lblFormStatus";
-            lblFormStatus.Size = new Size(0, 25);
+            lblFormStatus.Size = new Size(0, 32);
             lblFormStatus.TabIndex = 10;
             // 
             // LecturerApproveRequestsForm
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(905, 598);
+            ClientSize = new Size(1176, 765);
             Controls.Add(lblFormStatus);
             Controls.Add(lblStatus);
             Controls.Add(btnClose);
@@ -286,6 +260,7 @@
             Controls.Add(btnFilter);
             Controls.Add(lblShow);
             Controls.Add(cboShowRequests);
+            Margin = new Padding(4, 4, 4, 4);
             Name = "LecturerApproveRequestsForm";
             Text = "LecturerApproveRequestsForm";
             ((System.ComponentModel.ISupportInitialize)dgvRequests).EndInit();
