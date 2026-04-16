@@ -1,3 +1,6 @@
+using APUCC_Project.Forms.Common;
+using APUCC_Project.Forms.Trainer;
+
 namespace APUCC_Project
 {
     internal static class Program
@@ -14,6 +17,8 @@ namespace APUCC_Project
             //Application.Run(new StudentShellForm());
             Application.Run(new StudentShellForm(1));
             //Application.Run(new TrainerShellForm());
+            //Application.Run(new AdminShellForm());
+            Application.Run(new LoginForm());
         }
     }
 }
