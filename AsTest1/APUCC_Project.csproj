@@ -40,8 +40,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Forms\Common\" />
-    <Folder Include="Forms\Lecturer\" />
     <Folder Include="Models\" />
     <Folder Include="Data\" />
   </ItemGroup>

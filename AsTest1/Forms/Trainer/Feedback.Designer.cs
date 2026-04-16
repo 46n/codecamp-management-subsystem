@@ -29,44 +29,45 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            TrainerFeedbackLabel = new Label();
-            txtFeedback = new TextBox();
+            lblTitle = new Label();
+            txtMessage = new TextBox();
             btnSendFeedback = new Button();
             chkFeedbackType = new CheckedListBox();
-            TypeFeedbacklabel = new Label();
-            label1 = new Label();
+            lblInstruction = new Label();
+            lblFeedbackType = new Label();
             txtTrainerName = new TextBox();
-            TrainerNameLabel = new Label();
+            lblTrainerName = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
-            panel1.BackColor = SystemColors.MenuHighlight;
-            panel1.Controls.Add(TrainerFeedbackLabel);
+            panel1.BackColor = Color.FromArgb(25, 25, 25);
+            panel1.Controls.Add(lblTitle);
             panel1.Location = new Point(-7, 4);
             panel1.Name = "panel1";
             panel1.Size = new Size(1674, 156);
             panel1.TabIndex = 0;
             // 
-            // TrainerFeedbackLabel
+            // lblTitle
             // 
-            TrainerFeedbackLabel.AutoSize = true;
-            TrainerFeedbackLabel.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            TrainerFeedbackLabel.Location = new Point(38, 48);
-            TrainerFeedbackLabel.Name = "TrainerFeedbackLabel";
-            TrainerFeedbackLabel.Size = new Size(625, 65);
-            TrainerFeedbackLabel.TabIndex = 0;
-            TrainerFeedbackLabel.Text = "Feedback To Administration ";
+            lblTitle.AutoSize = true;
+            lblTitle.Font = new Font("Segoe UI Black", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTitle.ForeColor = Color.White;
+            lblTitle.Location = new Point(38, 48);
+            lblTitle.Name = "lblTitle";
+            lblTitle.Size = new Size(708, 65);
+            lblTitle.TabIndex = 0;
+            lblTitle.Text = "Feedback To Administration ";
             // 
-            // txtFeedback
+            // txtMessage
             // 
-            txtFeedback.BackColor = SystemColors.InactiveBorder;
-            txtFeedback.Location = new Point(49, 284);
-            txtFeedback.Multiline = true;
-            txtFeedback.Name = "txtFeedback";
-            txtFeedback.Size = new Size(1026, 459);
-            txtFeedback.TabIndex = 1;
+            txtMessage.BackColor = SystemColors.ControlLight;
+            txtMessage.Location = new Point(49, 284);
+            txtMessage.Multiline = true;
+            txtMessage.Name = "txtMessage";
+            txtMessage.Size = new Size(1026, 459);
+            txtMessage.TabIndex = 1;
             // 
             // btnSendFeedback
             // 
@@ -87,27 +88,26 @@
             chkFeedbackType.Name = "chkFeedbackType";
             chkFeedbackType.Size = new Size(206, 112);
             chkFeedbackType.TabIndex = 3;
-            chkFeedbackType.SelectedIndexChanged += chkGeneral_SelectedIndexChanged;
             // 
-            // TypeFeedbacklabel
+            // lblInstruction
             // 
-            TypeFeedbacklabel.AutoSize = true;
-            TypeFeedbacklabel.Font = new Font("Segoe UI", 16.125F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            TypeFeedbacklabel.Location = new Point(49, 196);
-            TypeFeedbacklabel.Name = "TypeFeedbacklabel";
-            TypeFeedbacklabel.Size = new Size(539, 59);
-            TypeFeedbacklabel.TabIndex = 4;
-            TypeFeedbacklabel.Text = "Type your feedback below :";
+            lblInstruction.AutoSize = true;
+            lblInstruction.Font = new Font("Segoe UI", 16.125F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblInstruction.Location = new Point(49, 196);
+            lblInstruction.Name = "lblInstruction";
+            lblInstruction.Size = new Size(539, 59);
+            lblInstruction.TabIndex = 4;
+            lblInstruction.Text = "Type your feedback below :";
             // 
-            // label1
+            // lblFeedbackType
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(1101, 418);
-            label1.Name = "label1";
-            label1.Size = new Size(230, 45);
-            label1.TabIndex = 5;
-            label1.Text = "Feedback Type";
+            lblFeedbackType.AutoSize = true;
+            lblFeedbackType.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblFeedbackType.Location = new Point(1101, 418);
+            lblFeedbackType.Name = "lblFeedbackType";
+            lblFeedbackType.Size = new Size(230, 45);
+            lblFeedbackType.TabIndex = 5;
+            lblFeedbackType.Text = "Feedback Type";
             // 
             // txtTrainerName
             // 
@@ -116,29 +116,29 @@
             txtTrainerName.Size = new Size(370, 39);
             txtTrainerName.TabIndex = 6;
             // 
-            // TrainerNameLabel
+            // lblTrainerName
             // 
-            TrainerNameLabel.AutoSize = true;
-            TrainerNameLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            TrainerNameLabel.Location = new Point(1101, 284);
-            TrainerNameLabel.Name = "TrainerNameLabel";
-            TrainerNameLabel.Size = new Size(218, 45);
-            TrainerNameLabel.TabIndex = 7;
-            TrainerNameLabel.Text = "Trainer Name ";
+            lblTrainerName.AutoSize = true;
+            lblTrainerName.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblTrainerName.Location = new Point(1101, 284);
+            lblTrainerName.Name = "lblTrainerName";
+            lblTrainerName.Size = new Size(218, 45);
+            lblTrainerName.TabIndex = 7;
+            lblTrainerName.Text = "Trainer Name ";
             // 
             // FeedBackForm1
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLightLight;
-            ClientSize = new Size(1660, 814);
-            Controls.Add(TrainerNameLabel);
+            ClientSize = new Size(1590, 814);
+            Controls.Add(lblTrainerName);
             Controls.Add(txtTrainerName);
-            Controls.Add(label1);
-            Controls.Add(TypeFeedbacklabel);
+            Controls.Add(lblFeedbackType);
+            Controls.Add(lblInstruction);
             Controls.Add(chkFeedbackType);
             Controls.Add(btnSendFeedback);
-            Controls.Add(txtFeedback);
+            Controls.Add(txtMessage);
             Controls.Add(panel1);
             Name = "FeedBackForm1";
             Text = "FeedbackToAdminForm";
@@ -152,13 +152,13 @@
         #endregion
 
         private Panel panel1;
-        private Label TrainerFeedbackLabel;
-        private TextBox txtFeedback;
+        private Label lblTitle;
+        private TextBox txtMessage;
         private Button btnSendFeedback;
         private CheckedListBox chkFeedbackType;
-        private Label TypeFeedbacklabel;
-        private Label label1;
+        private Label lblInstruction;
+        private Label lblFeedbackType;
         private TextBox txtTrainerName;
-        private Label TrainerNameLabel;
+        private Label lblTrainerName;
     }
 }

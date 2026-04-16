@@ -32,17 +32,17 @@
             btnAddClass = new Button();
             btnUpdateClass = new Button();
             btnDeleteClass = new Button();
-            label1 = new Label();
-            ModuleIdLabel = new Label();
+            lblTitle = new Label();
+            lblModuleID = new Label();
             txtModuleID = new TextBox();
-            ModuleNameLabel = new Label();
+            lblModuleName = new Label();
             txtModuleName = new TextBox();
-            ClassDateLabel = new Label();
-            ChargesLabel = new Label();
+            lblClassDate = new Label();
+            lblCharges = new Label();
             txtCharges = new TextBox();
             panel1 = new Panel();
             dtpClassDate = new DateTimePicker();
-            ClaasTimeLabel = new Label();
+            lblClassTime = new Label();
             txtClassTime = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvClassSchedule).BeginInit();
             panel1.SuspendLayout();
@@ -81,7 +81,7 @@
             btnUpdateClass.TabIndex = 2;
             btnUpdateClass.Text = "UPDATE CLASS";
             btnUpdateClass.UseVisualStyleBackColor = false;
-            btnUpdateClass.Click += updateClass_Click;
+            btnUpdateClass.Click += btnUpdateClass_Click;
             // 
             // btnDeleteClass
             // 
@@ -93,30 +93,30 @@
             btnDeleteClass.TabIndex = 3;
             btnDeleteClass.Text = "DELETE CLASS";
             btnDeleteClass.UseVisualStyleBackColor = false;
-            btnDeleteClass.Click += deleteClass_Click;
+            btnDeleteClass.Click += btnDeleteClass_Click;
             // 
-            // label1
+            // lblTitle
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.ForeColor = SystemColors.ControlText;
-            label1.Location = new Point(52, 48);
-            label1.Name = "label1";
-            label1.Size = new Size(352, 65);
-            label1.TabIndex = 4;
-            label1.Text = "Class Schedule ";
+            lblTitle.AutoSize = true;
+            lblTitle.Font = new Font("Segoe UI Black", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTitle.ForeColor = Color.White;
+            lblTitle.Location = new Point(52, 48);
+            lblTitle.Name = "lblTitle";
+            lblTitle.Size = new Size(383, 65);
+            lblTitle.TabIndex = 4;
+            lblTitle.Text = "Class Schedule ";
             // 
-            // ModuleIdLabel
+            // lblModuleID
             // 
-            ModuleIdLabel.AutoSize = true;
-            ModuleIdLabel.BackColor = SystemColors.GradientActiveCaption;
-            ModuleIdLabel.BorderStyle = BorderStyle.Fixed3D;
-            ModuleIdLabel.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ModuleIdLabel.Location = new Point(64, 563);
-            ModuleIdLabel.Name = "ModuleIdLabel";
-            ModuleIdLabel.Size = new Size(153, 42);
-            ModuleIdLabel.TabIndex = 5;
-            ModuleIdLabel.Text = "Module ID";
+            lblModuleID.AutoSize = true;
+            lblModuleID.BackColor = SystemColors.GradientActiveCaption;
+            lblModuleID.BorderStyle = BorderStyle.Fixed3D;
+            lblModuleID.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblModuleID.Location = new Point(64, 563);
+            lblModuleID.Name = "lblModuleID";
+            lblModuleID.Size = new Size(153, 42);
+            lblModuleID.TabIndex = 5;
+            lblModuleID.Text = "Module ID";
             // 
             // txtModuleID
             // 
@@ -126,17 +126,17 @@
             txtModuleID.Size = new Size(200, 39);
             txtModuleID.TabIndex = 6;
             // 
-            // ModuleNameLabel
+            // lblModuleName
             // 
-            ModuleNameLabel.AutoSize = true;
-            ModuleNameLabel.BackColor = SystemColors.GradientActiveCaption;
-            ModuleNameLabel.BorderStyle = BorderStyle.FixedSingle;
-            ModuleNameLabel.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ModuleNameLabel.Location = new Point(494, 566);
-            ModuleNameLabel.Name = "ModuleNameLabel";
-            ModuleNameLabel.Size = new Size(202, 42);
-            ModuleNameLabel.TabIndex = 7;
-            ModuleNameLabel.Text = "Module Name";
+            lblModuleName.AutoSize = true;
+            lblModuleName.BackColor = SystemColors.GradientActiveCaption;
+            lblModuleName.BorderStyle = BorderStyle.FixedSingle;
+            lblModuleName.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblModuleName.Location = new Point(494, 566);
+            lblModuleName.Name = "lblModuleName";
+            lblModuleName.Size = new Size(202, 42);
+            lblModuleName.TabIndex = 7;
+            lblModuleName.Text = "Module Name";
             // 
             // txtModuleName
             // 
@@ -145,29 +145,29 @@
             txtModuleName.Size = new Size(200, 39);
             txtModuleName.TabIndex = 8;
             // 
-            // ClassDateLabel
+            // lblClassDate
             // 
-            ClassDateLabel.AutoSize = true;
-            ClassDateLabel.BackColor = SystemColors.GradientActiveCaption;
-            ClassDateLabel.BorderStyle = BorderStyle.Fixed3D;
-            ClassDateLabel.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ClassDateLabel.Location = new Point(64, 701);
-            ClassDateLabel.Name = "ClassDateLabel";
-            ClassDateLabel.Size = new Size(159, 42);
-            ClassDateLabel.TabIndex = 9;
-            ClassDateLabel.Text = "Class Date ";
+            lblClassDate.AutoSize = true;
+            lblClassDate.BackColor = SystemColors.GradientActiveCaption;
+            lblClassDate.BorderStyle = BorderStyle.Fixed3D;
+            lblClassDate.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblClassDate.Location = new Point(64, 701);
+            lblClassDate.Name = "lblClassDate";
+            lblClassDate.Size = new Size(159, 42);
+            lblClassDate.TabIndex = 9;
+            lblClassDate.Text = "Class Date ";
             // 
-            // ChargesLabel
+            // lblCharges
             // 
-            ChargesLabel.AutoSize = true;
-            ChargesLabel.BackColor = SystemColors.GradientActiveCaption;
-            ChargesLabel.BorderStyle = BorderStyle.Fixed3D;
-            ChargesLabel.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ChargesLabel.Location = new Point(494, 632);
-            ChargesLabel.Name = "ChargesLabel";
-            ChargesLabel.Size = new Size(122, 42);
-            ChargesLabel.TabIndex = 11;
-            ChargesLabel.Text = "Charges";
+            lblCharges.AutoSize = true;
+            lblCharges.BackColor = SystemColors.GradientActiveCaption;
+            lblCharges.BorderStyle = BorderStyle.Fixed3D;
+            lblCharges.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblCharges.Location = new Point(494, 632);
+            lblCharges.Name = "lblCharges";
+            lblCharges.Size = new Size(122, 42);
+            lblCharges.TabIndex = 11;
+            lblCharges.Text = "Charges";
             // 
             // txtCharges
             // 
@@ -178,12 +178,12 @@
             // 
             // panel1
             // 
-            panel1.BackColor = SystemColors.MenuHighlight;
+            panel1.BackColor = Color.FromArgb(25, 25, 25);
             panel1.BorderStyle = BorderStyle.Fixed3D;
-            panel1.Controls.Add(label1);
+            panel1.Controls.Add(lblTitle);
             panel1.Location = new Point(-27, -2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1800, 168);
+            panel1.Size = new Size(1738, 168);
             panel1.TabIndex = 13;
             // 
             // dtpClassDate
@@ -193,17 +193,17 @@
             dtpClassDate.Size = new Size(400, 39);
             dtpClassDate.TabIndex = 14;
             // 
-            // ClaasTimeLabel
+            // lblClassTime
             // 
-            ClaasTimeLabel.AutoSize = true;
-            ClaasTimeLabel.BackColor = SystemColors.GradientActiveCaption;
-            ClaasTimeLabel.BorderStyle = BorderStyle.Fixed3D;
-            ClaasTimeLabel.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ClaasTimeLabel.Location = new Point(64, 635);
-            ClaasTimeLabel.Name = "ClaasTimeLabel";
-            ClaasTimeLabel.Size = new Size(153, 42);
-            ClaasTimeLabel.TabIndex = 15;
-            ClaasTimeLabel.Text = "Class Time";
+            lblClassTime.AutoSize = true;
+            lblClassTime.BackColor = SystemColors.GradientActiveCaption;
+            lblClassTime.BorderStyle = BorderStyle.Fixed3D;
+            lblClassTime.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblClassTime.Location = new Point(64, 635);
+            lblClassTime.Name = "lblClassTime";
+            lblClassTime.Size = new Size(153, 42);
+            lblClassTime.TabIndex = 15;
+            lblClassTime.Text = "Class Time";
             // 
             // txtClassTime
             // 
@@ -217,18 +217,18 @@
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ButtonHighlight;
-            ClientSize = new Size(1740, 900);
+            ClientSize = new Size(1454, 900);
             Controls.Add(txtClassTime);
-            Controls.Add(ClaasTimeLabel);
+            Controls.Add(lblClassTime);
             Controls.Add(dtpClassDate);
             Controls.Add(panel1);
             Controls.Add(txtCharges);
-            Controls.Add(ChargesLabel);
-            Controls.Add(ClassDateLabel);
+            Controls.Add(lblCharges);
+            Controls.Add(lblClassDate);
             Controls.Add(txtModuleName);
-            Controls.Add(ModuleNameLabel);
+            Controls.Add(lblModuleName);
             Controls.Add(txtModuleID);
-            Controls.Add(ModuleIdLabel);
+            Controls.Add(lblModuleID);
             Controls.Add(btnDeleteClass);
             Controls.Add(btnUpdateClass);
             Controls.Add(btnAddClass);
@@ -255,17 +255,17 @@
         private Button btnAddClass;
         private Button btnUpdateClass;
         private Button btnDeleteClass;
-        private Label label1;
-        private Label ModuleIdLabel;
+        private Label lblTitle;
+        private Label lblModuleID;
         private TextBox txtModuleID;
-        private Label ModuleNameLabel;
+        private Label lblModuleName;
         private TextBox txtModuleName;
-        private Label ClassDateLabel;
-        private Label ChargesLabel;
+        private Label lblClassDate;
+        private Label lblCharges;
         private TextBox txtCharges;
         private Panel panel1;
         private DateTimePicker dtpClassDate;
-        private Label ClaasTimeLabel;
+        private Label lblClassTime;
         private TextBox txtClassTime;
     }
 }
