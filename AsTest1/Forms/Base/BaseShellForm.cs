@@ -42,7 +42,7 @@ namespace APUCC_Project
 
             AttachRipples();
 
-            this.ClientSize = new Size(770, 425);
+            this.ClientSize = new Size(1000, 700);
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.StartPosition = FormStartPosition.CenterScreen;

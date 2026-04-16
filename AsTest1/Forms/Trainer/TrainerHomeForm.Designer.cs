@@ -44,6 +44,14 @@
             dtpClassDate = new DateTimePicker();
             lblClassTime = new Label();
             txtClassTime = new TextBox();
+            lblRoom = new Label();
+            txtRoom = new TextBox();
+            lblLevel = new Label();
+            cboLevel = new ComboBox();
+            lblTrainerID = new Label();
+            txtTrainerID = new TextBox();
+            lblWrong = new Label();
+            lblConfirmed = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvClassSchedule).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -52,10 +60,10 @@
             // 
             dgvClassSchedule.BorderStyle = BorderStyle.Fixed3D;
             dgvClassSchedule.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvClassSchedule.Location = new Point(64, 182);
+            dgvClassSchedule.Location = new Point(27, 192);
             dgvClassSchedule.Name = "dgvClassSchedule";
             dgvClassSchedule.RowHeadersWidth = 82;
-            dgvClassSchedule.Size = new Size(1071, 344);
+            dgvClassSchedule.Size = new Size(1401, 344);
             dgvClassSchedule.TabIndex = 0;
             dgvClassSchedule.CellClick += dgvClassSchedule_CellClick;
             // 
@@ -112,7 +120,7 @@
             lblModuleID.BackColor = SystemColors.GradientActiveCaption;
             lblModuleID.BorderStyle = BorderStyle.Fixed3D;
             lblModuleID.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblModuleID.Location = new Point(64, 563);
+            lblModuleID.Location = new Point(446, 566);
             lblModuleID.Name = "lblModuleID";
             lblModuleID.Size = new Size(153, 42);
             lblModuleID.TabIndex = 5;
@@ -121,7 +129,7 @@
             // txtModuleID
             // 
             txtModuleID.BackColor = SystemColors.ButtonHighlight;
-            txtModuleID.Location = new Point(239, 566);
+            txtModuleID.Location = new Point(608, 566);
             txtModuleID.Name = "txtModuleID";
             txtModuleID.Size = new Size(200, 39);
             txtModuleID.TabIndex = 6;
@@ -132,7 +140,7 @@
             lblModuleName.BackColor = SystemColors.GradientActiveCaption;
             lblModuleName.BorderStyle = BorderStyle.FixedSingle;
             lblModuleName.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblModuleName.Location = new Point(494, 566);
+            lblModuleName.Location = new Point(823, 563);
             lblModuleName.Name = "lblModuleName";
             lblModuleName.Size = new Size(202, 42);
             lblModuleName.TabIndex = 7;
@@ -140,9 +148,9 @@
             // 
             // txtModuleName
             // 
-            txtModuleName.Location = new Point(731, 569);
+            txtModuleName.Location = new Point(1052, 566);
             txtModuleName.Name = "txtModuleName";
-            txtModuleName.Size = new Size(200, 39);
+            txtModuleName.Size = new Size(154, 39);
             txtModuleName.TabIndex = 8;
             // 
             // lblClassDate
@@ -163,7 +171,7 @@
             lblCharges.BackColor = SystemColors.GradientActiveCaption;
             lblCharges.BorderStyle = BorderStyle.Fixed3D;
             lblCharges.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblCharges.Location = new Point(494, 632);
+            lblCharges.Location = new Point(468, 629);
             lblCharges.Name = "lblCharges";
             lblCharges.Size = new Size(122, 42);
             lblCharges.TabIndex = 11;
@@ -171,9 +179,9 @@
             // 
             // txtCharges
             // 
-            txtCharges.Location = new Point(655, 632);
+            txtCharges.Location = new Point(608, 629);
             txtCharges.Name = "txtCharges";
-            txtCharges.Size = new Size(200, 39);
+            txtCharges.Size = new Size(174, 39);
             txtCharges.TabIndex = 12;
             // 
             // panel1
@@ -212,12 +220,98 @@
             txtClassTime.Size = new Size(200, 39);
             txtClassTime.TabIndex = 16;
             // 
+            // lblRoom
+            // 
+            lblRoom.AutoSize = true;
+            lblRoom.BackColor = SystemColors.GradientActiveCaption;
+            lblRoom.BorderStyle = BorderStyle.Fixed3D;
+            lblRoom.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblRoom.Location = new Point(671, 701);
+            lblRoom.Name = "lblRoom";
+            lblRoom.Size = new Size(94, 42);
+            lblRoom.TabIndex = 17;
+            lblRoom.Text = "Room";
+            // 
+            // txtRoom
+            // 
+            txtRoom.Location = new Point(771, 701);
+            txtRoom.Name = "txtRoom";
+            txtRoom.Size = new Size(154, 39);
+            txtRoom.TabIndex = 18;
+            // 
+            // lblLevel
+            // 
+            lblLevel.AutoSize = true;
+            lblLevel.BackColor = SystemColors.GradientActiveCaption;
+            lblLevel.BorderStyle = BorderStyle.Fixed3D;
+            lblLevel.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblLevel.Location = new Point(804, 626);
+            lblLevel.Name = "lblLevel";
+            lblLevel.Size = new Size(84, 42);
+            lblLevel.TabIndex = 19;
+            lblLevel.Text = "Level";
+            // 
+            // cboLevel
+            // 
+            cboLevel.FormattingEnabled = true;
+            cboLevel.Items.AddRange(new object[] { "Beginner", "Intermediate", "Advance" });
+            cboLevel.Location = new Point(914, 626);
+            cboLevel.Name = "cboLevel";
+            cboLevel.Size = new Size(170, 40);
+            cboLevel.TabIndex = 20;
+            // 
+            // lblTrainerID
+            // 
+            lblTrainerID.AutoSize = true;
+            lblTrainerID.BackColor = SystemColors.GradientActiveCaption;
+            lblTrainerID.BorderStyle = BorderStyle.Fixed3D;
+            lblTrainerID.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblTrainerID.Location = new Point(64, 566);
+            lblTrainerID.Name = "lblTrainerID";
+            lblTrainerID.Size = new Size(140, 42);
+            lblTrainerID.TabIndex = 21;
+            lblTrainerID.Text = "Trainer ID";
+            // 
+            // txtTrainerID
+            // 
+            txtTrainerID.BackColor = SystemColors.ButtonHighlight;
+            txtTrainerID.Location = new Point(223, 569);
+            txtTrainerID.Name = "txtTrainerID";
+            txtTrainerID.Size = new Size(200, 39);
+            txtTrainerID.TabIndex = 22;
+            // 
+            // lblWrong
+            // 
+            lblWrong.AutoSize = true;
+            lblWrong.ForeColor = Color.Red;
+            lblWrong.Location = new Point(847, 792);
+            lblWrong.Name = "lblWrong";
+            lblWrong.Size = new Size(0, 32);
+            lblWrong.TabIndex = 23;
+            // 
+            // lblConfirmed
+            // 
+            lblConfirmed.AutoSize = true;
+            lblConfirmed.ForeColor = Color.Green;
+            lblConfirmed.Location = new Point(962, 709);
+            lblConfirmed.Name = "lblConfirmed";
+            lblConfirmed.Size = new Size(0, 32);
+            lblConfirmed.TabIndex = 24;
+            // 
             // TrainerHomeForm
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ButtonHighlight;
             ClientSize = new Size(1454, 900);
+            Controls.Add(lblConfirmed);
+            Controls.Add(lblWrong);
+            Controls.Add(txtTrainerID);
+            Controls.Add(lblTrainerID);
+            Controls.Add(cboLevel);
+            Controls.Add(lblLevel);
+            Controls.Add(txtRoom);
+            Controls.Add(lblRoom);
             Controls.Add(txtClassTime);
             Controls.Add(lblClassTime);
             Controls.Add(dtpClassDate);
@@ -267,5 +361,13 @@
         private DateTimePicker dtpClassDate;
         private Label lblClassTime;
         private TextBox txtClassTime;
+        private Label lblRoom;
+        private TextBox txtRoom;
+        private Label lblLevel;
+        private ComboBox cboLevel;
+        private Label lblTrainerID;
+        private TextBox txtTrainerID;
+        private Label lblWrong;
+        private Label lblConfirmed;
     }
 }

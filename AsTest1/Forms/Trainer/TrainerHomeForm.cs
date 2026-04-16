@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Data;
+using System.Drawing;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 
@@ -8,238 +9,495 @@ namespace APUCC_Project.Forms.Trainer
 {
     public partial class TrainerHomeForm : Form
     {
-        string connectionString = ConfigurationManager.ConnectionStrings["MyConn"].ConnectionString;
+        private readonly string connStr =
+            ConfigurationManager.ConnectionStrings["MyConn"].ConnectionString;
+
+        private System.Windows.Forms.Timer successTimer = new System.Windows.Forms.Timer();
+        private System.Windows.Forms.Timer errorTimer = new System.Windows.Forms.Timer();
 
         public TrainerHomeForm()
         {
             InitializeComponent();
+
+            successTimer.Interval = 3000;
+            successTimer.Tick += SuccessTimer_Tick;
+
+            errorTimer.Interval = 3000;
+            errorTimer.Tick += ErrorTimer_Tick;
         }
 
         private void TrainerHomeForm_Load(object sender, EventArgs e)
         {
+            lblWrong.Visible = false;
+            lblConfirmed.Visible = false;
             LoadClassSchedule();
         }
 
-        // ========================= LOAD DATA =========================
+        private void SuccessTimer_Tick(object sender, EventArgs e)
+        {
+            successTimer.Stop();
+            lblConfirmed.Visible = false;
+        }
+
+        private void ErrorTimer_Tick(object sender, EventArgs e)
+        {
+            errorTimer.Stop();
+            lblWrong.Visible = false;
+        }
+
+        private void ShowError(string message)
+        {
+            successTimer.Stop();
+            lblConfirmed.Visible = false;
+            lblConfirmed.Text = "";
+
+            lblWrong.Text = message;
+            lblWrong.ForeColor = Color.Red;
+            lblWrong.Visible = true;
+
+            errorTimer.Stop();
+            errorTimer.Start();
+        }
+
+        private void ShowSuccess(string message)
+        {
+            errorTimer.Stop();
+            lblWrong.Visible = false;
+            lblWrong.Text = "";
+
+            lblConfirmed.Text = message;
+            lblConfirmed.ForeColor = Color.Green;
+            lblConfirmed.Visible = true;
+
+            successTimer.Stop();
+            successTimer.Start();
+        }
+
+        private void ClearMessages()
+        {
+            successTimer.Stop();
+            errorTimer.Stop();
+
+            lblWrong.Visible = false;
+            lblWrong.Text = "";
+
+            lblConfirmed.Visible = false;
+            lblConfirmed.Text = "";
+        }
+
         private void LoadClassSchedule()
         {
-            using (SqlConnection con = new SqlConnection(connectionString))
+            try
             {
-                string query = @"
-                        SELECT
+                using (SqlConnection con = new SqlConnection(connStr))
+                {
+                    string query = @"
+                        SELECT 
                             Id,
+                            TrainerID,
                             ModuleId,
                             ModuleName,
                             ClassDate,
                             ClassTime,
-                            Charges
-                        FROM ClassSchedule";
+                            Charges,
+                            Level,
+                            Room
+                        FROM ClassSchedule
+                        ORDER BY ClassDate, ClassTime";
 
-                SqlDataAdapter da = new SqlDataAdapter(query, con);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
+                    SqlDataAdapter da = new SqlDataAdapter(query, con);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
 
-                dgvClassSchedule.DataSource = dt;
+                    dgvClassSchedule.DataSource = dt;
+
+                    if (dgvClassSchedule.Columns["Id"] != null)
+                        dgvClassSchedule.Columns["Id"].Visible = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowError("Load Error: " + ex.Message);
             }
         }
 
-        // ========================= VALIDATION =========================
-        private bool ValidateInputs(out int charges)
+        private bool ValidateInputs(out decimal charges, out TimeSpan classTime, out int trainerId)
         {
             charges = 0;
+            classTime = TimeSpan.Zero;
+            trainerId = 0;
+
+            ClearMessages();
+
+            if (string.IsNullOrWhiteSpace(txtTrainerID.Text))
+            {
+                ShowError("Trainer ID is required.");
+                txtTrainerID.Focus();
+                return false;
+            }
+
+            if (!int.TryParse(txtTrainerID.Text.Trim(), out trainerId) || trainerId <= 0)
+            {
+                ShowError("Trainer ID must be a valid number.");
+                txtTrainerID.Focus();
+                return false;
+            }
 
             if (string.IsNullOrWhiteSpace(txtModuleID.Text))
             {
-                MessageBox.Show("Module ID is required.");
+                ShowError("Module ID is required.");
+                txtModuleID.Focus();
                 return false;
             }
 
             if (string.IsNullOrWhiteSpace(txtModuleName.Text))
             {
-                MessageBox.Show("Module Name is required.");
+                ShowError("Module Name is required.");
+                txtModuleName.Focus();
                 return false;
             }
 
             if (string.IsNullOrWhiteSpace(txtClassTime.Text))
             {
-                MessageBox.Show("Class Time is required.");
+                ShowError("Class Time is required.");
+                txtClassTime.Focus();
                 return false;
             }
 
-            if (!TimeSpan.TryParse(txtClassTime.Text, out _))
+            if (!TimeSpan.TryParse(txtClassTime.Text.Trim(), out classTime))
             {
-                MessageBox.Show("Invalid time format. Use HH:mm");
+                ShowError("Enter valid time in HH:mm format. Example: 04:30");
+                txtClassTime.Focus();
                 return false;
             }
 
-            if (!int.TryParse(txtCharges.Text, out charges))
+            if (string.IsNullOrWhiteSpace(txtCharges.Text))
             {
-                MessageBox.Show("Charges must be a number.");
+                ShowError("Charges is required.");
+                txtCharges.Focus();
+                return false;
+            }
+
+            if (!decimal.TryParse(txtCharges.Text.Trim(), out charges))
+            {
+                ShowError("Charges must be a valid number.");
+                txtCharges.Focus();
                 return false;
             }
 
             if (charges <= 0)
             {
-                MessageBox.Show("Charges must be greater than 0.");
+                ShowError("Charges must be greater than 0.");
+                txtCharges.Focus();
                 return false;
             }
 
-            // ✅ NEW VALIDATION (IMPORTANT)
+            if (cboLevel.SelectedIndex == -1 || string.IsNullOrWhiteSpace(cboLevel.Text))
+            {
+                ShowError("Please select a level.");
+                cboLevel.Focus();
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtRoom.Text))
+            {
+                ShowError("Room is required.");
+                txtRoom.Focus();
+                return false;
+            }
+
             if (dtpClassDate.Value.Date < DateTime.Today)
             {
-                MessageBox.Show("Class date cannot be in the past.");
+                ShowError("Class date cannot be in the past.");
+                dtpClassDate.Focus();
                 return false;
             }
 
             return true;
         }
 
-        // ========================= ADD =========================
         private void btnAddClass_Click(object sender, EventArgs e)
         {
-            if (!ValidateInputs(out int charges)) return;
+            if (!ValidateInputs(out decimal charges, out TimeSpan classTime, out int trainerId))
+                return;
 
-            using (SqlConnection con = new SqlConnection(connectionString))
+            try
             {
-                con.Open();
-
-                // Prevent duplicate
-                string checkQuery = @"
-                    SELECT COUNT(*) 
-                    FROM ClassSchedule 
-                    WHERE ModuleID = @ModuleID 
-                    AND ClassDate = @Date 
-                    AND ClassTime = @Time";
-
-                using (SqlCommand checkCmd = new SqlCommand(checkQuery, con))
+                using (SqlConnection con = new SqlConnection(connStr))
                 {
-                    checkCmd.Parameters.AddWithValue("@ModuleID", txtModuleID.Text.Trim());
-                    checkCmd.Parameters.AddWithValue("@Date", dtpClassDate.Value.Date);
-                    checkCmd.Parameters.AddWithValue("@Time", txtClassTime.Text.Trim());
+                    con.Open();
 
-                    int count = (int)checkCmd.ExecuteScalar();
+                    string checkQuery = @"
+                        SELECT COUNT(*)
+                        FROM ClassSchedule
+                        WHERE ModuleId = @ModuleId
+                          AND ClassDate = @ClassDate
+                          AND ClassTime = @ClassTime";
 
-                    if (count > 0)
+                    using (SqlCommand checkCmd = new SqlCommand(checkQuery, con))
                     {
-                        MessageBox.Show("This class already exists!");
-                        return;
+                        checkCmd.Parameters.AddWithValue("@ModuleId", txtModuleID.Text.Trim());
+                        checkCmd.Parameters.AddWithValue("@ClassDate", dtpClassDate.Value.Date);
+                        checkCmd.Parameters.AddWithValue("@ClassTime", classTime);
+
+                        int count = Convert.ToInt32(checkCmd.ExecuteScalar());
+
+                        if (count > 0)
+                        {
+                            ShowError("This class schedule already exists.");
+                            return;
+                        }
+                    }
+
+                    string insertQuery = @"
+                        INSERT INTO ClassSchedule
+                        (TrainerID, ModuleId, ModuleName, ClassDate, ClassTime, Charges, Level, Room)
+                        VALUES
+                        (@TrainerID, @ModuleId, @ModuleName, @ClassDate, @ClassTime, @Charges, @Level, @Room)";
+
+                    using (SqlCommand cmd = new SqlCommand(insertQuery, con))
+                    {
+                        cmd.Parameters.AddWithValue("@TrainerID", trainerId);
+                        cmd.Parameters.AddWithValue("@ModuleId", txtModuleID.Text.Trim());
+                        cmd.Parameters.AddWithValue("@ModuleName", txtModuleName.Text.Trim());
+                        cmd.Parameters.AddWithValue("@ClassDate", dtpClassDate.Value.Date);
+                        cmd.Parameters.AddWithValue("@ClassTime", classTime);
+                        cmd.Parameters.AddWithValue("@Charges", charges);
+                        cmd.Parameters.AddWithValue("@Level", cboLevel.Text.Trim());
+                        cmd.Parameters.AddWithValue("@Room", txtRoom.Text.Trim());
+
+                        cmd.ExecuteNonQuery();
                     }
                 }
 
-                string insertQuery = @"
-                    INSERT INTO ClassSchedule 
-                    (ModuleID, ModuleName, ClassDate, ClassTime, Charges)
-                    VALUES 
-                    (@ModuleID, @ModuleName, @Date, @Time, @Charges)";
-
-                using (SqlCommand cmd = new SqlCommand(insertQuery, con))
-                {
-                    cmd.Parameters.AddWithValue("@ModuleID", txtModuleID.Text.Trim());
-                    cmd.Parameters.AddWithValue("@ModuleName", txtModuleName.Text.Trim());
-                    cmd.Parameters.AddWithValue("@Date", dtpClassDate.Value.Date);
-                    cmd.Parameters.AddWithValue("@Time", txtClassTime.Text.Trim());
-                    cmd.Parameters.AddWithValue("@Charges", charges);
-
-                    cmd.ExecuteNonQuery();
-                }
+                ShowSuccess("Class added successfully.");
+                LoadClassSchedule();
+                ClearFields();
             }
-
-            MessageBox.Show("Class added successfully!");
-            LoadClassSchedule();
+            catch (Exception ex)
+            {
+                ShowError("Add Error: " + ex.Message);
+            }
         }
 
-        // ========================= UPDATE =========================
         private void btnUpdateClass_Click(object sender, EventArgs e)
         {
-            if (dgvClassSchedule.SelectedRows.Count == 0)
+            if (!ValidateInputs(out decimal charges, out TimeSpan classTime, out int trainerId))
+                return;
+
+            if (dgvClassSchedule.CurrentRow == null || dgvClassSchedule.CurrentRow.Index < 0)
             {
-                MessageBox.Show("Please select a row to update.");
+                ShowError("Please select a class to update.");
                 return;
             }
 
-            if (!ValidateInputs(out int charges)) return;
-
-            int id = Convert.ToInt32(dgvClassSchedule.SelectedRows[0].Cells["Id"].Value);
-
-            using (SqlConnection con = new SqlConnection(connectionString))
+            try
             {
-                string updateQuery = @"
-                    UPDATE ClassSchedule
-                    SET ModuleID = @ModuleID,
-                        ModuleName = @ModuleName,
-                        ClassDate = @Date,
-                        ClassTime = @Time,
-                        Charges = @Charges
-                    WHERE ClassScheduleID = @ID";
+                int selectedId = Convert.ToInt32(dgvClassSchedule.CurrentRow.Cells["Id"].Value);
 
-                using (SqlCommand cmd = new SqlCommand(updateQuery, con))
+                using (SqlConnection con = new SqlConnection(connStr))
                 {
-                    cmd.Parameters.AddWithValue("@ModuleID", txtModuleID.Text.Trim());
-                    cmd.Parameters.AddWithValue("@ModuleName", txtModuleName.Text.Trim());
-                    cmd.Parameters.AddWithValue("@Date", dtpClassDate.Value.Date);
-                    cmd.Parameters.AddWithValue("@Time", txtClassTime.Text.Trim());
-                    cmd.Parameters.AddWithValue("@Charges", charges);
-                    cmd.Parameters.AddWithValue("@ID", id);
-
                     con.Open();
-                    cmd.ExecuteNonQuery();
-                }
-            }
 
-            MessageBox.Show("Class updated successfully!");
-            LoadClassSchedule();
+                    string duplicateCheck = @"
+                        SELECT COUNT(*)
+                        FROM ClassSchedule
+                        WHERE ModuleId = @ModuleId
+                          AND ClassDate = @ClassDate
+                          AND ClassTime = @ClassTime
+                          AND Id <> @Id";
+
+                    using (SqlCommand checkCmd = new SqlCommand(duplicateCheck, con))
+                    {
+                        checkCmd.Parameters.AddWithValue("@ModuleId", txtModuleID.Text.Trim());
+                        checkCmd.Parameters.AddWithValue("@ClassDate", dtpClassDate.Value.Date);
+                        checkCmd.Parameters.AddWithValue("@ClassTime", classTime);
+                        checkCmd.Parameters.AddWithValue("@Id", selectedId);
+
+                        int count = Convert.ToInt32(checkCmd.ExecuteScalar());
+
+                        if (count > 0)
+                        {
+                            ShowError("Another class with the same module, date, and time already exists.");
+                            return;
+                        }
+                    }
+
+                    string updateQuery = @"
+                        UPDATE ClassSchedule
+                        SET TrainerID = @TrainerID,
+                            ModuleId = @ModuleId,
+                            ModuleName = @ModuleName,
+                            ClassDate = @ClassDate,
+                            ClassTime = @ClassTime,
+                            Charges = @Charges,
+                            Level = @Level,
+                            Room = @Room
+                        WHERE Id = @Id";
+
+                    using (SqlCommand cmd = new SqlCommand(updateQuery, con))
+                    {
+                        cmd.Parameters.AddWithValue("@TrainerID", trainerId);
+                        cmd.Parameters.AddWithValue("@ModuleId", txtModuleID.Text.Trim());
+                        cmd.Parameters.AddWithValue("@ModuleName", txtModuleName.Text.Trim());
+                        cmd.Parameters.AddWithValue("@ClassDate", dtpClassDate.Value.Date);
+                        cmd.Parameters.AddWithValue("@ClassTime", classTime);
+                        cmd.Parameters.AddWithValue("@Charges", charges);
+                        cmd.Parameters.AddWithValue("@Level", cboLevel.Text.Trim());
+                        cmd.Parameters.AddWithValue("@Room", txtRoom.Text.Trim());
+                        cmd.Parameters.AddWithValue("@Id", selectedId);
+
+                        int rows = cmd.ExecuteNonQuery();
+
+                        if (rows > 0)
+                            ShowSuccess("Class updated successfully.");
+                        else
+                            ShowError("No record found to update.");
+                    }
+                }
+
+                LoadClassSchedule();
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                ShowError("Update Error: " + ex.Message);
+            }
         }
 
-        // ========================= DELETE =========================
         private void btnDeleteClass_Click(object sender, EventArgs e)
         {
-            if (dgvClassSchedule.SelectedRows.Count == 0)
+            ClearMessages();
+
+            if (dgvClassSchedule.CurrentRow == null || dgvClassSchedule.CurrentRow.Index < 0)
             {
-                MessageBox.Show("Select a row to delete.");
+                ShowError("Please select a class to delete.");
                 return;
             }
 
             DialogResult result = MessageBox.Show(
                 "Are you sure you want to delete this class?",
-                "Confirm",
-                MessageBoxButtons.YesNo
-            );
+                "Confirm Delete",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
 
-            if (result != DialogResult.Yes) return;
+            if (result != DialogResult.Yes)
+                return;
 
-            int id = Convert.ToInt32(dgvClassSchedule.SelectedRows[0].Cells["Id"].Value);
-
-            using (SqlConnection con = new SqlConnection(connectionString))
+            try
             {
-                string deleteQuery = "DELETE FROM ClassSchedule WHERE ClassScheduleID = @ID";
+                int selectedId = Convert.ToInt32(dgvClassSchedule.CurrentRow.Cells["Id"].Value);
 
-                using (SqlCommand cmd = new SqlCommand(deleteQuery, con))
+                using (SqlConnection con = new SqlConnection(connStr))
                 {
-                    cmd.Parameters.AddWithValue("@ID", id);
-
                     con.Open();
-                    cmd.ExecuteNonQuery();
-                }
-            }
 
-            MessageBox.Show("Class deleted successfully!");
-            LoadClassSchedule();
+                    string deleteQuery = "DELETE FROM ClassSchedule WHERE Id = @Id";
+
+                    using (SqlCommand cmd = new SqlCommand(deleteQuery, con))
+                    {
+                        cmd.Parameters.AddWithValue("@Id", selectedId);
+
+                        int rows = cmd.ExecuteNonQuery();
+
+                        if (rows > 0)
+                            ShowSuccess("Class deleted successfully.");
+                        else
+                            ShowError("No record found to delete.");
+                    }
+                }
+
+                LoadClassSchedule();
+                ClearFields();
+            }
+            catch (SqlException)
+            {
+                ShowError("This class cannot be deleted because it is linked to other records.");
+            }
+            catch (Exception ex)
+            {
+                ShowError("Delete Error: " + ex.Message);
+            }
         }
 
-        // ========================= GRID CLICK =========================
         private void dgvClassSchedule_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewRow row = dgvClassSchedule.Rows[e.RowIndex];
+            if (e.RowIndex < 0) return;
 
-                txtModuleID.Text = row.Cells["ModuleID"].Value.ToString();
-                txtModuleName.Text = row.Cells["ModuleName"].Value.ToString();
-                txtClassTime.Text = row.Cells["ClassTime"].Value.ToString();
-                txtCharges.Text = row.Cells["Charges"].Value.ToString();
+            DataGridViewRow row = dgvClassSchedule.Rows[e.RowIndex];
 
+            txtTrainerID.Text = row.Cells["TrainerID"].Value?.ToString() ?? "";
+            txtModuleID.Text = row.Cells["ModuleId"].Value?.ToString() ?? "";
+            txtModuleName.Text = row.Cells["ModuleName"].Value?.ToString() ?? "";
+            txtCharges.Text = row.Cells["Charges"].Value?.ToString() ?? "";
+            txtRoom.Text = row.Cells["Room"].Value?.ToString() ?? "";
+            cboLevel.Text = row.Cells["Level"].Value?.ToString() ?? "";
+
+            if (row.Cells["ClassDate"].Value != null && row.Cells["ClassDate"].Value != DBNull.Value)
                 dtpClassDate.Value = Convert.ToDateTime(row.Cells["ClassDate"].Value);
+            else
+                dtpClassDate.Value = DateTime.Today;
+
+            if (row.Cells["ClassTime"].Value != null && row.Cells["ClassTime"].Value != DBNull.Value)
+            {
+                if (row.Cells["ClassTime"].Value is TimeSpan time)
+                    txtClassTime.Text = time.ToString(@"hh\:mm");
+                else
+                    txtClassTime.Text = row.Cells["ClassTime"].Value.ToString();
             }
+            else
+            {
+                txtClassTime.Clear();
+            }
+
+            ClearMessages();
+        }
+
+        private void ClearFields()
+        {
+            txtTrainerID.Clear();
+            txtModuleID.Clear();
+            txtModuleName.Clear();
+            txtClassTime.Clear();
+            txtCharges.Clear();
+            txtRoom.Clear();
+            cboLevel.SelectedIndex = -1;
+            dtpClassDate.Value = DateTime.Today;
+        }
+
+        private void txtTrainerID_TextChanged(object sender, EventArgs e)
+        {
+            ClearMessages();
+        }
+
+        private void txtModuleID_TextChanged(object sender, EventArgs e)
+        {
+            ClearMessages();
+        }
+
+        private void txtModuleName_TextChanged(object sender, EventArgs e)
+        {
+            ClearMessages();
+        }
+
+        private void txtClassTime_TextChanged(object sender, EventArgs e)
+        {
+            ClearMessages();
+        }
+
+        private void txtCharges_TextChanged(object sender, EventArgs e)
+        {
+            ClearMessages();
+        }
+
+        private void txtRoom_TextChanged(object sender, EventArgs e)
+        {
+            ClearMessages();
+        }
+
+        private void cboLevel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ClearMessages();
         }
     }
 }
