@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
@@ -8,7 +8,14 @@ namespace APUCC_Project.Forms.Student
 {
     public partial class StudentHomeForm : Form
     {
+        private enum ScheduleView
+        {
+            Current,
+            Upcoming
+        }
+
         private readonly int _studentId;
+        private ScheduleView _activeView = ScheduleView.Current;
 
         public StudentHomeForm(int studentId)
         {
@@ -23,7 +30,7 @@ namespace APUCC_Project.Forms.Student
         private void StudentHomeForm_Load(object? sender, EventArgs e)
         {
             SetupGrid();
-            LoadCurrentSchedule();
+            ShowSchedule(ScheduleView.Current);
         }
 
         private void SetupGrid()
@@ -33,12 +40,19 @@ namespace APUCC_Project.Forms.Student
             dgvSchedule.AllowUserToAddRows = false;
             dgvSchedule.AllowUserToDeleteRows = false;
             dgvSchedule.AllowUserToResizeRows = false;
+            dgvSchedule.AllowUserToResizeColumns = false;
             dgvSchedule.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvSchedule.MultiSelect = false;
             dgvSchedule.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvSchedule.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dgvSchedule.BorderStyle = BorderStyle.None;
+            dgvSchedule.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvSchedule.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgvSchedule.RowTemplate.Height = 36;
 
             ModuleColumnHome.DataPropertyName = "Module";
             TrainerColumn.DataPropertyName = "Trainer";
+            DateColumnHome.DataPropertyName = "Date";
             DayColumnHome.DataPropertyName = "Day";
             TimeColumnHome.DataPropertyName = "Time";
             RoomColumnHome.DataPropertyName = "Room";
@@ -55,56 +69,37 @@ namespace APUCC_Project.Forms.Student
 
             dgvSchedule.RowHeadersVisible = false;
             dgvSchedule.ClearSelection();
+            ApplyButtonState();
         }
 
-        private void LoadCurrentSchedule()
+        private void ShowSchedule(ScheduleView scheduleView)
         {
+            _activeView = scheduleView;
+            ApplyButtonState();
+            LoadSchedule(scheduleView);
+        }
+
+        private void LoadSchedule(ScheduleView scheduleView)
+        {
+            string scheduleLabel = scheduleView == ScheduleView.Current
+                ? "Current"
+                : "Upcoming";
+
             string query = @"
                 SELECT 
-                    cs.ModuleName AS Module,
-                    tu.[Name] AS Trainer,
-                    FORMAT(cs.ClassDate, 'dddd') AS [Day],
-                    CONVERT(VARCHAR(5), cs.ClassTime, 108) AS [Time],
-                    cs.Room,
-                    se.EnrollmentStatus AS [Status]
-                FROM StudentEnrollments se
-                INNER JOIN ClassSchedule cs ON se.ClassScheduleID = cs.Id
-                INNER JOIN Students s ON se.StudentID = s.StudentID
-                LEFT JOIN Trainers t ON cs.TrainerID = t.TrainerID
-                LEFT JOIN Users tu ON t.UserID = tu.UserID
-                WHERE se.StudentID = @StudentID
-                  AND se.EnrollmentStatus = 'Active'
-                  AND cs.ClassDate = CAST(GETDATE() AS DATE)
-                ORDER BY cs.ClassTime;";
+                    Module,
+                    Trainer,
+                    [Date],
+                    [Day],
+                    [Time],
+                    Room,
+                    ScheduleType AS [Status]
+                FROM vw_StudentHomeSchedule
+                WHERE StudentID = @StudentID
+                  AND ScheduleType = @ScheduleLabel
+                  AND IsVisibleOnHome = 1
+                ORDER BY SortDate, SortTime;";
 
-            LoadSchedule(query);
-        }
-
-        private void LoadUpcomingSchedule()
-        {
-            string query = @"
-                SELECT 
-                    cs.ModuleName AS Module,
-                    tu.[Name] AS Trainer,
-                    FORMAT(cs.ClassDate, 'dddd') AS [Day],
-                    CONVERT(VARCHAR(5), cs.ClassTime, 108) AS [Time],
-                    cs.Room,
-                    se.EnrollmentStatus AS [Status]
-                FROM StudentEnrollments se
-                INNER JOIN ClassSchedule cs ON se.ClassScheduleID = cs.Id
-                INNER JOIN Students s ON se.StudentID = s.StudentID
-                LEFT JOIN Trainers t ON cs.TrainerID = t.TrainerID
-                LEFT JOIN Users tu ON t.UserID = tu.UserID
-                WHERE se.StudentID = @StudentID
-                  AND se.EnrollmentStatus = 'Active'
-                  AND cs.ClassDate > CAST(GETDATE() AS DATE)
-                ORDER BY cs.ClassDate, cs.ClassTime;";
-
-            LoadSchedule(query);
-        }
-
-        private void LoadSchedule(string query)
-        {
             try
             {
                 using SqlConnection conn = DatabaseHelper.GetConnection();
@@ -112,12 +107,14 @@ namespace APUCC_Project.Forms.Student
                 using SqlDataAdapter adapter = new SqlDataAdapter(cmd);
 
                 cmd.Parameters.AddWithValue("@StudentID", _studentId);
+                cmd.Parameters.AddWithValue("@ScheduleLabel", scheduleLabel);
 
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
 
                 dgvSchedule.DataSource = null;
                 dgvSchedule.DataSource = dt;
+                dgvSchedule.ClearSelection();
             }
             catch (Exception ex)
             {
@@ -125,19 +122,30 @@ namespace APUCC_Project.Forms.Student
             }
         }
 
+        private void ApplyButtonState()
+        {
+            StyleScheduleButton(btnCurrentSchedule, _activeView == ScheduleView.Current);
+            StyleScheduleButton(btnUpcomingSchedule, _activeView == ScheduleView.Upcoming);
+        }
+
+        private static void StyleScheduleButton(Button button, bool isActive)
+        {
+            button.BackColor = isActive ? Color.FromArgb(25, 25, 25) : Color.White;
+            button.ForeColor = isActive ? Color.White : Color.Black;
+        }
+
         private void btnCurrentSchedule_Click(object? sender, EventArgs e)
         {
-            LoadCurrentSchedule();
+            ShowSchedule(ScheduleView.Current);
         }
 
         private void btnUpcomingSchedule_Click(object? sender, EventArgs e)
         {
-            LoadUpcomingSchedule();
+            ShowSchedule(ScheduleView.Upcoming);
         }
 
         private void label1_Click_1(object sender, EventArgs e)
         {
-
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace APUCC_Project.Forms.Student
+namespace APUCC_Project.Forms.Student
 {
     partial class StudentHomeForm
     {
@@ -36,6 +36,7 @@
             dgvSchedule = new DataGridView();
             ModuleColumnHome = new DataGridViewTextBoxColumn();
             TrainerColumn = new DataGridViewTextBoxColumn();
+            DateColumnHome = new DataGridViewTextBoxColumn();
             DayColumnHome = new DataGridViewTextBoxColumn();
             TimeColumnHome = new DataGridViewTextBoxColumn();
             RoomColumnHome = new DataGridViewTextBoxColumn();
@@ -100,7 +101,7 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dgvSchedule.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvSchedule.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvSchedule.Columns.AddRange(new DataGridViewColumn[] { ModuleColumnHome, TrainerColumn, DayColumnHome, TimeColumnHome, RoomColumnHome, StatusColumnHome });
+            dgvSchedule.Columns.AddRange(new DataGridViewColumn[] { ModuleColumnHome, TrainerColumn, DateColumnHome, DayColumnHome, TimeColumnHome, RoomColumnHome, StatusColumnHome });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(25, 25, 25);
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
@@ -135,6 +136,14 @@
             TrainerColumn.Name = "TrainerColumn";
             TrainerColumn.ReadOnly = true;
             TrainerColumn.Width = 170;
+            // 
+            // DateColumnHome
+            // 
+            DateColumnHome.HeaderText = "Date";
+            DateColumnHome.MinimumWidth = 10;
+            DateColumnHome.Name = "DateColumnHome";
+            DateColumnHome.ReadOnly = true;
+            DateColumnHome.Width = 120;
             // 
             // DayColumnHome
             // 
@@ -227,6 +236,7 @@
         private DataGridView dgvSchedule;
         private DataGridViewTextBoxColumn ModuleColumnHome;
         private DataGridViewTextBoxColumn TrainerColumn;
+        private DataGridViewTextBoxColumn DateColumnHome;
         private DataGridViewTextBoxColumn DayColumnHome;
         private DataGridViewTextBoxColumn TimeColumnHome;
         private DataGridViewTextBoxColumn RoomColumnHome;

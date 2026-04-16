@@ -6,7 +6,6 @@ namespace APUCC_Project
 {
     public partial class StudentShellForm : BaseShellForm
     {
-        private Form? activeForm = null;
         private readonly int _studentId;
 
         public StudentShellForm(int studentId)
@@ -34,28 +33,7 @@ namespace APUCC_Project
 
         private void OpenChildForm(Form childForm)
         {
-            if (activeForm != null)
-                activeForm.Close();
-
-            activeForm = childForm;
-
-            childForm.TopLevel = false;
-            childForm.FormBorderStyle = FormBorderStyle.None;
-
-            MainPanel.Controls.Clear();
-
-            Panel contentPanel = new Panel();
-            contentPanel.Dock = DockStyle.Fill;
-            contentPanel.Padding = new Padding(0, 30, 0, 0);
-            contentPanel.BackColor = MainPanel.BackColor;
-
-            childForm.Dock = DockStyle.Fill;
-
-            contentPanel.Controls.Add(childForm);
-            MainPanel.Controls.Add(contentPanel);
-
-            childForm.BringToFront();
-            childForm.Show();
+            OpenSharedChildForm(childForm);
         }
 
         protected override void homebtn_Click(object sender, EventArgs e)
@@ -67,13 +45,13 @@ namespace APUCC_Project
         protected override void iconButton2_Click(object sender, EventArgs e)
         {
             base.iconButton2_Click(sender, e);
-            OpenChildForm(new StudentCoursesForm());
+            OpenChildForm(new StudentCoursesForm(_studentId));
         }
 
         protected override void iconButton3_Click(object sender, EventArgs e)
         {
             base.iconButton3_Click(sender, e);
-            OpenChildForm(new StudentFeesForm());
+            OpenChildForm(new StudentFeesForm(_studentId));
         }
 
         protected override void iconButton4_Click(object sender, EventArgs e)

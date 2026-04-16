@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Configuration;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 using APUCC_Project.Forms.Admin;
-using APUCC_Project.Forms.Trainer;
+using APUCC_Project.Forms.Lecturer;
 using APUCC_Project.Forms.Student;
-// using APUCC_Project.Forms.Lecturer;
+using APUCC_Project.Forms.Trainer;
 
 namespace APUCC_Project.Forms.Common
 {
@@ -19,15 +19,21 @@ namespace APUCC_Project.Forms.Common
             InitializeComponent();
         }
 
+        public void PrepareForReuse()
+        {
+            txtUser.Clear();
+            txtPassword.Clear();
+            lblWrong.Visible = false;
+            txtUser.Focus();
+        }
+
         private void LoginForm_Load(object sender, EventArgs e)
         {
             lblWrong.Visible = false;
             lblWrong.Text = "Wrong username/email or password.";
 
             txtPassword.UseSystemPasswordChar = true;
-
-            // Press Enter to login
-            this.AcceptButton = btnLogin;
+            AcceptButton = btnLogin;
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -37,7 +43,6 @@ namespace APUCC_Project.Forms.Common
             string userInput = txtUser.Text.Trim();
             string password = txtPassword.Text.Trim();
 
-            // ================= VALIDATION =================
             if (string.IsNullOrWhiteSpace(userInput))
             {
                 lblWrong.Text = "Please enter username or email.";
@@ -56,65 +61,66 @@ namespace APUCC_Project.Forms.Common
 
             try
             {
-                using (SqlConnection con = new SqlConnection(connStr))
+                using SqlConnection con = new SqlConnection(connStr);
+                con.Open();
+
+                string query = @"
+                    SELECT u.UserID, u.Role, s.StudentID
+                    FROM Users u
+                    LEFT JOIN Students s ON u.UserID = s.UserID
+                    WHERE (u.Username = @UserInput OR u.Email = @UserInput)
+                      AND u.[Password] = @Password";
+
+                using SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@UserInput", userInput);
+                cmd.Parameters.AddWithValue("@Password", password);
+
+                using SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
                 {
-                    con.Open();
+                    string role = dr["Role"].ToString() ?? string.Empty;
+                    Form? nextForm = null;
 
-                    string query = @"
-                        SELECT UserID, Role
-                        FROM Users
-                        WHERE (Username = @UserInput OR Email = @UserInput)
-                          AND Password = @Password";
-
-                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    if (role == "Admin")
                     {
-                        cmd.Parameters.AddWithValue("@UserInput", userInput);
-                        cmd.Parameters.AddWithValue("@Password", password);
-
-                        using (SqlDataReader dr = cmd.ExecuteReader())
-                        {
-                            // ================= ROLE HANDLING =================
-                            if (dr.Read())
-                            {
-                                int userId = Convert.ToInt32(dr["UserID"]);
-                                string role = dr["Role"].ToString();
-
-                                Form nextForm = null;
-
-                                if (role == "Admin")
-                                {
-                                    nextForm = new AdminShellForm();
-                                }
-                                else if (role == "Trainer")
-                                {
-                                    nextForm = new TrainerShellForm();
-                                }
-                                else if (role == "Student")
-                                {
-                                     nextForm = new StudentShellForm();
-                                }
-                                else if (role == "Lecturer")
-                                {
-                                     nextForm = new LecturerShellForm();
-                                }
-                                else
-                                {
-                                    lblWrong.Text = "Soory, An Invalid User .";
-                                    return;
-                                }
-
-                                nextForm.Show();
-                                this.Hide();
-                            }
-                            else
-                            {
-                                lblWrong.Text = "Wrong username/email or password.";
-                                lblWrong.Visible = true;
-                                txtPassword.Clear();
-                                txtPassword.Focus();
-                            }
-                        }
+                        nextForm = new AdminShellForm();
                     }
+                    else if (role == "Trainer")
+                    {
+                        nextForm = new TrainerShellForm();
+                    }
+                    else if (role == "Student")
+                    {
+                        if (dr["StudentID"] == DBNull.Value)
+                        {
+                            lblWrong.Text = "Student profile was not found.";
+                            lblWrong.Visible = true;
+                            return;
+                        }
+
+                        int studentId = Convert.ToInt32(dr["StudentID"]);
+                        nextForm = new StudentShellForm(studentId);
+                    }
+                    else if (role == "Lecturer")
+                    {
+                        nextForm = new LecturerShellForm();
+                    }
+                    else
+                    {
+                        lblWrong.Text = "Soory, An Invalid User .";
+                        lblWrong.Visible = true;
+                        return;
+                    }
+
+                    nextForm.Show();
+                    Hide();
+                }
+                else
+                {
+                    lblWrong.Text = "Wrong username/email or password.";
+                    lblWrong.Visible = true;
+                    txtPassword.Clear();
+                    txtPassword.Focus();
                 }
             }
             catch (Exception ex)
@@ -128,7 +134,6 @@ namespace APUCC_Project.Forms.Common
             }
         }
 
-        // Hide error when typing again
         private void txtUser_TextChanged(object sender, EventArgs e)
         {
             lblWrong.Visible = false;

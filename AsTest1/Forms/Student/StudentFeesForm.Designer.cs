@@ -30,6 +30,7 @@
         {
             OutstandingPaymentGroupBox = new GroupBox();
             dataGridView1 = new DataGridView();
+            InvoiceIDHiddenColumn = new DataGridViewTextBoxColumn();
             ModuleColumn = new DataGridViewTextBoxColumn();
             Column2 = new DataGridViewTextBoxColumn();
             Column3 = new DataGridViewTextBoxColumn();
@@ -60,13 +61,13 @@
             OutstandingPaymentGroupBox.Size = new Size(1022, 268);
             OutstandingPaymentGroupBox.TabIndex = 1;
             OutstandingPaymentGroupBox.TabStop = false;
-            OutstandingPaymentGroupBox.Text = "Outsranding Payment";
+            OutstandingPaymentGroupBox.Text = "Outstanding Fees";
             // 
             // dataGridView1
             // 
             dataGridView1.BackgroundColor = Color.FromArgb(42, 42, 42);
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { ModuleColumn, Column2, Column3, Column4, Column5, ActionColumn });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { InvoiceIDHiddenColumn, ModuleColumn, Column2, Column3, Column4, Column5, ActionColumn });
             dataGridView1.Location = new Point(8, 50);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
@@ -74,6 +75,13 @@
             dataGridView1.Size = new Size(1004, 186);
             dataGridView1.TabIndex = 0;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            // 
+            // InvoiceIDHiddenColumn
+            // 
+            InvoiceIDHiddenColumn.HeaderText = "InvoiceID";
+            InvoiceIDHiddenColumn.MinimumWidth = 10;
+            InvoiceIDHiddenColumn.Name = "InvoiceIDHiddenColumn";
+            InvoiceIDHiddenColumn.Visible = false;
             // 
             // ModuleColumn
             // 
@@ -98,7 +106,7 @@
             // 
             // Column4
             // 
-            Column4.HeaderText = "Fee";
+            Column4.HeaderText = "Amount";
             Column4.MinimumWidth = 10;
             Column4.Name = "Column4";
             Column4.Width = 150;
@@ -117,7 +125,7 @@
             ActionColumn.Name = "ActionColumn";
             ActionColumn.Resizable = DataGridViewTriState.True;
             ActionColumn.SortMode = DataGridViewColumnSortMode.Automatic;
-            ActionColumn.Text = "Pay Online";
+            ActionColumn.Text = "Pay Now";
             ActionColumn.Width = 150;
             // 
             // groupBox2
@@ -146,7 +154,7 @@
             // 
             // InvoiceIDColumn
             // 
-            InvoiceIDColumn.HeaderText = "InvoiceID";
+            InvoiceIDColumn.HeaderText = "Invoice";
             InvoiceIDColumn.MinimumWidth = 10;
             InvoiceIDColumn.Name = "InvoiceIDColumn";
             InvoiceIDColumn.Width = 200;
@@ -160,14 +168,14 @@
             // 
             // AmountColumn
             // 
-            AmountColumn.HeaderText = "Amount ";
+            AmountColumn.HeaderText = "Amount Paid";
             AmountColumn.MinimumWidth = 10;
             AmountColumn.Name = "AmountColumn";
             AmountColumn.Width = 150;
             // 
             // dataGridViewTextBoxColumn4
             // 
-            dataGridViewTextBoxColumn4.HeaderText = "Fee";
+            dataGridViewTextBoxColumn4.HeaderText = "Method";
             dataGridViewTextBoxColumn4.MinimumWidth = 10;
             dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             dataGridViewTextBoxColumn4.Width = 150;
@@ -181,12 +189,12 @@
             // 
             // ReceiptColumn
             // 
-            ReceiptColumn.HeaderText = "Receipt";
+            ReceiptColumn.HeaderText = "Status";
             ReceiptColumn.MinimumWidth = 10;
             ReceiptColumn.Name = "ReceiptColumn";
             ReceiptColumn.Resizable = DataGridViewTriState.True;
             ReceiptColumn.SortMode = DataGridViewColumnSortMode.Automatic;
-            ReceiptColumn.Text = "Pay Online";
+            ReceiptColumn.Text = "Paid";
             ReceiptColumn.Width = 150;
             // 
             // StudentFeesForm
@@ -210,6 +218,7 @@
         private GroupBox OutstandingPaymentGroupBox;
         private DataGridView dataGridView1;
         private GroupBox groupBox2;
+        private DataGridViewTextBoxColumn InvoiceIDHiddenColumn;
         private DataGridViewTextBoxColumn ModuleColumn;
         private DataGridViewTextBoxColumn Column2;
         private DataGridViewTextBoxColumn Column3;

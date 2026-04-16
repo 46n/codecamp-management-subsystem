@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             FillPanelCourses = new Panel();
             groupBox2 = new GroupBox();
             button3 = new Button();
@@ -48,7 +49,7 @@
             // 
             // FillPanelCourses
             // 
-            FillPanelCourses.BackColor = Color.FromArgb(42, 42, 42);
+            FillPanelCourses.BackColor = Color.White;
             FillPanelCourses.BackgroundImageLayout = ImageLayout.Center;
             FillPanelCourses.Controls.Add(groupBox2);
             FillPanelCourses.Controls.Add(CurrentCourses);
@@ -63,12 +64,12 @@
             // 
             // groupBox2
             // 
-            groupBox2.BackColor = Color.FromArgb(25, 25, 25);
+            groupBox2.BackColor = Color.White;
             groupBox2.Controls.Add(button3);
             groupBox2.Controls.Add(comboBox1);
             groupBox2.Controls.Add(label2);
             groupBox2.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            groupBox2.ForeColor = SystemColors.ButtonHighlight;
+            groupBox2.ForeColor = Color.Black;
             groupBox2.Location = new Point(74, 371);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(890, 200);
@@ -102,18 +103,19 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.Black;
             label2.Location = new Point(37, 67);
             label2.Name = "label2";
-            label2.Size = new Size(185, 32);
+            label2.Size = new Size(191, 32);
             label2.TabIndex = 0;
-            label2.Text = "Availible Course";
+            label2.Text = "Available Course";
             // 
             // CurrentCourses
             // 
-            CurrentCourses.BackColor = Color.FromArgb(25, 25, 25);
+            CurrentCourses.BackColor = Color.White;
             CurrentCourses.Controls.Add(dataGridView1);
             CurrentCourses.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            CurrentCourses.ForeColor = SystemColors.ButtonHighlight;
+            CurrentCourses.ForeColor = Color.Black;
             CurrentCourses.Location = new Point(74, 25);
             CurrentCourses.Name = "CurrentCourses";
             CurrentCourses.Size = new Size(890, 314);
@@ -123,15 +125,18 @@
             // 
             // dataGridView1
             // 
-            dataGridView1.BackgroundColor = Color.FromArgb(25, 25, 25);
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle1.Font = new Font("Segoe Fluent Icons", 7.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = Color.Black;
+            dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridView1.BackgroundColor = Color.White;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Control;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { TrainerColumn, ScheduleColumn, StatusColumn, CourseNameColumn });
             dataGridView1.Location = new Point(37, 60);

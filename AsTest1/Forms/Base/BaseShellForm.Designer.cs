@@ -1,16 +1,9 @@
-﻿namespace APUCC_Project
+namespace APUCC_Project
 {
     partial class BaseShellForm : Form
     {
-        /// <summary>
-        ///  Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        ///  Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,21 +15,17 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        ///  Required method for Designer support - do not modify
-        ///  the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BaseShellForm));
             panelMenu = new Panel();
-            iconButton4 = new FontAwesome.Sharp.IconButton();
             Profile = new FontAwesome.Sharp.IconButton();
             iconButton3 = new FontAwesome.Sharp.IconButton();
             iconButton2 = new FontAwesome.Sharp.IconButton();
             homebtn = new FontAwesome.Sharp.IconButton();
             panelLogo = new Panel();
             pictureBox1 = new PictureBox();
+            iconButton4 = new FontAwesome.Sharp.IconButton();
             iconMenuItem1 = new FontAwesome.Sharp.IconMenuItem();
             panelSidebarContainer = new FlowLayoutPanel();
             MainPanel = new Panel();
@@ -49,7 +38,6 @@
             // panelMenu
             // 
             panelMenu.BackColor = Color.FromArgb(25, 25, 25);
-            panelMenu.Controls.Add(iconButton4);
             panelMenu.Controls.Add(Profile);
             panelMenu.Controls.Add(iconButton3);
             panelMenu.Controls.Add(iconButton2);
@@ -58,33 +46,9 @@
             panelMenu.Location = new Point(14, 12);
             panelMenu.Margin = new Padding(9, 7, 9, 7);
             panelMenu.Name = "panelMenu";
-            panelMenu.Size = new Size(146, 302);
+            panelMenu.Size = new Size(146, 252);
             panelMenu.TabIndex = 0;
             panelMenu.Paint += panelMenu_Paint;
-            // 
-            // iconButton4
-            // 
-            iconButton4.Dock = DockStyle.Top;
-            iconButton4.FlatAppearance.BorderSize = 0;
-            iconButton4.FlatStyle = FlatStyle.Flat;
-            iconButton4.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            iconButton4.ForeColor = Color.White;
-            iconButton4.IconChar = FontAwesome.Sharp.IconChar.Cog;
-            iconButton4.IconColor = Color.White;
-            iconButton4.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            iconButton4.IconSize = 30;
-            iconButton4.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton4.Location = new Point(0, 260);
-            iconButton4.Margin = new Padding(2, 1, 2, 1);
-            iconButton4.Name = "iconButton4";
-            iconButton4.Padding = new Padding(9, 0, 0, 0);
-            iconButton4.Size = new Size(146, 50);
-            iconButton4.TabIndex = 4;
-            iconButton4.Text = "Settings";
-            iconButton4.TextAlign = ContentAlignment.MiddleLeft;
-            iconButton4.TextImageRelation = TextImageRelation.ImageBeforeText;
-            iconButton4.UseVisualStyleBackColor = true;
-            iconButton4.Click += iconButton4_Click;
             // 
             // Profile
             // 
@@ -204,6 +168,11 @@
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click;
             // 
+            // iconButton4
+            // 
+            iconButton4.Enabled = false;
+            iconButton4.Visible = false;
+            // 
             // iconMenuItem1
             // 
             iconMenuItem1.IconChar = FontAwesome.Sharp.IconChar.None;
@@ -258,6 +227,7 @@
         }
 
         #endregion
+
         protected Panel panelMenu;
         protected FontAwesome.Sharp.IconButton homebtn;
         protected Panel panelLogo;
@@ -269,5 +239,5 @@
         protected FlowLayoutPanel panelSidebarContainer;
         protected FontAwesome.Sharp.IconButton Profile;
         protected Panel MainPanel;
-    }   
+    }
 }

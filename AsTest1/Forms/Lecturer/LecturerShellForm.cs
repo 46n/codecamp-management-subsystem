@@ -6,8 +6,6 @@ namespace APUCC_Project
 {
     public class LecturerShellForm : BaseShellForm
     {
-        private Form? activeForm = null;
-
         public LecturerShellForm()
         {
             this.Text = "Lecturer Dashboard";
@@ -19,28 +17,14 @@ namespace APUCC_Project
             iconButton3.Text = "Student List";
 
             iconButton4.Visible = false;
-            Profile.Visible = false;
+            Profile.Visible = true;
 
             OpenChildForm(new LecturerManageStudentsForm());
         }
 
         private void OpenChildForm(Form childForm)
         {
-            if (activeForm != null)
-                activeForm.Close();
-
-            activeForm = childForm;
-
-            childForm.TopLevel = false;
-            childForm.FormBorderStyle = FormBorderStyle.None;
-            childForm.Dock = DockStyle.Fill;
-
-            MainPanel.Controls.Clear();
-            MainPanel.Controls.Add(childForm);
-            MainPanel.Tag = childForm;
-
-            childForm.BringToFront();
-            childForm.Show();
+            OpenSharedChildForm(childForm);
         }
 
         protected override void homebtn_Click(object sender, EventArgs e)

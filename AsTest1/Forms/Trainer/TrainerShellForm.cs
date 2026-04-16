@@ -6,7 +6,6 @@ namespace APUCC_Project
 {
     public partial class TrainerShellForm : BaseShellForm
     {
-        private Form? activeForm = null;
         public TrainerShellForm()
         {
             InitializeComponent();
@@ -22,20 +21,7 @@ namespace APUCC_Project
         }
         private void OpenChildForm(Form childForm)
         {
-            if (activeForm != null)
-                activeForm.Close();
-
-            activeForm = childForm;
-
-            childForm.TopLevel = false;
-            childForm.FormBorderStyle = FormBorderStyle.None;
-            childForm.Dock = DockStyle.Fill;
-
-            MainPanel.Controls.Clear();   // the big panel on the right
-            MainPanel.Controls.Add(childForm);
-
-            childForm.BringToFront();
-            childForm.Show();
+            OpenSharedChildForm(childForm);
         }
         // Student actions when clicking the SHARED base buttons
         protected override void homebtn_Click(object sender, EventArgs e)

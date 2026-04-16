@@ -376,6 +376,162 @@ CREATE TABLE StudentWeeklyEnrollments
 GO
 
 /* =========================================
+   19. STUDENT HOME SCHEDULE VIEW
+   DB-level logic for Current / Upcoming / Hidden
+========================================= */
+IF OBJECT_ID('vw_StudentHomeSchedule', 'V') IS NOT NULL
+    DROP VIEW vw_StudentHomeSchedule;
+GO
+
+CREATE VIEW vw_StudentHomeSchedule
+AS
+SELECT
+    se.EnrollmentID,
+    se.StudentID,
+    cs.Id AS ClassScheduleID,
+    cs.ModuleId,
+    cs.ModuleName AS Module,
+    ISNULL(tu.[Name], 'TBA') AS Trainer,
+    CONVERT(VARCHAR(10), cs.ClassDate, 23) AS [Date],
+    DATENAME(WEEKDAY, cs.ClassDate) AS [Day],
+    CONVERT(VARCHAR(5), cs.ClassTime, 108) AS [Time],
+    ISNULL(cs.Room, 'TBA') AS Room,
+    se.EnrollmentStatus,
+    CASE
+        WHEN cs.ClassDate = CAST(GETDATE() AS DATE) THEN 'Current'
+        WHEN cs.ClassDate = DATEADD(DAY, 1, CAST(GETDATE() AS DATE)) THEN 'Upcoming'
+        ELSE 'Hidden'
+    END AS ScheduleType,
+    CASE
+        WHEN cs.ClassDate IN (CAST(GETDATE() AS DATE), DATEADD(DAY, 1, CAST(GETDATE() AS DATE))) THEN CAST(1 AS BIT)
+        ELSE CAST(0 AS BIT)
+    END AS IsVisibleOnHome,
+    cs.ClassDate AS SortDate,
+    cs.ClassTime AS SortTime
+FROM StudentEnrollments se
+INNER JOIN ClassSchedule cs ON se.ClassScheduleID = cs.Id
+LEFT JOIN Trainers t ON cs.TrainerID = t.TrainerID
+LEFT JOIN Users tu ON t.UserID = tu.UserID
+WHERE se.EnrollmentStatus = 'Active';
+GO
+
+/* =========================================
+   20. STUDENT COURSES VIEWS
+   DB-level support for subscribed and requestable courses
+========================================= */
+IF OBJECT_ID('vw_StudentSubscribedCourses', 'V') IS NOT NULL
+    DROP VIEW vw_StudentSubscribedCourses;
+GO
+
+CREATE VIEW vw_StudentSubscribedCourses
+AS
+SELECT
+    se.EnrollmentID,
+    se.StudentID,
+    cs.Id AS ClassScheduleID,
+    cs.ModuleName AS CourseName,
+    ISNULL(tu.[Name], 'TBA') AS Trainer,
+    CONCAT(
+        CONVERT(VARCHAR(10), cs.ClassDate, 23),
+        ' (',
+        DATENAME(WEEKDAY, cs.ClassDate),
+        ') ',
+        CONVERT(VARCHAR(5), cs.ClassTime, 108),
+        ' - ',
+        ISNULL(cs.Room, 'TBA')
+    ) AS Schedule,
+    se.EnrollmentStatus AS [Status],
+    cs.ClassDate AS SortDate,
+    cs.ClassTime AS SortTime
+FROM StudentEnrollments se
+INNER JOIN ClassSchedule cs ON se.ClassScheduleID = cs.Id
+LEFT JOIN Trainers t ON cs.TrainerID = t.TrainerID
+LEFT JOIN Users tu ON t.UserID = tu.UserID
+WHERE se.EnrollmentStatus = 'Active';
+GO
+
+IF OBJECT_ID('vw_RequestableCourseOptions', 'V') IS NOT NULL
+    DROP VIEW vw_RequestableCourseOptions;
+GO
+
+CREATE VIEW vw_RequestableCourseOptions
+AS
+SELECT
+    cs.Id AS ClassScheduleID,
+    cs.ModuleName AS CourseName,
+    ISNULL(tu.[Name], 'TBA') AS Trainer,
+    cs.[Level],
+    CONCAT(
+        cs.ModuleName,
+        ' | ',
+        CONVERT(VARCHAR(10), cs.ClassDate, 23),
+        ' ',
+        CONVERT(VARCHAR(5), cs.ClassTime, 108),
+        ' | ',
+        DATENAME(WEEKDAY, cs.ClassDate),
+        ' | Room ',
+        ISNULL(cs.Room, 'TBA'),
+        ' | Trainer ',
+        ISNULL(tu.[Name], 'TBA')
+    ) AS DisplayText,
+    cs.ClassDate AS SortDate,
+    cs.ClassTime AS SortTime
+FROM ClassSchedule cs
+LEFT JOIN Trainers t ON cs.TrainerID = t.TrainerID
+LEFT JOIN Users tu ON t.UserID = tu.UserID
+WHERE cs.ClassDate >= CAST(GETDATE() AS DATE);
+GO
+
+/* =========================================
+   21. STUDENT FEES VIEWS
+   DB-level support for outstanding fees and payment history
+========================================= */
+IF OBJECT_ID('vw_StudentOutstandingFees', 'V') IS NOT NULL
+    DROP VIEW vw_StudentOutstandingFees;
+GO
+
+CREATE VIEW vw_StudentOutstandingFees
+AS
+SELECT
+    i.InvoiceID,
+    se.StudentID,
+    cs.ModuleName AS Module,
+    cs.[Level],
+    ISNULL(tu.[Name], 'TBA') AS Trainer,
+    CONCAT('RM ', CONVERT(VARCHAR(20), CAST(i.Amount AS DECIMAL(10,2)))) AS Fee,
+    i.InvoiceStatus AS [Status],
+    i.DueDate AS SortDueDate
+FROM Invoices i
+INNER JOIN StudentEnrollments se ON i.EnrollmentID = se.EnrollmentID
+INNER JOIN ClassSchedule cs ON se.ClassScheduleID = cs.Id
+LEFT JOIN Trainers t ON cs.TrainerID = t.TrainerID
+LEFT JOIN Users tu ON t.UserID = tu.UserID
+WHERE i.InvoiceStatus = 'Unpaid';
+GO
+
+IF OBJECT_ID('vw_StudentPaymentHistory', 'V') IS NOT NULL
+    DROP VIEW vw_StudentPaymentHistory;
+GO
+
+CREATE VIEW vw_StudentPaymentHistory
+AS
+SELECT
+    ph.PaymentHistoryID,
+    se.StudentID,
+    CONCAT('INV-', i.InvoiceID) AS InvoiceNo,
+    cs.ModuleName AS Module,
+    CONCAT('RM ', CONVERT(VARCHAR(20), CAST(ph.AmountPaid AS DECIMAL(10,2)))) AS AmountPaid,
+    ISNULL(ph.PaymentMethod, 'Online Banking') AS PaymentMethod,
+    CONVERT(VARCHAR(10), ph.PaymentDate, 23) AS PaidDate,
+    ph.PaymentDate AS SortPaymentDate
+FROM PaymentHistory ph
+INNER JOIN Invoices i ON ph.InvoiceID = i.InvoiceID
+INNER JOIN StudentEnrollments se ON i.EnrollmentID = se.EnrollmentID
+INNER JOIN ClassSchedule cs ON se.ClassScheduleID = cs.Id
+WHERE ph.PaymentStatus = 'Paid';
+GO
+
+/* =========================================
    37. TEST QUERIES
 ========================================= */
 SELECT * FROM Users;
@@ -396,31 +552,29 @@ SELECT * FROM LecturerModules;
 SELECT * FROM TrainerAssignments;
 SELECT * FROM WeeklySchedules;
 SELECT * FROM StudentWeeklyEnrollments;
+SELECT * FROM vw_StudentHomeSchedule;
+SELECT * FROM vw_StudentSubscribedCourses;
+SELECT * FROM vw_RequestableCourseOptions;
+SELECT * FROM vw_StudentOutstandingFees;
+SELECT * FROM vw_StudentPaymentHistory;
 GO
 
 /* =========================================
    38. STUDENT HOME FORM QUERY
-   Legacy schedule view
+   DB-driven home schedule view
 ========================================= */
 SELECT 
-    se.EnrollmentID,
-    s.StudentID,
-    su.[Name] AS StudentName,
-    cs.ModuleId,
-    cs.ModuleName,
-    cs.ClassDate,
-    cs.ClassTime,
-    cs.Room,
-    cs.[Level],
-    tu.[Name] AS TrainerName,
-    se.EnrollmentStatus
-FROM StudentEnrollments se
-INNER JOIN Students s ON se.StudentID = s.StudentID
-INNER JOIN Users su ON s.UserID = su.UserID
-INNER JOIN ClassSchedule cs ON se.ClassScheduleID = cs.Id
-LEFT JOIN Trainers t ON cs.TrainerID = t.TrainerID
-LEFT JOIN Users tu ON t.UserID = tu.UserID
-ORDER BY cs.ClassDate, cs.ClassTime;
+    StudentID,
+    Module,
+    Trainer,
+    [Date],
+    [Day],
+    [Time],
+    Room,
+    ScheduleType
+FROM vw_StudentHomeSchedule
+WHERE IsVisibleOnHome = 1
+ORDER BY StudentID, SortDate, SortTime;
 GO
 
 /* =========================================
@@ -455,18 +609,47 @@ GO
    40. STUDENT COURSES FORM QUERY
 ========================================= */
 SELECT
-    s.StudentID,
-    u.[Name] AS StudentName,
-    cs.ModuleName,
-    cs.[Level],
-    cs.ClassDate,
-    cs.ClassTime,
-    se.EnrollmentStatus
-FROM StudentEnrollments se
-INNER JOIN Students s ON se.StudentID = s.StudentID
-INNER JOIN Users u ON s.UserID = u.UserID
-INNER JOIN ClassSchedule cs ON se.ClassScheduleID = cs.Id
-ORDER BY u.[Name];
+    StudentID,
+    CourseName,
+    Trainer,
+    Schedule,
+    [Status]
+FROM vw_StudentSubscribedCourses
+ORDER BY StudentID, SortDate, SortTime;
+GO
+
+SELECT
+    ClassScheduleID,
+    CourseName,
+    Trainer,
+    DisplayText
+FROM vw_RequestableCourseOptions
+ORDER BY SortDate, SortTime;
+GO
+
+/* =========================================
+   40A. STUDENT FEES FORM QUERY
+========================================= */
+SELECT
+    StudentID,
+    Module,
+    [Level],
+    Trainer,
+    Fee,
+    [Status]
+FROM vw_StudentOutstandingFees
+ORDER BY StudentID, SortDueDate, InvoiceID;
+GO
+
+SELECT
+    StudentID,
+    InvoiceNo,
+    Module,
+    AmountPaid,
+    PaymentMethod,
+    PaidDate
+FROM vw_StudentPaymentHistory
+ORDER BY StudentID, SortPaymentDate DESC, PaymentHistoryID DESC;
 GO
 
 /* =========================================
@@ -845,7 +1028,7 @@ GO
 ========================================================= */
 INSERT INTO EnrollmentRequests (StudentID, ClassScheduleID, RequestDate, RequestStatus, Remarks, HandledByLecturerID, HandledDate)
 VALUES
-(1, 4,  GETDATE(), 'Pending',  'Interested in web development coaching', NULL, NULL),
+(1, 6,  GETDATE(), 'Pending',  'Interested in database systems coaching', NULL, NULL),
 (2, 5,  GETDATE(), 'Approved', 'Need help with data structures', 1, GETDATE()),
 (3, 6,  GETDATE(), 'Rejected', 'Schedule conflict with existing class', 2, GETDATE()),
 (4, 7,  GETDATE(), 'Pending',  'Want extra computer networks class', NULL, NULL),
@@ -909,6 +1092,47 @@ VALUES
 GO
 
 /* =========================================================
+   L2. EXTRA STUDENT COURSE TEST DATA
+   Keeps StudentCoursesForm request dropdown populated
+========================================================= */
+INSERT INTO ClassSchedule (ModuleId, ModuleName, ClassDate, ClassTime, Charges, TrainerID, [Level], Room)
+VALUES
+('510', 'Web API Development', DATEADD(DAY, 2, CAST(GETDATE() AS DATE)), '11:30', 210.00, 1, 'Intermediate', 'C-10'),
+('520', 'Cloud Fundamentals', DATEADD(DAY, 3, CAST(GETDATE() AS DATE)), '13:30', 230.00, 2, 'Intermediate', 'C-11'),
+('530', 'Data Analytics Essentials', DATEADD(DAY, 4, CAST(GETDATE() AS DATE)), '15:30', 240.00, 1, 'Advance', 'C-12');
+GO
+
+INSERT INTO EnrollmentRequests (StudentID, ClassScheduleID, RequestDate, RequestStatus, Remarks, HandledByLecturerID, HandledDate)
+VALUES
+(2, 31, GETDATE(), 'Pending', 'Requested from student course form demo data', NULL, NULL),
+(3, 32, GETDATE(), 'Rejected', 'Schedule clash, can retry later', 1, GETDATE());
+GO
+
+/* =========================================================
+   L3. NORMALISE REQUESTS AGAINST ACTIVE ENROLLMENTS
+   Keeps seed data logically consistent in one master script
+========================================================= */
+UPDATE er
+SET
+    RequestStatus = 'Approved',
+    HandledByLecturerID = ISNULL(er.HandledByLecturerID, 1),
+    HandledDate = ISNULL(er.HandledDate, CAST(GETDATE() AS DATE)),
+    Remarks = CASE
+        WHEN er.Remarks IS NULL OR LTRIM(RTRIM(er.Remarks)) = '' THEN 'Request auto-aligned with active enrollment'
+        ELSE er.Remarks
+    END
+FROM EnrollmentRequests er
+WHERE EXISTS
+(
+    SELECT 1
+    FROM StudentEnrollments se
+    WHERE se.StudentID = er.StudentID
+      AND se.ClassScheduleID = er.ClassScheduleID
+      AND se.EnrollmentStatus = 'Active'
+);
+GO
+
+/* =========================================================
    M. ADD INVOICES
 ========================================================= */
 INSERT INTO Invoices (EnrollmentID, InvoiceDate, Amount, InvoiceStatus, DueDate)
@@ -926,7 +1150,7 @@ SELECT EnrollmentID, GETDATE(),
        END,
        DATEADD(DAY, 14, GETDATE())
 FROM StudentEnrollments
-WHERE EnrollmentID >= 4 AND EnrollmentID <= 30;
+WHERE EnrollmentID >= 1 AND EnrollmentID <= 30;
 GO
 
 /* =========================================================

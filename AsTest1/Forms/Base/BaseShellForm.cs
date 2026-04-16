@@ -1,18 +1,17 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 using FontAwesome.Sharp;
+using APUCC_Project.Forms.Common;
 
 namespace APUCC_Project
 {
     public partial class BaseShellForm : Form
     {
-        // 🎨 Shared colors (children can access)
         protected readonly Color colorDefault = Color.White;
         protected readonly Color colorTeal = ColorTranslator.FromHtml("#669299");
         protected readonly Color colorActiveBack = Color.FromArgb(25, 25, 25);
 
-        // ✅ shared fields
         protected IconButton? currentBtn;
         protected Panel leftBorderBtn;
         protected Form? currentChildForm;
@@ -21,45 +20,49 @@ namespace APUCC_Project
         {
             InitializeComponent();
 
-            // highlight bar
             leftBorderBtn = new Panel();
             leftBorderBtn.Size = new Size(7, 50);
             panelMenu.Controls.Add(leftBorderBtn);
             leftBorderBtn.Visible = false;
 
-            // form settings
-            this.Text = string.Empty;
-            this.ControlBox = false;
-            this.DoubleBuffered = true;
-            this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
+            Text = string.Empty;
+            ControlBox = false;
+            DoubleBuffered = true;
+            MaximizedBounds = Screen.FromHandle(Handle).WorkingArea;
 
-            // hover + ripple once
             SetupHoverEffects(homebtn);
             SetupHoverEffects(iconButton2);
             SetupHoverEffects(iconButton3);
-            SetupHoverEffects(iconButton4);
             SetupHoverEffects(Profile);
 
+            HideSharedSettingsButton();
             AttachRipples();
 
-            this.ClientSize = new Size(770, 425);
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.StartPosition = FormStartPosition.CenterScreen;
+            ClientSize = new Size(770, 425);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            StartPosition = FormStartPosition.CenterScreen;
         }
 
-
-        // ✅ Ripple once (virtual so child can override if needed)
         protected virtual void AttachRipples()
         {
             RippleEffect.Attach(homebtn, Color.FromArgb(120, 170, 190));
             RippleEffect.Attach(iconButton2, Color.FromArgb(120, 170, 190));
             RippleEffect.Attach(iconButton3, Color.FromArgb(120, 170, 190));
-            RippleEffect.Attach(iconButton4, Color.FromArgb(120, 170, 190));
             RippleEffect.Attach(Profile, Color.FromArgb(120, 170, 190));
         }
 
-        // ✅ children can call this
+        private void HideSharedSettingsButton()
+        {
+            iconButton4.Visible = false;
+            iconButton4.Enabled = false;
+
+            if (panelMenu.Controls.Contains(iconButton4))
+            {
+                panelMenu.Controls.Remove(iconButton4);
+            }
+        }
+
         protected void ActivateButton(object senderBtn)
         {
             if (senderBtn is not IconButton btn) return;
@@ -108,32 +111,63 @@ namespace APUCC_Project
             };
         }
 
-        // ✅ Base can handle shared button clicks too (optional)
         protected virtual void homebtn_Click(object sender, EventArgs e) => ActivateButton(sender);
 
         protected virtual void iconButton2_Click(object sender, EventArgs e) => ActivateButton(sender);
 
         protected virtual void iconButton3_Click(object sender, EventArgs e) => ActivateButton(sender);
 
-        protected virtual void iconButton4_Click(object sender, EventArgs e) => ActivateButton(sender);
+        protected virtual void iconButton4_Click(object sender, EventArgs e)
+        {
+        }
 
-        protected virtual void Profile_Click(object sender, EventArgs e) => ActivateButton(sender);
+        protected void OpenSharedChildForm(Form childForm)
+        {
+            if (currentChildForm != null)
+            {
+                currentChildForm.Close();
+            }
+
+            currentChildForm = childForm;
+
+            childForm.TopLevel = false;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+
+            MainPanel.Controls.Clear();
+
+            Panel contentPanel = new Panel();
+            contentPanel.Dock = DockStyle.Fill;
+            contentPanel.Padding = new Padding(0, 30, 0, 0);
+            contentPanel.BackColor = MainPanel.BackColor;
+
+            childForm.Dock = DockStyle.Fill;
+
+            contentPanel.Controls.Add(childForm);
+            MainPanel.Controls.Add(contentPanel);
+
+            childForm.BringToFront();
+            childForm.Show();
+        }
+
+        protected virtual void Profile_Click(object sender, EventArgs e)
+        {
+            ActivateButton(sender);
+            OpenSharedChildForm(new ProfileForm(Text, this));
+        }
 
         protected virtual void pictureBox1_Click(object sender, EventArgs e) { }
 
         protected virtual void Form1_Load(object sender, EventArgs e)
         {
-            AttachRipples(); // or leave empty if you don't use it
+            AttachRipples();
         }
 
         private void panelMenu_Paint(object sender, PaintEventArgs e)
         {
-
         }
 
         private void MainPanel_Paint(object sender, PaintEventArgs e)
         {
-
         }
     }
 }

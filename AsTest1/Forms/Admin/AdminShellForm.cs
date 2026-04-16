@@ -6,8 +6,6 @@ namespace APUCC_Project
 {
     public partial class AdminShellForm : BaseShellForm
     {
-        private Form? activeForm = null;
-
         public AdminShellForm()
         {
             InitializeComponent();
@@ -21,28 +19,14 @@ namespace APUCC_Project
             iconButton3.Text = "Monthly Income Report";
 
             iconButton4.Visible = false;
-            Profile.Visible = false;
+            Profile.Visible = true;
 
             OpenChildForm(new AdminManageTrainer());
         }
 
         private void OpenChildForm(Form childForm)
         {
-            if (activeForm != null)
-                activeForm.Close();
-
-            activeForm = childForm;
-
-            childForm.TopLevel = false;
-            childForm.FormBorderStyle = FormBorderStyle.None;
-            childForm.Dock = DockStyle.Fill;
-
-            MainPanel.Controls.Clear();
-            MainPanel.Controls.Add(childForm);
-            MainPanel.Tag = childForm;
-
-            childForm.BringToFront();
-            childForm.Show();
+            OpenSharedChildForm(childForm);
         }
 
         // Student actions when clicking the SHARED base buttons
