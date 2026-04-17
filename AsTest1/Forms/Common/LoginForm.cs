@@ -108,7 +108,7 @@ namespace APUCC_Project.Forms.Common
                     }
                     else
                     {
-                        lblWrong.Text = "Soory, An Invalid User .";
+                        lblWrong.Text = "Sorry, An Invalid User .";
                         lblWrong.Visible = true;
                         return;
                     }
