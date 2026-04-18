@@ -863,7 +863,7 @@ GO
 INSERT INTO Users (Username, [Password], [Role], [Name], Email, Phone, [Address])
 VALUES
 ('admin1',    '123456789', 'Admin',    'Admin User', 'admin1@apu.edu.my',               '0111000001', 'APU Main Campus'),
-('trainer1',  '123456789', 'Trainer',  'Abdalla',    'abdalla@apu.edu.my',              '0111000002', 'Bukit Jalil'),
+('lau.20',    '123456789', 'Trainer',  'Lau Chen',   'lau.20@apu.edu.my',               '0111000002', 'Bukit Jalil'),
 ('trainer2',  '123456789', 'Trainer',  'Waleed',     'waleed@apu.edu.my',               '0111000003', 'Sri Petaling'),
 ('lecturer1', '123456789', 'Lecturer', 'Dr Ahmad',   'ahmad@apu.edu.my',                '0111000004', 'School of Computing'),
 ('lecturer2', '123456789', 'Lecturer', 'Ms Farah',   'farah@apu.edu.my',                '0111000005', 'School of Computing'),
@@ -1607,3 +1607,9 @@ WHERE UserID = (
 
 COMMIT TRANSACTION;
 GO
+
+UPDATE Users
+SET Username = 'lau.20',
+    [Name] = 'Lau Chen',
+    Email = 'lau.20@apu.edu.my'
+WHERE Username = 'trainer1';
