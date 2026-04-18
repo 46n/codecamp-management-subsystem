@@ -14,6 +14,7 @@ namespace APUCC_Project.Forms.Admin
             ConfigurationManager.ConnectionStrings["MyConn"].ConnectionString;
 
         private readonly PrintDocument printDocument = new PrintDocument();
+        private readonly string[] printHeaders = { "Trainer", "Module", "Level", "Students Paid", "Fee/Student", "Total" };
         private DataTable reportTable = new DataTable();
         private int printRowIndex = 0;
 
@@ -44,10 +45,19 @@ namespace APUCC_Project.Forms.Admin
             dgvReport.AllowUserToAddRows = false;
             dgvReport.AllowUserToDeleteRows = false;
             dgvReport.AllowUserToResizeRows = false;
+            dgvReport.AllowUserToResizeColumns = false;
             dgvReport.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvReport.MultiSelect = false;
             dgvReport.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvReport.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
             dgvReport.RowHeadersVisible = false;
+            dgvReport.RowTemplate.Height = 34;
+            dgvReport.DefaultCellStyle.WrapMode = DataGridViewTriState.False;
+            dgvReport.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.False;
+            dgvReport.AlternatingRowsDefaultCellStyle.WrapMode = DataGridViewTriState.False;
+            dgvReport.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False;
+            dgvReport.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvReport.ColumnHeadersHeight = 42;
 
             if (dgvReport.Columns.Count > 0)
             {
@@ -75,6 +85,8 @@ namespace APUCC_Project.Forms.Admin
             {
                 dgvReport.AutoGenerateColumns = true;
             }
+
+            ConfigureReportColumns();
         }
 
         private void LoadMonths()
@@ -222,14 +234,25 @@ ORDER BY
 
         private void FormatGrid()
         {
+            ConfigureReportColumns();
+
             if (dgvReport.Columns.Contains("FeePerStudent"))
+            {
                 dgvReport.Columns["FeePerStudent"].DefaultCellStyle.Format = "N2";
+                dgvReport.Columns["FeePerStudent"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
 
             if (dgvReport.Columns.Contains("Total"))
+            {
                 dgvReport.Columns["Total"].DefaultCellStyle.Format = "N2";
+                dgvReport.Columns["Total"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
 
             if (dgvReport.Columns.Contains("StudentsPaid"))
+            {
                 dgvReport.Columns["StudentsPaid"].HeaderText = "Students Paid";
+                dgvReport.Columns["StudentsPaid"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
         }
 
         private void UpdateSummary()
@@ -294,9 +317,13 @@ ORDER BY
             Font headerFont = new Font("Arial", 10, FontStyle.Bold);
             Font bodyFont = new Font("Arial", 10);
 
-            int left = 40;
-            int top = 40;
+            int left = e.MarginBounds.Left;
+            int top = e.MarginBounds.Top;
             int y = top;
+            int printableWidth = e.MarginBounds.Width;
+            int headerHeight = 32;
+            int rowHeight = 34;
+            int[] widths = CalculatePrintColumnWidths(printableWidth);
 
             e.Graphics.DrawString("Monthly Income Report", titleFont, Brushes.Black, left, y);
             y += 35;
@@ -310,22 +337,12 @@ ORDER BY
             e.Graphics.DrawString(lblTotalIncomeTitle.Text, bodyFont, Brushes.Black, left, y);
             y += 30;
 
-            int[] widths = { 140, 130, 90, 100, 110, 110 };
-            string[] headers = { "Trainer", "Module", "Level", "Students Paid", "Fee/Student", "Total" };
-
-            int x = left;
-            for (int i = 0; i < headers.Length; i++)
-            {
-                e.Graphics.DrawRectangle(Pens.Black, x, y, widths[i], 25);
-                e.Graphics.DrawString(headers[i], headerFont, Brushes.Black, x + 3, y + 4);
-                x += widths[i];
-            }
-
-            y += 25;
+            DrawPrintHeader(e.Graphics, headerFont, left, y, widths, headerHeight);
+            y += headerHeight;
 
             while (printRowIndex < reportTable.Rows.Count)
             {
-                if (y + 25 > e.MarginBounds.Bottom)
+                if (y + rowHeight > e.MarginBounds.Bottom)
                 {
                     e.HasMorePages = true;
                     return;
@@ -343,19 +360,95 @@ ORDER BY
                     Convert.ToDecimal(row["Total"]).ToString("N2")
                 };
 
-                x = left;
-                for (int i = 0; i < values.Length; i++)
-                {
-                    e.Graphics.DrawRectangle(Pens.Black, x, y, widths[i], 25);
-                    e.Graphics.DrawString(values[i], bodyFont, Brushes.Black, x + 3, y + 4);
-                    x += widths[i];
-                }
+                DrawPrintRow(e.Graphics, bodyFont, left, y, widths, rowHeight, values);
 
-                y += 25;
+                y += rowHeight;
                 printRowIndex++;
             }
 
             e.HasMorePages = false;
+        }
+
+        private void ConfigureReportColumns()
+        {
+            ConfigureColumn("colTrainerName", 22F, 150, DataGridViewContentAlignment.MiddleLeft);
+            ConfigureColumn("colModule", 32F, 260, DataGridViewContentAlignment.MiddleLeft);
+            ConfigureColumn("colLevel", 16F, 130, DataGridViewContentAlignment.MiddleLeft);
+            ConfigureColumn("colStudentPaid", 14F, 130, DataGridViewContentAlignment.MiddleCenter);
+            ConfigureColumn("colFeePerStudent", 16F, 140, DataGridViewContentAlignment.MiddleRight);
+            ConfigureColumn("colTotal", 16F, 140, DataGridViewContentAlignment.MiddleRight);
+        }
+
+        private void ConfigureColumn(string columnName, float fillWeight, int minimumWidth, DataGridViewContentAlignment alignment)
+        {
+            if (!dgvReport.Columns.Contains(columnName))
+            {
+                return;
+            }
+
+            DataGridViewColumn column = dgvReport.Columns[columnName];
+            column.FillWeight = fillWeight;
+            column.MinimumWidth = minimumWidth;
+            column.DefaultCellStyle.Alignment = alignment;
+            column.DefaultCellStyle.WrapMode = DataGridViewTriState.False;
+            column.SortMode = DataGridViewColumnSortMode.NotSortable;
+        }
+
+        private int[] CalculatePrintColumnWidths(int totalWidth)
+        {
+            double[] ratios = { 0.20, 0.30, 0.13, 0.14, 0.11, 0.12 };
+            int[] widths = new int[ratios.Length];
+            int usedWidth = 0;
+
+            for (int i = 0; i < ratios.Length; i++)
+            {
+                widths[i] = (int)Math.Floor(totalWidth * ratios[i]);
+                usedWidth += widths[i];
+            }
+
+            widths[^1] += totalWidth - usedWidth;
+            return widths;
+        }
+
+        private void DrawPrintHeader(Graphics graphics, Font font, int left, int top, int[] widths, int rowHeight)
+        {
+            int x = left;
+            for (int i = 0; i < printHeaders.Length; i++)
+            {
+                Rectangle bounds = new Rectangle(x, top, widths[i], rowHeight);
+                graphics.FillRectangle(Brushes.WhiteSmoke, bounds);
+                graphics.DrawRectangle(Pens.Black, bounds);
+                DrawCellText(graphics, printHeaders[i], font, bounds, i >= 3 ? StringAlignment.Center : StringAlignment.Near);
+                x += widths[i];
+            }
+        }
+
+        private void DrawPrintRow(Graphics graphics, Font font, int left, int top, int[] widths, int rowHeight, string[] values)
+        {
+            int x = left;
+            for (int i = 0; i < values.Length; i++)
+            {
+                Rectangle bounds = new Rectangle(x, top, widths[i], rowHeight);
+                graphics.DrawRectangle(Pens.Black, bounds);
+
+                StringAlignment alignment = i >= 3 ? StringAlignment.Far : StringAlignment.Near;
+                DrawCellText(graphics, values[i], font, bounds, alignment);
+                x += widths[i];
+            }
+        }
+
+        private void DrawCellText(Graphics graphics, string text, Font font, Rectangle bounds, StringAlignment alignment)
+        {
+            Rectangle paddedBounds = Rectangle.Inflate(bounds, -6, -4);
+            using StringFormat format = new StringFormat
+            {
+                Alignment = alignment,
+                LineAlignment = StringAlignment.Center,
+                Trimming = StringTrimming.EllipsisCharacter,
+                FormatFlags = StringFormatFlags.NoWrap
+            };
+
+            graphics.DrawString(text, font, Brushes.Black, paddedBounds, format);
         }
     }
 }
