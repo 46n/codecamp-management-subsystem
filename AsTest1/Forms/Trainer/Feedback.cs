@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Configuration;
+using System.Drawing;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 
@@ -7,6 +8,7 @@ namespace APUCC_Project.Forms.Trainer
 {
     public partial class FeedBackForm1 : Form
     {
+        private const string MessagePlaceholder = "Type here.....";
         private readonly string connStr =
             ConfigurationManager.ConnectionStrings["MyConn"].ConnectionString;
 
@@ -27,6 +29,7 @@ namespace APUCC_Project.Forms.Trainer
         {
             txtTrainerName.ReadOnly = true;
             LoadTrainerName();
+            ApplyMessagePlaceholder();
         }
 
         private void LoadTrainerName()
@@ -130,7 +133,7 @@ namespace APUCC_Project.Forms.Trainer
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(txtMessage.Text))
+            if (string.IsNullOrWhiteSpace(txtMessage.Text) || txtMessage.Text == MessagePlaceholder)
             {
                 MessageBox.Show("Please enter feedback.");
                 txtMessage.Focus();
@@ -157,11 +160,40 @@ namespace APUCC_Project.Forms.Trainer
         private void ClearFields()
         {
             txtMessage.Clear();
+            ApplyMessagePlaceholder();
 
             for (int i = 0; i < chkFeedbackType.Items.Count; i++)
             {
                 chkFeedbackType.SetItemChecked(i, false);
             }
+        }
+
+        private void txtMessage_Enter(object sender, EventArgs e)
+        {
+            if (txtMessage.Text == MessagePlaceholder)
+            {
+                txtMessage.Text = string.Empty;
+                txtMessage.ForeColor = SystemColors.WindowText;
+            }
+        }
+
+        private void txtMessage_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtMessage.Text))
+            {
+                ApplyMessagePlaceholder();
+            }
+        }
+
+        private void ApplyMessagePlaceholder()
+        {
+            txtMessage.Text = MessagePlaceholder;
+            txtMessage.ForeColor = SystemColors.GrayText;
+        }
+
+        private void lblFeedbackType_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

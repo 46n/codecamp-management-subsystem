@@ -11,13 +11,20 @@ namespace APUCC_Project.Forms.Trainer
     {
         private readonly string connStr =
             ConfigurationManager.ConnectionStrings["MyConn"].ConnectionString;
+        private readonly int trainerId;
 
         private System.Windows.Forms.Timer successTimer = new System.Windows.Forms.Timer();
         private System.Windows.Forms.Timer errorTimer = new System.Windows.Forms.Timer();
 
         public TrainerHomeForm()
+            : this(0)
+        {
+        }
+
+        public TrainerHomeForm(int loggedInTrainerId)
         {
             InitializeComponent();
+            trainerId = loggedInTrainerId;
             dgvClassSchedule.RowHeadersVisible = false;
             dgvClassSchedule.AllowUserToAddRows = false;
             dgvClassSchedule.AllowUserToDeleteRows = false;
@@ -45,6 +52,10 @@ namespace APUCC_Project.Forms.Trainer
         {
             lblWrong.Visible = false;
             lblConfirmed.Visible = false;
+            if (trainerId > 0)
+            {
+                txtTrainerID.Text = trainerId.ToString();
+            }
             LoadClassSchedule();
         }
 
@@ -118,9 +129,11 @@ namespace APUCC_Project.Forms.Trainer
                             Level,
                             Room
                         FROM ClassSchedule
+                        WHERE (@TrainerID = 0 OR TrainerID = @TrainerID)
                         ORDER BY ClassDate, ClassTime";
 
                     SqlDataAdapter da = new SqlDataAdapter(query, con);
+                    da.SelectCommand.Parameters.AddWithValue("@TrainerID", trainerId);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
 

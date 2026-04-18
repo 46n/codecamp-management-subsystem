@@ -38,7 +38,18 @@ namespace APUCC_Project.Forms.Trainer
         private void SetupForm()
         {
             this.StartPosition = FormStartPosition.CenterScreen;
-            this.WindowState = FormWindowState.Maximized;
+            dgvEnrolledStudents.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvEnrolledStudents.MultiSelect = false;
+            dgvEnrolledStudents.ReadOnly = true;
+            dgvEnrolledStudents.AllowUserToAddRows = false;
+            dgvEnrolledStudents.AllowUserToDeleteRows = false;
+            dgvEnrolledStudents.AllowUserToResizeRows = false;
+            dgvEnrolledStudents.AllowUserToResizeColumns = false;
+            dgvEnrolledStudents.RowHeadersVisible = false;
+            dgvEnrolledStudents.ScrollBars = ScrollBars.Both;
+            dgvEnrolledStudents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+            dgvEnrolledStudents.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+            dgvEnrolledStudents.RowTemplate.Height = 34;
         }
 
         // =========================
@@ -85,20 +96,47 @@ namespace APUCC_Project.Forms.Trainer
 
                     dgvEnrolledStudents.DataSource = dt;
 
-                    // UI SETTINGS
-                    dgvEnrolledStudents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                    dgvEnrolledStudents.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-                    dgvEnrolledStudents.MultiSelect = false;
-                    dgvEnrolledStudents.ReadOnly = true;
-                    dgvEnrolledStudents.AllowUserToAddRows = false;
-                    dgvEnrolledStudents.AllowUserToDeleteRows = false;
-                    dgvEnrolledStudents.RowHeadersVisible = false;
+                    ConfigureGridColumns();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error loading students: " + ex.Message);
             }
+        }
+
+        private void ConfigureGridColumns()
+        {
+            if (dgvEnrolledStudents.Columns.Count == 0)
+            {
+                return;
+            }
+
+            SetColumn("PaymentID", "Payment ID", 110);
+            SetColumn("StudentName", "Student Name", 190);
+            SetColumn("ModuleId", "Module ID", 110);
+            SetColumn("ModuleName", "Module Name", 220);
+            SetColumn("ClassDate", "Class Date", 130);
+            SetColumn("ClassTime", "Class Time", 120);
+            SetColumn("Level", "Level", 120);
+            SetColumn("Room", "Room", 100);
+            SetColumn("Amount", "Amount", 110);
+            SetColumn("PaymentDate", "Payment Date", 140);
+            SetColumn("Status", "Status", 120);
+        }
+
+        private void SetColumn(string columnName, string headerText, int width)
+        {
+            if (dgvEnrolledStudents.Columns[columnName] == null)
+            {
+                return;
+            }
+
+            DataGridViewColumn column = dgvEnrolledStudents.Columns[columnName];
+            column.HeaderText = headerText;
+            column.Width = width;
+            column.Resizable = DataGridViewTriState.False;
+            column.SortMode = DataGridViewColumnSortMode.NotSortable;
         }
         private void dgvEnrolledStudents_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {

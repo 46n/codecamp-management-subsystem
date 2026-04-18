@@ -66,15 +66,18 @@
             txtMessage.Location = new Point(49, 284);
             txtMessage.Multiline = true;
             txtMessage.Name = "txtMessage";
-            txtMessage.Size = new Size(760, 459);
+            txtMessage.Size = new Size(760, 493);
             txtMessage.TabIndex = 1;
+            txtMessage.Text = "aine";
+            txtMessage.Enter += txtMessage_Enter;
+            txtMessage.Leave += txtMessage_Leave;
             // 
             // btnSendFeedback
             // 
             btnSendFeedback.BackColor = Color.LightSteelBlue;
-            btnSendFeedback.Location = new Point(850, 651);
+            btnSendFeedback.Location = new Point(850, 685);
             btnSendFeedback.Name = "btnSendFeedback";
-            btnSendFeedback.Size = new Size(230, 92);
+            btnSendFeedback.Size = new Size(280, 92);
             btnSendFeedback.TabIndex = 2;
             btnSendFeedback.Text = "Send Feedback";
             btnSendFeedback.UseVisualStyleBackColor = false;
@@ -84,9 +87,9 @@
             // 
             chkFeedbackType.FormattingEnabled = true;
             chkFeedbackType.Items.AddRange(new object[] { "Genaeral", "Suggestion", "complaint" });
-            chkFeedbackType.Location = new Point(850, 494);
+            chkFeedbackType.Location = new Point(850, 486);
             chkFeedbackType.Name = "chkFeedbackType";
-            chkFeedbackType.Size = new Size(206, 112);
+            chkFeedbackType.Size = new Size(280, 184);
             chkFeedbackType.TabIndex = 3;
             // 
             // lblInstruction
@@ -103,11 +106,12 @@
             // 
             lblFeedbackType.AutoSize = true;
             lblFeedbackType.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblFeedbackType.Location = new Point(850, 418);
+            lblFeedbackType.Location = new Point(850, 416);
             lblFeedbackType.Name = "lblFeedbackType";
             lblFeedbackType.Size = new Size(230, 45);
             lblFeedbackType.TabIndex = 5;
             lblFeedbackType.Text = "Feedback Type";
+            lblFeedbackType.Click += lblFeedbackType_Click;
             // 
             // txtTrainerName
             // 

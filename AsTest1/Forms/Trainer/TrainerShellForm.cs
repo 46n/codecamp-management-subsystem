@@ -1,6 +1,8 @@
 using APUCC_Project.Forms.Trainer;
 using APUCC_Project.UI;
+using Microsoft.Data.SqlClient;
 using System;
+using System.Configuration;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -8,10 +10,16 @@ namespace APUCC_Project
 {
     public partial class TrainerShellForm : BaseShellForm
     {
+        private readonly string connStr =
+            ConfigurationManager.ConnectionStrings["MyConn"].ConnectionString;
+        private readonly int currentTrainerId;
+        protected override int ChildContentTopPadding => panelLogo.Height;
+
         public TrainerShellForm(int userId)
         {
             InitializeComponent();
             InitializeUserContext(userId, "Trainer");
+            currentTrainerId = ResolveTrainerId(userId);
             Text = "Trainer Dashboard";
             ControlBox = true;
 
@@ -22,7 +30,29 @@ namespace APUCC_Project
             Profile.Text = "Profile";
             ApplyStandardShellWindow();
             ActivateButton(homebtn);
-            OpenChildForm(new TrainerHomeForm());
+            OpenChildForm(new TrainerHomeForm(currentTrainerId));
+        }
+
+        private int ResolveTrainerId(int userId)
+        {
+            try
+            {
+                using SqlConnection con = new SqlConnection(connStr);
+                using SqlCommand cmd = new SqlCommand(
+                    "SELECT TrainerID FROM Trainers WHERE UserID = @UserID",
+                    con);
+                cmd.Parameters.AddWithValue("@UserID", userId);
+                con.Open();
+
+                object? result = cmd.ExecuteScalar();
+                return result != null && result != DBNull.Value
+                    ? Convert.ToInt32(result)
+                    : 0;
+            }
+            catch
+            {
+                return 0;
+            }
         }
 
         private void OpenChildForm(Form childForm)
@@ -33,19 +63,19 @@ namespace APUCC_Project
         protected override void homebtn_Click(object sender, EventArgs e)
         {
             base.homebtn_Click(sender, e);
-            OpenChildForm(new TrainerHomeForm());
+            OpenChildForm(new TrainerHomeForm(currentTrainerId));
         }
 
         protected override void iconButton2_Click(object sender, EventArgs e)
         {
             base.iconButton2_Click(sender, e);
-            OpenChildForm(new TrainerEnrolledStudents());
+            OpenChildForm(new TrainerEnrolledStudents(currentTrainerId));
         }
 
         protected override void iconButton3_Click(object sender, EventArgs e)
         {
             base.iconButton3_Click(sender, e);
-            OpenChildForm(new FeedBackForm1());
+            OpenChildForm(new FeedBackForm1(currentTrainerId));
         }
 
         protected override void iconButton4_Click(object sender, EventArgs e)
@@ -114,8 +144,7 @@ namespace APUCC_Project
 
         private static bool IsTopHeaderLabel(Label label)
         {
-            return label.Top <= 220
-                || label.Font.Size >= ThemeTypography.Header.Size
+            return label.Font.Size >= ThemeTypography.Header.Size
                 || IsHeaderLike(label.Text)
                 || IsHeaderLike(label.Name);
         }
@@ -127,7 +156,8 @@ namespace APUCC_Project
                 || normalized.Contains("header")
                 || normalized.Contains("schedule")
                 || normalized.Contains("feedback")
-                || normalized.Contains("profile");
+                || normalized.Contains("profile")
+                || normalized.Contains("enrolled students");
         }
 
         private static bool IsStatusLabel(string? value)
