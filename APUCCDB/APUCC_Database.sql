@@ -1531,3 +1531,79 @@ GO
 SELECT Username, [Password]
 FROM Users
 WHERE Username = 'TP091283';
+
+ALTER VIEW vw_RequestableCourseOptions
+AS
+SELECT
+    MIN(cs.Id) AS ClassScheduleID,
+    CASE
+        WHEN cs.ModuleName LIKE 'Student Dashboard %'
+            THEN LTRIM(RTRIM(REPLACE(cs.ModuleName, 'Student Dashboard ', '')))
+        WHEN cs.ModuleName LIKE '% Group A'
+            THEN LEFT(cs.ModuleName, LEN(cs.ModuleName) - LEN(' Group A'))
+        WHEN cs.ModuleName LIKE '% Group B'
+            THEN LEFT(cs.ModuleName, LEN(cs.ModuleName) - LEN(' Group B'))
+        WHEN cs.ModuleName LIKE '% Tutorial'
+            THEN LEFT(cs.ModuleName, LEN(cs.ModuleName) - LEN(' Tutorial'))
+        WHEN cs.ModuleName LIKE '% Lab'
+            THEN LEFT(cs.ModuleName, LEN(cs.ModuleName) - LEN(' Lab'))
+        WHEN cs.ModuleName LIKE '% Workshop'
+            THEN LEFT(cs.ModuleName, LEN(cs.ModuleName) - LEN(' Workshop'))
+        WHEN cs.ModuleName LIKE '% Clinic'
+            THEN LEFT(cs.ModuleName, LEN(cs.ModuleName) - LEN(' Clinic'))
+        ELSE cs.ModuleName
+    END AS CourseName,
+    MIN(cs.ClassDate) AS SortDate,
+    MIN(cs.ClassTime) AS SortTime
+FROM ClassSchedule cs
+WHERE cs.ClassDate >= CAST(GETDATE() AS DATE)
+GROUP BY
+    CASE
+        WHEN cs.ModuleName LIKE 'Student Dashboard %'
+            THEN LTRIM(RTRIM(REPLACE(cs.ModuleName, 'Student Dashboard ', '')))
+        WHEN cs.ModuleName LIKE '% Group A'
+            THEN LEFT(cs.ModuleName, LEN(cs.ModuleName) - LEN(' Group A'))
+        WHEN cs.ModuleName LIKE '% Group B'
+            THEN LEFT(cs.ModuleName, LEN(cs.ModuleName) - LEN(' Group B'))
+        WHEN cs.ModuleName LIKE '% Tutorial'
+            THEN LEFT(cs.ModuleName, LEN(cs.ModuleName) - LEN(' Tutorial'))
+        WHEN cs.ModuleName LIKE '% Lab'
+            THEN LEFT(cs.ModuleName, LEN(cs.ModuleName) - LEN(' Lab'))
+        WHEN cs.ModuleName LIKE '% Workshop'
+            THEN LEFT(cs.ModuleName, LEN(cs.ModuleName) - LEN(' Workshop'))
+        WHEN cs.ModuleName LIKE '% Clinic'
+            THEN LEFT(cs.ModuleName, LEN(cs.ModuleName) - LEN(' Clinic'))
+        ELSE cs.ModuleName
+    END;
+
+USE MyDatabase;
+GO
+
+BEGIN TRANSACTION;
+
+UPDATE Users
+SET
+    Username = 'TP091212',
+    Email = 'TP091212@mail.apu.edu.my'
+WHERE Username = 'student1';
+
+UPDATE Students
+SET
+    TPNumber = 'TP091212'
+WHERE UserID = (
+    SELECT UserID
+    FROM Users
+    WHERE Username = 'TP091212'
+);
+
+UPDATE UserProfileDetails
+SET
+    ProfileCode = 'TP091212'
+WHERE UserID = (
+    SELECT UserID
+    FROM Users
+    WHERE Username = 'TP091212'
+);
+
+COMMIT TRANSACTION;
+GO

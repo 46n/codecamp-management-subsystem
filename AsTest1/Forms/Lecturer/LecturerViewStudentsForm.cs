@@ -45,7 +45,6 @@ namespace APUCC_Project.Forms.Lecturer
             dgvStudentList.Columns.Add("colEmail", "Email");
             dgvStudentList.Columns.Add("colPhone", "Phone");
             dgvStudentList.Columns.Add("colLevel", "Level");
-            dgvStudentList.Columns.Add("colModule", "Module");
             dgvStudentList.Columns.Add("colMonth", "Month");
             dgvStudentList.Columns.Add("colEnrolType", "Enrol Type");
             dgvStudentList.Columns.Add("colStatus", "Status");
@@ -146,35 +145,59 @@ namespace APUCC_Project.Forms.Lecturer
             {
                 string query = @"
                     SELECT
-                        se.EnrollmentID,
+                        MIN(se.EnrollmentID) AS EnrollmentID,
                         s.StudentID,
                         s.TPNumber,
                         u.[Name] AS StudentName,
                         u.Email,
                         s.ContactNumber AS Phone,
-                        s.StudyLevel,
-                        cs.ModuleName,
-                        s.MonthOfEnrollment,
+                        s.StudyLevel AS StudyLevel,
+                        MAX(s.MonthOfEnrollment) AS MonthOfEnrollment,
                         CASE
-                            WHEN EXISTS
-                            (
-                                SELECT 1
-                                FROM EnrollmentRequests er
-                                WHERE er.StudentID = s.StudentID
-                                  AND er.ClassScheduleID = se.ClassScheduleID
-                                  AND er.RequestStatus = 'Approved'
-                            )
+                            WHEN MAX(CASE WHEN approvedRequests.StudentID IS NOT NULL THEN 1 ELSE 0 END) = 1
                             THEN 'Self'
                             ELSE 'Lecturer'
                         END AS EnrolType,
-                        se.EnrollmentStatus
+                        CASE
+                            WHEN SUM(CASE WHEN se.EnrollmentStatus = 'Active' THEN 1 ELSE 0 END) > 0 THEN 'Active'
+                            WHEN SUM(CASE WHEN se.EnrollmentStatus = 'Pending' THEN 1 ELSE 0 END) > 0 THEN 'Pending'
+                            WHEN SUM(CASE WHEN se.EnrollmentStatus = 'Completed' THEN 1 ELSE 0 END) > 0 THEN 'Completed'
+                            WHEN SUM(CASE WHEN se.EnrollmentStatus = 'Cancelled' THEN 1 ELSE 0 END) > 0 THEN 'Cancelled'
+                            ELSE MAX(se.EnrollmentStatus)
+                        END AS EnrollmentStatus
                     FROM StudentEnrollments se
                     INNER JOIN Students s ON se.StudentID = s.StudentID
                     INNER JOIN Users u ON s.UserID = u.UserID
                     INNER JOIN ClassSchedule cs ON se.ClassScheduleID = cs.Id
+                    LEFT JOIN
+                    (
+                        SELECT DISTINCT StudentID, ClassScheduleID
+                        FROM EnrollmentRequests
+                        WHERE RequestStatus = 'Approved'
+                    ) approvedRequests
+                        ON approvedRequests.StudentID = se.StudentID
+                       AND approvedRequests.ClassScheduleID = se.ClassScheduleID
                     WHERE (@Level = 'All' OR s.StudyLevel = @Level)
-                      AND (@Module = 'All' OR cs.ModuleName = @Module)
                       AND (@Status = 'All' OR se.EnrollmentStatus = @Status)
+                      AND
+                      (
+                          @Module = 'All'
+                          OR EXISTS
+                          (
+                              SELECT 1
+                              FROM StudentEnrollments seFilter
+                              INNER JOIN ClassSchedule csFilter ON seFilter.ClassScheduleID = csFilter.Id
+                              WHERE seFilter.StudentID = s.StudentID
+                                AND csFilter.ModuleName = @Module
+                          )
+                      )
+                    GROUP BY
+                        s.StudentID,
+                        s.TPNumber,
+                        u.[Name],
+                        u.Email,
+                        s.ContactNumber,
+                        s.StudyLevel
                     ORDER BY u.[Name]";
 
                 SqlCommand cmd = new SqlCommand(query, con);
@@ -195,7 +218,6 @@ namespace APUCC_Project.Forms.Lecturer
                         dr["Email"].ToString(),
                         dr["Phone"].ToString(),
                         dr["StudyLevel"].ToString(),
-                        dr["ModuleName"].ToString(),
                         dr["MonthOfEnrollment"].ToString(),
                         dr["EnrolType"].ToString(),
                         dr["EnrollmentStatus"].ToString()
@@ -234,8 +256,85 @@ namespace APUCC_Project.Forms.Lecturer
             lblFormStatus.MaximumSize = new System.Drawing.Size(availableWidth, 0);
             lblFormStatus.Width = availableWidth;
 
+            LayoutFilterControls();
+
             btnDeleteSelected.Top = actionTop;
             btnClose.Top = actionTop;
+        }
+
+        private void LayoutFilterControls()
+        {
+            const int top = 37;
+            const int labelTop = 46;
+            const int leftPadding = 18;
+            const int rightPadding = 18;
+            const int labelSpacing = 8;
+            const int groupSpacing = 18;
+            const int buttonSpacing = 12;
+            const int defaultComboWidth = 155;
+            const int minimumComboWidth = 120;
+            const int filterButtonWidth = 125;
+            const int showAllButtonWidth = 165;
+
+            const int levelLabelWidth = 91;
+            const int statusLabelWidth = 101;
+            const int moduleLabelWidth = 122;
+
+            int availableWidth = grpFilter.ClientSize.Width - leftPadding - rightPadding;
+            int totalStaticWidth =
+                levelLabelWidth + statusLabelWidth + moduleLabelWidth +
+                filterButtonWidth + showAllButtonWidth +
+                (labelSpacing * 3) +
+                (groupSpacing * 4) +
+                buttonSpacing;
+
+            int comboWidth = Math.Min(
+                defaultComboWidth,
+                Math.Max(minimumComboWidth, (availableWidth - totalStaticWidth) / 3));
+
+            int contentWidth =
+                levelLabelWidth + comboWidth +
+                statusLabelWidth + comboWidth +
+                moduleLabelWidth + comboWidth +
+                filterButtonWidth + showAllButtonWidth +
+                (labelSpacing * 3) +
+                (groupSpacing * 4) +
+                buttonSpacing;
+
+            int startX = Math.Max(leftPadding, (grpFilter.ClientSize.Width - contentWidth) / 2);
+            int x = startX;
+
+            cboLevel.Width = comboWidth;
+            cboStatus.Width = comboWidth;
+            cboModule.Width = comboWidth;
+
+            lblLevel.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+            cboLevel.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+            lblStatus.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+            cboStatus.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+            lblModule.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+            cboModule.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+            btnFilter.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+            btnShowAll.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+
+            lblLevel.Location = new System.Drawing.Point(x, labelTop);
+            x += levelLabelWidth + labelSpacing;
+            cboLevel.Location = new System.Drawing.Point(x, top);
+            x += comboWidth + groupSpacing;
+
+            lblStatus.Location = new System.Drawing.Point(x, labelTop);
+            x += statusLabelWidth + labelSpacing;
+            cboStatus.Location = new System.Drawing.Point(x, top);
+            x += comboWidth + groupSpacing;
+
+            lblModule.Location = new System.Drawing.Point(x, labelTop);
+            x += moduleLabelWidth + labelSpacing;
+            cboModule.Location = new System.Drawing.Point(x, top);
+            x += comboWidth + groupSpacing;
+
+            btnFilter.Location = new System.Drawing.Point(x, top);
+            x += filterButtonWidth + buttonSpacing;
+            btnShowAll.Location = new System.Drawing.Point(x, top);
         }
 
         private void dgvStudentList_CellClick(object sender, DataGridViewCellEventArgs e)

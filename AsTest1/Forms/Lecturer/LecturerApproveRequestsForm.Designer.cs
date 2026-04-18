@@ -54,16 +54,16 @@
             // cboShowRequests
             // 
             cboShowRequests.FormattingEnabled = true;
-            cboShowRequests.Location = new Point(194, 57);
+            cboShowRequests.Location = new Point(212, 63);
             cboShowRequests.Margin = new Padding(4);
             cboShowRequests.Name = "cboShowRequests";
-            cboShowRequests.Size = new Size(235, 40);
+            cboShowRequests.Size = new Size(377, 40);
             cboShowRequests.TabIndex = 0;
             // 
             // lblShow
             // 
             lblShow.AutoSize = true;
-            lblShow.Location = new Point(59, 60);
+            lblShow.Location = new Point(57, 67);
             lblShow.Margin = new Padding(4, 0, 4, 0);
             lblShow.Name = "lblShow";
             lblShow.Size = new Size(72, 32);
@@ -72,7 +72,7 @@
             // 
             // btnFilter
             // 
-            btnFilter.Location = new Point(478, 55);
+            btnFilter.Location = new Point(948, 60);
             btnFilter.Margin = new Padding(4);
             btnFilter.Name = "btnFilter";
             btnFilter.Size = new Size(146, 44);
@@ -88,7 +88,7 @@
             dgvRequests.Margin = new Padding(4);
             dgvRequests.Name = "dgvRequests";
             dgvRequests.RowHeadersWidth = 62;
-            dgvRequests.Size = new Size(914, 193);
+            dgvRequests.Size = new Size(1035, 193);
             dgvRequests.TabIndex = 3;
             dgvRequests.CellClick += dgvRequests_CellClick;
             // 
@@ -106,7 +106,7 @@
             grpSelectedRequestDetails.Margin = new Padding(4);
             grpSelectedRequestDetails.Name = "grpSelectedRequestDetails";
             grpSelectedRequestDetails.Padding = new Padding(4);
-            grpSelectedRequestDetails.Size = new Size(1048, 196);
+            grpSelectedRequestDetails.Size = new Size(1048, 262);
             grpSelectedRequestDetails.TabIndex = 4;
             grpSelectedRequestDetails.TabStop = false;
             grpSelectedRequestDetails.Text = "Selected Request Details";
@@ -114,7 +114,7 @@
             // lblLevel
             // 
             lblLevel.AutoSize = true;
-            lblLevel.Location = new Point(595, 132);
+            lblLevel.Location = new Point(525, 158);
             lblLevel.Margin = new Padding(4, 0, 4, 0);
             lblLevel.Name = "lblLevel";
             lblLevel.Size = new Size(69, 32);
@@ -124,7 +124,7 @@
             // lblTPNumber
             // 
             lblTPNumber.AutoSize = true;
-            lblTPNumber.Location = new Point(595, 46);
+            lblTPNumber.Location = new Point(525, 72);
             lblTPNumber.Margin = new Padding(4, 0, 4, 0);
             lblTPNumber.Name = "lblTPNumber";
             lblTPNumber.Size = new Size(135, 32);
@@ -134,7 +134,7 @@
             // lblModule
             // 
             lblModule.AutoSize = true;
-            lblModule.Location = new Point(35, 132);
+            lblModule.Location = new Point(29, 166);
             lblModule.Margin = new Padding(4, 0, 4, 0);
             lblModule.Name = "lblModule";
             lblModule.Size = new Size(97, 32);
@@ -144,7 +144,7 @@
             // lblStudent
             // 
             lblStudent.AutoSize = true;
-            lblStudent.Location = new Point(35, 46);
+            lblStudent.Location = new Point(29, 80);
             lblStudent.Margin = new Padding(4, 0, 4, 0);
             lblStudent.Name = "lblStudent";
             lblStudent.Size = new Size(97, 32);
@@ -153,7 +153,7 @@
             // 
             // txtLevel
             // 
-            txtLevel.Location = new Point(737, 124);
+            txtLevel.Location = new Point(731, 158);
             txtLevel.Margin = new Padding(4);
             txtLevel.Name = "txtLevel";
             txtLevel.Size = new Size(273, 39);
@@ -161,7 +161,7 @@
             // 
             // txtTPNumber
             // 
-            txtTPNumber.Location = new Point(737, 38);
+            txtTPNumber.Location = new Point(731, 72);
             txtTPNumber.Margin = new Padding(4);
             txtTPNumber.Name = "txtTPNumber";
             txtTPNumber.Size = new Size(273, 39);
@@ -169,7 +169,7 @@
             // 
             // txtModule
             // 
-            txtModule.Location = new Point(172, 124);
+            txtModule.Location = new Point(166, 158);
             txtModule.Margin = new Padding(4);
             txtModule.Name = "txtModule";
             txtModule.Size = new Size(273, 39);
@@ -177,7 +177,7 @@
             // 
             // txtStudent
             // 
-            txtStudent.Location = new Point(172, 38);
+            txtStudent.Location = new Point(166, 72);
             txtStudent.Margin = new Padding(4);
             txtStudent.Name = "txtStudent";
             txtStudent.Size = new Size(273, 39);
@@ -185,7 +185,7 @@
             // 
             // btnApprove
             // 
-            btnApprove.Location = new Point(59, 599);
+            btnApprove.Location = new Point(44, 647);
             btnApprove.Margin = new Padding(4);
             btnApprove.Name = "btnApprove";
             btnApprove.Size = new Size(146, 44);
@@ -196,7 +196,7 @@
             // 
             // btnReject
             // 
-            btnReject.Location = new Point(263, 599);
+            btnReject.Location = new Point(248, 647);
             btnReject.Margin = new Padding(4);
             btnReject.Name = "btnReject";
             btnReject.Size = new Size(146, 44);
@@ -207,7 +207,7 @@
             // 
             // btnRerfesh
             // 
-            btnRerfesh.Location = new Point(458, 599);
+            btnRerfesh.Location = new Point(443, 647);
             btnRerfesh.Margin = new Padding(4);
             btnRerfesh.Name = "btnRerfesh";
             btnRerfesh.Size = new Size(146, 44);
@@ -218,7 +218,7 @@
             // 
             // btnClose
             // 
-            btnClose.Location = new Point(656, 599);
+            btnClose.Location = new Point(641, 647);
             btnClose.Margin = new Padding(4);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(146, 44);
@@ -230,7 +230,7 @@
             // lblStatus
             // 
             lblStatus.AutoSize = true;
-            lblStatus.Location = new Point(914, 570);
+            lblStatus.Location = new Point(640, 709);
             lblStatus.Margin = new Padding(4, 0, 4, 0);
             lblStatus.Name = "lblStatus";
             lblStatus.Size = new Size(0, 32);
@@ -239,7 +239,7 @@
             // lblFormStatus
             // 
             lblFormStatus.AutoSize = true;
-            lblFormStatus.Location = new Point(78, 563);
+            lblFormStatus.Location = new Point(46, 709);
             lblFormStatus.Margin = new Padding(4, 0, 4, 0);
             lblFormStatus.Name = "lblFormStatus";
             lblFormStatus.Size = new Size(0, 32);
@@ -249,7 +249,7 @@
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1176, 765);
+            ClientSize = new Size(1276, 765);
             Controls.Add(lblFormStatus);
             Controls.Add(lblStatus);
             Controls.Add(btnClose);

@@ -25,16 +25,35 @@ namespace APUCC_Project.Forms.Student
             SetupCoursesGrid();
             LoadSubscribedCourses();
             LoadAvailableCourses();
+            LoadPendingRequests();
         }
 
         private void SetupCoursesGrid()
         {
             ConfigureGrid(dataGridView1);
+            ConfigureGrid(dataGridView2);
 
             TrainerColumn.DataPropertyName = "Trainer";
             ScheduleColumn.DataPropertyName = "Schedule";
             StatusColumn.DataPropertyName = "Status";
             CourseNameColumn.DataPropertyName = "CourseName";
+
+            PendingRequestIdColumn.DataPropertyName = "RequestID";
+            PendingTrainerColumn.DataPropertyName = "Trainer";
+            PendingCourseNameColumn.DataPropertyName = "CourseName";
+            PendingLevelColumn.DataPropertyName = "Level";
+            PendingRequestDateColumn.DataPropertyName = "RequestDate";
+            PendingStatusColumn.DataPropertyName = "Status";
+
+            if (dataGridView2.Columns.Contains("PendingActionColumn"))
+            {
+                DataGridViewButtonColumn cancelColumn = (DataGridViewButtonColumn)dataGridView2.Columns["PendingActionColumn"];
+                cancelColumn.FlatStyle = FlatStyle.Flat;
+                cancelColumn.DefaultCellStyle.BackColor = Color.FromArgb(178, 55, 45);
+                cancelColumn.DefaultCellStyle.ForeColor = Color.White;
+                cancelColumn.DefaultCellStyle.SelectionBackColor = Color.FromArgb(147, 39, 31);
+                cancelColumn.DefaultCellStyle.SelectionForeColor = Color.White;
+            }
 
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -88,30 +107,52 @@ namespace APUCC_Project.Forms.Student
             LoadTable(query, dataGridView1);
         }
 
-        private void LoadAvailableCourses()
+        private void LoadPendingRequests()
         {
             const string query = @"
                 SELECT
-                    v.ClassScheduleID,
-                    v.CourseName
-                FROM dbo.vw_RequestableCourseOptions v
-                WHERE NOT EXISTS
-                (
-                    SELECT 1
-                    FROM StudentEnrollments se
-                    WHERE se.StudentID = @StudentID
-                      AND se.ClassScheduleID = v.ClassScheduleID
-                      AND se.EnrollmentStatus = 'Active'
-                )
-                AND NOT EXISTS
-                (
-                    SELECT 1
-                    FROM EnrollmentRequests er
-                    WHERE er.StudentID = @StudentID
-                      AND er.ClassScheduleID = v.ClassScheduleID
-                      AND er.RequestStatus = 'Pending'
-                )
-                ORDER BY v.SortDate, v.SortTime;";
+                    er.RequestID,
+                    u.[Name] AS Trainer,
+                    cs.ModuleName AS CourseName,
+                    cs.[Level] AS [Level],
+                    CONVERT(varchar(10), er.RequestDate, 23) AS RequestDate,
+                    er.RequestStatus AS [Status]
+                FROM EnrollmentRequests er
+                INNER JOIN ClassSchedule cs ON er.ClassScheduleID = cs.Id
+                INNER JOIN Trainers t ON cs.TrainerID = t.TrainerID
+                INNER JOIN Users u ON t.UserID = u.UserID
+                WHERE er.StudentID = @StudentID
+                  AND er.RequestStatus = 'Pending'
+                ORDER BY er.RequestDate DESC, er.RequestID DESC;";
+
+            LoadTable(query, dataGridView2);
+        }
+
+        private void LoadAvailableCourses()
+        {
+            const string query = @"
+        SELECT
+            MIN(v.ClassScheduleID) AS ClassScheduleID,
+            v.CourseName
+        FROM dbo.vw_RequestableCourseOptions v
+        WHERE NOT EXISTS
+        (
+            SELECT 1
+            FROM StudentEnrollments se
+            WHERE se.StudentID = @StudentID
+              AND se.ClassScheduleID = v.ClassScheduleID
+              AND se.EnrollmentStatus = 'Active'
+        )
+        AND NOT EXISTS
+        (
+            SELECT 1
+            FROM EnrollmentRequests er
+            WHERE er.StudentID = @StudentID
+              AND er.ClassScheduleID = v.ClassScheduleID
+              AND er.RequestStatus = 'Pending'
+        )
+        GROUP BY v.CourseName
+        ORDER BY v.CourseName;";
 
             try
             {
@@ -124,7 +165,10 @@ namespace APUCC_Project.Forms.Student
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
 
+                comboBox1.DataSource = null;
                 comboBox1.DataSource = dt;
+                comboBox1.DisplayMember = "CourseName";
+                comboBox1.ValueMember = "ClassScheduleID";
                 comboBox1.SelectedIndex = dt.Rows.Count > 0 ? 0 : -1;
             }
             catch (Exception ex)
@@ -170,6 +214,7 @@ namespace APUCC_Project.Forms.Student
             }
 
             int classScheduleId = Convert.ToInt32(comboBox1.SelectedValue);
+            string courseName = comboBox1.Text.Trim();
 
             try
             {
@@ -181,7 +226,7 @@ namespace APUCC_Project.Forms.Student
                 if (existingStatus == "Pending")
                 {
                     MessageBox.Show(
-                        "You already have a pending request for this course.",
+                        "The course request is already pending with the lecturer.",
                         "Request Course",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information
@@ -197,6 +242,18 @@ namespace APUCC_Project.Forms.Student
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information
                     );
+                    return;
+                }
+
+                bool shouldProceed = ActionConfirmationDialog.ShowConfirmation(
+                    this,
+                    "Request Course",
+                    $"The course request for {courseName} will be marked as pending and sent to the lecturer. Do you want to proceed?",
+                    "Proceed",
+                    "Cancel");
+
+                if (!shouldProceed)
+                {
                     return;
                 }
 
@@ -252,6 +309,7 @@ namespace APUCC_Project.Forms.Student
 
                 LoadSubscribedCourses();
                 LoadAvailableCourses();
+                LoadPendingRequests();
             }
             catch (Exception ex)
             {
@@ -282,6 +340,76 @@ namespace APUCC_Project.Forms.Student
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+            {
+                return;
+            }
+
+            if (dataGridView2.Columns[e.ColumnIndex].Name != "PendingActionColumn")
+            {
+                return;
+            }
+
+            object? requestIdValue = dataGridView2.Rows[e.RowIndex].Cells["PendingRequestIdColumn"].Value;
+            object? courseNameValue = dataGridView2.Rows[e.RowIndex].Cells["PendingCourseNameColumn"].Value;
+
+            if (requestIdValue == null || !int.TryParse(requestIdValue.ToString(), out int requestId))
+            {
+                MessageBox.Show("Unable to identify the pending request to cancel.", "Pending Requests", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string courseName = courseNameValue?.ToString() ?? "this course";
+
+            bool shouldCancel = ActionConfirmationDialog.ShowConfirmation(
+                this,
+                "Cancel Request",
+                $"The pending request for {courseName} will be cancelled. Do you want to proceed?",
+                "Proceed",
+                "Cancel");
+
+            if (!shouldCancel)
+            {
+                return;
+            }
+
+            try
+            {
+                using SqlConnection conn = DatabaseHelper.GetConnection();
+                conn.Open();
+
+                const string deleteQuery = @"
+                    DELETE FROM EnrollmentRequests
+                    WHERE RequestID = @RequestID
+                      AND StudentID = @StudentID
+                      AND RequestStatus = 'Pending';";
+
+                using SqlCommand cmd = new SqlCommand(deleteQuery, conn);
+                cmd.Parameters.AddWithValue("@RequestID", requestId);
+                cmd.Parameters.AddWithValue("@StudentID", _studentId);
+
+                int affectedRows = cmd.ExecuteNonQuery();
+
+                if (affectedRows == 0)
+                {
+                    MessageBox.Show("This request could not be cancelled because it is no longer pending.", "Pending Requests", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("The pending request was cancelled successfully.", "Pending Requests", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                LoadPendingRequests();
+                LoadAvailableCourses();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to cancel request: " + ex.Message, "Pending Requests", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

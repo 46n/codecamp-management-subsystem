@@ -1,5 +1,6 @@
 using System;
 using System.Data;
+using System.Drawing;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 using APUCC_Project.Services;
@@ -9,6 +10,7 @@ namespace APUCC_Project.Forms.Student
 {
     public partial class StudentFeesForm : Form
     {
+        private static readonly Color ActionButtonColor = Color.FromArgb(24, 78, 119);
         private static readonly Color PaidButtonColor = Color.FromArgb(52, 120, 246);
         private readonly int _studentId;
 
@@ -18,6 +20,7 @@ namespace APUCC_Project.Forms.Student
             _studentId = studentId;
 
             Load += StudentFeesForm_Load;
+            dataGridView2.CellContentClick += dataGridView2_CellContentClick;
         }
 
         private void StudentFeesForm_Load(object? sender, EventArgs e)
@@ -32,6 +35,7 @@ namespace APUCC_Project.Forms.Student
         {
             ConfigureGrid(dataGridView1);
 
+            InvoiceIDHiddenColumn.DataPropertyName = "InvoiceID";
             ModuleColumn.DataPropertyName = "Module";
             Column2.DataPropertyName = "Level";
             Column3.DataPropertyName = "Trainer";
@@ -41,10 +45,13 @@ namespace APUCC_Project.Forms.Student
             ActionColumn.UseColumnTextForButtonValue = true;
             ActionColumn.Text = "Pay Now";
             ActionColumn.FlatStyle = FlatStyle.Flat;
-            ActionColumn.DefaultCellStyle.BackColor = ThemePalette.DangerButton;
+            ActionColumn.DefaultCellStyle.BackColor = ActionButtonColor;
             ActionColumn.DefaultCellStyle.ForeColor = Color.White;
-            ActionColumn.DefaultCellStyle.SelectionBackColor = ThemePalette.DangerButton;
+            ActionColumn.DefaultCellStyle.SelectionBackColor = ActionButtonColor;
             ActionColumn.DefaultCellStyle.SelectionForeColor = Color.White;
+            ActionColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            ActionColumn.DefaultCellStyle.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            ActionColumn.Width = 170;
         }
 
         private void SetupPaymentHistoryGrid()
@@ -58,12 +65,17 @@ namespace APUCC_Project.Forms.Student
             DatePaidColumn.DataPropertyName = "PaidDate";
 
             ReceiptColumn.UseColumnTextForButtonValue = true;
-            ReceiptColumn.Text = "Paid";
+            ReceiptColumn.HeaderText = "Status / Invoice";
+            ReceiptColumn.Text = "Paid - View Invoice";
             ReceiptColumn.FlatStyle = FlatStyle.Flat;
             ReceiptColumn.DefaultCellStyle.BackColor = PaidButtonColor;
             ReceiptColumn.DefaultCellStyle.ForeColor = Color.White;
             ReceiptColumn.DefaultCellStyle.SelectionBackColor = PaidButtonColor;
             ReceiptColumn.DefaultCellStyle.SelectionForeColor = Color.White;
+            ReceiptColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            ReceiptColumn.DefaultCellStyle.Font = new Font("Segoe UI Semibold", 8.5F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            ReceiptColumn.Width = 200;
+            ReceiptColumn.ToolTipText = "Click to see invoice";
         }
 
         private void ConfigureGrid(DataGridView grid)
@@ -162,14 +174,14 @@ namespace APUCC_Project.Forms.Student
             int invoiceId = Convert.ToInt32(row.Cells["InvoiceIDHiddenColumn"].Value);
             string moduleName = row.Cells["ModuleColumn"].Value?.ToString() ?? "this course";
 
-            DialogResult confirm = MessageBox.Show(
-                $"Mark the fee for {moduleName} as paid?",
+            bool shouldProceed = ActionConfirmationDialog.ShowConfirmation(
+                this,
                 "Confirm Payment",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question
-            );
+                $"Proceed with the payment for {moduleName}? Once completed, the fee will move to Payment History immediately.",
+                "Proceed",
+                "Cancel");
 
-            if (confirm != DialogResult.Yes)
+            if (!shouldProceed)
             {
                 return;
             }
@@ -186,10 +198,25 @@ namespace APUCC_Project.Forms.Student
                         InvoiceDate = CAST(GETDATE() AS DATE)
                     WHERE InvoiceID = @InvoiceID;";
 
+                int updatedInvoices;
                 using (SqlCommand updateCmd = new SqlCommand(updateInvoiceQuery, conn, transaction))
                 {
                     updateCmd.Parameters.AddWithValue("@InvoiceID", invoiceId);
-                    updateCmd.ExecuteNonQuery();
+                    updatedInvoices = updateCmd.ExecuteNonQuery();
+                }
+
+                if (updatedInvoices == 0)
+                {
+                    transaction.Rollback();
+                    MessageBox.Show(
+                        "The selected fee could not be updated. Please reload the page and try again.",
+                        "Fees",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                    LoadOutstandingFees();
+                    LoadPaymentHistory();
+                    return;
                 }
 
                 const string insertPaymentQuery = @"
@@ -219,30 +246,131 @@ namespace APUCC_Project.Forms.Student
                             AND ph.PaymentStatus = 'Paid'
                       );";
 
+                int insertedPayments;
                 using (SqlCommand insertCmd = new SqlCommand(insertPaymentQuery, conn, transaction))
                 {
                     insertCmd.Parameters.AddWithValue("@InvoiceID", invoiceId);
-                    insertCmd.ExecuteNonQuery();
+                    insertedPayments = insertCmd.ExecuteNonQuery();
+                }
+
+                if (insertedPayments == 0)
+                {
+                    transaction.Rollback();
+                    MessageBox.Show(
+                        "The payment could not be recorded for the selected fee. Please try again.",
+                        "Fees",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                    LoadOutstandingFees();
+                    LoadPaymentHistory();
+                    return;
                 }
 
                 transaction.Commit();
-
-                MessageBox.Show(
-                    "Payment recorded successfully.",
-                    "Fees",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information
-                );
 
                 LoadOutstandingFees();
                 LoadPaymentHistory();
                 dataGridView1.Refresh();
                 dataGridView2.Refresh();
+
+                MessageBox.Show(
+                    "Payment recorded successfully. The fee has been moved to Payment History.",
+                    "Fees",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to record payment: " + ex.Message);
             }
+        }
+
+        private void dataGridView2_CellContentClick(object? sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex != dataGridView2.Columns["ReceiptColumn"].Index)
+            {
+                return;
+            }
+
+            string invoiceNo = dataGridView2.Rows[e.RowIndex].Cells["InvoiceIDColumn"].Value?.ToString() ?? string.Empty;
+            if (string.IsNullOrWhiteSpace(invoiceNo))
+            {
+                MessageBox.Show("Invoice information is not available for this payment.", "Invoice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            try
+            {
+                InvoicePrintData invoice = GetInvoicePreviewData(invoiceNo);
+                InvoicePreviewDialog.ShowInvoice(this, invoice);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to load invoice: " + ex.Message, "Invoice", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private InvoicePrintData GetInvoicePreviewData(string invoiceNo)
+        {
+            const string query = @"
+                SELECT TOP 1
+                    CONCAT('INV-', i.InvoiceID) AS InvoiceNo,
+                    cs.ModuleName AS Module,
+                    cs.[Level] AS CourseLevel,
+                    ISNULL(tu.[Name], 'TBA') AS Trainer,
+                    CAST(i.Amount AS DECIMAL(10,2)) AS InvoiceAmount,
+                    CAST(ph.AmountPaid AS DECIMAL(10,2)) AS AmountPaid,
+                    ISNULL(ph.PaymentMethod, 'Online Banking') AS PaymentMethod,
+                    CONVERT(VARCHAR(10), ph.PaymentDate, 23) AS PaidDate,
+                    ISNULL(ph.ReceiptNo, 'N/A') AS ReceiptNo,
+                    i.InvoiceStatus AS InvoiceStatus,
+                    ph.PaymentStatus AS PaymentStatus,
+                    CONVERT(VARCHAR(10), i.DueDate, 23) AS DueDate
+                FROM PaymentHistory ph
+                INNER JOIN Invoices i ON ph.InvoiceID = i.InvoiceID
+                INNER JOIN StudentEnrollments se ON i.EnrollmentID = se.EnrollmentID
+                INNER JOIN ClassSchedule cs ON se.ClassScheduleID = cs.Id
+                LEFT JOIN Trainers t ON cs.TrainerID = t.TrainerID
+                LEFT JOIN Users tu ON t.UserID = tu.UserID
+                WHERE se.StudentID = @StudentID
+                  AND CONCAT('INV-', i.InvoiceID) = @InvoiceNo
+                ORDER BY ph.PaymentDate DESC, ph.PaymentHistoryID DESC;";
+
+            using SqlConnection conn = DatabaseHelper.GetConnection();
+            using SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@StudentID", _studentId);
+            cmd.Parameters.AddWithValue("@InvoiceNo", invoiceNo);
+
+            conn.Open();
+            using SqlDataReader reader = cmd.ExecuteReader();
+            if (!reader.Read())
+            {
+                throw new InvalidOperationException("Invoice details could not be found for the selected payment.");
+            }
+
+            return new InvoicePrintData
+            {
+                InvoiceNo = ReadString(reader, "InvoiceNo"),
+                Module = ReadString(reader, "Module"),
+                Level = ReadString(reader, "CourseLevel"),
+                Trainer = ReadString(reader, "Trainer"),
+                InvoiceAmount = Convert.ToDecimal(reader["InvoiceAmount"]),
+                AmountPaid = Convert.ToDecimal(reader["AmountPaid"]),
+                PaymentMethod = ReadString(reader, "PaymentMethod"),
+                PaidDate = ReadString(reader, "PaidDate"),
+                ReceiptNo = ReadString(reader, "ReceiptNo"),
+                InvoiceStatus = ReadString(reader, "InvoiceStatus"),
+                PaymentStatus = ReadString(reader, "PaymentStatus"),
+                DueDate = ReadString(reader, "DueDate", "Not set")
+            };
+        }
+
+        private static string ReadString(SqlDataReader reader, string columnName, string fallback = "N/A")
+        {
+            object value = reader[columnName];
+            return value == DBNull.Value ? fallback : value.ToString() ?? fallback;
         }
     }
 }

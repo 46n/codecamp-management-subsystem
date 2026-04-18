@@ -56,7 +56,7 @@
             VeiwStudentpnl.Controls.Add(ViewStudentslbl);
             VeiwStudentpnl.Location = new Point(-7, -6);
             VeiwStudentpnl.Name = "VeiwStudentpnl";
-            VeiwStudentpnl.Size = new Size(1380, 162);
+            VeiwStudentpnl.Size = new Size(1380, 168);
             VeiwStudentpnl.TabIndex = 0;
             // 
             // ViewStudentslbl
@@ -82,9 +82,9 @@
             grpFilter.Controls.Add(lblStatus);
             grpFilter.Controls.Add(lblLevel);
             grpFilter.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            grpFilter.Location = new Point(37, 168);
+            grpFilter.Location = new Point(12, 180);
             grpFilter.Name = "grpFilter";
-            grpFilter.Size = new Size(1221, 118);
+            grpFilter.Size = new Size(1356, 118);
             grpFilter.TabIndex = 1;
             grpFilter.TabStop = false;
             grpFilter.Text = "Filter";
@@ -102,14 +102,14 @@
             // cboModule
             // 
             cboModule.FormattingEnabled = true;
-            cboModule.Location = new Point(718, 37);
+            cboModule.Location = new Point(794, 37);
             cboModule.Name = "cboModule";
             cboModule.Size = new Size(155, 53);
             cboModule.TabIndex = 7;
             // 
             // btnShowAll
             // 
-            btnShowAll.Location = new Point(1038, 37);
+            btnShowAll.Location = new Point(1086, 40);
             btnShowAll.Name = "btnShowAll";
             btnShowAll.Size = new Size(165, 50);
             btnShowAll.TabIndex = 6;
@@ -119,7 +119,7 @@
             // 
             // btnFilter
             // 
-            btnFilter.Location = new Point(894, 37);
+            btnFilter.Location = new Point(955, 40);
             btnFilter.Name = "btnFilter";
             btnFilter.Size = new Size(125, 50);
             btnFilter.TabIndex = 5;
@@ -130,7 +130,7 @@
             // cboStatus
             // 
             cboStatus.FormattingEnabled = true;
-            cboStatus.Location = new Point(403, 37);
+            cboStatus.Location = new Point(429, 40);
             cboStatus.Name = "cboStatus";
             cboStatus.Size = new Size(155, 53);
             cboStatus.TabIndex = 4;
@@ -138,7 +138,7 @@
             // cboLevel
             // 
             cboLevel.FormattingEnabled = true;
-            cboLevel.Location = new Point(115, 37);
+            cboLevel.Location = new Point(135, 40);
             cboLevel.Name = "cboLevel";
             cboLevel.Size = new Size(155, 53);
             cboLevel.TabIndex = 3;
@@ -176,7 +176,7 @@
             // 
             // btnDeleteSelected
             // 
-            btnDeleteSelected.Location = new Point(42, 650);
+            btnDeleteSelected.Location = new Point(42, 674);
             btnDeleteSelected.Name = "btnDeleteSelected";
             btnDeleteSelected.Size = new Size(265, 65);
             btnDeleteSelected.TabIndex = 3;
@@ -186,7 +186,7 @@
             // 
             // btnClose
             // 
-            btnClose.Location = new Point(371, 650);
+            btnClose.Location = new Point(371, 674);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(210, 65);
             btnClose.TabIndex = 4;

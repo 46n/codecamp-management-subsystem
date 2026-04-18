@@ -211,6 +211,13 @@ namespace APUCC_Project.Forms.Admin
                 return false;
             }
 
+            if (!txtEmail.Text.EndsWith("@apu.edu.my", StringComparison.OrdinalIgnoreCase) ||
+                txtEmail.Text.Contains("@mail.apu.edu.my", StringComparison.OrdinalIgnoreCase))
+            {
+                lblError.Text = "Trainer email must use the @apu.edu.my domain.";
+                return false;
+            }
+
             if (!Regex.IsMatch(txtPassword.Text, @"^\d{8}$"))
             {
                 lblError.Text = "Password must be exactly 8 digits.";
@@ -348,6 +355,11 @@ namespace APUCC_Project.Forms.Admin
 
                     LoadTrainers();
                     ClearFields();
+                }
+                catch (SqlException ex) when (ex.Message.Contains("CHK_Users_Email_Format", StringComparison.OrdinalIgnoreCase))
+                {
+                    trans.Rollback();
+                    lblError.Text = "Save failed: Trainer email must use the @apu.edu.my domain.";
                 }
                 catch (Exception ex)
                 {
