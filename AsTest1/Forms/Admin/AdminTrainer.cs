@@ -168,5 +168,10 @@ namespace APUCC_Project.Forms.Admin
         {
             Close();
         }
+
+        private void lblMessage_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

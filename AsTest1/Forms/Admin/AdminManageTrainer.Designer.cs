@@ -130,7 +130,7 @@
             grpAssignment.Margin = new Padding(4);
             grpAssignment.Name = "grpAssignment";
             grpAssignment.Padding = new Padding(4);
-            grpAssignment.Size = new Size(360, 192);
+            grpAssignment.Size = new Size(399, 192);
             grpAssignment.TabIndex = 4;
             grpAssignment.TabStop = false;
             grpAssignment.Text = "Assignment";
@@ -158,19 +158,19 @@
             // cboLevel
             // 
             cboLevel.FormattingEnabled = true;
-            cboLevel.Location = new Point(126, 119);
+            cboLevel.Location = new Point(150, 119);
             cboLevel.Margin = new Padding(4);
             cboLevel.Name = "cboLevel";
-            cboLevel.Size = new Size(210, 40);
+            cboLevel.Size = new Size(230, 40);
             cboLevel.TabIndex = 1;
             // 
             // cboModule
             // 
             cboModule.FormattingEnabled = true;
-            cboModule.Location = new Point(126, 51);
+            cboModule.Location = new Point(150, 51);
             cboModule.Margin = new Padding(4);
             cboModule.Name = "cboModule";
-            cboModule.Size = new Size(210, 40);
+            cboModule.Size = new Size(230, 40);
             cboModule.TabIndex = 0;
             // 
             // grpTrainerDetails
@@ -189,7 +189,7 @@
             grpTrainerDetails.Margin = new Padding(4);
             grpTrainerDetails.Name = "grpTrainerDetails";
             grpTrainerDetails.Padding = new Padding(4);
-            grpTrainerDetails.Size = new Size(360, 270);
+            grpTrainerDetails.Size = new Size(399, 270);
             grpTrainerDetails.TabIndex = 3;
             grpTrainerDetails.TabStop = false;
             grpTrainerDetails.Text = "Trainer Details";
@@ -249,7 +249,7 @@
             txtPassword.Location = new Point(150, 220);
             txtPassword.Margin = new Padding(4);
             txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(180, 39);
+            txtPassword.Size = new Size(224, 39);
             txtPassword.TabIndex = 4;
             // 
             // txtUserName
@@ -257,7 +257,7 @@
             txtUserName.Location = new Point(150, 178);
             txtUserName.Margin = new Padding(4);
             txtUserName.Name = "txtUserName";
-            txtUserName.Size = new Size(180, 39);
+            txtUserName.Size = new Size(224, 39);
             txtUserName.TabIndex = 3;
             // 
             // txtPhone
@@ -265,7 +265,7 @@
             txtPhone.Location = new Point(150, 136);
             txtPhone.Margin = new Padding(4);
             txtPhone.Name = "txtPhone";
-            txtPhone.Size = new Size(180, 39);
+            txtPhone.Size = new Size(224, 39);
             txtPhone.TabIndex = 2;
             // 
             // txtEmail
@@ -273,7 +273,7 @@
             txtEmail.Location = new Point(150, 94);
             txtEmail.Margin = new Padding(4);
             txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(180, 39);
+            txtEmail.Size = new Size(224, 39);
             txtEmail.TabIndex = 1;
             // 
             // txtFullName
@@ -281,7 +281,7 @@
             txtFullName.Location = new Point(150, 52);
             txtFullName.Margin = new Padding(4);
             txtFullName.Name = "txtFullName";
-            txtFullName.Size = new Size(180, 39);
+            txtFullName.Size = new Size(224, 39);
             txtFullName.TabIndex = 0;
             // 
             // btnSearch
@@ -330,7 +330,7 @@
             // 
             // btnAssign
             // 
-            btnAssign.Location = new Point(736, 746);
+            btnAssign.Location = new Point(843, 746);
             btnAssign.Margin = new Padding(4);
             btnAssign.Name = "btnAssign";
             btnAssign.Size = new Size(146, 44);
@@ -341,7 +341,7 @@
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(578, 746);
+            btnSave.Location = new Point(685, 746);
             btnSave.Margin = new Padding(4);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(146, 44);
@@ -352,7 +352,7 @@
             // 
             // btnClear
             // 
-            btnClear.Location = new Point(894, 746);
+            btnClear.Location = new Point(1001, 746);
             btnClear.Margin = new Padding(4);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(146, 44);
@@ -382,7 +382,7 @@
             // lblError
             // 
             lblError.AutoSize = true;
-            lblError.Location = new Point(578, 804);
+            lblError.Location = new Point(685, 804);
             lblError.Margin = new Padding(4, 0, 4, 0);
             lblError.Name = "lblError";
             lblError.Size = new Size(0, 32);
@@ -422,7 +422,7 @@
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1180, 860);
+            ClientSize = new Size(1250, 860);
             Controls.Add(pnlMain);
             Controls.Add(lblStatus);
             Controls.Add(lblError);

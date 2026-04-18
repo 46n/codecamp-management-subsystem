@@ -114,6 +114,7 @@
             lblMessage.Size = new Size(221, 32);
             lblMessage.TabIndex = 6;
             lblMessage.Text = "Feedback Message:";
+            lblMessage.Click += lblMessage_Click;
             // 
             // dgvFeedBack
             // 
