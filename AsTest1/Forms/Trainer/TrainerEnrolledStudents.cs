@@ -71,22 +71,36 @@ namespace APUCC_Project.Forms.Trainer
                 {
                     string query = @"
                         SELECT 
-                            sp.PaymentID,
-                            sp.StudentName,
+                            ISNULL(ph.PaymentHistoryID, 0) AS PaymentID,
+                            u.[Name] AS StudentName,
                             cs.ModuleId,
                             cs.ModuleName,
                             cs.ClassDate,
                             cs.ClassTime,
                             cs.Level,
                             cs.Room,
-                            sp.Amount,
-                            sp.PaymentDate,
-                            sp.Status
-                        FROM StudentPayments sp
+                            i.Amount,
+                            ph.PaymentDate,
+                            CASE
+                                WHEN ph.PaymentHistoryID IS NOT NULL THEN ph.PaymentStatus
+                                ELSE i.InvoiceStatus
+                            END AS [Status]
+                        FROM StudentEnrollments se
+                        INNER JOIN Students s
+                            ON se.StudentID = s.StudentID
+                        INNER JOIN Users u
+                            ON s.UserID = u.UserID
                         INNER JOIN ClassSchedule cs 
-                            ON sp.ClassScheduleID = cs.Id
+                            ON se.ClassScheduleID = cs.Id
+                        LEFT JOIN Invoices i
+                            ON i.EnrollmentID = se.EnrollmentID
+                        LEFT JOIN PaymentHistory ph
+                            ON ph.InvoiceID = i.InvoiceID
                         WHERE cs.TrainerID = @TrainerID
-                        ORDER BY sp.PaymentDate DESC";
+                        ORDER BY 
+                            CASE WHEN ph.PaymentDate IS NULL THEN 1 ELSE 0 END,
+                            ph.PaymentDate DESC,
+                            se.EnrollmentID DESC";
 
                     SqlDataAdapter da = new SqlDataAdapter(query, con);
                     da.SelectCommand.Parameters.AddWithValue("@TrainerID", trainerId);
