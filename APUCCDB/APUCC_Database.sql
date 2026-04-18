@@ -1426,3 +1426,72 @@ SELECT COUNT(*) AS TotalSchedules FROM ClassSchedule;
 SELECT COUNT(*) AS TotalEnrollments FROM StudentEnrollments;
 SELECT COUNT(*) AS TotalInvoices FROM Invoices;
 GO
+
+USE MyDatabase;
+GO
+
+SELECT Username, Email, [Password], [Role]
+FROM Users
+WHERE Username = 'student1'
+   OR Email = 'TP001@mail.apu.edu.my';
+
+USE MyDatabase;
+GO
+
+INSERT INTO Users (Username, [Password], [Role], [Name], Email, Phone, [Address])
+VALUES
+('abdalla.hassan', '12345678', 'Admin', 'Abdalla Hasaan', 'abdalla.hassan@apu.edu.my', '0111000099', 'APU Campus');
+GO
+
+USE MyDatabase;
+GO
+
+INSERT INTO Users (Username, [Password], [Role], [Name], Email, Phone, [Address])
+VALUES
+('thava.sivasamy', '12345678', 'Trainer', 'Thavamalini Sivasamy', 'thavamalini@apu.edu.my', '0111000100', 'School of Computing');
+GO
+
+INSERT INTO Trainers (UserID, Qualifications, Specialisation, AssignedModuleId, AssignedModuleName, AssignedLevel)
+SELECT
+    UserID,
+    'Lecturer',
+    'School of Computing',
+    NULL,
+    NULL,
+    'Intermediate'
+FROM Users
+WHERE Username = 'thava.sivasamy';
+GO
+
+IF NOT EXISTS (SELECT 1 FROM Users WHERE Username = 'TP091283' OR Email = 'TP091283@mail.apu.edu.my')
+BEGIN
+    INSERT INTO Users (Username, [Password], [Role], [Name], Email, Phone, [Address])
+    VALUES
+    (
+        'TP091283',
+        '12345678',
+        'Student',
+        'Abdulaziz Abdullah Mohammed Qaderi',
+        'TP091283@mail.apu.edu.my',
+        '0189128300',
+        'Kuala Lumpur'
+    );
+END
+GO
+
+
+IF NOT EXISTS (SELECT 1 FROM Users WHERE Username = 'siawswin.hong' OR Email = 'siawswin.hong@apu.edu.my')
+BEGIN
+    INSERT INTO Users (Username, [Password], [Role], [Name], Email, Phone, [Address])
+    VALUES
+    (
+        'siawswin.hong',
+        '12345678',
+        'Lecturer',
+        'Dr. Hong Siaw Swin',
+        'siawswin.hong@apu.edu.my',
+        '03-89961000',
+        'Faculty of Computing, Engineering & Technology'
+    );
+END
+GO
