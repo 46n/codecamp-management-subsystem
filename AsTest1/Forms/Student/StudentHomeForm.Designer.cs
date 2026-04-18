@@ -51,27 +51,27 @@ namespace APUCC_Project.Forms.Student
             // 
             lblGreeting.AutoSize = true;
             lblGreeting.BackColor = Color.Transparent;
-            lblGreeting.Font = new Font("Segoe UI Semibold", 16.125F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblGreeting.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblGreeting.ForeColor = Color.Black;
-            lblGreeting.Location = new Point(22, 16);
-            lblGreeting.Margin = new Padding(2, 0, 2, 0);
+            lblGreeting.Location = new Point(13, 18);
+            lblGreeting.Margin = new Padding(4, 0, 4, 0);
             lblGreeting.Name = "lblGreeting";
-            lblGreeting.Size = new Size(259, 30);
+            lblGreeting.Size = new Size(354, 51);
             lblGreeting.TabIndex = 1;
-            lblGreeting.Text = "Good Evening, Abdullah ";
+            lblGreeting.Text = "Good day, Student!";
             // 
             // lblWelcome
             // 
             lblWelcome.AutoSize = true;
             lblWelcome.BackColor = Color.Transparent;
-            lblWelcome.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblWelcome.Font = new Font("Segoe UI", 8.5F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblWelcome.ForeColor = Color.Black;
-            lblWelcome.Location = new Point(22, 48);
-            lblWelcome.Margin = new Padding(2, 0, 2, 0);
+            lblWelcome.Location = new Point(13, 86);
+            lblWelcome.Margin = new Padding(4, 0, 4, 0);
             lblWelcome.Name = "lblWelcome";
-            lblWelcome.Size = new Size(248, 15);
+            lblWelcome.Size = new Size(421, 31);
             lblWelcome.TabIndex = 2;
-            lblWelcome.Text = "Welcome back to your CodeCamp dashboard";
+            lblWelcome.Text = "Welcome to your CodeCamp dashboard";
             // 
             // panelScheduleCard
             // 
@@ -81,11 +81,11 @@ namespace APUCC_Project.Forms.Student
             panelScheduleCard.Controls.Add(dgvSchedule);
             panelScheduleCard.Controls.Add(btnUpcomingSchedule);
             panelScheduleCard.Controls.Add(btnCurrentSchedule);
-            panelScheduleCard.Location = new Point(22, 81);
-            panelScheduleCard.Margin = new Padding(2, 1, 2, 1);
+            panelScheduleCard.Location = new Point(13, 157);
+            panelScheduleCard.Margin = new Padding(4, 2, 4, 2);
             panelScheduleCard.Name = "panelScheduleCard";
-            panelScheduleCard.Padding = new Padding(11, 9, 11, 9);
-            panelScheduleCard.Size = new Size(650, 247);
+            panelScheduleCard.Padding = new Padding(20, 19, 20, 19);
+            panelScheduleCard.Size = new Size(1139, 525);
             panelScheduleCard.TabIndex = 3;
             // 
             // dgvSchedule
@@ -112,13 +112,13 @@ namespace APUCC_Project.Forms.Student
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvSchedule.DefaultCellStyle = dataGridViewCellStyle2;
             dgvSchedule.EnableHeadersVisualStyles = false;
-            dgvSchedule.Location = new Point(13, 39);
-            dgvSchedule.Margin = new Padding(2, 1, 2, 1);
+            dgvSchedule.Location = new Point(24, 83);
+            dgvSchedule.Margin = new Padding(4, 2, 4, 2);
             dgvSchedule.Name = "dgvSchedule";
             dgvSchedule.ReadOnly = true;
             dgvSchedule.RowHeadersVisible = false;
             dgvSchedule.RowHeadersWidth = 82;
-            dgvSchedule.Size = new Size(619, 196);
+            dgvSchedule.Size = new Size(1082, 418);
             dgvSchedule.TabIndex = 2;
             // 
             // ModuleColumnHome
@@ -184,10 +184,10 @@ namespace APUCC_Project.Forms.Student
             btnUpcomingSchedule.FlatStyle = FlatStyle.Flat;
             btnUpcomingSchedule.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnUpcomingSchedule.ForeColor = Color.Black;
-            btnUpcomingSchedule.Location = new Point(144, 10);
-            btnUpcomingSchedule.Margin = new Padding(2, 1, 2, 1);
+            btnUpcomingSchedule.Location = new Point(267, 21);
+            btnUpcomingSchedule.Margin = new Padding(4, 2, 4, 2);
             btnUpcomingSchedule.Name = "btnUpcomingSchedule";
-            btnUpcomingSchedule.Size = new Size(135, 31);
+            btnUpcomingSchedule.Size = new Size(251, 66);
             btnUpcomingSchedule.TabIndex = 1;
             btnUpcomingSchedule.Text = "Upcoming Schedule";
             btnUpcomingSchedule.UseVisualStyleBackColor = false;
@@ -199,10 +199,10 @@ namespace APUCC_Project.Forms.Student
             btnCurrentSchedule.FlatStyle = FlatStyle.Flat;
             btnCurrentSchedule.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnCurrentSchedule.ForeColor = Color.Black;
-            btnCurrentSchedule.Location = new Point(13, 10);
-            btnCurrentSchedule.Margin = new Padding(2, 1, 2, 1);
+            btnCurrentSchedule.Location = new Point(24, 21);
+            btnCurrentSchedule.Margin = new Padding(4, 2, 4, 2);
             btnCurrentSchedule.Name = "btnCurrentSchedule";
-            btnCurrentSchedule.Size = new Size(135, 31);
+            btnCurrentSchedule.Size = new Size(251, 66);
             btnCurrentSchedule.TabIndex = 0;
             btnCurrentSchedule.Text = "Current Schedule";
             btnCurrentSchedule.UseVisualStyleBackColor = false;
@@ -210,15 +210,15 @@ namespace APUCC_Project.Forms.Student
             // 
             // StudentHomeForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(724, 444);
+            ClientSize = new Size(1181, 731);
             Controls.Add(panelScheduleCard);
             Controls.Add(lblWelcome);
             Controls.Add(lblGreeting);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(2, 1, 2, 1);
+            Margin = new Padding(4, 2, 4, 2);
             Name = "StudentHomeForm";
             Text = "StudentHomeForm";
             panelScheduleCard.ResumeLayout(false);

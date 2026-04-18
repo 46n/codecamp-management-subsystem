@@ -867,9 +867,9 @@ VALUES
 ('trainer2',  '123456789', 'Trainer',  'Waleed',     'waleed@apu.edu.my',               '0111000003', 'Sri Petaling'),
 ('lecturer1', '123456789', 'Lecturer', 'Dr Ahmad',   'ahmad@apu.edu.my',                '0111000004', 'School of Computing'),
 ('lecturer2', '123456789', 'Lecturer', 'Ms Farah',   'farah@apu.edu.my',                '0111000005', 'School of Computing'),
-('student1',  '123456789', 'Student',  'Ali Ahmad',  'TP001@mail.apu.edu.my',           '0111000006', 'Kuala Lumpur'),
-('student2',  '123456789', 'Student',  'Nur Aina',   'TP002@mail.apu.edu.my',           '0111000007', 'Selangor'),
-('student3',  '123456789', 'Student',  'John Lee',   'TP003@mail.apu.edu.my',           '0111000008', 'Penang');
+('student1',  '123456789', 'Student',  'Abdulaziz Abdullah Mohammed Qaderi', 'TP001@mail.apu.edu.my', '0111000006', 'Kuala Lumpur'),
+('student2',  '123456789', 'Student',  'Nur Aina Binti Rahman',              'TP002@mail.apu.edu.my', '0111000007', 'Selangor'),
+('student3',  '123456789', 'Student',  'John Adrian Lee',                    'TP003@mail.apu.edu.my', '0111000008', 'Penang');
 GO
 
 INSERT INTO Trainers (UserID, Qualifications, Specialisation, AssignedModuleId, AssignedModuleName, AssignedLevel)
@@ -946,26 +946,26 @@ VALUES
 ('lecturer4', '123456789', 'Lecturer', 'Mr Hafiz Rahman',  'hafiz.rahman@apu.edu.my',     '0172000002', 'APU Campus'),
 ('lecturer5', '123456789', 'Lecturer', 'Ms Tan Li Wen',    'liwen.tan@apu.edu.my',        '0172000003', 'APU Campus'),
 
-('student4',  '123456789', 'Student',  'Muhammad Amir',    'TP100001@mail.apu.edu.my',    '0183000001', 'Kuala Lumpur'),
-('student5',  '123456789', 'Student',  'Siti Hajar',       'TP100002@mail.apu.edu.my',    '0183000002', 'Selangor'),
-('student6',  '123456789', 'Student',  'Ethan Koh',        'TP100003@mail.apu.edu.my',    '0183000003', 'Penang'),
-('student7',  '123456789', 'Student',  'Nurul Syafiqah',   'TP100004@mail.apu.edu.my',    '0183000004', 'Johor'),
-('student8',  '123456789', 'Student',  'Adam Faris',       'TP100005@mail.apu.edu.my',    '0183000005', 'Perak'),
-('student9',  '123456789', 'Student',  'Alicia Chan',      'TP100006@mail.apu.edu.my',    '0183000006', 'Malacca'),
-('student10', '123456789', 'Student',  'Ryan Goh',         'TP100007@mail.apu.edu.my',    '0183000007', 'Negeri Sembilan'),
-('student11', '123456789', 'Student',  'Izzah Sofea',      'TP100008@mail.apu.edu.my',    '0183000008', 'Sabah'),
-('student12', '123456789', 'Student',  'Marcus Teo',       'TP100009@mail.apu.edu.my',    '0183000009', 'Sarawak'),
-('student13', '123456789', 'Student',  'Farhan Iskandar',  'TP100010@mail.apu.edu.my',    '0183000010', 'Kedah'),
-('student14', '123456789', 'Student',  'Grace Yap',        'TP100011@mail.apu.edu.my',    '0183000011', 'Selangor'),
-('student15', '123456789', 'Student',  'Haziq Roslan',     'TP100012@mail.apu.edu.my',    '0183000012', 'Kuala Lumpur'),
-('student16', '123456789', 'Student',  'Chloe Lee',        'TP100013@mail.apu.edu.my',    '0183000013', 'Penang'),
-('student17', '123456789', 'Student',  'Aiman Hakim',      'TP100014@mail.apu.edu.my',    '0183000014', 'Johor'),
-('student18', '123456789', 'Student',  'Natalie Wong',     'TP100015@mail.apu.edu.my',    '0183000015', 'Sabah'),
-('student19', '123456789', 'Student',  'Syed Danish',      'TP100016@mail.apu.edu.my',    '0183000016', 'Perlis'),
-('student20', '123456789', 'Student',  'Mei Xin',          'TP100017@mail.apu.edu.my',    '0183000017', 'Sarawak'),
-('student21', '123456789', 'Student',  'Hakim Zulkifli',   'TP100018@mail.apu.edu.my',    '0183000018', 'Selangor'),
-('student22', '123456789', 'Student',  'Vanessa Low',      'TP100019@mail.apu.edu.my',    '0183000019', 'Kuala Lumpur'),
-('student23', '123456789', 'Student',  'Farisya Jamal',    'TP100020@mail.apu.edu.my',    '0183000020', 'Johor');
+('student4',  '123456789', 'Student',  'Muhammad Amirul Hakim',   'TP100001@mail.apu.edu.my',    '0183000001', 'Kuala Lumpur'),
+('student5',  '123456789', 'Student',  'Siti Hajar Binti Salleh', 'TP100002@mail.apu.edu.my',    '0183000002', 'Selangor'),
+('student6',  '123456789', 'Student',  'Ethan Benjamin Koh',      'TP100003@mail.apu.edu.my',    '0183000003', 'Penang'),
+('student7',  '123456789', 'Student',  'Nurul Syafiqah Binti Omar','TP100004@mail.apu.edu.my',   '0183000004', 'Johor'),
+('student8',  '123456789', 'Student',  'Adam Faris Bin Zulkifli', 'TP100005@mail.apu.edu.my',    '0183000005', 'Perak'),
+('student9',  '123456789', 'Student',  'Alicia Carmen Chan',      'TP100006@mail.apu.edu.my',    '0183000006', 'Malacca'),
+('student10', '123456789', 'Student',  'Ryan Matthew Goh',        'TP100007@mail.apu.edu.my',    '0183000007', 'Negeri Sembilan'),
+('student11', '123456789', 'Student',  'Izzah Sofea Binti Karim', 'TP100008@mail.apu.edu.my',    '0183000008', 'Sabah'),
+('student12', '123456789', 'Student',  'Marcus Jian Hao Teo',     'TP100009@mail.apu.edu.my',    '0183000009', 'Sarawak'),
+('student13', '123456789', 'Student',  'Farhan Iskandar Bin Musa','TP100010@mail.apu.edu.my',    '0183000010', 'Kedah'),
+('student14', '123456789', 'Student',  'Grace Hui Min Yap',       'TP100011@mail.apu.edu.my',    '0183000011', 'Selangor'),
+('student15', '123456789', 'Student',  'Haziq Roslan Bin Aziz',   'TP100012@mail.apu.edu.my',    '0183000012', 'Kuala Lumpur'),
+('student16', '123456789', 'Student',  'Chloe Mei Ling Lee',      'TP100013@mail.apu.edu.my',    '0183000013', 'Penang'),
+('student17', '123456789', 'Student',  'Aiman Hakim Bin Rahmat',  'TP100014@mail.apu.edu.my',    '0183000014', 'Johor'),
+('student18', '123456789', 'Student',  'Natalie Shu Wen Wong',    'TP100015@mail.apu.edu.my',    '0183000015', 'Sabah'),
+('student19', '123456789', 'Student',  'Syed Danish Bin Hamdan',  'TP100016@mail.apu.edu.my',    '0183000016', 'Perlis'),
+('student20', '123456789', 'Student',  'Mei Xin Tan',             'TP100017@mail.apu.edu.my',    '0183000017', 'Sarawak'),
+('student21', '123456789', 'Student',  'Hakim Zulkifli Bin Ali',  'TP100018@mail.apu.edu.my',    '0183000018', 'Selangor'),
+('student22', '123456789', 'Student',  'Vanessa Rui En Low',      'TP100019@mail.apu.edu.my',    '0183000019', 'Kuala Lumpur'),
+('student23', '123456789', 'Student',  'Farisya Jamal Binti Noor','TP100020@mail.apu.edu.my',    '0183000020', 'Johor');
 GO
 
 /* =========================================================
@@ -1114,6 +1114,60 @@ VALUES
 GO
 
 /* =========================================================
+   I2. ADD WEEKLY SCHEDULES
+   Keeps the timetable-style tables populated as well
+========================================================= */
+INSERT INTO WeeklySchedules
+(
+    ModuleID,
+    IntakeID,
+    TrainerID,
+    LecturerID,
+    CoachingLevel,
+    DayOfWeek,
+    StartTime,
+    EndTime,
+    Room,
+    StartDate,
+    EndDate,
+    Status
+)
+VALUES
+(1, 1, 1, 1, 'Beginner',     'Monday',    '09:00', '11:00', 'LAB-01',  CAST(GETDATE() AS DATE), DATEADD(MONTH, 3, CAST(GETDATE() AS DATE)), 'Active'),
+(2, 1, 2, 1, 'Intermediate', 'Tuesday',   '11:00', '13:00', 'LAB-02',  CAST(GETDATE() AS DATE), DATEADD(MONTH, 3, CAST(GETDATE() AS DATE)), 'Active'),
+(3, 2, 2, 2, 'Level 2',      'Wednesday', '10:00', '12:00', 'B-201',   CAST(GETDATE() AS DATE), DATEADD(MONTH, 4, CAST(GETDATE() AS DATE)), 'Active'),
+(4, 2, 1, 2, 'Level 2',      'Thursday',  '14:00', '16:00', 'NET-01',  CAST(GETDATE() AS DATE), DATEADD(MONTH, 4, CAST(GETDATE() AS DATE)), 'Active'),
+(5, 3, 3, 3, 'Level 2',      'Friday',    '09:30', '11:30', 'SYS-01',  CAST(GETDATE() AS DATE), DATEADD(MONTH, 4, CAST(GETDATE() AS DATE)), 'Active'),
+(6, 1, 3, 3, 'Level 3',      'Monday',    '13:00', '15:00', 'MOB-01',  CAST(GETDATE() AS DATE), DATEADD(MONTH, 5, CAST(GETDATE() AS DATE)), 'Active'),
+(7, 2, 4, 4, 'Level 3',      'Tuesday',   '15:00', '17:00', 'AI-01',   CAST(GETDATE() AS DATE), DATEADD(MONTH, 5, CAST(GETDATE() AS DATE)), 'Active'),
+(8, 2, 4, 4, 'Level 3',      'Wednesday', '08:30', '10:30', 'ML-01',   CAST(GETDATE() AS DATE), DATEADD(MONTH, 5, CAST(GETDATE() AS DATE)), 'Active'),
+(9, 3, 5, 5, 'Level 2',      'Thursday',  '12:00', '14:00', 'UX-01',   CAST(GETDATE() AS DATE), DATEADD(MONTH, 5, CAST(GETDATE() AS DATE)), 'Active'),
+(10,4, 6, 5, 'Level 3',      'Friday',    '14:00', '16:00', 'CLD-01',  CAST(GETDATE() AS DATE), DATEADD(MONTH, 5, CAST(GETDATE() AS DATE)), 'Active');
+GO
+
+/* =========================================================
+   I3. ADD STUDENT WEEKLY ENROLLMENTS
+========================================================= */
+INSERT INTO StudentWeeklyEnrollments (StudentID, WeeklyScheduleID, EnrollmentDate, EnrollmentStatus)
+VALUES
+(1, 1, GETDATE(), 'Active'),
+(1, 2, GETDATE(), 'Active'),
+(2, 1, GETDATE(), 'Active'),
+(2, 2, GETDATE(), 'Active'),
+(3, 3, GETDATE(), 'Active'),
+(3, 4, GETDATE(), 'Active'),
+(4, 5, GETDATE(), 'Active'),
+(5, 6, GETDATE(), 'Active'),
+(6, 7, GETDATE(), 'Active'),
+(7, 8, GETDATE(), 'Active'),
+(8, 9, GETDATE(), 'Active'),
+(9, 10, GETDATE(), 'Active'),
+(10, 5, GETDATE(), 'Active'),
+(11, 6, GETDATE(), 'Active'),
+(12, 7, GETDATE(), 'Active');
+GO
+
+/* =========================================================
    J. ADD MORE CLASS SCHEDULE
    IMPORTANT:
    - some rows use CAST(GETDATE() AS DATE) for Current Schedule
@@ -1223,6 +1277,36 @@ VALUES
 
 (14,29, GETDATE(), 'Active',    4, NULL),
 (14,30, GETDATE(), 'Active',    4, NULL);
+GO
+
+/* =========================================================
+   L1. STUDENT DASHBOARD GUARANTEE DATA
+   Explicit current/upcoming rows for the first students
+========================================================= */
+INSERT INTO ClassSchedule (ModuleId, ModuleName, ClassDate, ClassTime, Charges, TrainerID, [Level], Room)
+VALUES
+('SD101', 'Student Dashboard Programming', CAST(GETDATE() AS DATE),                '08:30', 150.00, 1, 'Beginner',     'S-01'),
+('SD102', 'Student Dashboard Web Basics',  DATEADD(DAY, 1, CAST(GETDATE() AS DATE)), '10:30', 180.00, 2, 'Intermediate', 'S-02'),
+('SD103', 'Student Dashboard Database',    CAST(GETDATE() AS DATE),                '13:30', 210.00, 3, 'Intermediate', 'S-03'),
+('SD104', 'Student Dashboard Cloud',       DATEADD(DAY, 1, CAST(GETDATE() AS DATE)), '15:00', 230.00, 4, 'Advance',      'S-04'),
+('SD105', 'Student Dashboard Data Analytics', CAST(GETDATE() AS DATE),             '16:30', 220.00, 1, 'Intermediate', 'S-05'),
+('SD106', 'Student Dashboard Systems Design', DATEADD(DAY, 1, CAST(GETDATE() AS DATE)), '08:45', 240.00, 2, 'Advance', 'S-06'),
+('SD107', 'Student Dashboard Cyber Security', CAST(GETDATE() AS DATE),             '11:15', 210.00, 3, 'Intermediate', 'S-07'),
+('SD108', 'Student Dashboard Mobile Computing', DATEADD(DAY, 1, CAST(GETDATE() AS DATE)), '13:15', 225.00, 4, 'Intermediate', 'S-08');
+GO
+
+INSERT INTO StudentEnrollments (StudentID, ClassScheduleID, EnrolledDate, EnrollmentStatus, EnrolledByLecturerID, CompletedDate)
+SELECT 1, cs.Id, GETDATE(), 'Active', 1, NULL
+FROM ClassSchedule cs
+WHERE cs.ModuleId IN ('SD101', 'SD102', 'SD105', 'SD106')
+UNION ALL
+SELECT 2, cs.Id, GETDATE(), 'Active', 1, NULL
+FROM ClassSchedule cs
+WHERE cs.ModuleId IN ('SD103', 'SD104', 'SD107', 'SD108')
+UNION ALL
+SELECT 3, cs.Id, GETDATE(), 'Active', 2, NULL
+FROM ClassSchedule cs
+WHERE cs.ModuleId IN ('SD101', 'SD104', 'SD105', 'SD108');
 GO
 
 /* =========================================================

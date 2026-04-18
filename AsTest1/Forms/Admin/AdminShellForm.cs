@@ -13,7 +13,6 @@ namespace APUCC_Project
 
             this.Text = "Admin Dashboard";
             this.ControlBox = true;
-            this.FormBorderStyle = FormBorderStyle.Sizable;
 
             homebtn.Text = "Manage Trainer";
             iconButton2.Text = "Trainer Feedback";
@@ -21,6 +20,7 @@ namespace APUCC_Project
 
             iconButton4.Visible = false;
             Profile.Visible = true;
+            ApplyStandardShellWindow();
 
             OpenChildForm(new AdminManageTrainer());
         }

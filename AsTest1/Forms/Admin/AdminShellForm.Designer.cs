@@ -66,9 +66,8 @@
             // 
             // AdminShellForm
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1078, 644);
+            AutoScaleMode = AutoScaleMode.None;
+            ClientSize = new Size(1534, 1018);
             Location = new Point(0, 0);
             Name = "AdminShellForm";
             panelMenu.ResumeLayout(false);

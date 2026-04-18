@@ -1,5 +1,7 @@
-﻿using APUCC_Project.Forms.Trainer;
+using APUCC_Project.Forms.Trainer;
+using APUCC_Project.UI;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace APUCC_Project
@@ -10,24 +12,27 @@ namespace APUCC_Project
         {
             InitializeComponent();
             InitializeUserContext(userId, "Trainer");
-            this.ControlBox = true;
-            OpenChildForm(new TrainerHomeForm());
+            Text = "Trainer Dashboard";
+            ControlBox = true;
 
-            // Optional: change labels/icons for student
             homebtn.Text = "Manage Classes";
             iconButton2.Text = "EnrolLed Student";
             iconButton3.Text = "Feedback";
             iconButton4.Text = "Settings";
             Profile.Text = "Profile";
+            ApplyStandardShellWindow();
+            ActivateButton(homebtn);
+            OpenChildForm(new TrainerHomeForm());
         }
+
         private void OpenChildForm(Form childForm)
         {
             OpenSharedChildForm(childForm);
         }
-        // Student actions when clicking the SHARED base buttons
+
         protected override void homebtn_Click(object sender, EventArgs e)
         {
-            base.homebtn_Click(sender, e); // keeps highlight + style
+            base.homebtn_Click(sender, e);
             OpenChildForm(new TrainerHomeForm());
         }
 
@@ -35,47 +40,119 @@ namespace APUCC_Project
         {
             base.iconButton2_Click(sender, e);
             OpenChildForm(new TrainerEnrolledStudents());
-            // OpenChildForm(new StudentCoursesForm());
         }
 
         protected override void iconButton3_Click(object sender, EventArgs e)
         {
             base.iconButton3_Click(sender, e);
             OpenChildForm(new FeedBackForm1());
-            // OpenChildForm(new StudentFeesForm());
         }
 
         protected override void iconButton4_Click(object sender, EventArgs e)
         {
             base.iconButton4_Click(sender, e);
-
-            // OpenChildForm(new StudentProfileForm());
         }
 
         protected override void Profile_Click(object sender, EventArgs e)
         {
             base.Profile_Click(sender, e);
-            // OpenChildForm(new StudentProfileForm());
+        }
+
+        protected override void CustomizeChildFormAppearance(Form childForm)
+        {
+            SoftenTrainerTypography(childForm);
+        }
+
+        private void SoftenTrainerTypography(Control root)
+        {
+            foreach (Control control in root.Controls)
+            {
+                switch (control)
+                {
+                    case Label label:
+                        ApplyTrainerLabelFont(label);
+                        break;
+                    case Button button:
+                        button.Font = new Font("Segoe UI", 10.5F, FontStyle.Regular);
+                        break;
+                    case GroupBox groupBox:
+                        groupBox.Font = new Font("Segoe UI", 10.5F, FontStyle.Regular);
+                        break;
+                    case TextBoxBase textBox:
+                        textBox.Font = ThemeTypography.Body;
+                        break;
+                    case ComboBox comboBox:
+                        comboBox.Font = ThemeTypography.Body;
+                        break;
+                    case DateTimePicker dateTimePicker:
+                        dateTimePicker.Font = ThemeTypography.Body;
+                        break;
+                }
+
+                if (control.HasChildren)
+                {
+                    SoftenTrainerTypography(control);
+                }
+            }
+        }
+
+        private static void ApplyTrainerLabelFont(Label label)
+        {
+            if (IsStatusLabel(label.Name))
+            {
+                return;
+            }
+
+            if (IsTopHeaderLabel(label))
+            {
+                label.Font = ThemeTypography.Header;
+                return;
+            }
+
+            label.Font = new Font("Segoe UI", 10.5F, FontStyle.Regular);
+        }
+
+        private static bool IsTopHeaderLabel(Label label)
+        {
+            return label.Top <= 220
+                || label.Font.Size >= ThemeTypography.Header.Size
+                || IsHeaderLike(label.Text)
+                || IsHeaderLike(label.Name);
+        }
+
+        private static bool IsHeaderLike(string? value)
+        {
+            string normalized = value?.Trim().ToLowerInvariant() ?? string.Empty;
+            return normalized.Contains("title")
+                || normalized.Contains("header")
+                || normalized.Contains("schedule")
+                || normalized.Contains("feedback")
+                || normalized.Contains("profile");
+        }
+
+        private static bool IsStatusLabel(string? value)
+        {
+            string normalized = value?.Trim().ToLowerInvariant() ?? string.Empty;
+            return normalized.Contains("wrong")
+                || normalized.Contains("error")
+                || normalized.Contains("confirm")
+                || normalized.Contains("success");
         }
 
         private void MainPanel_Paint(object sender, PaintEventArgs e)
         {
-            
         }
 
         private void homebtn_Click_1(object sender, EventArgs e)
         {
-
         }
 
         private void TrainerShellForm_Load(object sender, EventArgs e)
         {
-            OpenChildForm(new TrainerHomeForm());
         }
 
         private void iconButton2_Click_1(object sender, EventArgs e)
         {
-
         }
     }
 }

@@ -19,12 +19,6 @@ namespace APUCC_Project.Forms.Admin
         {
             InitializeComponent();
 
-            this.StartPosition = FormStartPosition.CenterScreen;
-            this.FormBorderStyle = FormBorderStyle.Sizable;
-            this.MaximizeBox = true;
-            this.MinimizeBox = true;
-            this.WindowState = FormWindowState.Maximized;
-
             dgvTrainer.CellClick += dgvTrainer_CellClick;
             txtPassword.TextChanged += txtPassword_TextChanged;
         }

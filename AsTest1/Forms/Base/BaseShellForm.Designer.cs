@@ -215,7 +215,7 @@ namespace APUCC_Project
             panelSidebarContainer.Margin = new Padding(0);
             panelSidebarContainer.Name = "panelSidebarContainer";
             panelSidebarContainer.Padding = new Padding(9, 11, 9, 11);
-            panelSidebarContainer.Size = new Size(290, 755);
+            panelSidebarContainer.Size = new Size(290, 1018);
             panelSidebarContainer.TabIndex = 2;
             // 
             // MainPanel
@@ -224,21 +224,18 @@ namespace APUCC_Project
             MainPanel.Location = new Point(290, 0);
             MainPanel.Margin = new Padding(4, 2, 4, 2);
             MainPanel.Name = "MainPanel";
-            MainPanel.Size = new Size(1092, 755);
+            MainPanel.Size = new Size(1244, 1018);
             MainPanel.TabIndex = 3;
             MainPanel.Paint += MainPanel_Paint;
             // 
             // BaseShellForm
             // 
-            AutoScaleDimensions = new SizeF(13F, 32F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1700, 755);
+            AutoScaleMode = AutoScaleMode.None;
+            ClientSize = new Size(1534, 1018);
             Controls.Add(MainPanel);
             Controls.Add(panelSidebarContainer);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Margin = new Padding(4, 2, 4, 2);
-            MaximumSize = new Size(1700, 826);
-            MinimumSize = new Size(1408, 826);
             Name = "BaseShellForm";
             Text = "Form1";
             Load += Form1_Load;

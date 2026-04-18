@@ -3,6 +3,7 @@ using System.Data;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 using APUCC_Project.Services;
+using APUCC_Project.UI;
 
 namespace APUCC_Project.Forms.Student
 {
@@ -53,20 +54,22 @@ namespace APUCC_Project.Forms.Student
             grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             grid.RowHeadersVisible = false;
-            grid.BackgroundColor = Color.White;
+            grid.BackgroundColor = ThemePalette.BaseBackground;
             grid.BorderStyle = BorderStyle.None;
             grid.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             grid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             grid.EnableHeadersVisualStyles = false;
-            grid.DefaultCellStyle.BackColor = Color.White;
-            grid.DefaultCellStyle.ForeColor = Color.Black;
-            grid.DefaultCellStyle.SelectionBackColor = Color.LightSteelBlue;
-            grid.DefaultCellStyle.SelectionForeColor = Color.Black;
-            grid.DefaultCellStyle.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(25, 25, 25);
-            grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            grid.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            grid.RowTemplate.Height = 34;
+            grid.DefaultCellStyle.BackColor = ThemePalette.BaseBackground;
+            grid.DefaultCellStyle.ForeColor = ThemePalette.PrimaryText;
+            grid.DefaultCellStyle.SelectionBackColor = ThemePalette.SelectionBackground;
+            grid.DefaultCellStyle.SelectionForeColor = ThemePalette.PrimaryText;
+            grid.DefaultCellStyle.Font = ThemeTypography.GridBody;
+            grid.ColumnHeadersDefaultCellStyle.BackColor = ThemePalette.SecondaryBackground;
+            grid.ColumnHeadersDefaultCellStyle.ForeColor = ThemePalette.PrimaryText;
+            grid.ColumnHeadersDefaultCellStyle.Font = ThemeTypography.GridHeader;
+            grid.RowsDefaultCellStyle.Font = ThemeTypography.GridBody;
+            grid.AlternatingRowsDefaultCellStyle.Font = ThemeTypography.GridBody;
+            grid.RowTemplate.Height = 28;
             grid.ClearSelection();
         }
 
@@ -274,6 +277,11 @@ namespace APUCC_Project.Forms.Student
 
         private void FillPanelCourses_Paint(object sender, PaintEventArgs e)
         {
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

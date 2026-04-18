@@ -7,6 +7,8 @@ namespace APUCC_Project
     public partial class StudentShellForm : BaseShellForm
     {
         private readonly int _studentId;
+        protected override int ChildContentTopPadding => panelLogo.Height;
+        protected override int ChildContentLeftPadding => 30;
 
         public StudentShellForm(int userId, int studentId)
         {
@@ -14,22 +16,17 @@ namespace APUCC_Project
             InitializeUserContext(userId, "Student");
             _studentId = studentId;
 
-            OpenChildForm(new StudentHomeForm(_studentId));
-
             this.Text = "Student Dashboard";
             this.ControlBox = true;
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.MinimizeBox = true;
-            this.StartPosition = FormStartPosition.CenterScreen;
-            this.MinimumSize = this.Size;
-            this.MaximumSize = this.Size;
 
             homebtn.Text = "Home";
             iconButton2.Text = "My courses";
             iconButton3.Text = "Fees";
             iconButton4.Text = "Settings";
             Profile.Text = "Profile";
+            ApplyStandardShellWindow();
+            ActivateButton(homebtn);
+            OpenChildForm(new StudentHomeForm(_studentId));
         }
 
         private void OpenChildForm(Form childForm)

@@ -61,11 +61,11 @@
             grpFilter.Controls.Add(btnGenerate);
             grpFilter.Controls.Add(cboTrainer);
             grpFilter.Controls.Add(cboMonth);
-            grpFilter.Location = new Point(138, 201);
+            grpFilter.Location = new Point(74, 214);
             grpFilter.Margin = new Padding(4);
             grpFilter.Name = "grpFilter";
             grpFilter.Padding = new Padding(4);
-            grpFilter.Size = new Size(984, 116);
+            grpFilter.Size = new Size(1030, 116);
             grpFilter.TabIndex = 0;
             grpFilter.TabStop = false;
             grpFilter.Text = "Filter";
@@ -92,7 +92,7 @@
             // 
             // btnGenerate
             // 
-            btnGenerate.Location = new Point(845, 44);
+            btnGenerate.Location = new Point(878, 44);
             btnGenerate.Margin = new Padding(4);
             btnGenerate.Name = "btnGenerate";
             btnGenerate.Size = new Size(131, 44);
@@ -121,7 +121,7 @@
             // lblPaidCountTitle
             // 
             lblPaidCountTitle.AutoSize = true;
-            lblPaidCountTitle.Location = new Point(138, 361);
+            lblPaidCountTitle.Location = new Point(74, 360);
             lblPaidCountTitle.Margin = new Padding(4, 0, 4, 0);
             lblPaidCountTitle.Name = "lblPaidCountTitle";
             lblPaidCountTitle.Size = new Size(148, 32);
@@ -131,7 +131,7 @@
             // lblTotalIncomeTitle
             // 
             lblTotalIncomeTitle.AutoSize = true;
-            lblTotalIncomeTitle.Location = new Point(404, 361);
+            lblTotalIncomeTitle.Location = new Point(336, 360);
             lblTotalIncomeTitle.Margin = new Padding(4, 0, 4, 0);
             lblTotalIncomeTitle.Name = "lblTotalIncomeTitle";
             lblTotalIncomeTitle.Size = new Size(151, 32);
@@ -140,7 +140,7 @@
             // 
             // btnPrint
             // 
-            btnPrint.Location = new Point(171, 802);
+            btnPrint.Location = new Point(74, 802);
             btnPrint.Margin = new Padding(4);
             btnPrint.Name = "btnPrint";
             btnPrint.Size = new Size(131, 44);
@@ -150,7 +150,7 @@
             // 
             // btnClose
             // 
-            btnClose.Location = new Point(392, 802);
+            btnClose.Location = new Point(246, 802);
             btnClose.Margin = new Padding(4);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(131, 44);
@@ -226,19 +226,19 @@
             // dgvReport
             // 
             dgvReport.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvReport.Location = new Point(138, 426);
+            dgvReport.Location = new Point(74, 426);
             dgvReport.Name = "dgvReport";
             dgvReport.RowHeadersWidth = 82;
-            dgvReport.Size = new Size(984, 346);
+            dgvReport.Size = new Size(1030, 346);
             dgvReport.TabIndex = 7;
             // 
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(25, 25, 25);
             panel1.Controls.Add(lblAdminMonthlyIncome);
-            panel1.Location = new Point(-15, -8);
+            panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1448, 200);
+            panel1.Size = new Size(1180, 182);
             panel1.TabIndex = 8;
             // 
             // lblAdminMonthlyIncome
@@ -246,7 +246,7 @@
             lblAdminMonthlyIncome.AutoSize = true;
             lblAdminMonthlyIncome.Font = new Font("Segoe UI Black", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblAdminMonthlyIncome.ForeColor = Color.White;
-            lblAdminMonthlyIncome.Location = new Point(80, 66);
+            lblAdminMonthlyIncome.Location = new Point(48, 56);
             lblAdminMonthlyIncome.Name = "lblAdminMonthlyIncome";
             lblAdminMonthlyIncome.Size = new Size(415, 65);
             lblAdminMonthlyIncome.TabIndex = 0;
@@ -257,7 +257,7 @@
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1430, 861);
+            ClientSize = new Size(1180, 861);
             Controls.Add(panel1);
             Controls.Add(dgvReport);
             Controls.Add(btnClose);

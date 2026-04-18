@@ -44,9 +44,9 @@
             // 
             panel1.BackColor = Color.FromArgb(25, 25, 25);
             panel1.Controls.Add(lblTitle);
-            panel1.Location = new Point(-7, 4);
+            panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1674, 156);
+            panel1.Size = new Size(1180, 156);
             panel1.TabIndex = 0;
             // 
             // lblTitle
@@ -66,15 +66,15 @@
             txtMessage.Location = new Point(49, 284);
             txtMessage.Multiline = true;
             txtMessage.Name = "txtMessage";
-            txtMessage.Size = new Size(1026, 459);
+            txtMessage.Size = new Size(760, 459);
             txtMessage.TabIndex = 1;
             // 
             // btnSendFeedback
             // 
             btnSendFeedback.BackColor = Color.LightSteelBlue;
-            btnSendFeedback.Location = new Point(1101, 651);
+            btnSendFeedback.Location = new Point(850, 651);
             btnSendFeedback.Name = "btnSendFeedback";
-            btnSendFeedback.Size = new Size(264, 92);
+            btnSendFeedback.Size = new Size(230, 92);
             btnSendFeedback.TabIndex = 2;
             btnSendFeedback.Text = "Send Feedback";
             btnSendFeedback.UseVisualStyleBackColor = false;
@@ -84,7 +84,7 @@
             // 
             chkFeedbackType.FormattingEnabled = true;
             chkFeedbackType.Items.AddRange(new object[] { "Genaeral", "Suggestion", "complaint" });
-            chkFeedbackType.Location = new Point(1101, 494);
+            chkFeedbackType.Location = new Point(850, 494);
             chkFeedbackType.Name = "chkFeedbackType";
             chkFeedbackType.Size = new Size(206, 112);
             chkFeedbackType.TabIndex = 3;
@@ -103,7 +103,7 @@
             // 
             lblFeedbackType.AutoSize = true;
             lblFeedbackType.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblFeedbackType.Location = new Point(1101, 418);
+            lblFeedbackType.Location = new Point(850, 418);
             lblFeedbackType.Name = "lblFeedbackType";
             lblFeedbackType.Size = new Size(230, 45);
             lblFeedbackType.TabIndex = 5;
@@ -111,16 +111,16 @@
             // 
             // txtTrainerName
             // 
-            txtTrainerName.Location = new Point(1101, 350);
+            txtTrainerName.Location = new Point(850, 350);
             txtTrainerName.Name = "txtTrainerName";
-            txtTrainerName.Size = new Size(370, 39);
+            txtTrainerName.Size = new Size(280, 39);
             txtTrainerName.TabIndex = 6;
             // 
             // lblTrainerName
             // 
             lblTrainerName.AutoSize = true;
             lblTrainerName.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblTrainerName.Location = new Point(1101, 284);
+            lblTrainerName.Location = new Point(850, 284);
             lblTrainerName.Name = "lblTrainerName";
             lblTrainerName.Size = new Size(218, 45);
             lblTrainerName.TabIndex = 7;
@@ -131,7 +131,7 @@
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLightLight;
-            ClientSize = new Size(1590, 814);
+            ClientSize = new Size(1180, 814);
             Controls.Add(lblTrainerName);
             Controls.Add(txtTrainerName);
             Controls.Add(lblFeedbackType);

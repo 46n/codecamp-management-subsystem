@@ -31,17 +31,17 @@
             VeiwStudentpnl = new Panel();
             ViewStudentslbl = new Label();
             grpFilter = new GroupBox();
-            lblLevel = new Label();
-            lblStatus = new Label();
-            cboLevel = new ComboBox();
-            cboStatus = new ComboBox();
-            btnFilter = new Button();
+            lblModule = new Label();
+            cboModule = new ComboBox();
             btnShowAll = new Button();
+            btnFilter = new Button();
+            cboStatus = new ComboBox();
+            cboLevel = new ComboBox();
+            lblStatus = new Label();
+            lblLevel = new Label();
             dgvStudentList = new DataGridView();
             btnDeleteSelected = new Button();
             btnClose = new Button();
-            cboModule = new ComboBox();
-            lblModule = new Label();
             lblCount = new Label();
             lblFormStatus = new Label();
             VeiwStudentpnl.SuspendLayout();
@@ -51,6 +51,7 @@
             // 
             // VeiwStudentpnl
             // 
+            VeiwStudentpnl.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             VeiwStudentpnl.BackColor = Color.FromArgb(25, 25, 25);
             VeiwStudentpnl.Controls.Add(ViewStudentslbl);
             VeiwStudentpnl.Location = new Point(-7, -6);
@@ -71,6 +72,7 @@
             // 
             // grpFilter
             // 
+            grpFilter.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             grpFilter.Controls.Add(lblModule);
             grpFilter.Controls.Add(cboModule);
             grpFilter.Controls.Add(btnShowAll);
@@ -87,51 +89,23 @@
             grpFilter.TabStop = false;
             grpFilter.Text = "Filter";
             // 
-            // lblLevel
+            // lblModule
             // 
-            lblLevel.AutoSize = true;
-            lblLevel.Font = new Font("Segoe UI", 10.125F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblLevel.Location = new Point(18, 46);
-            lblLevel.Name = "lblLevel";
-            lblLevel.Size = new Size(91, 37);
-            lblLevel.TabIndex = 0;
-            lblLevel.Text = "Level :";
+            lblModule.AutoSize = true;
+            lblModule.Font = new Font("Segoe UI", 10.125F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblModule.Location = new Point(590, 46);
+            lblModule.Name = "lblModule";
+            lblModule.Size = new Size(122, 37);
+            lblModule.TabIndex = 8;
+            lblModule.Text = "Module :";
             // 
-            // lblStatus
+            // cboModule
             // 
-            lblStatus.AutoSize = true;
-            lblStatus.Font = new Font("Segoe UI", 10.125F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblStatus.Location = new Point(296, 46);
-            lblStatus.Name = "lblStatus";
-            lblStatus.Size = new Size(101, 37);
-            lblStatus.TabIndex = 2;
-            lblStatus.Text = "Status :";
-            // 
-            // cboLevel
-            // 
-            cboLevel.FormattingEnabled = true;
-            cboLevel.Location = new Point(115, 37);
-            cboLevel.Name = "cboLevel";
-            cboLevel.Size = new Size(155, 53);
-            cboLevel.TabIndex = 3;
-            // 
-            // cboStatus
-            // 
-            cboStatus.FormattingEnabled = true;
-            cboStatus.Location = new Point(403, 37);
-            cboStatus.Name = "cboStatus";
-            cboStatus.Size = new Size(155, 53);
-            cboStatus.TabIndex = 4;
-            // 
-            // btnFilter
-            // 
-            btnFilter.Location = new Point(894, 37);
-            btnFilter.Name = "btnFilter";
-            btnFilter.Size = new Size(125, 50);
-            btnFilter.TabIndex = 5;
-            btnFilter.Text = "Filter";
-            btnFilter.UseVisualStyleBackColor = true;
-            btnFilter.Click += btnFilter_Click;
+            cboModule.FormattingEnabled = true;
+            cboModule.Location = new Point(718, 37);
+            cboModule.Name = "cboModule";
+            cboModule.Size = new Size(155, 53);
+            cboModule.TabIndex = 7;
             // 
             // btnShowAll
             // 
@@ -143,8 +117,55 @@
             btnShowAll.UseVisualStyleBackColor = true;
             btnShowAll.Click += btnShowAll_Click;
             // 
+            // btnFilter
+            // 
+            btnFilter.Location = new Point(894, 37);
+            btnFilter.Name = "btnFilter";
+            btnFilter.Size = new Size(125, 50);
+            btnFilter.TabIndex = 5;
+            btnFilter.Text = "Filter";
+            btnFilter.UseVisualStyleBackColor = true;
+            btnFilter.Click += btnFilter_Click;
+            // 
+            // cboStatus
+            // 
+            cboStatus.FormattingEnabled = true;
+            cboStatus.Location = new Point(403, 37);
+            cboStatus.Name = "cboStatus";
+            cboStatus.Size = new Size(155, 53);
+            cboStatus.TabIndex = 4;
+            // 
+            // cboLevel
+            // 
+            cboLevel.FormattingEnabled = true;
+            cboLevel.Location = new Point(115, 37);
+            cboLevel.Name = "cboLevel";
+            cboLevel.Size = new Size(155, 53);
+            cboLevel.TabIndex = 3;
+            // 
+            // lblStatus
+            // 
+            lblStatus.AutoSize = true;
+            lblStatus.Font = new Font("Segoe UI", 10.125F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblStatus.Location = new Point(296, 46);
+            lblStatus.Name = "lblStatus";
+            lblStatus.Size = new Size(101, 37);
+            lblStatus.TabIndex = 2;
+            lblStatus.Text = "Status :";
+            // 
+            // lblLevel
+            // 
+            lblLevel.AutoSize = true;
+            lblLevel.Font = new Font("Segoe UI", 10.125F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblLevel.Location = new Point(18, 46);
+            lblLevel.Name = "lblLevel";
+            lblLevel.Size = new Size(91, 37);
+            lblLevel.TabIndex = 0;
+            lblLevel.Text = "Level :";
+            // 
             // dgvStudentList
             // 
+            dgvStudentList.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             dgvStudentList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvStudentList.Location = new Point(17, 304);
             dgvStudentList.Name = "dgvStudentList";
@@ -173,24 +194,6 @@
             btnClose.UseVisualStyleBackColor = true;
             btnClose.Click += btnClose_Click;
             // 
-            // cboModule
-            // 
-            cboModule.FormattingEnabled = true;
-            cboModule.Location = new Point(718, 37);
-            cboModule.Name = "cboModule";
-            cboModule.Size = new Size(155, 53);
-            cboModule.TabIndex = 7;
-            // 
-            // lblModule
-            // 
-            lblModule.AutoSize = true;
-            lblModule.Font = new Font("Segoe UI", 10.125F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblModule.Location = new Point(590, 46);
-            lblModule.Name = "lblModule";
-            lblModule.Size = new Size(122, 37);
-            lblModule.TabIndex = 8;
-            lblModule.Text = "Module :";
-            // 
             // lblCount
             // 
             lblCount.AutoSize = true;
@@ -198,11 +201,12 @@
             lblCount.Name = "lblCount";
             lblCount.Size = new Size(0, 32);
             lblCount.TabIndex = 5;
+            lblCount.Visible = false;
             // 
             // lblFormStatus
             // 
             lblFormStatus.AutoSize = true;
-            lblFormStatus.Location = new Point(101, 604);
+            lblFormStatus.Location = new Point(37, 600);
             lblFormStatus.Name = "lblFormStatus";
             lblFormStatus.Size = new Size(0, 32);
             lblFormStatus.TabIndex = 6;
@@ -212,7 +216,7 @@
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1270, 752);
+            ClientSize = new Size(1637, 784);
             Controls.Add(lblFormStatus);
             Controls.Add(lblCount);
             Controls.Add(btnClose);

@@ -43,7 +43,8 @@
             // 
             // StudentShellForm
             // 
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.None;
+            ClientSize = new Size(1534, 1018);
             StartPosition = FormStartPosition.CenterScreen;
             Name = "StudentShellForm";
             Load += StudentShellForm_Load;

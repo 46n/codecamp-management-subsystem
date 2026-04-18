@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using FontAwesome.Sharp;
 using APUCC_Project.Forms.Common;
+using APUCC_Project.UI;
 
 namespace APUCC_Project
 {
@@ -15,8 +16,13 @@ namespace APUCC_Project
         protected IconButton? currentBtn;
         protected Panel leftBorderBtn;
         protected Form? currentChildForm;
+        private bool hasCenteredOnFirstShow;
         protected int CurrentUserId { get; private set; }
         protected string CurrentUserRole { get; private set; } = string.Empty;
+        protected virtual int ChildContentTopPadding => 30;
+        protected virtual int ChildContentLeftPadding => 0;
+        protected virtual int ProfileContentLeftPadding => 30;
+        protected virtual void CustomizeChildFormAppearance(Form childForm) { }
 
         protected BaseShellForm()
         {
@@ -30,7 +36,6 @@ namespace APUCC_Project
             Text = string.Empty;
             ControlBox = false;
             DoubleBuffered = true;
-            MaximizedBounds = Screen.FromHandle(Handle).WorkingArea;
 
             SetupHoverEffects(homebtn);
             SetupHoverEffects(iconButton2);
@@ -44,6 +49,8 @@ namespace APUCC_Project
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             StartPosition = FormStartPosition.CenterScreen;
+            MainPanel.BackColor = ThemePalette.BaseBackground;
+            ApplyStandardShellWindow();
         }
 
         protected virtual void AttachRipples()
@@ -129,6 +136,49 @@ namespace APUCC_Project
         {
         }
 
+        protected void ApplyStandardShellWindow()
+        {
+            SuspendLayout();
+            AutoScaleMode = AutoScaleMode.None;
+            ClientSize = ThemeLayout.StandardClientSize;
+            Size fixedWindowSize = Size;
+
+            MinimumSize = fixedWindowSize;
+            MaximumSize = fixedWindowSize;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = true;
+            StartPosition = FormStartPosition.CenterScreen;
+            Font = ThemeTypography.Body;
+
+            homebtn.Font = ThemeTypography.Navigation;
+            iconButton2.Font = ThemeTypography.Navigation;
+            iconButton3.Font = ThemeTypography.Navigation;
+            iconButton4.Font = ThemeTypography.Navigation;
+            Profile.Font = ThemeTypography.Navigation;
+            ResumeLayout(performLayout: true);
+        }
+
+        protected override void OnShown(EventArgs e)
+        {
+            base.OnShown(e);
+
+            if (hasCenteredOnFirstShow)
+            {
+                return;
+            }
+
+            hasCenteredOnFirstShow = true;
+
+            Screen currentScreen = Screen.FromPoint(Cursor.Position);
+            Rectangle workingArea = currentScreen.WorkingArea;
+
+            MaximizedBounds = workingArea;
+            Location = new Point(
+                workingArea.Left + Math.Max(0, (workingArea.Width - Width) / 2),
+                workingArea.Top + Math.Max(0, (workingArea.Height - Height) / 2));
+        }
+
         protected void OpenSharedChildForm(Form childForm)
         {
             if (currentChildForm != null)
@@ -140,19 +190,29 @@ namespace APUCC_Project
 
             childForm.TopLevel = false;
             childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.WindowState = FormWindowState.Normal;
+            childForm.StartPosition = FormStartPosition.Manual;
+            childForm.MaximizeBox = false;
+            childForm.MinimizeBox = false;
 
             MainPanel.Controls.Clear();
 
             Panel contentPanel = new Panel();
             contentPanel.Dock = DockStyle.Fill;
-            contentPanel.Padding = new Padding(0, 30, 0, 0);
-            contentPanel.BackColor = MainPanel.BackColor;
+            int leftPadding = childForm is ProfileForm
+                ? ProfileContentLeftPadding
+                : ChildContentLeftPadding;
+            contentPanel.Padding = new Padding(leftPadding, ChildContentTopPadding, 0, 0);
+            contentPanel.BackColor = ThemePalette.BaseBackground;
+            contentPanel.AutoScroll = childForm is not ProfileForm;
 
             childForm.Dock = DockStyle.Fill;
 
             contentPanel.Controls.Add(childForm);
             MainPanel.Controls.Add(contentPanel);
 
+            FormTheme.ApplyToChildForm(childForm);
+            CustomizeChildFormAppearance(childForm);
             childForm.BringToFront();
             childForm.Show();
         }

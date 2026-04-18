@@ -13,10 +13,12 @@ namespace APUCC_Project.Forms.Common
     {
         private readonly string connStr =
             ConfigurationManager.ConnectionStrings["MyConn"].ConnectionString;
+        private bool isPasswordVisible;
 
         public LoginForm()
         {
             InitializeComponent();
+            StartPosition = FormStartPosition.CenterScreen;
         }
 
         public void PrepareForReuse()
@@ -24,6 +26,7 @@ namespace APUCC_Project.Forms.Common
             txtUser.Clear();
             txtPassword.Clear();
             lblWrong.Visible = false;
+            SetPasswordVisibility(false);
             txtUser.Focus();
         }
 
@@ -32,8 +35,15 @@ namespace APUCC_Project.Forms.Common
             lblWrong.Visible = false;
             lblWrong.Text = "Wrong username/email or password.";
 
-            txtPassword.UseSystemPasswordChar = true;
+            SetPasswordVisibility(false);
             AcceptButton = btnLogin;
+        }
+
+        private void SetPasswordVisibility(bool visible)
+        {
+            isPasswordVisible = visible;
+            txtPassword.UseSystemPasswordChar = !visible;
+            btnTogglePassword.Text = visible ? "Hide" : "Show";
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -143,6 +153,11 @@ namespace APUCC_Project.Forms.Common
         private void txtPassword_TextChanged(object sender, EventArgs e)
         {
             lblWrong.Visible = false;
+        }
+
+        private void btnTogglePassword_Click(object sender, EventArgs e)
+        {
+            SetPasswordVisibility(!isPasswordVisible);
         }
     }
 }

@@ -1,8 +1,10 @@
 using System;
 using System.Data;
+using System.Drawing;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 using APUCC_Project.Services;
+using APUCC_Project.UI;
 
 namespace APUCC_Project.Forms.Student
 {
@@ -29,8 +31,46 @@ namespace APUCC_Project.Forms.Student
 
         private void StudentHomeForm_Load(object? sender, EventArgs e)
         {
+            ApplyGreetingText();
             SetupGrid();
             ShowSchedule(ScheduleView.Current);
+        }
+
+        private void ApplyGreetingText()
+        {
+            string studentName = GetStudentDisplayName();
+            lblGreeting.Text = $"Good day, {studentName}!";
+            lblWelcome.Text = "Welcome to your CodeCamp dashboard";
+            lblWelcome.Font = new Font("Segoe UI", 8.5F, FontStyle.Regular, GraphicsUnit.Point);
+        }
+
+        private string GetStudentDisplayName()
+        {
+            const string query = @"
+                SELECT TOP 1 u.[Name]
+                FROM Students s
+                INNER JOIN Users u ON s.UserID = u.UserID
+                WHERE s.StudentID = @StudentID;";
+
+            try
+            {
+                using SqlConnection conn = DatabaseHelper.GetConnection();
+                using SqlCommand cmd = new SqlCommand(query, conn);
+
+                cmd.Parameters.AddWithValue("@StudentID", _studentId);
+                conn.Open();
+
+                object? result = cmd.ExecuteScalar();
+                string? displayName = result?.ToString()?.Trim();
+
+                return string.IsNullOrWhiteSpace(displayName)
+                    ? "Student"
+                    : displayName;
+            }
+            catch
+            {
+                return "Student";
+            }
         }
 
         private void SetupGrid()
@@ -58,13 +98,13 @@ namespace APUCC_Project.Forms.Student
             RoomColumnHome.DataPropertyName = "Room";
             StatusColumnHome.DataPropertyName = "Status";
 
-            dgvSchedule.DefaultCellStyle.BackColor = Color.White;
-            dgvSchedule.DefaultCellStyle.ForeColor = Color.Black;
-            dgvSchedule.DefaultCellStyle.SelectionBackColor = Color.LightSteelBlue;
-            dgvSchedule.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dgvSchedule.DefaultCellStyle.BackColor = ThemePalette.BaseBackground;
+            dgvSchedule.DefaultCellStyle.ForeColor = ThemePalette.PrimaryText;
+            dgvSchedule.DefaultCellStyle.SelectionBackColor = ThemePalette.SelectionBackground;
+            dgvSchedule.DefaultCellStyle.SelectionForeColor = ThemePalette.PrimaryText;
 
-            dgvSchedule.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(25, 25, 25);
-            dgvSchedule.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvSchedule.ColumnHeadersDefaultCellStyle.BackColor = ThemePalette.SecondaryBackground;
+            dgvSchedule.ColumnHeadersDefaultCellStyle.ForeColor = ThemePalette.PrimaryText;
             dgvSchedule.EnableHeadersVisualStyles = false;
 
             dgvSchedule.RowHeadersVisible = false;
@@ -130,8 +170,13 @@ namespace APUCC_Project.Forms.Student
 
         private static void StyleScheduleButton(Button button, bool isActive)
         {
-            button.BackColor = isActive ? Color.FromArgb(25, 25, 25) : Color.White;
-            button.ForeColor = isActive ? Color.White : Color.Black;
+            button.BackColor = isActive
+                ? ThemePalette.PrimaryButton
+                : ThemePalette.BaseBackground;
+            button.ForeColor = isActive
+                ? Color.White
+                : ThemePalette.PrimaryText;
+            button.FlatAppearance.BorderColor = ThemePalette.PrimaryButton;
         }
 
         private void btnCurrentSchedule_Click(object? sender, EventArgs e)

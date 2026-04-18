@@ -33,6 +33,7 @@
             pnlLogin = new Panel();
             lblWrong = new Label();
             label1 = new Label();
+            btnTogglePassword = new Button();
             txtPassword = new TextBox();
             lblUserNameEmail = new Label();
             btnLogin = new Button();
@@ -45,7 +46,7 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(362, 35);
+            pictureBox1.Location = new Point(344, 86);
             pictureBox1.Margin = new Padding(4, 2, 4, 2);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(767, 287);
@@ -58,6 +59,7 @@
             pnlLogin.BackColor = Color.FromArgb(25, 25, 25);
             pnlLogin.Controls.Add(lblWrong);
             pnlLogin.Controls.Add(label1);
+            pnlLogin.Controls.Add(btnTogglePassword);
             pnlLogin.Controls.Add(txtPassword);
             pnlLogin.Controls.Add(lblUserNameEmail);
             pnlLogin.Controls.Add(btnLogin);
@@ -73,7 +75,7 @@
             // 
             lblWrong.AutoSize = true;
             lblWrong.ForeColor = Color.FromArgb(192, 0, 0);
-            lblWrong.Location = new Point(552, 654);
+            lblWrong.Location = new Point(564, 690);
             lblWrong.Name = "lblWrong";
             lblWrong.Size = new Size(0, 32);
             lblWrong.TabIndex = 8;
@@ -83,25 +85,40 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(470, 579);
+            label1.Location = new Point(268, 615);
             label1.Name = "label1";
             label1.Size = new Size(190, 45);
             label1.TabIndex = 7;
             label1.Text = "Password :";
             // 
+            // btnTogglePassword
+            // 
+            btnTogglePassword.BackColor = Color.FromArgb(102, 146, 153);
+            btnTogglePassword.FlatStyle = FlatStyle.Popup;
+            btnTogglePassword.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnTogglePassword.ForeColor = Color.White;
+            btnTogglePassword.Location = new Point(1067, 619);
+            btnTogglePassword.Name = "btnTogglePassword";
+            btnTogglePassword.Size = new Size(111, 45);
+            btnTogglePassword.TabIndex = 9;
+            btnTogglePassword.Text = "Show";
+            btnTogglePassword.UseVisualStyleBackColor = false;
+            btnTogglePassword.Click += btnTogglePassword_Click;
+            // 
             // txtPassword
             // 
-            txtPassword.Location = new Point(671, 586);
+            txtPassword.Location = new Point(683, 622);
             txtPassword.Name = "txtPassword";
             txtPassword.Size = new Size(370, 39);
             txtPassword.TabIndex = 6;
+            txtPassword.TextChanged += txtPassword_TextChanged;
             // 
             // lblUserNameEmail
             // 
             lblUserNameEmail.AutoSize = true;
             lblUserNameEmail.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblUserNameEmail.ForeColor = Color.White;
-            lblUserNameEmail.Location = new Point(256, 512);
+            lblUserNameEmail.Location = new Point(268, 548);
             lblUserNameEmail.Name = "lblUserNameEmail";
             lblUserNameEmail.Size = new Size(404, 45);
             lblUserNameEmail.TabIndex = 5;
@@ -113,7 +130,7 @@
             btnLogin.FlatStyle = FlatStyle.Popup;
             btnLogin.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnLogin.ForeColor = Color.Black;
-            btnLogin.Location = new Point(574, 742);
+            btnLogin.Location = new Point(582, 728);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(326, 78);
             btnLogin.TabIndex = 4;
@@ -123,17 +140,18 @@
             // 
             // txtUser
             // 
-            txtUser.Location = new Point(671, 518);
+            txtUser.Location = new Point(683, 554);
             txtUser.Name = "txtUser";
             txtUser.Size = new Size(370, 39);
             txtUser.TabIndex = 3;
+            txtUser.TextChanged += txtUser_TextChanged;
             // 
             // lblSignIn
             // 
             lblSignIn.AutoSize = true;
             lblSignIn.Font = new Font("Segoe UI Black", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblSignIn.ForeColor = Color.White;
-            lblSignIn.Location = new Point(620, 354);
+            lblSignIn.Location = new Point(632, 424);
             lblSignIn.Name = "lblSignIn";
             lblSignIn.Size = new Size(204, 65);
             lblSignIn.TabIndex = 2;
@@ -147,6 +165,7 @@
             Controls.Add(pnlLogin);
             Name = "LoginForm";
             Text = "LoginForm";
+            Load += LoginForm_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             pnlLogin.ResumeLayout(false);
             pnlLogin.PerformLayout();
@@ -163,6 +182,7 @@
         private Label lblUserNameEmail;
         private Label lblWrong;
         private Label label1;
+        private Button btnTogglePassword;
         private TextBox txtPassword;
     }
 }

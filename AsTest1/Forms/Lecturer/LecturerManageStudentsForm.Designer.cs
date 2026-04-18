@@ -283,7 +283,7 @@
             // 
             // btnRegister
             // 
-            btnRegister.Location = new Point(681, 677);
+            btnRegister.Location = new Point(716, 660);
             btnRegister.Margin = new Padding(4);
             btnRegister.Name = "btnRegister";
             btnRegister.Size = new Size(146, 44);
@@ -294,7 +294,7 @@
             // 
             // btnClear
             // 
-            btnClear.Location = new Point(883, 677);
+            btnClear.Location = new Point(918, 660);
             btnClear.Margin = new Padding(4);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(146, 44);
@@ -397,7 +397,7 @@
             // lblFormStatus
             // 
             lblFormStatus.AutoSize = true;
-            lblFormStatus.Location = new Point(142, 528);
+            lblFormStatus.Location = new Point(75, 532);
             lblFormStatus.Margin = new Padding(4, 0, 4, 0);
             lblFormStatus.Name = "lblFormStatus";
             lblFormStatus.Size = new Size(0, 32);
@@ -406,7 +406,7 @@
             // lblStatus
             // 
             lblStatus.AutoSize = true;
-            lblStatus.Location = new Point(209, 478);
+            lblStatus.Location = new Point(142, 482);
             lblStatus.Margin = new Padding(4, 0, 4, 0);
             lblStatus.Name = "lblStatus";
             lblStatus.Size = new Size(0, 32);
@@ -415,7 +415,7 @@
             // lblError
             // 
             lblError.AutoSize = true;
-            lblError.Location = new Point(693, 738);
+            lblError.Location = new Point(728, 721);
             lblError.Margin = new Padding(4, 0, 4, 0);
             lblError.Name = "lblError";
             lblError.Size = new Size(0, 32);
@@ -425,7 +425,7 @@
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1135, 849);
+            ClientSize = new Size(1217, 742);
             Controls.Add(lblError);
             Controls.Add(lblStatus);
             Controls.Add(lblFormStatus);

@@ -54,7 +54,7 @@
             // cboShowRequests
             // 
             cboShowRequests.FormattingEnabled = true;
-            cboShowRequests.Location = new Point(216, 32);
+            cboShowRequests.Location = new Point(194, 57);
             cboShowRequests.Margin = new Padding(4);
             cboShowRequests.Name = "cboShowRequests";
             cboShowRequests.Size = new Size(235, 40);
@@ -63,7 +63,7 @@
             // lblShow
             // 
             lblShow.AutoSize = true;
-            lblShow.Location = new Point(81, 35);
+            lblShow.Location = new Point(59, 60);
             lblShow.Margin = new Padding(4, 0, 4, 0);
             lblShow.Name = "lblShow";
             lblShow.Size = new Size(72, 32);
@@ -72,7 +72,7 @@
             // 
             // btnFilter
             // 
-            btnFilter.Location = new Point(500, 30);
+            btnFilter.Location = new Point(478, 55);
             btnFilter.Margin = new Padding(4);
             btnFilter.Name = "btnFilter";
             btnFilter.Size = new Size(146, 44);

@@ -121,7 +121,7 @@
             dgvFeedBack.Location = new Point(93, 306);
             dgvFeedBack.Name = "dgvFeedBack";
             dgvFeedBack.RowHeadersWidth = 82;
-            dgvFeedBack.Size = new Size(1162, 254);
+            dgvFeedBack.Size = new Size(960, 254);
             dgvFeedBack.TabIndex = 7;
             dgvFeedBack.CellClick += dgvFeedBack_CellClick;
             // 
@@ -129,9 +129,9 @@
             // 
             pnlMain.BackColor = Color.FromArgb(25, 25, 25);
             pnlMain.Controls.Add(lblTrainerFeedback);
-            pnlMain.Location = new Point(-13, -6);
+            pnlMain.Location = new Point(0, 0);
             pnlMain.Name = "pnlMain";
-            pnlMain.Size = new Size(1332, 182);
+            pnlMain.Size = new Size(1180, 182);
             pnlMain.TabIndex = 8;
             // 
             // lblTrainerFeedback
@@ -150,7 +150,7 @@
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1316, 828);
+            ClientSize = new Size(1180, 828);
             Controls.Add(pnlMain);
             Controls.Add(dgvFeedBack);
             Controls.Add(lblMessage);

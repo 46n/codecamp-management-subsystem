@@ -18,6 +18,21 @@ namespace APUCC_Project.Forms.Trainer
         public TrainerHomeForm()
         {
             InitializeComponent();
+            dgvClassSchedule.RowHeadersVisible = false;
+            dgvClassSchedule.AllowUserToAddRows = false;
+            dgvClassSchedule.AllowUserToDeleteRows = false;
+            dgvClassSchedule.AllowUserToResizeRows = false;
+            btnAddClass.Font = new Font("Segoe UI", 10.5F, FontStyle.Regular);
+            btnUpdateClass.Font = new Font("Segoe UI", 10.5F, FontStyle.Regular);
+            btnDeleteClass.Font = new Font("Segoe UI", 10.5F, FontStyle.Regular);
+            lblTrainerID.Font = new Font("Segoe UI", 10.5F, FontStyle.Regular);
+            lblModuleID.Font = new Font("Segoe UI", 10.5F, FontStyle.Regular);
+            lblModuleName.Font = new Font("Segoe UI", 10.5F, FontStyle.Regular);
+            lblClassTime.Font = new Font("Segoe UI", 10.5F, FontStyle.Regular);
+            lblCharges.Font = new Font("Segoe UI", 10.5F, FontStyle.Regular);
+            lblLevel.Font = new Font("Segoe UI", 10.5F, FontStyle.Regular);
+            lblClassDate.Font = new Font("Segoe UI", 10.5F, FontStyle.Regular);
+            lblRoom.Font = new Font("Segoe UI", 10.5F, FontStyle.Regular);
 
             successTimer.Interval = 3000;
             successTimer.Tick += SuccessTimer_Tick;

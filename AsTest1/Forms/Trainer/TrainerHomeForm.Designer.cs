@@ -63,7 +63,7 @@
             dgvClassSchedule.Location = new Point(27, 192);
             dgvClassSchedule.Name = "dgvClassSchedule";
             dgvClassSchedule.RowHeadersWidth = 82;
-            dgvClassSchedule.Size = new Size(1401, 344);
+            dgvClassSchedule.Size = new Size(1080, 344);
             dgvClassSchedule.TabIndex = 0;
             dgvClassSchedule.CellClick += dgvClassSchedule_CellClick;
             // 
@@ -71,7 +71,7 @@
             // 
             btnAddClass.BackColor = Color.DarkGreen;
             btnAddClass.ForeColor = SystemColors.ButtonHighlight;
-            btnAddClass.Location = new Point(59, 771);
+            btnAddClass.Location = new Point(27, 770);
             btnAddClass.Name = "btnAddClass";
             btnAddClass.Size = new Size(230, 75);
             btnAddClass.TabIndex = 1;
@@ -83,7 +83,7 @@
             // 
             btnUpdateClass.BackColor = SystemColors.MenuHighlight;
             btnUpdateClass.ForeColor = SystemColors.ButtonHighlight;
-            btnUpdateClass.Location = new Point(317, 771);
+            btnUpdateClass.Location = new Point(285, 770);
             btnUpdateClass.Name = "btnUpdateClass";
             btnUpdateClass.Size = new Size(230, 75);
             btnUpdateClass.TabIndex = 2;
@@ -95,7 +95,7 @@
             // 
             btnDeleteClass.BackColor = Color.FromArgb(192, 0, 0);
             btnDeleteClass.ForeColor = SystemColors.ButtonHighlight;
-            btnDeleteClass.Location = new Point(578, 771);
+            btnDeleteClass.Location = new Point(546, 770);
             btnDeleteClass.Name = "btnDeleteClass";
             btnDeleteClass.Size = new Size(230, 75);
             btnDeleteClass.TabIndex = 3;
@@ -120,7 +120,7 @@
             lblModuleID.BackColor = SystemColors.GradientActiveCaption;
             lblModuleID.BorderStyle = BorderStyle.Fixed3D;
             lblModuleID.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblModuleID.Location = new Point(446, 566);
+            lblModuleID.Location = new Point(431, 565);
             lblModuleID.Name = "lblModuleID";
             lblModuleID.Size = new Size(153, 42);
             lblModuleID.TabIndex = 5;
@@ -129,7 +129,7 @@
             // txtModuleID
             // 
             txtModuleID.BackColor = SystemColors.ButtonHighlight;
-            txtModuleID.Location = new Point(608, 566);
+            txtModuleID.Location = new Point(593, 565);
             txtModuleID.Name = "txtModuleID";
             txtModuleID.Size = new Size(200, 39);
             txtModuleID.TabIndex = 6;
@@ -140,7 +140,7 @@
             lblModuleName.BackColor = SystemColors.GradientActiveCaption;
             lblModuleName.BorderStyle = BorderStyle.FixedSingle;
             lblModuleName.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblModuleName.Location = new Point(823, 563);
+            lblModuleName.Location = new Point(828, 565);
             lblModuleName.Name = "lblModuleName";
             lblModuleName.Size = new Size(202, 42);
             lblModuleName.TabIndex = 7;
@@ -148,9 +148,9 @@
             // 
             // txtModuleName
             // 
-            txtModuleName.Location = new Point(1052, 566);
+            txtModuleName.Location = new Point(1041, 568);
             txtModuleName.Name = "txtModuleName";
-            txtModuleName.Size = new Size(154, 39);
+            txtModuleName.Size = new Size(170, 39);
             txtModuleName.TabIndex = 8;
             // 
             // lblClassDate
@@ -159,7 +159,7 @@
             lblClassDate.BackColor = SystemColors.GradientActiveCaption;
             lblClassDate.BorderStyle = BorderStyle.Fixed3D;
             lblClassDate.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblClassDate.Location = new Point(64, 701);
+            lblClassDate.Location = new Point(27, 700);
             lblClassDate.Name = "lblClassDate";
             lblClassDate.Size = new Size(159, 42);
             lblClassDate.TabIndex = 9;
@@ -171,7 +171,7 @@
             lblCharges.BackColor = SystemColors.GradientActiveCaption;
             lblCharges.BorderStyle = BorderStyle.Fixed3D;
             lblCharges.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblCharges.Location = new Point(468, 629);
+            lblCharges.Location = new Point(431, 628);
             lblCharges.Name = "lblCharges";
             lblCharges.Size = new Size(122, 42);
             lblCharges.TabIndex = 11;
@@ -179,9 +179,9 @@
             // 
             // txtCharges
             // 
-            txtCharges.Location = new Point(608, 629);
+            txtCharges.Location = new Point(593, 631);
             txtCharges.Name = "txtCharges";
-            txtCharges.Size = new Size(174, 39);
+            txtCharges.Size = new Size(200, 39);
             txtCharges.TabIndex = 12;
             // 
             // panel1
@@ -189,14 +189,14 @@
             panel1.BackColor = Color.FromArgb(25, 25, 25);
             panel1.BorderStyle = BorderStyle.Fixed3D;
             panel1.Controls.Add(lblTitle);
-            panel1.Location = new Point(-27, -2);
+            panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1738, 168);
+            panel1.Size = new Size(1180, 168);
             panel1.TabIndex = 13;
             // 
             // dtpClassDate
             // 
-            dtpClassDate.Location = new Point(239, 704);
+            dtpClassDate.Location = new Point(202, 703);
             dtpClassDate.Name = "dtpClassDate";
             dtpClassDate.Size = new Size(400, 39);
             dtpClassDate.TabIndex = 14;
@@ -207,7 +207,7 @@
             lblClassTime.BackColor = SystemColors.GradientActiveCaption;
             lblClassTime.BorderStyle = BorderStyle.Fixed3D;
             lblClassTime.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblClassTime.Location = new Point(64, 635);
+            lblClassTime.Location = new Point(27, 634);
             lblClassTime.Name = "lblClassTime";
             lblClassTime.Size = new Size(153, 42);
             lblClassTime.TabIndex = 15;
@@ -215,7 +215,7 @@
             // 
             // txtClassTime
             // 
-            txtClassTime.Location = new Point(239, 635);
+            txtClassTime.Location = new Point(202, 634);
             txtClassTime.Name = "txtClassTime";
             txtClassTime.Size = new Size(200, 39);
             txtClassTime.TabIndex = 16;
@@ -226,7 +226,7 @@
             lblRoom.BackColor = SystemColors.GradientActiveCaption;
             lblRoom.BorderStyle = BorderStyle.Fixed3D;
             lblRoom.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblRoom.Location = new Point(671, 701);
+            lblRoom.Location = new Point(828, 700);
             lblRoom.Name = "lblRoom";
             lblRoom.Size = new Size(94, 42);
             lblRoom.TabIndex = 17;
@@ -234,9 +234,9 @@
             // 
             // txtRoom
             // 
-            txtRoom.Location = new Point(771, 701);
+            txtRoom.Location = new Point(1041, 700);
             txtRoom.Name = "txtRoom";
-            txtRoom.Size = new Size(154, 39);
+            txtRoom.Size = new Size(170, 39);
             txtRoom.TabIndex = 18;
             // 
             // lblLevel
@@ -245,7 +245,7 @@
             lblLevel.BackColor = SystemColors.GradientActiveCaption;
             lblLevel.BorderStyle = BorderStyle.Fixed3D;
             lblLevel.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblLevel.Location = new Point(804, 626);
+            lblLevel.Location = new Point(828, 628);
             lblLevel.Name = "lblLevel";
             lblLevel.Size = new Size(84, 42);
             lblLevel.TabIndex = 19;
@@ -255,7 +255,7 @@
             // 
             cboLevel.FormattingEnabled = true;
             cboLevel.Items.AddRange(new object[] { "Beginner", "Intermediate", "Advance" });
-            cboLevel.Location = new Point(914, 626);
+            cboLevel.Location = new Point(1041, 628);
             cboLevel.Name = "cboLevel";
             cboLevel.Size = new Size(170, 40);
             cboLevel.TabIndex = 20;
@@ -266,7 +266,7 @@
             lblTrainerID.BackColor = SystemColors.GradientActiveCaption;
             lblTrainerID.BorderStyle = BorderStyle.Fixed3D;
             lblTrainerID.Font = new Font("Segoe UI", 10.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblTrainerID.Location = new Point(64, 566);
+            lblTrainerID.Location = new Point(27, 565);
             lblTrainerID.Name = "lblTrainerID";
             lblTrainerID.Size = new Size(140, 42);
             lblTrainerID.TabIndex = 21;
@@ -275,7 +275,7 @@
             // txtTrainerID
             // 
             txtTrainerID.BackColor = SystemColors.ButtonHighlight;
-            txtTrainerID.Location = new Point(223, 569);
+            txtTrainerID.Location = new Point(202, 568);
             txtTrainerID.Name = "txtTrainerID";
             txtTrainerID.Size = new Size(200, 39);
             txtTrainerID.TabIndex = 22;
@@ -284,7 +284,7 @@
             // 
             lblWrong.AutoSize = true;
             lblWrong.ForeColor = Color.Red;
-            lblWrong.Location = new Point(847, 792);
+            lblWrong.Location = new Point(815, 791);
             lblWrong.Name = "lblWrong";
             lblWrong.Size = new Size(0, 32);
             lblWrong.TabIndex = 23;
@@ -293,7 +293,7 @@
             // 
             lblConfirmed.AutoSize = true;
             lblConfirmed.ForeColor = Color.Green;
-            lblConfirmed.Location = new Point(962, 709);
+            lblConfirmed.Location = new Point(828, 758);
             lblConfirmed.Name = "lblConfirmed";
             lblConfirmed.Size = new Size(0, 32);
             lblConfirmed.TabIndex = 24;
@@ -303,7 +303,7 @@
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ButtonHighlight;
-            ClientSize = new Size(1454, 900);
+            ClientSize = new Size(1234, 900);
             Controls.Add(lblConfirmed);
             Controls.Add(lblWrong);
             Controls.Add(txtTrainerID);
@@ -329,12 +329,10 @@
             Controls.Add(dgvClassSchedule);
             FormBorderStyle = FormBorderStyle.None;
             MaximizeBox = false;
-            MaximumSize = new Size(2200, 900);
             MinimizeBox = false;
             Name = "TrainerHomeForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "ClassText";
-            WindowState = FormWindowState.Maximized;
             Load += TrainerHomeForm_Load;
             ((System.ComponentModel.ISupportInitialize)dgvClassSchedule).EndInit();
             panel1.ResumeLayout(false);

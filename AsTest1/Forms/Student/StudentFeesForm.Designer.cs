@@ -56,7 +56,7 @@
             OutstandingPaymentGroupBox.Controls.Add(dataGridView1);
             OutstandingPaymentGroupBox.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             OutstandingPaymentGroupBox.ForeColor = Color.Black;
-            OutstandingPaymentGroupBox.Location = new Point(28, 26);
+            OutstandingPaymentGroupBox.Location = new Point(12, 12);
             OutstandingPaymentGroupBox.Name = "OutstandingPaymentGroupBox";
             OutstandingPaymentGroupBox.Size = new Size(1022, 268);
             OutstandingPaymentGroupBox.TabIndex = 1;
@@ -134,7 +134,7 @@
             groupBox2.Controls.Add(dataGridView2);
             groupBox2.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox2.ForeColor = Color.Black;
-            groupBox2.Location = new Point(28, 316);
+            groupBox2.Location = new Point(12, 302);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(1022, 258);
             groupBox2.TabIndex = 2;

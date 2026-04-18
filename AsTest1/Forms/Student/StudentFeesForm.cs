@@ -3,11 +3,13 @@ using System.Data;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 using APUCC_Project.Services;
+using APUCC_Project.UI;
 
 namespace APUCC_Project.Forms.Student
 {
     public partial class StudentFeesForm : Form
     {
+        private static readonly Color PaidButtonColor = Color.FromArgb(52, 120, 246);
         private readonly int _studentId;
 
         public StudentFeesForm(int studentId)
@@ -39,9 +41,9 @@ namespace APUCC_Project.Forms.Student
             ActionColumn.UseColumnTextForButtonValue = true;
             ActionColumn.Text = "Pay Now";
             ActionColumn.FlatStyle = FlatStyle.Flat;
-            ActionColumn.DefaultCellStyle.BackColor = Color.FromArgb(102, 146, 153);
+            ActionColumn.DefaultCellStyle.BackColor = ThemePalette.DangerButton;
             ActionColumn.DefaultCellStyle.ForeColor = Color.White;
-            ActionColumn.DefaultCellStyle.SelectionBackColor = Color.FromArgb(82, 126, 133);
+            ActionColumn.DefaultCellStyle.SelectionBackColor = ThemePalette.DangerButton;
             ActionColumn.DefaultCellStyle.SelectionForeColor = Color.White;
         }
 
@@ -58,9 +60,9 @@ namespace APUCC_Project.Forms.Student
             ReceiptColumn.UseColumnTextForButtonValue = true;
             ReceiptColumn.Text = "Paid";
             ReceiptColumn.FlatStyle = FlatStyle.Flat;
-            ReceiptColumn.DefaultCellStyle.BackColor = Color.FromArgb(60, 120, 80);
+            ReceiptColumn.DefaultCellStyle.BackColor = PaidButtonColor;
             ReceiptColumn.DefaultCellStyle.ForeColor = Color.White;
-            ReceiptColumn.DefaultCellStyle.SelectionBackColor = Color.FromArgb(50, 100, 70);
+            ReceiptColumn.DefaultCellStyle.SelectionBackColor = PaidButtonColor;
             ReceiptColumn.DefaultCellStyle.SelectionForeColor = Color.White;
         }
 
@@ -76,18 +78,18 @@ namespace APUCC_Project.Forms.Student
             grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             grid.RowHeadersVisible = false;
-            grid.BackgroundColor = Color.White;
+            grid.BackgroundColor = ThemePalette.BaseBackground;
             grid.BorderStyle = BorderStyle.None;
             grid.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             grid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             grid.EnableHeadersVisualStyles = false;
-            grid.DefaultCellStyle.BackColor = Color.White;
-            grid.DefaultCellStyle.ForeColor = Color.Black;
-            grid.DefaultCellStyle.SelectionBackColor = Color.LightSteelBlue;
-            grid.DefaultCellStyle.SelectionForeColor = Color.Black;
+            grid.DefaultCellStyle.BackColor = ThemePalette.BaseBackground;
+            grid.DefaultCellStyle.ForeColor = ThemePalette.PrimaryText;
+            grid.DefaultCellStyle.SelectionBackColor = ThemePalette.SelectionBackground;
+            grid.DefaultCellStyle.SelectionForeColor = ThemePalette.PrimaryText;
             grid.DefaultCellStyle.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(25, 25, 25);
-            grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            grid.ColumnHeadersDefaultCellStyle.BackColor = ThemePalette.SecondaryBackground;
+            grid.ColumnHeadersDefaultCellStyle.ForeColor = ThemePalette.PrimaryText;
             grid.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             grid.RowTemplate.Height = 34;
             grid.ClearSelection();

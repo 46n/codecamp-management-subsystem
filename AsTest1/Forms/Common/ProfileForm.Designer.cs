@@ -18,6 +18,7 @@ namespace APUCC_Project.Forms.Common
         private void InitializeComponent()
         {
             panelAccount = new Panel();
+            btnSignOut = new Button();
             btnSavePassword = new Button();
             btnEditPassword = new Button();
             txtAddress = new TextBox();
@@ -33,7 +34,6 @@ namespace APUCC_Project.Forms.Common
             txtUsername = new TextBox();
             lblUsername = new Label();
             lblAccountTitle = new Label();
-            btnSignOut = new Button();
             panelAccount.SuspendLayout();
             SuspendLayout();
             // 
@@ -41,6 +41,7 @@ namespace APUCC_Project.Forms.Common
             // 
             panelAccount.BackColor = Color.White;
             panelAccount.BorderStyle = BorderStyle.FixedSingle;
+            panelAccount.Controls.Add(btnSignOut);
             panelAccount.Controls.Add(btnSavePassword);
             panelAccount.Controls.Add(btnEditPassword);
             panelAccount.Controls.Add(txtAddress);
@@ -56,11 +57,27 @@ namespace APUCC_Project.Forms.Common
             panelAccount.Controls.Add(txtUsername);
             panelAccount.Controls.Add(lblUsername);
             panelAccount.Controls.Add(lblAccountTitle);
-            panelAccount.Location = new Point(49, 55);
-            panelAccount.Margin = new Padding(6, 6, 6, 6);
+            panelAccount.Location = new Point(1, 6);
+            panelAccount.Margin = new Padding(6);
             panelAccount.Name = "panelAccount";
-            panelAccount.Size = new Size(705, 749);
+            panelAccount.Size = new Size(1093, 696);
             panelAccount.TabIndex = 1;
+            // 
+            // btnSignOut
+            // 
+            btnSignOut.BackColor = Color.FromArgb(192, 57, 43);
+            btnSignOut.FlatAppearance.BorderSize = 0;
+            btnSignOut.FlatStyle = FlatStyle.Flat;
+            btnSignOut.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSignOut.ForeColor = Color.White;
+            btnSignOut.Location = new Point(214, 616);
+            btnSignOut.Margin = new Padding(6);
+            btnSignOut.Name = "btnSignOut";
+            btnSignOut.Size = new Size(648, 61);
+            btnSignOut.TabIndex = 3;
+            btnSignOut.Text = "Sign Out";
+            btnSignOut.UseVisualStyleBackColor = false;
+            btnSignOut.Click += btnSignOut_Click;
             // 
             // btnSavePassword
             // 
@@ -69,8 +86,8 @@ namespace APUCC_Project.Forms.Common
             btnSavePassword.FlatStyle = FlatStyle.Flat;
             btnSavePassword.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSavePassword.ForeColor = Color.White;
-            btnSavePassword.Location = new Point(513, 670);
-            btnSavePassword.Margin = new Padding(6, 6, 6, 6);
+            btnSavePassword.Location = new Point(919, 519);
+            btnSavePassword.Margin = new Padding(6);
             btnSavePassword.Name = "btnSavePassword";
             btnSavePassword.Size = new Size(112, 51);
             btnSavePassword.TabIndex = 14;
@@ -85,8 +102,8 @@ namespace APUCC_Project.Forms.Common
             btnEditPassword.FlatStyle = FlatStyle.Flat;
             btnEditPassword.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnEditPassword.ForeColor = Color.Black;
-            btnEditPassword.Location = new Point(375, 670);
-            btnEditPassword.Margin = new Padding(6, 6, 6, 6);
+            btnEditPassword.Location = new Point(781, 519);
+            btnEditPassword.Margin = new Padding(6);
             btnEditPassword.Name = "btnEditPassword";
             btnEditPassword.Size = new Size(112, 51);
             btnEditPassword.TabIndex = 13;
@@ -99,11 +116,11 @@ namespace APUCC_Project.Forms.Common
             txtAddress.BackColor = Color.WhiteSmoke;
             txtAddress.BorderStyle = BorderStyle.FixedSingle;
             txtAddress.ForeColor = Color.Black;
-            txtAddress.Location = new Point(312, 593);
-            txtAddress.Margin = new Padding(6, 6, 6, 6);
+            txtAddress.Location = new Point(741, 356);
+            txtAddress.Margin = new Padding(6);
             txtAddress.Name = "txtAddress";
             txtAddress.ReadOnly = true;
-            txtAddress.Size = new Size(313, 39);
+            txtAddress.Size = new Size(312, 39);
             txtAddress.TabIndex = 12;
             // 
             // lblAddress
@@ -111,7 +128,7 @@ namespace APUCC_Project.Forms.Common
             lblAddress.AutoSize = true;
             lblAddress.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblAddress.ForeColor = Color.Black;
-            lblAddress.Location = new Point(33, 593);
+            lblAddress.Location = new Point(567, 352);
             lblAddress.Margin = new Padding(6, 0, 6, 0);
             lblAddress.Name = "lblAddress";
             lblAddress.Size = new Size(115, 37);
@@ -123,11 +140,11 @@ namespace APUCC_Project.Forms.Common
             txtPhone.BackColor = Color.WhiteSmoke;
             txtPhone.BorderStyle = BorderStyle.FixedSingle;
             txtPhone.ForeColor = Color.Black;
-            txtPhone.Location = new Point(312, 501);
-            txtPhone.Margin = new Padding(6, 6, 6, 6);
+            txtPhone.Location = new Point(247, 354);
+            txtPhone.Margin = new Padding(6);
             txtPhone.Name = "txtPhone";
             txtPhone.ReadOnly = true;
-            txtPhone.Size = new Size(313, 39);
+            txtPhone.Size = new Size(250, 39);
             txtPhone.TabIndex = 10;
             // 
             // lblPhone
@@ -135,7 +152,7 @@ namespace APUCC_Project.Forms.Common
             lblPhone.AutoSize = true;
             lblPhone.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblPhone.ForeColor = Color.Black;
-            lblPhone.Location = new Point(33, 503);
+            lblPhone.Location = new Point(33, 352);
             lblPhone.Margin = new Padding(6, 0, 6, 0);
             lblPhone.Name = "lblPhone";
             lblPhone.Size = new Size(95, 37);
@@ -147,10 +164,10 @@ namespace APUCC_Project.Forms.Common
             txtPassword.BackColor = Color.WhiteSmoke;
             txtPassword.BorderStyle = BorderStyle.FixedSingle;
             txtPassword.ForeColor = Color.Black;
-            txtPassword.Location = new Point(312, 399);
-            txtPassword.Margin = new Padding(6, 6, 6, 6);
+            txtPassword.Location = new Point(741, 246);
+            txtPassword.Margin = new Padding(6);
             txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(313, 39);
+            txtPassword.Size = new Size(312, 39);
             txtPassword.TabIndex = 8;
             // 
             // lblPassword
@@ -158,7 +175,7 @@ namespace APUCC_Project.Forms.Common
             lblPassword.AutoSize = true;
             lblPassword.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblPassword.ForeColor = Color.Black;
-            lblPassword.Location = new Point(33, 401);
+            lblPassword.Location = new Point(567, 244);
             lblPassword.Margin = new Padding(6, 0, 6, 0);
             lblPassword.Name = "lblPassword";
             lblPassword.Size = new Size(132, 37);
@@ -170,11 +187,11 @@ namespace APUCC_Project.Forms.Common
             txtEmail.BackColor = Color.WhiteSmoke;
             txtEmail.BorderStyle = BorderStyle.FixedSingle;
             txtEmail.ForeColor = Color.Black;
-            txtEmail.Location = new Point(312, 307);
-            txtEmail.Margin = new Padding(6, 6, 6, 6);
+            txtEmail.Location = new Point(741, 132);
+            txtEmail.Margin = new Padding(6);
             txtEmail.Name = "txtEmail";
             txtEmail.ReadOnly = true;
-            txtEmail.Size = new Size(313, 39);
+            txtEmail.Size = new Size(312, 39);
             txtEmail.TabIndex = 6;
             // 
             // lblEmail
@@ -182,7 +199,7 @@ namespace APUCC_Project.Forms.Common
             lblEmail.AutoSize = true;
             lblEmail.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblEmail.ForeColor = Color.Black;
-            lblEmail.Location = new Point(33, 309);
+            lblEmail.Location = new Point(567, 130);
             lblEmail.Margin = new Padding(6, 0, 6, 0);
             lblEmail.Name = "lblEmail";
             lblEmail.Size = new Size(83, 37);
@@ -194,11 +211,11 @@ namespace APUCC_Project.Forms.Common
             txtRole.BackColor = Color.WhiteSmoke;
             txtRole.BorderStyle = BorderStyle.FixedSingle;
             txtRole.ForeColor = Color.Black;
-            txtRole.Location = new Point(312, 215);
-            txtRole.Margin = new Padding(6, 6, 6, 6);
+            txtRole.Location = new Point(247, 241);
+            txtRole.Margin = new Padding(6);
             txtRole.Name = "txtRole";
             txtRole.ReadOnly = true;
-            txtRole.Size = new Size(313, 39);
+            txtRole.Size = new Size(250, 39);
             txtRole.TabIndex = 4;
             // 
             // lblRole
@@ -206,7 +223,7 @@ namespace APUCC_Project.Forms.Common
             lblRole.AutoSize = true;
             lblRole.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblRole.ForeColor = Color.Black;
-            lblRole.Location = new Point(33, 217);
+            lblRole.Location = new Point(33, 239);
             lblRole.Margin = new Padding(6, 0, 6, 0);
             lblRole.Name = "lblRole";
             lblRole.Size = new Size(70, 37);
@@ -218,11 +235,11 @@ namespace APUCC_Project.Forms.Common
             txtUsername.BackColor = Color.WhiteSmoke;
             txtUsername.BorderStyle = BorderStyle.FixedSingle;
             txtUsername.ForeColor = Color.Black;
-            txtUsername.Location = new Point(312, 124);
-            txtUsername.Margin = new Padding(6, 6, 6, 6);
+            txtUsername.Location = new Point(247, 128);
+            txtUsername.Margin = new Padding(6);
             txtUsername.Name = "txtUsername";
             txtUsername.ReadOnly = true;
-            txtUsername.Size = new Size(313, 39);
+            txtUsername.Size = new Size(250, 39);
             txtUsername.TabIndex = 2;
             // 
             // lblUsername
@@ -249,33 +266,14 @@ namespace APUCC_Project.Forms.Common
             lblAccountTitle.TabIndex = 0;
             lblAccountTitle.Text = "Account Details";
             // 
-            // btnSignOut
-            // 
-            btnSignOut.BackColor = Color.FromArgb(192, 57, 43);
-            btnSignOut.FlatAppearance.BorderSize = 0;
-            btnSignOut.FlatStyle = FlatStyle.Flat;
-            btnSignOut.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnSignOut.ForeColor = Color.White;
-            btnSignOut.Location = new Point(49, 849);
-            btnSignOut.Margin = new Padding(6, 6, 6, 6);
-            btnSignOut.Name = "btnSignOut";
-            btnSignOut.Size = new Size(705, 90);
-            btnSignOut.TabIndex = 3;
-            btnSignOut.Text = "Sign Out";
-            btnSignOut.UseVisualStyleBackColor = false;
-            btnSignOut.Click += btnSignOut_Click;
-            // 
             // ProfileForm
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            AutoScroll = true;
-            AutoScrollMinSize = new Size(0, 980);
             BackColor = Color.White;
-            ClientSize = new Size(972, 1095);
-            Controls.Add(btnSignOut);
+            ClientSize = new Size(1142, 761);
             Controls.Add(panelAccount);
-            Margin = new Padding(6, 6, 6, 6);
+            Margin = new Padding(6);
             Name = "ProfileForm";
             Text = "Profile";
             Load += ProfileForm_Load;

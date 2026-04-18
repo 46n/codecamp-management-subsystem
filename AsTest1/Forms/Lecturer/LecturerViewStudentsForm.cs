@@ -16,6 +16,7 @@ namespace APUCC_Project.Forms.Lecturer
         public LecturerViewStudentsForm()
         {
             InitializeComponent();
+            Resize += LecturerViewStudentsForm_Resize;
         }
 
         private void LecturerViewStudentsForm_Load(object sender, EventArgs e)
@@ -23,6 +24,7 @@ namespace APUCC_Project.Forms.Lecturer
             SetupStudentGrid();
             LoadFilterOptions();
             LoadStudents("All", "All", "All");
+            AdjustLayout();
         }
 
         private void SetupStudentGrid()
@@ -56,6 +58,7 @@ namespace APUCC_Project.Forms.Lecturer
             dgvStudentList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvStudentList.RowHeadersVisible = false;
             dgvStudentList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvStudentList.ScrollBars = ScrollBars.Vertical;
         }
 
         private void LoadFilterOptions()
@@ -207,16 +210,32 @@ namespace APUCC_Project.Forms.Lecturer
 
         private void UpdateLabels(string levelFilter, string moduleFilter, string statusFilter)
         {
-            if (lblCount != null)
-            {
-                lblCount.Text = $"Showing {dgvStudentList.Rows.Count} students";
-            }
-
             if (lblFormStatus != null)
             {
                 lblFormStatus.Text =
-                    $"Filtered: Level = {levelFilter}, Module = {moduleFilter}, Status = {statusFilter}";
+                    $"Showing {dgvStudentList.Rows.Count} students | Filtered: Level = {levelFilter}, Module = {moduleFilter}, Status = {statusFilter}";
             }
+        }
+
+        private void LecturerViewStudentsForm_Resize(object? sender, EventArgs e)
+        {
+            AdjustLayout();
+        }
+
+        private void AdjustLayout()
+        {
+            const int sideMargin = 37;
+            const int actionTop = 650;
+            int availableWidth = Math.Max(980, ClientSize.Width - (sideMargin * 2));
+
+            VeiwStudentpnl.Width = ClientSize.Width + 14;
+            grpFilter.Width = availableWidth;
+            dgvStudentList.Width = availableWidth;
+            lblFormStatus.MaximumSize = new System.Drawing.Size(availableWidth, 0);
+            lblFormStatus.Width = availableWidth;
+
+            btnDeleteSelected.Top = actionTop;
+            btnClose.Top = actionTop;
         }
 
         private void dgvStudentList_CellClick(object sender, DataGridViewCellEventArgs e)

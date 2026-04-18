@@ -51,9 +51,9 @@
             EnrolledStuedntsPanel.BackColor = Color.FromArgb(25, 25, 25);
             EnrolledStuedntsPanel.BorderStyle = BorderStyle.Fixed3D;
             EnrolledStuedntsPanel.Controls.Add(lblTitle);
-            EnrolledStuedntsPanel.Location = new Point(-20, -16);
+            EnrolledStuedntsPanel.Location = new Point(0, 0);
             EnrolledStuedntsPanel.Name = "EnrolledStuedntsPanel";
-            EnrolledStuedntsPanel.Size = new Size(1845, 176);
+            EnrolledStuedntsPanel.Size = new Size(1180, 176);
             EnrolledStuedntsPanel.TabIndex = 1;
             // 
             // dgvEnrolledStudents
@@ -63,7 +63,7 @@
             dgvEnrolledStudents.Location = new Point(40, 180);
             dgvEnrolledStudents.Name = "dgvEnrolledStudents";
             dgvEnrolledStudents.RowHeadersWidth = 82;
-            dgvEnrolledStudents.Size = new Size(1294, 506);
+            dgvEnrolledStudents.Size = new Size(1080, 506);
             dgvEnrolledStudents.TabIndex = 2;
             // 
             // TrainerEnrolledStudents
@@ -71,7 +71,7 @@
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ButtonHighlight;
-            ClientSize = new Size(1566, 896);
+            ClientSize = new Size(1180, 896);
             Controls.Add(dgvEnrolledStudents);
             Controls.Add(EnrolledStuedntsPanel);
             Name = "TrainerEnrolledStudents";
