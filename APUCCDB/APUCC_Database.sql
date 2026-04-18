@@ -1495,3 +1495,39 @@ BEGIN
     );
 END
 GO
+
+IF NOT EXISTS
+(
+    SELECT 1
+    FROM Students s
+    INNER JOIN Users u ON s.UserID = u.UserID
+    WHERE u.Username = 'TP091283'
+)
+BEGIN
+    INSERT INTO Students
+    (
+        UserID,
+        TPNumber,
+        StudyLevel,
+        ContactNumber,
+        StudentAddress,
+        MonthOfEnrollment,
+        StudentStatus
+    )
+    SELECT
+        u.UserID,
+        'TP091283',
+        'Level 1',
+        '0189128300',
+        'Kuala Lumpur',
+        'April 2026',
+        'Active'
+    FROM Users u
+    WHERE u.Username = 'TP091283';
+END
+GO
+
+
+SELECT Username, [Password]
+FROM Users
+WHERE Username = 'TP091283';
