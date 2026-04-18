@@ -78,14 +78,19 @@ namespace APUCC_Project.Forms.Admin
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                string query = "SELECT DISTINCT ModuleId, ModuleName FROM ClassSchedule ORDER BY ModuleName";
+                string query = @"
+            SELECT ModuleID, ModuleName
+            FROM Modules
+            WHERE Status = 'Active'
+            ORDER BY ModuleName";
+
                 SqlDataAdapter da = new SqlDataAdapter(query, con);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
 
                 cboModule.DataSource = dt;
                 cboModule.DisplayMember = "ModuleName";
-                cboModule.ValueMember = "ModuleId";
+                cboModule.ValueMember = "ModuleID";
                 cboModule.SelectedIndex = -1;
             }
         }

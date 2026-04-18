@@ -50,30 +50,6 @@ namespace APUCC_Project
             panelMenu.TabIndex = 0;
             panelMenu.Paint += panelMenu_Paint;
             // 
-            // iconButton4
-            // 
-            iconButton4.Dock = DockStyle.Top;
-            iconButton4.FlatAppearance.BorderSize = 0;
-            iconButton4.FlatStyle = FlatStyle.Flat;
-            iconButton4.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            iconButton4.ForeColor = Color.White;
-            iconButton4.IconChar = FontAwesome.Sharp.IconChar.Cog;
-            iconButton4.IconColor = Color.White;
-            iconButton4.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            iconButton4.IconSize = 30;
-            iconButton4.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton4.Location = new Point(0, 556);
-            iconButton4.Margin = new Padding(4, 2, 4, 2);
-            iconButton4.Name = "iconButton4";
-            iconButton4.Padding = new Padding(17, 0, 0, 0);
-            iconButton4.Size = new Size(271, 107);
-            iconButton4.TabIndex = 4;
-            iconButton4.Text = "Settings";
-            iconButton4.TextAlign = ContentAlignment.MiddleLeft;
-            iconButton4.TextImageRelation = TextImageRelation.ImageBeforeText;
-            iconButton4.UseVisualStyleBackColor = true;
-            iconButton4.Click += iconButton4_Click;
-            // 
             // Profile
             // 
             Profile.Dock = DockStyle.Top;
@@ -194,8 +170,29 @@ namespace APUCC_Project
             // 
             // iconButton4
             // 
+            iconButton4.Dock = DockStyle.Top;
             iconButton4.Enabled = false;
+            iconButton4.FlatAppearance.BorderSize = 0;
+            iconButton4.FlatStyle = FlatStyle.Flat;
+            iconButton4.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            iconButton4.ForeColor = Color.White;
+            iconButton4.IconChar = FontAwesome.Sharp.IconChar.Cog;
+            iconButton4.IconColor = Color.White;
+            iconButton4.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            iconButton4.IconSize = 30;
+            iconButton4.ImageAlign = ContentAlignment.MiddleLeft;
+            iconButton4.Location = new Point(0, 556);
+            iconButton4.Margin = new Padding(4, 2, 4, 2);
+            iconButton4.Name = "iconButton4";
+            iconButton4.Padding = new Padding(17, 0, 0, 0);
+            iconButton4.Size = new Size(271, 107);
+            iconButton4.TabIndex = 4;
+            iconButton4.Text = "Settings";
+            iconButton4.TextAlign = ContentAlignment.MiddleLeft;
+            iconButton4.TextImageRelation = TextImageRelation.ImageBeforeText;
+            iconButton4.UseVisualStyleBackColor = true;
             iconButton4.Visible = false;
+            iconButton4.Click += iconButton4_Click;
             // 
             // iconMenuItem1
             // 
@@ -215,7 +212,7 @@ namespace APUCC_Project
             panelSidebarContainer.Margin = new Padding(0);
             panelSidebarContainer.Name = "panelSidebarContainer";
             panelSidebarContainer.Padding = new Padding(9, 11, 9, 11);
-            panelSidebarContainer.Size = new Size(290, 1018);
+            panelSidebarContainer.Size = new Size(290, 643);
             panelSidebarContainer.TabIndex = 2;
             // 
             // MainPanel
@@ -224,20 +221,20 @@ namespace APUCC_Project
             MainPanel.Location = new Point(290, 0);
             MainPanel.Margin = new Padding(4, 2, 4, 2);
             MainPanel.Name = "MainPanel";
-            MainPanel.Size = new Size(1244, 1018);
+            MainPanel.Size = new Size(803, 643);
             MainPanel.TabIndex = 3;
             MainPanel.Paint += MainPanel_Paint;
             // 
             // BaseShellForm
             // 
             AutoScaleMode = AutoScaleMode.None;
-            ClientSize = new Size(1534, 1018);
+            ClientSize = new Size(1093, 643);
             Controls.Add(MainPanel);
             Controls.Add(panelSidebarContainer);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Margin = new Padding(4, 2, 4, 2);
             Name = "BaseShellForm";
-            Text = "Form1";
+            Text = "Base Shell Form";
             Load += Form1_Load;
             panelMenu.ResumeLayout(false);
             panelLogo.ResumeLayout(false);
