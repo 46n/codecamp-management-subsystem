@@ -75,7 +75,7 @@
             // 
             lblWrong.AutoSize = true;
             lblWrong.ForeColor = Color.FromArgb(192, 0, 0);
-            lblWrong.Location = new Point(564, 690);
+            lblWrong.Location = new Point(672, 679);
             lblWrong.Name = "lblWrong";
             lblWrong.Size = new Size(0, 32);
             lblWrong.TabIndex = 8;

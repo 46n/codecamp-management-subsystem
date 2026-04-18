@@ -150,7 +150,7 @@
             // 
             txtModuleName.Location = new Point(1041, 568);
             txtModuleName.Name = "txtModuleName";
-            txtModuleName.Size = new Size(170, 39);
+            txtModuleName.Size = new Size(139, 39);
             txtModuleName.TabIndex = 8;
             // 
             // lblClassDate
@@ -236,7 +236,7 @@
             // 
             txtRoom.Location = new Point(1041, 700);
             txtRoom.Name = "txtRoom";
-            txtRoom.Size = new Size(170, 39);
+            txtRoom.Size = new Size(139, 39);
             txtRoom.TabIndex = 18;
             // 
             // lblLevel
@@ -257,7 +257,7 @@
             cboLevel.Items.AddRange(new object[] { "Beginner", "Intermediate", "Advance" });
             cboLevel.Location = new Point(1041, 628);
             cboLevel.Name = "cboLevel";
-            cboLevel.Size = new Size(170, 40);
+            cboLevel.Size = new Size(139, 40);
             cboLevel.TabIndex = 20;
             // 
             // lblTrainerID
@@ -303,7 +303,7 @@
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ButtonHighlight;
-            ClientSize = new Size(1234, 900);
+            ClientSize = new Size(1196, 900);
             Controls.Add(lblConfirmed);
             Controls.Add(lblWrong);
             Controls.Add(txtTrainerID);

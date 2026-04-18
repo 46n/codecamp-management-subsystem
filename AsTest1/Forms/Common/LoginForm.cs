@@ -130,8 +130,8 @@ namespace APUCC_Project.Forms.Common
                 {
                     lblWrong.Text = "Wrong username/email or password.";
                     lblWrong.Visible = true;
-                    txtPassword.Clear();
                     txtPassword.Focus();
+                    txtPassword.SelectAll();
                 }
             }
             catch (Exception ex)
@@ -147,12 +147,14 @@ namespace APUCC_Project.Forms.Common
 
         private void txtUser_TextChanged(object sender, EventArgs e)
         {
-            lblWrong.Visible = false;
+            if (lblWrong.Visible)
+                lblWrong.Visible = false;
         }
 
         private void txtPassword_TextChanged(object sender, EventArgs e)
         {
-            lblWrong.Visible = false;
+            if (lblWrong.Visible)
+                lblWrong.Visible = false;
         }
 
         private void btnTogglePassword_Click(object sender, EventArgs e)
