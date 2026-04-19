@@ -31,7 +31,7 @@ namespace APUCC_Project.Forms.Student
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             lblGreeting = new Label();
-            lblWelcome = new Label();
+            lblWelcomeMessage = new Label();
             panelScheduleCard = new Panel();
             dgvSchedule = new DataGridView();
             ModuleColumnHome = new DataGridViewTextBoxColumn();
@@ -60,18 +60,18 @@ namespace APUCC_Project.Forms.Student
             lblGreeting.TabIndex = 1;
             lblGreeting.Text = "Good day, Student!";
             // 
-            // lblWelcome
+            // lblWelcomeMessage
             // 
-            lblWelcome.AutoSize = true;
-            lblWelcome.BackColor = Color.Transparent;
-            lblWelcome.Font = new Font("Segoe UI", 8.5F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblWelcome.ForeColor = Color.Black;
-            lblWelcome.Location = new Point(13, 86);
-            lblWelcome.Margin = new Padding(4, 0, 4, 0);
-            lblWelcome.Name = "lblWelcome";
-            lblWelcome.Size = new Size(421, 31);
-            lblWelcome.TabIndex = 2;
-            lblWelcome.Text = "Welcome to your CodeCamp dashboard";
+            lblWelcomeMessage.AutoSize = true;
+            lblWelcomeMessage.BackColor = Color.Transparent;
+            lblWelcomeMessage.Font = new Font("Segoe UI", 8.5F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblWelcomeMessage.ForeColor = Color.Black;
+            lblWelcomeMessage.Location = new Point(13, 86);
+            lblWelcomeMessage.Margin = new Padding(4, 0, 4, 0);
+            lblWelcomeMessage.Name = "lblWelcomeMessage";
+            lblWelcomeMessage.Size = new Size(421, 31);
+            lblWelcomeMessage.TabIndex = 2;
+            lblWelcomeMessage.Text = "Welcome to your CodeCamp dashboard";
             // 
             // panelScheduleCard
             // 
@@ -215,7 +215,7 @@ namespace APUCC_Project.Forms.Student
             BackColor = Color.White;
             ClientSize = new Size(1181, 731);
             Controls.Add(panelScheduleCard);
-            Controls.Add(lblWelcome);
+            Controls.Add(lblWelcomeMessage);
             Controls.Add(lblGreeting);
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(4, 2, 4, 2);
@@ -229,7 +229,7 @@ namespace APUCC_Project.Forms.Student
 
         #endregion
         private Label lblGreeting;
-        private Label lblWelcome;
+        private Label lblWelcomeMessage;
         private Panel panelScheduleCard;
         private Button btnUpcomingSchedule;
         private Button btnCurrentSchedule;

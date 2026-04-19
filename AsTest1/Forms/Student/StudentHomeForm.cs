@@ -40,8 +40,8 @@ namespace APUCC_Project.Forms.Student
         {
             string studentName = GetStudentDisplayName();
             lblGreeting.Text = $"Good day, {studentName}!";
-            lblWelcome.Text = "Welcome to your CodeCamp dashboard";
-            lblWelcome.Font = new Font("Segoe UI", 8.5F, FontStyle.Regular, GraphicsUnit.Point);
+            lblWelcomeMessage.Text = "Welcome to your CodeCamp dashboard";
+            lblWelcomeMessage.Font = new Font("Segoe UI", 8.5F, FontStyle.Regular, GraphicsUnit.Point);
         }
 
         private string GetStudentDisplayName()

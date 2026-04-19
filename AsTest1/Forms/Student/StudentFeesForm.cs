@@ -20,20 +20,56 @@ namespace APUCC_Project.Forms.Student
             _studentId = studentId;
 
             Load += StudentFeesForm_Load;
-            dataGridView2.CellContentClick += dataGridView2_CellContentClick;
+            dgvPaymentHistory.CellContentClick += dataGridView2_CellContentClick;
         }
 
         private void StudentFeesForm_Load(object? sender, EventArgs e)
         {
             SetupOutstandingGrid();
             SetupPaymentHistoryGrid();
+            EnsureInvoicesForStudentEnrollments();
             LoadOutstandingFees();
             LoadPaymentHistory();
         }
 
+        private void EnsureInvoicesForStudentEnrollments()
+        {
+            const string query = @"
+                INSERT INTO Invoices (EnrollmentID, InvoiceDate, Amount, InvoiceStatus, DueDate)
+                SELECT
+                    se.EnrollmentID,
+                    CAST(GETDATE() AS DATE),
+                    cs.Charges,
+                    CASE
+                        WHEN se.EnrollmentStatus = 'Cancelled' THEN 'Cancelled'
+                        ELSE 'Unpaid'
+                    END,
+                    DATEADD(DAY, 14, CAST(GETDATE() AS DATE))
+                FROM StudentEnrollments se
+                INNER JOIN ClassSchedule cs ON se.ClassScheduleID = cs.Id
+                LEFT JOIN Invoices i ON i.EnrollmentID = se.EnrollmentID
+                WHERE se.StudentID = @StudentID
+                  AND se.EnrollmentStatus IN ('Active', 'Completed')
+                  AND i.InvoiceID IS NULL;";
+
+            try
+            {
+                using SqlConnection conn = DatabaseHelper.GetConnection();
+                using SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@StudentID", _studentId);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to prepare fee records: " + ex.Message, "Fees", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
         private void SetupOutstandingGrid()
         {
-            ConfigureGrid(dataGridView1);
+            ConfigureGrid(dgvOutstandingFees);
 
             InvoiceIDHiddenColumn.DataPropertyName = "InvoiceID";
             ModuleColumn.DataPropertyName = "Module";
@@ -56,7 +92,7 @@ namespace APUCC_Project.Forms.Student
 
         private void SetupPaymentHistoryGrid()
         {
-            ConfigureGrid(dataGridView2);
+            ConfigureGrid(dgvPaymentHistory);
 
             InvoiceIDColumn.DataPropertyName = "InvoiceNo";
             ModuleColumn2.DataPropertyName = "Module";
@@ -121,7 +157,7 @@ namespace APUCC_Project.Forms.Student
                 WHERE StudentID = @StudentID
                 ORDER BY SortDueDate, InvoiceID;";
 
-            LoadGrid(query, dataGridView1);
+            LoadGrid(query, dgvOutstandingFees);
         }
 
         private void LoadPaymentHistory()
@@ -137,7 +173,7 @@ namespace APUCC_Project.Forms.Student
                 WHERE StudentID = @StudentID
                 ORDER BY SortPaymentDate DESC, PaymentHistoryID DESC;";
 
-            LoadGrid(query, dataGridView2);
+            LoadGrid(query, dgvPaymentHistory);
         }
 
         private void LoadGrid(string query, DataGridView grid)
@@ -165,12 +201,12 @@ namespace APUCC_Project.Forms.Student
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0 || e.ColumnIndex != dataGridView1.Columns["ActionColumn"].Index)
+            if (e.RowIndex < 0 || e.ColumnIndex != dgvOutstandingFees.Columns["ActionColumn"].Index)
             {
                 return;
             }
 
-            DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+            DataGridViewRow row = dgvOutstandingFees.Rows[e.RowIndex];
             int invoiceId = Convert.ToInt32(row.Cells["InvoiceIDHiddenColumn"].Value);
             string moduleName = row.Cells["ModuleColumn"].Value?.ToString() ?? "this course";
 
@@ -271,8 +307,8 @@ namespace APUCC_Project.Forms.Student
 
                 LoadOutstandingFees();
                 LoadPaymentHistory();
-                dataGridView1.Refresh();
-                dataGridView2.Refresh();
+                dgvOutstandingFees.Refresh();
+                dgvPaymentHistory.Refresh();
 
                 MessageBox.Show(
                     "Payment recorded successfully. The fee has been moved to Payment History.",
@@ -289,12 +325,12 @@ namespace APUCC_Project.Forms.Student
 
         private void dataGridView2_CellContentClick(object? sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0 || e.ColumnIndex != dataGridView2.Columns["ReceiptColumn"].Index)
+            if (e.RowIndex < 0 || e.ColumnIndex != dgvPaymentHistory.Columns["ReceiptColumn"].Index)
             {
                 return;
             }
 
-            string invoiceNo = dataGridView2.Rows[e.RowIndex].Cells["InvoiceIDColumn"].Value?.ToString() ?? string.Empty;
+            string invoiceNo = dgvPaymentHistory.Rows[e.RowIndex].Cells["InvoiceIDColumn"].Value?.ToString() ?? string.Empty;
             if (string.IsNullOrWhiteSpace(invoiceNo))
             {
                 MessageBox.Show("Invoice information is not available for this payment.", "Invoice", MessageBoxButtons.OK, MessageBoxIcon.Information);

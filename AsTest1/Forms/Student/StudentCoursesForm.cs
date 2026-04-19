@@ -17,7 +17,7 @@ namespace APUCC_Project.Forms.Student
             _studentId = studentId;
 
             Load += StudentCoursesForm_Load;
-            button3.Click += button3_Click;
+            btnRequestCourse.Click += button3_Click;
         }
 
         private void StudentCoursesForm_Load(object? sender, EventArgs e)
@@ -30,8 +30,8 @@ namespace APUCC_Project.Forms.Student
 
         private void SetupCoursesGrid()
         {
-            ConfigureGrid(dataGridView1);
-            ConfigureGrid(dataGridView2);
+            ConfigureGrid(dgvCurrentCourses);
+            ConfigureGrid(dgvPendingRequest);
 
             TrainerColumn.DataPropertyName = "Trainer";
             ScheduleColumn.DataPropertyName = "Schedule";
@@ -45,9 +45,9 @@ namespace APUCC_Project.Forms.Student
             PendingRequestDateColumn.DataPropertyName = "RequestDate";
             PendingStatusColumn.DataPropertyName = "Status";
 
-            if (dataGridView2.Columns.Contains("PendingActionColumn"))
+            if (dgvPendingRequest.Columns.Contains("PendingActionColumn"))
             {
-                DataGridViewButtonColumn cancelColumn = (DataGridViewButtonColumn)dataGridView2.Columns["PendingActionColumn"];
+                DataGridViewButtonColumn cancelColumn = (DataGridViewButtonColumn)dgvPendingRequest.Columns["PendingActionColumn"];
                 cancelColumn.FlatStyle = FlatStyle.Flat;
                 cancelColumn.DefaultCellStyle.BackColor = Color.FromArgb(178, 55, 45);
                 cancelColumn.DefaultCellStyle.ForeColor = Color.White;
@@ -55,10 +55,10 @@ namespace APUCC_Project.Forms.Student
                 cancelColumn.DefaultCellStyle.SelectionForeColor = Color.White;
             }
 
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            comboBox1.DisplayMember = "CourseName";
-            comboBox1.ValueMember = "ClassScheduleID";
+            cboAvailableCourse.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboAvailableCourse.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cboAvailableCourse.DisplayMember = "CourseName";
+            cboAvailableCourse.ValueMember = "ClassScheduleID";
         }
 
         private void ConfigureGrid(DataGridView grid)
@@ -104,7 +104,7 @@ namespace APUCC_Project.Forms.Student
                 WHERE StudentID = @StudentID
                 ORDER BY SortDate, SortTime;";
 
-            LoadTable(query, dataGridView1);
+            LoadTable(query, dgvCurrentCourses);
         }
 
         private void LoadPendingRequests()
@@ -125,7 +125,7 @@ namespace APUCC_Project.Forms.Student
                   AND er.RequestStatus = 'Pending'
                 ORDER BY er.RequestDate DESC, er.RequestID DESC;";
 
-            LoadTable(query, dataGridView2);
+            LoadTable(query, dgvPendingRequest);
         }
 
         private void LoadAvailableCourses()
@@ -165,11 +165,11 @@ namespace APUCC_Project.Forms.Student
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
 
-                comboBox1.DataSource = null;
-                comboBox1.DataSource = dt;
-                comboBox1.DisplayMember = "CourseName";
-                comboBox1.ValueMember = "ClassScheduleID";
-                comboBox1.SelectedIndex = dt.Rows.Count > 0 ? 0 : -1;
+                cboAvailableCourse.DataSource = null;
+                cboAvailableCourse.DataSource = dt;
+                cboAvailableCourse.DisplayMember = "CourseName";
+                cboAvailableCourse.ValueMember = "ClassScheduleID";
+                cboAvailableCourse.SelectedIndex = dt.Rows.Count > 0 ? 0 : -1;
             }
             catch (Exception ex)
             {
@@ -202,7 +202,7 @@ namespace APUCC_Project.Forms.Student
 
         private void button3_Click(object? sender, EventArgs e)
         {
-            if (comboBox1.SelectedValue == null || comboBox1.SelectedIndex < 0)
+            if (cboAvailableCourse.SelectedValue == null || cboAvailableCourse.SelectedIndex < 0)
             {
                 MessageBox.Show(
                     "No available course can be requested right now.",
@@ -213,8 +213,8 @@ namespace APUCC_Project.Forms.Student
                 return;
             }
 
-            int classScheduleId = Convert.ToInt32(comboBox1.SelectedValue);
-            string courseName = comboBox1.Text.Trim();
+            int classScheduleId = Convert.ToInt32(cboAvailableCourse.SelectedValue);
+            string courseName = cboAvailableCourse.Text.Trim();
 
             try
             {
@@ -349,13 +349,13 @@ namespace APUCC_Project.Forms.Student
                 return;
             }
 
-            if (dataGridView2.Columns[e.ColumnIndex].Name != "PendingActionColumn")
+            if (dgvPendingRequest.Columns[e.ColumnIndex].Name != "PendingActionColumn")
             {
                 return;
             }
 
-            object? requestIdValue = dataGridView2.Rows[e.RowIndex].Cells["PendingRequestIdColumn"].Value;
-            object? courseNameValue = dataGridView2.Rows[e.RowIndex].Cells["PendingCourseNameColumn"].Value;
+            object? requestIdValue = dgvPendingRequest.Rows[e.RowIndex].Cells["PendingRequestIdColumn"].Value;
+            object? courseNameValue = dgvPendingRequest.Rows[e.RowIndex].Cells["PendingCourseNameColumn"].Value;
 
             if (requestIdValue == null || !int.TryParse(requestIdValue.ToString(), out int requestId))
             {

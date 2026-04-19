@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             OutstandingPaymentGroupBox = new GroupBox();
-            dataGridView1 = new DataGridView();
+            dgvOutstandingFees = new DataGridView();
             InvoiceIDHiddenColumn = new DataGridViewTextBoxColumn();
             ModuleColumn = new DataGridViewTextBoxColumn();
             Column2 = new DataGridViewTextBoxColumn();
@@ -38,7 +38,7 @@
             Column5 = new DataGridViewTextBoxColumn();
             ActionColumn = new DataGridViewButtonColumn();
             groupBox2 = new GroupBox();
-            dataGridView2 = new DataGridView();
+            dgvPaymentHistory = new DataGridView();
             InvoiceIDColumn = new DataGridViewTextBoxColumn();
             ModuleColumn2 = new DataGridViewTextBoxColumn();
             AmountColumn = new DataGridViewTextBoxColumn();
@@ -46,14 +46,14 @@
             DatePaidColumn = new DataGridViewTextBoxColumn();
             ReceiptColumn = new DataGridViewButtonColumn();
             OutstandingPaymentGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvOutstandingFees).BeginInit();
             groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvPaymentHistory).BeginInit();
             SuspendLayout();
             // 
             // OutstandingPaymentGroupBox
             // 
-            OutstandingPaymentGroupBox.Controls.Add(dataGridView1);
+            OutstandingPaymentGroupBox.Controls.Add(dgvOutstandingFees);
             OutstandingPaymentGroupBox.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             OutstandingPaymentGroupBox.ForeColor = Color.Black;
             OutstandingPaymentGroupBox.Location = new Point(12, 12);
@@ -63,18 +63,18 @@
             OutstandingPaymentGroupBox.TabStop = false;
             OutstandingPaymentGroupBox.Text = "Outstanding Fees";
             // 
-            // dataGridView1
+            // dgvOutstandingFees
             // 
-            dataGridView1.BackgroundColor = Color.White;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { InvoiceIDHiddenColumn, ModuleColumn, Column2, Column3, Column4, Column5, ActionColumn });
-            dataGridView1.Location = new Point(8, 50);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersVisible = false;
-            dataGridView1.RowHeadersWidth = 82;
-            dataGridView1.Size = new Size(1004, 186);
-            dataGridView1.TabIndex = 0;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            dgvOutstandingFees.BackgroundColor = Color.White;
+            dgvOutstandingFees.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvOutstandingFees.Columns.AddRange(new DataGridViewColumn[] { InvoiceIDHiddenColumn, ModuleColumn, Column2, Column3, Column4, Column5, ActionColumn });
+            dgvOutstandingFees.Location = new Point(8, 50);
+            dgvOutstandingFees.Name = "dgvOutstandingFees";
+            dgvOutstandingFees.RowHeadersVisible = false;
+            dgvOutstandingFees.RowHeadersWidth = 82;
+            dgvOutstandingFees.Size = new Size(1004, 186);
+            dgvOutstandingFees.TabIndex = 0;
+            dgvOutstandingFees.CellContentClick += dataGridView1_CellContentClick;
             // 
             // InvoiceIDHiddenColumn
             // 
@@ -131,7 +131,7 @@
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(dataGridView2);
+            groupBox2.Controls.Add(dgvPaymentHistory);
             groupBox2.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             groupBox2.ForeColor = Color.Black;
             groupBox2.Location = new Point(12, 302);
@@ -141,17 +141,17 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Payment History";
             // 
-            // dataGridView2
+            // dgvPaymentHistory
             // 
-            dataGridView2.BackgroundColor = Color.White;
-            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Columns.AddRange(new DataGridViewColumn[] { InvoiceIDColumn, ModuleColumn2, AmountColumn, dataGridViewTextBoxColumn4, DatePaidColumn, ReceiptColumn });
-            dataGridView2.Location = new Point(8, 50);
-            dataGridView2.Name = "dataGridView2";
-            dataGridView2.RowHeadersVisible = false;
-            dataGridView2.RowHeadersWidth = 82;
-            dataGridView2.Size = new Size(1004, 174);
-            dataGridView2.TabIndex = 1;
+            dgvPaymentHistory.BackgroundColor = Color.White;
+            dgvPaymentHistory.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvPaymentHistory.Columns.AddRange(new DataGridViewColumn[] { InvoiceIDColumn, ModuleColumn2, AmountColumn, dataGridViewTextBoxColumn4, DatePaidColumn, ReceiptColumn });
+            dgvPaymentHistory.Location = new Point(8, 50);
+            dgvPaymentHistory.Name = "dgvPaymentHistory";
+            dgvPaymentHistory.RowHeadersVisible = false;
+            dgvPaymentHistory.RowHeadersWidth = 82;
+            dgvPaymentHistory.Size = new Size(1004, 174);
+            dgvPaymentHistory.TabIndex = 1;
             // 
             // InvoiceIDColumn
             // 
@@ -209,15 +209,15 @@
             Name = "StudentFeesForm";
             Text = "StudentFeesForm";
             OutstandingPaymentGroupBox.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvOutstandingFees).EndInit();
             groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvPaymentHistory).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
         private GroupBox OutstandingPaymentGroupBox;
-        private DataGridView dataGridView1;
+        private DataGridView dgvOutstandingFees;
         private GroupBox groupBox2;
         private DataGridViewTextBoxColumn InvoiceIDHiddenColumn;
         private DataGridViewTextBoxColumn ModuleColumn;
@@ -226,7 +226,7 @@
         private DataGridViewTextBoxColumn Column4;
         private DataGridViewTextBoxColumn Column5;
         private DataGridViewButtonColumn ActionColumn;
-        private DataGridView dataGridView2;
+        private DataGridView dgvPaymentHistory;
         private DataGridViewTextBoxColumn InvoiceIDColumn;
         private DataGridViewTextBoxColumn ModuleColumn2;
         private DataGridViewTextBoxColumn AmountColumn;

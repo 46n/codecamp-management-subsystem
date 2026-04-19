@@ -33,7 +33,7 @@
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             FillPanelCourses = new Panel();
             groupBox1 = new GroupBox();
-            dataGridView2 = new DataGridView();
+            dgvPendingRequest = new DataGridView();
             PendingRequestIdColumn = new DataGridViewTextBoxColumn();
             PendingTrainerColumn = new DataGridViewTextBoxColumn();
             PendingCourseNameColumn = new DataGridViewTextBoxColumn();
@@ -42,21 +42,21 @@
             PendingStatusColumn = new DataGridViewTextBoxColumn();
             PendingActionColumn = new DataGridViewButtonColumn();
             groupBox2 = new GroupBox();
-            button3 = new Button();
-            comboBox1 = new ComboBox();
+            btnRequestCourse = new Button();
+            cboAvailableCourse = new ComboBox();
             label2 = new Label();
             CurrentCourses = new GroupBox();
-            dataGridView1 = new DataGridView();
+            dgvCurrentCourses = new DataGridView();
             TrainerColumn = new DataGridViewTextBoxColumn();
             ScheduleColumn = new DataGridViewTextBoxColumn();
             StatusColumn = new DataGridViewTextBoxColumn();
             CourseNameColumn = new DataGridViewTextBoxColumn();
             FillPanelCourses.SuspendLayout();
             groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvPendingRequest).BeginInit();
             groupBox2.SuspendLayout();
             CurrentCourses.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvCurrentCourses).BeginInit();
             SuspendLayout();
             // 
             // FillPanelCourses
@@ -79,7 +79,7 @@
             // groupBox1
             // 
             groupBox1.BackColor = Color.White;
-            groupBox1.Controls.Add(dataGridView2);
+            groupBox1.Controls.Add(dgvPendingRequest);
             groupBox1.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
             groupBox1.ForeColor = Color.Black;
             groupBox1.Location = new Point(13, 637);
@@ -89,21 +89,21 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Pending Requests";
             // 
-            // dataGridView2
+            // dgvPendingRequest
             // 
             dataGridViewCellStyle1.Font = new Font("Segoe Fluent Icons", 7.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = Color.Black;
-            dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridView2.BackgroundColor = Color.White;
-            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Columns.AddRange(new DataGridViewColumn[] { PendingRequestIdColumn, PendingTrainerColumn, PendingCourseNameColumn, PendingLevelColumn, PendingRequestDateColumn, PendingStatusColumn, PendingActionColumn });
-            dataGridView2.Location = new Point(37, 60);
-            dataGridView2.Name = "dataGridView2";
-            dataGridView2.RowHeadersVisible = false;
-            dataGridView2.RowHeadersWidth = 82;
-            dataGridView2.Size = new Size(1013, 234);
-            dataGridView2.TabIndex = 0;
-            dataGridView2.CellContentClick += dataGridView2_CellContentClick;
+            dgvPendingRequest.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dgvPendingRequest.BackgroundColor = Color.White;
+            dgvPendingRequest.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvPendingRequest.Columns.AddRange(new DataGridViewColumn[] { PendingRequestIdColumn, PendingTrainerColumn, PendingCourseNameColumn, PendingLevelColumn, PendingRequestDateColumn, PendingStatusColumn, PendingActionColumn });
+            dgvPendingRequest.Location = new Point(37, 60);
+            dgvPendingRequest.Name = "dgvPendingRequest";
+            dgvPendingRequest.RowHeadersVisible = false;
+            dgvPendingRequest.RowHeadersWidth = 82;
+            dgvPendingRequest.Size = new Size(1013, 234);
+            dgvPendingRequest.TabIndex = 0;
+            dgvPendingRequest.CellContentClick += dataGridView2_CellContentClick;
             // 
             // PendingRequestIdColumn
             // 
@@ -168,8 +168,8 @@
             // groupBox2
             // 
             groupBox2.BackColor = Color.White;
-            groupBox2.Controls.Add(button3);
-            groupBox2.Controls.Add(comboBox1);
+            groupBox2.Controls.Add(btnRequestCourse);
+            groupBox2.Controls.Add(cboAvailableCourse);
             groupBox2.Controls.Add(label2);
             groupBox2.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
             groupBox2.ForeColor = Color.Black;
@@ -180,27 +180,27 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Request New Course";
             // 
-            // button3
+            // btnRequestCourse
             // 
-            button3.BackColor = Color.FromArgb(102, 146, 153);
-            button3.BackgroundImageLayout = ImageLayout.None;
-            button3.Cursor = Cursors.Hand;
-            button3.Font = new Font("Segoe UI", 8.5F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button3.ForeColor = Color.White;
-            button3.Location = new Point(349, 147);
-            button3.Name = "button3";
-            button3.Size = new Size(292, 60);
-            button3.TabIndex = 3;
-            button3.Text = "Request";
-            button3.UseVisualStyleBackColor = false;
+            btnRequestCourse.BackColor = Color.FromArgb(102, 146, 153);
+            btnRequestCourse.BackgroundImageLayout = ImageLayout.None;
+            btnRequestCourse.Cursor = Cursors.Hand;
+            btnRequestCourse.Font = new Font("Segoe UI", 8.5F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnRequestCourse.ForeColor = Color.White;
+            btnRequestCourse.Location = new Point(349, 147);
+            btnRequestCourse.Name = "btnRequestCourse";
+            btnRequestCourse.Size = new Size(292, 60);
+            btnRequestCourse.TabIndex = 3;
+            btnRequestCourse.Text = "Request";
+            btnRequestCourse.UseVisualStyleBackColor = false;
             // 
-            // comboBox1
+            // cboAvailableCourse
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(330, 67);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(662, 45);
-            comboBox1.TabIndex = 1;
+            cboAvailableCourse.FormattingEnabled = true;
+            cboAvailableCourse.Location = new Point(330, 67);
+            cboAvailableCourse.Name = "cboAvailableCourse";
+            cboAvailableCourse.Size = new Size(662, 45);
+            cboAvailableCourse.TabIndex = 1;
             // 
             // label2
             // 
@@ -216,7 +216,7 @@
             // CurrentCourses
             // 
             CurrentCourses.BackColor = Color.White;
-            CurrentCourses.Controls.Add(dataGridView1);
+            CurrentCourses.Controls.Add(dgvCurrentCourses);
             CurrentCourses.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
             CurrentCourses.ForeColor = Color.Black;
             CurrentCourses.Location = new Point(13, 24);
@@ -226,12 +226,12 @@
             CurrentCourses.TabStop = false;
             CurrentCourses.Text = "Current Enrolled Courses";
             // 
-            // dataGridView1
+            // dgvCurrentCourses
             // 
             dataGridViewCellStyle2.Font = new Font("Segoe Fluent Icons", 7.875F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle2.ForeColor = Color.Black;
-            dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
-            dataGridView1.BackgroundColor = Color.White;
+            dgvCurrentCourses.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dgvCurrentCourses.BackgroundColor = Color.White;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = SystemColors.Control;
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -239,16 +239,16 @@
             dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { TrainerColumn, ScheduleColumn, StatusColumn, CourseNameColumn });
-            dataGridView1.Location = new Point(37, 60);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersVisible = false;
-            dataGridView1.RowHeadersWidth = 82;
-            dataGridView1.Size = new Size(1013, 234);
-            dataGridView1.TabIndex = 0;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            dgvCurrentCourses.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dgvCurrentCourses.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvCurrentCourses.Columns.AddRange(new DataGridViewColumn[] { TrainerColumn, ScheduleColumn, StatusColumn, CourseNameColumn });
+            dgvCurrentCourses.Location = new Point(37, 60);
+            dgvCurrentCourses.Name = "dgvCurrentCourses";
+            dgvCurrentCourses.RowHeadersVisible = false;
+            dgvCurrentCourses.RowHeadersWidth = 82;
+            dgvCurrentCourses.Size = new Size(1013, 234);
+            dgvCurrentCourses.TabIndex = 0;
+            dgvCurrentCourses.CellContentClick += dataGridView1_CellContentClick;
             // 
             // TrainerColumn
             // 
@@ -292,11 +292,11 @@
             Text = "StudentCoursesForm";
             FillPanelCourses.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvPendingRequest).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             CurrentCourses.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvCurrentCourses).EndInit();
             ResumeLayout(false);
         }
 
@@ -304,17 +304,17 @@
 
         private Panel FillPanelCourses;
         private GroupBox groupBox2;
-        private ComboBox comboBox1;
+        private ComboBox cboAvailableCourse;
         private Label label2;
         private GroupBox CurrentCourses;
-        private DataGridView dataGridView1;
-        private Button button3;
+        private DataGridView dgvCurrentCourses;
+        private Button btnRequestCourse;
         private DataGridViewTextBoxColumn TrainerColumn;
         private DataGridViewTextBoxColumn ScheduleColumn;
         private DataGridViewTextBoxColumn StatusColumn;
         private DataGridViewTextBoxColumn CourseNameColumn;
         private GroupBox groupBox1;
-        private DataGridView dataGridView2;
+        private DataGridView dgvPendingRequest;
         private DataGridViewTextBoxColumn PendingRequestIdColumn;
         private DataGridViewTextBoxColumn PendingTrainerColumn;
         private DataGridViewTextBoxColumn PendingCourseNameColumn;
