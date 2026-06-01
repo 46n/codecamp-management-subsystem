@@ -6,9 +6,9 @@ APU CodeCamp Management System is a cleaned portfolio version of an Introduction
 
 It is a C# Windows Forms desktop application connected to Microsoft SQL Server. The system manages additional coaching sessions through four roles: Administrator, Lecturer, Trainer, and Student.
 
-## My Contribution
+## Team Contribution
 
-This was developed as a group academic project. My contribution focused on creating and linking the Microsoft SQL Server database, planning and implementing the Student role workflow, designing the user interface, and building the navigation bar with button interactions and ripple effects.
+This was developed as a group academic project. The team worked together on the Microsoft SQL Server database, role-based workflows, user interface design, navigation structure, and interaction polish across the Administrator, Lecturer, Trainer, and Student modules.
 
 ## System Roles
 
