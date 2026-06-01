@@ -1,5 +1,9 @@
 # APU CodeCamp Management System — C# WinForms Project
 
+![C#](https://img.shields.io/badge/C%23-WinForms-512BD4?logo=dotnet&logoColor=white)
+![SQL Server](https://img.shields.io/badge/Database-SQL%20Server-CC2927?logo=microsoftsqlserver&logoColor=white)
+![Architecture](https://img.shields.io/badge/Design-OOP%20%2B%20Role%20Based-2E8B57)
+
 ## Overview
 
 APU CodeCamp Management System is a cleaned portfolio version of an Introduction to Object-Oriented Programming academic group project.
