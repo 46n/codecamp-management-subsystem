@@ -1,0 +1,69 @@
+﻿using APUCC_Project.Forms.Student;
+using System;
+using System.Windows.Forms;
+
+namespace APUCC_Project
+{
+    public partial class StudentShellForm : BaseShellForm
+    {
+        private readonly int _studentId;
+        protected override int ChildContentTopPadding => panelLogo.Height;
+        protected override int ChildContentLeftPadding => 30;
+
+        public StudentShellForm(int userId, int studentId)
+        {
+            InitializeComponent();
+            InitializeUserContext(userId, "Student");
+            _studentId = studentId;
+
+            this.Text = "Student Dashboard";
+            this.ControlBox = true;
+
+            homebtn.Text = "Home";
+            iconButton2.Text = "My courses";
+            iconButton3.Text = "Fees";
+            iconButton4.Text = "Settings";
+            Profile.Text = "Profile";
+            ApplyStandardShellWindow();
+            ActivateButton(homebtn);
+            OpenChildForm(new StudentHomeForm(_studentId));
+        }
+
+        private void OpenChildForm(Form childForm)
+        {
+            OpenSharedChildForm(childForm);
+        }
+
+        protected override void homebtn_Click(object sender, EventArgs e)
+        {
+            base.homebtn_Click(sender, e);
+            OpenChildForm(new StudentHomeForm(_studentId));
+        }
+
+        protected override void iconButton2_Click(object sender, EventArgs e)
+        {
+            base.iconButton2_Click(sender, e);
+            OpenChildForm(new StudentCoursesForm(_studentId));
+        }
+
+        protected override void iconButton3_Click(object sender, EventArgs e)
+        {
+            base.iconButton3_Click(sender, e);
+            OpenChildForm(new StudentFeesForm(_studentId));
+        }
+
+        protected override void iconButton4_Click(object sender, EventArgs e)
+        {
+            base.iconButton4_Click(sender, e);
+        }
+
+        protected override void Profile_Click(object sender, EventArgs e)
+        {
+            base.Profile_Click(sender, e);
+        }
+
+        private void StudentShellForm_Load(object sender, EventArgs e)
+        {
+        }
+    }
+}

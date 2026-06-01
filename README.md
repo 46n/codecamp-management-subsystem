@@ -1,189 +1,169 @@
-<h1 align="center">APU CodeCamp Management System</h1>
+# APU CodeCamp Management System — C# WinForms Project
 
-<p align="center">
-<b>IOOP Group Assignment</b><br>
-Introduction to Object-Oriented Programming (IOOP)<br>
-Asia Pacific University of Technology and Innovation
-</p>
+## Overview
 
-<p align="center">
-<b>Lecturer:</b> Dr. Hong Siaw Swin
-</p>
+APU CodeCamp Management System is a cleaned portfolio version of an Introduction to Object-Oriented Programming academic group project.
 
-<hr>
+It is a C# Windows Forms desktop application connected to Microsoft SQL Server. The system manages additional coaching sessions through four roles: Administrator, Lecturer, Trainer, and Student.
 
-<p>
-A Windows Forms desktop application developed in <b>C#</b> as part of the 
-<b>Introduction to Object-Oriented Programming (IOOP)</b> module assignment at 
-Asia Pacific University of Technology and Innovation (APU).
-</p>
+## My Contribution
 
-<hr>
+This was developed as a group academic project. My contribution focused on creating and linking the Microsoft SQL Server database, planning and implementing the Student role workflow, designing the user interface, and building the navigation bar with button interactions and ripple effects.
 
-<h2>Project Overview</h2>
+## System Roles
 
-<p>
-The <b>APU CodeCamp Management System</b> is a Windows Desktop application developed 
-using C# and Windows Forms as part of the IOOP module assignment at 
-<b>Asia Pacific University of Technology and Innovation (APU)</b>.
-</p>
+| Role | Main Functions |
+|---|---|
+| Administrator | Registers/removes trainers, assigns trainers to modules and levels, views trainer feedback, views monthly income reports, updates profile. |
+| Lecturer | Registers/enrolls students, approves requests, deletes completed students, views and filters student lists, updates profile. |
+| Trainer | Adds/updates/deletes class information, views enrolled and paid students, sends feedback, updates profile. |
+| Student | Views schedules, sends additional coaching requests, cancels pending requests, views invoices, makes payments, updates profile. |
 
-<p>
-The system is designed to manage the <b>APU CodeCamp programme</b>, which provides 
-additional coaching sessions for students to improve their programming skills.
-</p>
+## Project Features
 
-<p>
-The application allows different types of users to interact with the system through 
-a <b>role-based interface</b>, including administrators, lecturers, trainers, 
-and students.
-</p>
+- C# Windows Forms desktop application
+- Microsoft SQL Server database connectivity
+- Login authentication
+- Role-based dashboard navigation
+- CRUD operations
+- Student course request workflow
+- Lecturer approval workflow
+- Trainer class management workflow
+- Student payment and invoice workflow
+- Profile management
+- Input validation
+- Error handling
+- Object-oriented structure using classes, methods, and objects
 
-<p>
-The project demonstrates the implementation of fundamental 
-<b>Object-Oriented Programming (OOP)</b> concepts in a 
-<b>GUI-based desktop application</b>.
-</p>
+## Technologies Used
 
-<hr>
+- C#
+- Windows Forms
+- Microsoft SQL Server
+- Visual Studio
+- Object-Oriented Programming
+- ADO.NET
+- SqlConnection / SqlCommand
+- GitHub
 
-<h2>Technologies Used</h2>
+## Object-Oriented Programming Concepts
 
-<ul>
-<li>C#</li>
-<li>.NET Windows Forms</li>
-<li>Microsoft SQL Server</li>
-<li>Visual Studio</li>
-<li>Git & GitHub</li>
-</ul>
+Classes organize role-specific forms and logic for the Administrator, Lecturer, Trainer, and Student modules.
 
-<hr>
+Objects are created and used based on the logged-in role. After login authentication, the system redirects the user to the correct dashboard and loads the role-specific forms.
 
-<h2>System Features</h2>
+Methods handle actions such as login, dashboard redirection, course requests, approvals, payments, feedback submission, profile updates, and database operations.
 
-<h3>Administrator</h3>
-<ul>
-<li>Register and manage trainers</li>
-<li>Assign trainers to modules and coaching levels</li>
-<li>View trainer feedback</li>
-<li>Generate monthly income reports</li>
-<li>Update administrator profile</li>
-</ul>
+Services/helper logic manages database connection and SQL execution so repeated database access behavior can be reused across the application.
 
-<h3>Trainer</h3>
-<ul>
-<li>Add coaching class information</li>
-<li>Update or delete class details</li>
-<li>View students enrolled in sessions</li>
-<li>Send feedback to administrator</li>
-<li>Update trainer profile</li>
-</ul>
+## Database Integration
 
-<h3>Lecturer</h3>
-<ul>
-<li>Register and enrol students into coaching modules</li>
-<li>Approve student coaching requests</li>
-<li>Remove students who completed coaching</li>
-<li>View student lists</li>
-<li>Update lecturer profile</li>
-</ul>
+The system uses Microsoft SQL Server to store and retrieve application data. SQL operations support login authentication, role identification, course requests, approvals, payments, schedules, feedback, and reports.
 
-<h3>Student</h3>
-<ul>
-<li>View enrolled coaching schedules</li>
-<li>Request additional coaching sessions</li>
-<li>Cancel pending coaching requests</li>
-<li>View invoices and make payments</li>
-<li>Update student profile</li>
-</ul>
+The `Database` folder contains cleaned portfolio-ready SQL scripts with fictional demo data.
 
-<hr>
+- `Database/schema.sql` creates the database structure.
+- `Database/sample-data.sql` inserts clean fictional demo records.
+- `Database/setup-instructions.md` explains setup steps.
+- `Database/database-cleanup-report.md` documents the cleanup process.
 
-<h2>Installation</h2>
+## Project Structure
 
-<p><b>Prerequisites</b></p>
+```text
+.
+|-- Database/
+|   |-- database-cleanup-report.md
+|   |-- sample-data.sql
+|   |-- schema.sql
+|   `-- setup-instructions.md
+|-- diagrams/
+|   |-- class-diagram.png
+|   `-- use-case-diagram.png
+|-- screenshots/
+|   |-- admin-manage-trainers-form.png
+|   |-- admin-monthly-income-report.png
+|   |-- admin-trainer-feedback-form.png
+|   |-- base-form.png
+|   |-- lecturer-approve-requests.png
+|   |-- lecturer-manage-students.png
+|   |-- lecturer-view-students.png
+|   |-- login-form.png
+|   |-- profile-form.png
+|   |-- student-courses.png
+|   |-- student-fees.png
+|   |-- student-homepage.png
+|   |-- trainer-enrolled-students.png
+|   |-- trainer-manage-classes.png
+|   `-- trainer-send-feedback.png
+|-- SourceCode/
+|   |-- APUCC_Project.slnx
+|   `-- APUCC/
+|       |-- Forms/
+|       |-- Properties/
+|       |-- Services/
+|       |-- UI/
+|       |-- App.config
+|       |-- APUCC_Project.csproj
+|       |-- APU_Code_Camp_Admin.resx
+|       `-- Program.cs
+|-- .gitignore
+`-- README.md
+```
 
-<ul>
-<li>Visual Studio 2022 or later</li>
-<li>.NET Windows Forms</li>
-<li>Microsoft SQL Server</li>
-</ul>
+## Diagrams
 
-<p><b>Setup Steps</b></p>
+![Use Case Diagram](diagrams/use-case-diagram.png)
 
-<ol>
-<li>Clone the repository from GitHub.</li>
-<li>Open the <code>APUCC_Project.sln</code> file in Visual Studio.</li>
-<li>Configure the SQL Server database connection.</li>
-<li>Build the solution.</li>
-<li>Run the application.</li>
-</ol>
+![Class Diagram](diagrams/class-diagram.png)
 
-<hr>
+## Screenshots
 
-<h2>Usage</h2>
+### Login and Profile
 
-<p>
-After launching the application, users can log in using their credentials.
-The system automatically identifies the user role and provides access to the 
-corresponding system features.
-</p>
+![Login Form](screenshots/login-form.png)
 
-<hr>
+![Profile Form](screenshots/profile-form.png)
 
-<h2>Object-Oriented Concepts Used</h2>
+### Administrator
 
-<ul>
-<li>Classes</li>
-<li>Objects</li>
-<li>Methods</li>
-<li>Encapsulation</li>
-<li>Modular System Design</li>
-</ul>
+![Admin Manage Trainers Form](screenshots/admin-manage-trainers-form.png)
 
-<hr>
+![Admin Trainer Feedback Form](screenshots/admin-trainer-feedback-form.png)
 
-<h2>Project Purpose</h2>
+![Admin Monthly Income Report](screenshots/admin-monthly-income-report.png)
 
-<p>
-This project was developed as a <b>group assignment</b> for the 
-<b>Introduction to Object-Oriented Programming (IOOP)</b> module at 
-Asia Pacific University of Technology and Innovation.
-</p>
+### Lecturer
 
-<p>
-The main objective is to demonstrate the application of basic OOP concepts
-in developing a fully functional desktop application with a graphical
-user interface and database integration.
-</p>
+![Lecturer Manage Students](screenshots/lecturer-manage-students.png)
 
-<hr>
+![Lecturer Approve Requests](screenshots/lecturer-approve-requests.png)
 
-<h2>Authors</h2>
+![Lecturer View Students](screenshots/lecturer-view-students.png)
 
-<ul>
-<li>
-<a href="https://github.com/46n">Abdulaziz Qaderi</a> — TP091283
-</li>
+### Trainer
 
-<li>
-<a href="https://github.com/waleed8sd">Waleed Siddig</a> — TP078784
-</li>
+![Trainer Manage Classes](screenshots/trainer-manage-classes.png)
 
-<li>
-<a href="https://github.com/3bdosh70">Abdalla Hassan</a> — TP089555
-</li>
+![Trainer Enrolled Students](screenshots/trainer-enrolled-students.png)
 
-<li>
-<a href="https://github.com/Ghostcline">Abdelrahman Hussein</a> — TP086182
-</li>
-</ul>
+![Trainer Send Feedback](screenshots/trainer-send-feedback.png)
 
-<hr>
+### Student
 
-<h2>License</h2>
+![Student Homepage](screenshots/student-homepage.png)
 
-<p>
-This project is developed for <b>educational purposes only</b> as part of
-APU coursework.
-</p>
+![Student Courses](screenshots/student-courses.png)
+
+![Student Fees](screenshots/student-fees.png)
+
+## Setup Summary
+
+1. Open the solution in Visual Studio using `SourceCode/APUCC_Project.slnx`.
+2. Create the database by running `Database/schema.sql`.
+3. Insert demo records by running `Database/sample-data.sql`.
+4. Confirm the connection string in `SourceCode/APUCC/App.config`.
+5. Build and run the Windows Forms application.
+
+## Privacy Note
+
+This repository is prepared for portfolio presentation. The database scripts use fictional demo data and exclude private student information, real phone numbers, private passwords, and messy development dump records.
