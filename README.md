@@ -14,6 +14,8 @@ It is a C# Windows Forms desktop application connected to Microsoft SQL Server. 
 
 This was developed as a group academic project. The team worked together on the Microsoft SQL Server database, role-based workflows, user interface design, navigation structure, and interaction polish across the Administrator, Lecturer, Trainer, and Student modules.
 
+[Waleed Siddig (@waleed8sd)](https://github.com/waleed8sd) contributed updates to the Administrator and Lecturer forms, including lecturer student management.
+
 ## System Roles
 
 | Role | Main Functions |
